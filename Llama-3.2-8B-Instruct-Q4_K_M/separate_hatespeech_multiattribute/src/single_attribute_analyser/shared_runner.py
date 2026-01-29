@@ -58,13 +58,12 @@ def run_attribute_analysis(attribute_name, sample_size='all'):
         
         try:
             res = analyzer.analyze_attribute(comment, attribute_name)
-            res['comment_id'] = row.get('comment_id', idx)
+            # Always keep comment_id if present, else fallback to index
+            if 'comment_id' in row:
+                res['comment_id'] = row['comment_id']
+            else:
+                res['comment_id'] = idx
             res['index'] = idx
-            
-            # Request confidence (it's already in the logic? separate_hatespeech implementation check needed)
-            # Inspecting user's SingleAttributeAnalyzer logic from previous turns... 
-            # It uses `logprobs=1` and likely calculates confidence if updated.
-            # Just relying on whatever analyze_attribute provides.
             
             results.append(res)
         except Exception as e:
@@ -75,6 +74,11 @@ def run_attribute_analysis(attribute_name, sample_size='all'):
 
     # 3. Save
     out_df = pd.DataFrame(results)
+    # Ensure comment_id is the first column if present
+    if 'comment_id' in out_df.columns:
+        cols = list(out_df.columns)
+        cols.insert(0, cols.pop(cols.index('comment_id')))
+        out_df = out_df[cols]
     filename = f"results_{attribute_name}_{timestamp}.csv"
     save_path = os.path.join(attr_result_folder, filename)
     
