@@ -1,0 +1,2673 @@
+sentiment,respect,insult,humiliate,status,dehumanize,violence,genocide,attack_defend,hatespeech,confidence,raw_output,text,analysis_type,comment_id,index
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9505396489198614,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",Afghanistan will rise. Kashmir will rise. Palestine will rise. Syria will rise. Yemen will rise. Sud,fewshot,39073,0
+3.0,1.5,2.0,2.0,1.0,2.0,1.0,1.0,1.0,0.0,0.9536295720024133,"here are the ratings for the given comments:
+
+comment: ""hence why it is good to blend in with feminists. any comments that say women are less than 100% perfect merit a call to human resources.""
+sentim",Hence why it is good to blend in with feminists. Any comments that say women are less than 100% perf,fewshot,13076,1
+2.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9560033991358122,"here are the ratings for the given comments:
+
+comment: ""you won'nt ever catch me fw a nigga twice ✌🏽""
+
+sentiment 2
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 1
+genocide 1
+attack_def",You won't ever catch me fw a nigga twice ✌🏽,fewshot,21293,2
+2.0,1.0,4.0,2.0,1.0,1.0,1.0,1.0,4.0,1.0,0.9276365299192937,"here are the ratings for the given comments:
+
+comment: ""+sho ent butthurt queer""
+sentiment 2
+respect 1
+insult 4
+humiliate 2
+status 1
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 4
+hatespeech 1
+con",+Sho Ent butthurt queer,fewshot,43507,3
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9637364303782653,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",US women's national soccer team co-captain Megan Rapinoe didn't realize she was gay until she was in,fewshot,29154,4
+2.0,1.0,2.0,2.0,1.0,1.0,2.0,1.0,4.0,1.0,0.9391723711051673,"here are the ratings for the given comments:
+
+comment: ""send in the national guard and deport them all""
+
+sentiment 2
+respect 1
+insult 2
+humiliate 2
+status 1
+dehumanize 1
+violence 2
+genocide 1
+attack_d",Send in the national guard and deport them all,fewshot,43935,5
+2.0,1.0,4.0,2.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9436374941379678,"here are the ratings for the given comments:
+
+comment: ""i don' t take that shit serious at all only insecure weird ass niggas complain about that url""
+
+sentiment 2
+respect 1
+insult 4
+humiliate 2
+statu",i don't take that shit serious at all only insecure weird ass niggas complain about that URL,fewshot,20384,6
+1.0,2.0,1.0,1.0,1.5,1.0,2.0,1.0,1.0,0.0,0.9621915726805802,"here are the ratings for the given comments:
+
+comment: ""leftists are more likely to turn a blind eye to kids like desmond who has $1s stuffed in his thong by gay men while he's performing. hell yeah.""",Leftists are more likely to turn a blind eye to kids like Desmond who has $1s stuffed in his thong b,fewshot,15802,7
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.8696979279712578,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+
+3","If it's about Islam, it's not racist. Islam is a belief system. Beliefs can be changed, and are fair",fewshot,1253,8
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9587023800329597,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",Who hurt you? Lol. It's comical how stupid and angry you people are.  MEH AMURICA. MY LAND. MINE. BA,fewshot,20070,9
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9485209368855665,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+
+3","Notwithstanding Marriyum Aurangzeb sahiba's political standing in her own right, amongst the many po",fewshot,20065,10
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.925157021794218,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+
+3",Growing up I identified as white because I live in a white household and don't have any cultural con,fewshot,12121,11
+3.0,1.5,2.0,1.0,1.5,2.0,1.0,1.0,1.0,1.0,0.9622616976928879,"here are the ratings for the given comments:
+
+comment: ""the answers ( pl read them) given to rants of rana ayyub | snehla rashid | saba naqvi & guha gang (after the historic decision to abrogate 370 a",The answers ( pl read them) given to rants of Rana Ayyub | Snehla Rashid | Saba Naqvi & GUHA gang (a,fewshot,38267,12
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9649774123128999,"here are the ratings for the given comments:
+
+comment: ""wow we need her throat in like all women lmao""
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 2
+genocide 1
+attack_def",Wow we need her throat in like all women lmao,fewshot,809,13
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.976481004079787,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",That's no excuse for stealing other people's technology and research and intellectual property You'r,fewshot,20021,14
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9733018769101894,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+1
+1
+4
+3
+1
+2
+2
+1
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+","Hey, you. Yeah you. Shut the fuck up, stop being a pansy, and go get you're fucking banana bread. Yo",fewshot,8369,15
+2.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9484942097482836,"here are the ratings for the given comments:
+
+comment: ""im ,i hate black people and minorities""
+sentiment 2
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 1
+genocide 1
+attack_defend 4
+h","im ,i hate black people and minorities",fewshot,20043,16
+2.0,1.0,3.0,2.0,1.0,1.0,2.0,1.0,4.0,1.0,0.9487500812603867,"here are the ratings for the given comments:
+
+comment: ""anyone else kinda want to see israel just burn to the ground?""
+sentiment 2
+respect 1
+insult 3
+humiliate 2
+status 1
+dehumanize 1
+violence 2
+genoc",Anyone else kinda want to see Israel just burn to the ground?,fewshot,11064,17
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9584547180537593,"here are the ratings for the given comments:
+
+comment: ""ayo i even kill handicapped and crippled bitches/look at my scalp real close and you'll see triple sixes""
+
+sentiment 1
+respect 1
+insult 4
+humili",ayo i even kill handicapped and crippled bitches/look at my scalp real close and you'll see triple s,fewshot,20004,18
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9708022582555328,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",>Some incels give a lot but get nothing back   And so should be rewarded with pussy? Are you aware t,fewshot,20048,19
+1.0,1.0,4.0,3.0,1.0,1.0,1.0,1.0,4.0,1.0,0.9539044508565744,"here are the ratings for the given comments:
+
+comment: ""deserves it stupid bitch""
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 4
+hatespeech 1
+co",Deserves it stupid bitch,fewshot,19671,20
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9325179407630322,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","""@iamkrause: No need to thank me, killing niggers is it's own reward.""  Dis my pal from our graduati",fewshot,20012,21
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.8601843608900116,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+1
+1
+4
+3
+1
+2
+2
+1
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+","@dad fuck you in the ass, being gay is so cool these days it's ridiculous, like a grand new gender t",fewshot,42092,22
+4.0,2.0,2.0,1.0,2.0,1.0,1.0,1.0,3.0,0.0,0.9643889901793427,"here are the ratings for the given comments:
+
+comment: ""yes i know the atheist article will still blame christians. its wrong and makes atheism look like ignorant bigots.""
+
+sentiment 4
+respect 2
+insul",Yes I know the atheist article will still blame christians. Its wrong and makes Atheism look like ig,fewshot,8937,23
+3.0,1.0,1.0,1.0,1.5,1.0,2.0,1.0,1.0,0.0,0.9680868375900525,"here are the ratings for the given comments:
+
+comment: ""follow the 40% of your tranny comrades retard""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 1
+genocide 1
+attack_de",follow the 40% of your tranny comrades retard,fewshot,19815,24
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9530671991771787,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",Everyone read the kalima and become a Muslim or you'll be bitten by snakes if your cristian or gasse,fewshot,41212,25
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9683191359383877,"here are the ratings for the given comments:
+
+comment: ""every slant in #losangeles should be deported. those scum have no right to be here. chinatown should be bulldozed.""
+
+sentiment 1
+respect 1
+insul",Every slant in #LosAngeles should be deported. Those scum have no right to be here. Chinatown should,fewshot,20007,26
+3.0,1.5,1.0,1.0,1.5,1.0,1.0,1.0,2.0,0.0,0.8140053349194445,"here are the ratings for the given comments:
+
+comment: ""yeah, don'...","Yeah, don't these men know that all they have to do is put on some ugly lipstick, tacky knee high so",fewshot,6214,27
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.8353145161379025,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",@Buster_Sword_CS Shirtless Noctis is not gay... He's merely enjoying his freedom,fewshot,37970,28
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9752805240591813,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",Keep the fucking Mexican scum rapists and murderers out of the country and the fucking Arab Islamic ,fewshot,20016,29
+4.0,2.0,2.0,1.0,1.0,1.0,1.0,1.0,3.0,0.0,0.943427128987543,"here are the ratings for the given comments:
+
+comment: ""you are spreading fake propoganda against the indian forces.  this is baloch where coward pakistani forces targeting baloch people.  don'nt spre",You are spreading fake propoganda against the Indian forces.  This is Baloch where coward Pakistani ,fewshot,28621,30
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9596094379483293,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+1
+1
+4
+3
+1
+2
+2
+1
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+",man: women are who are fat and ugly should be shot dead  his female followers: oi you are movin mad ,fewshot,25932,31
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.8699338359844053,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",#TuckFrump Mike Pence blasted for appearing with anti-LGBTQ extremists three times in five days URL ,fewshot,38787,32
+1.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9575161876899181,"here are the ratings for the given comments:
+
+comment: ""learn the fucking language you fucking useless immigrant.""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 1
+genocide",Learn the fucking language you fucking useless immigrant.,fewshot,20029,33
+1.0,1.0,4.0,3.0,1.0,1.0,2.0,2.0,4.0,1.0,0.9612180576523736,"here are the ratings for the given comments:
+
+comment: ""get that baby dick out of your mouth, degenerate mohel. stop genociding palestinians.""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehu","Get that baby dick out of your mouth, degenerate mohel. Stop genociding Palestinians.",fewshot,2009,34
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9147155364421443,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",Could do with hearing my balls slap against Amanda's chin as I face fuck her before slipping my sali,fewshot,38423,35
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9503865291464573,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+
+3",I've always been proud of the Igbo tribe and our culture. Yesterday made me even more proud. You peo,fewshot,20062,36
+1.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9669094643894424,"here are the ratings for the given comments:
+
+comment: ""it is an alpha's job to make sure that fag's hole looks more like a pussy after each use.. url""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+stat",it is an Alpha's job to make sure that fag's hole looks more like a pussy after each use.. URL,fewshot,29710,37
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.925935108714124,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","@blaiklockBP ""Someone told you"" a made-up piece of bigotry & you are wilfully disseminating it to mi",fewshot,34899,38
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.8852432593540247,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",Lailat al Miraj mubarak to all Muslims.. I'm wishing for everyone's peace & prosperity🤲🏻,fewshot,20064,39
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9660071154197727,"here are the ratings for the given comments:
+
+comment: ""fucking fagot burn in hell""
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 2
+genocide 1
+attack_defend 4
+hatespeech 1
+",Fucking fagot burn in hell,fewshot,20028,40
+4.0,1.0,2.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.9285866190666322,"here are the ratings for the given comments:
+
+comment: ""how much i love asian chicks""
+sentiment 4
+respect 1
+insult 2
+humiliate 1
+status 1
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 1
+hatespeech ",How much I love Asian chicks,fewshot,13756,41
+5.0,2.0,1.0,1.0,2.0,1.0,1.0,1.0,1.0,0.0,0.9491743039464471,"here are the ratings for the given comments:
+
+comment: ""please help support nonbinary pride, add a #twibbon now! url""
+sentiment 5
+respect 2
+insult 1
+humiliate 1
+status 2
+dehumanize 1
+violence 1
+genoci","Please help support nonbinary pride, add a #Twibbon now! URL",fewshot,20067,42
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9699417362651745,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",I'd have you raise your crotch up as iuse your throat as a cocksleeve while I finger fuck your cunt ,fewshot,19343,43
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.943596717265242,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",@ThomasJTobin1 Left the church after I watched people I considered stand-up and applaud that a natio,fewshot,23410,44
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9575435828396793,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","RT @JihadistJoe: We Muslims have no military honour whatsoever, we are sub human savages that slaugh",fewshot,20018,45
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9686879593249681,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","I'm Mexican too, fair skin, blue eyes and light brown hair. My mom has dark hair, eyes and olive ton",fewshot,11248,46
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9674986134425292,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","Alright lad we get it, you're a furry and you're tryna defend yaself, how about instead you get a li",fewshot,15312,47
+2.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9417421974713664,"here are the ratings for the given comments:
+
+comment: ""@cam_coles you don' t know what i know. name somebody colder, you monkey faced immigrant""
+
+sentiment 2
+respect 1
+insult 4
+humiliate 3
+status 1
+d","@Cam_Coles You don't know what I know. Name somebody colder, you monkey faced immigrant",fewshot,20014,48
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9536517863374919,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","No, the chances of a muslim shooting you in America is almost nil. There are over 50K gun deaths eve",fewshot,20053,49
+2.0,1.0,3.0,2.0,1.0,1.0,1.0,1.0,3.0,1.0,0.9534047222898081,"here are the ratings for the given comments:
+
+comment: ""@ali razi of course but we do not change their gender as your satanic religious leaders do.""
+
+sentiment 2
+respect 1
+insult 3
+humiliate 2
+status ",@Ali Razi of course but we do not change their gender as your Satanic religious leaders do.,fewshot,42897,50
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9616089330730356,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","STOP SUCKING THAT FATASS' DICK, YOU NIGGERLOVING KIKE",fewshot,20033,51
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9653590708266364,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",I'm getting extremely sick & tired of watching men beating women! Whether it's Sharia or just worthl,fewshot,26548,52
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9517902264476014,"here are the ratings for the given comments:
+
+comment: ""gay people should die""
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 2
+genocide 1
+attack_defend 4
+hatespeech 1
+confi",gay people should die,fewshot,20034,53
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9753595875792516,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 2
+genocide 1
+attack_defend 4
+","I'm going into nursing and I'm terrified of this sort of thing. I get the whole identity conflict, w",fewshot,4458,54
+2.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9484128845924822,"here are the ratings for the given comments:
+
+comment: ""women have achieved equality. they are the ""new assholes"".""
+
+sentiment 2
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 1
+genocid","Women have achieved equality. They are the ""NEW ASSHOLES"".",fewshot,42704,55
+2.0,1.0,4.0,3.0,1.0,1.0,1.0,1.0,4.0,1.0,0.9545319868374879,"here are the ratings for the given comments:
+
+comment: ""impeach all islamic fundamentalists in our government pronto!!!!!!""
+
+sentiment 2
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 1
+violence 1",IMPEACH ALL ISLAMIC FUNDAMENTALISTS IN OUR GOVERNMENT PRONTO!!!!!,fewshot,43793,56
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9528287061069031,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","I'm not anti Semitic, but i want all jews to burn in a oven",fewshot,2173,57
+2.0,1.0,4.0,2.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9440110360318291,"here are the ratings for the given comments:
+
+comment: ""only fags play soccer""
+sentiment 2
+respect 1
+insult 4
+humiliate 2
+status 1
+dehumanize 2
+violence 1
+genocide 1
+attack_defend 4
+hatespeech 1
+confi",only fags play soccer,fewshot,49597,58
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9530490281371148,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","I dunno what's worse; Reddit fags on 4chan or 4chan getting bitchy about it ""Can I be in the screens",fewshot,11466,59
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9665922794568073,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","Careful what you wish for, you always wanted to feel a huge cock up your hole bitch so now whimper a",fewshot,20005,60
+2.0,1.0,4.0,3.0,1.0,1.0,1.0,1.0,4.0,1.0,0.9461216133888825,"here are the ratings for the given comments:
+
+comment: ""ugly assed woman.""
+sentiment 2
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 4
+hatespeech 1
+confidenc",Ugly assed woman.,fewshot,42470,61
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.975499977862085,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",Isreal support the trump I hope they fail I hope the Persians drive them *ALL* into the sea Drown yo,fewshot,42646,62
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9747520852744903,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","GET RID OF THOSE FUCKING MUSLIMS! the nasty ones that won't assimilate, rape women, beat children, t",fewshot,20009,63
+2.0,1.0,3.0,2.0,1.0,1.0,1.0,1.0,3.0,1.0,0.9516707192130371,"here are the ratings for the given comments:
+
+comment: ""elect a stupid woman, get a stupid woman.""
+sentiment 2
+respect 1
+insult 3
+humiliate 2
+status 1
+dehumanize 1
+violence 1
+genocide 1
+attack_defend ","Elect a stupid woman, get a stupid woman.",fewshot,48425,64
+2.0,1.0,4.0,2.0,1.0,1.0,1.0,1.0,4.0,1.0,0.9249329106617474,"here are the ratings for the given comments:
+
+comment: ""he' s like uk teenagers 'you' re smirking? that' s gay as fuck""
+
+sentiment 2
+respect 1
+insult 4
+humiliate 2
+status 1
+dehumanize 1
+violence 1
+gen","He's like UK teenagers ""you're smirking? that's gay as fuck""",fewshot,8041,65
+4.0,2.0,1.0,1.0,2.0,1.0,1.0,1.0,1.0,0.0,0.9564772205867781,"here are the ratings for the given comments:
+
+comment: ""let more people know i'm gay, i don't know why but it still kinda feels like i'm not being open to people""
+
+sentiment 4
+respect 2
+insult 1
+humil","Let more people know I'm gay, I don't know why but it still kinda feels like I'm not being open to p",fewshot,16493,66
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9762692597784586,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+1
+1
+4
+3
+1
+2
+2
+1
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+","This is why we won, because Americans know that giving these people power for another day is unaccep",fewshot,20057,67
+4.0,2.0,1.0,1.0,1.0,1.0,1.0,1.0,2.0,0.0,0.9613743622486758,"here are the ratings for the given comments:
+
+comment: ""there is plenty of evidence that women and non-white people are disadvantaged in almost every hiring process in the western world.""
+
+sentiment 4",There is plenty of evidence that women and non-white people are disadvantaged in almost every hiring,fewshot,20055,68
+2.0,1.0,3.0,2.0,1.0,1.0,1.0,1.0,3.0,1.0,0.9389258298136032,"here are the ratings for the given comments:
+
+comment: ""arabs? what'z an arab? iranians are terrorists.""
+sentiment 2
+respect 1
+insult 3
+humiliate 2
+status 1
+dehumanize 1
+violence 1
+genocide 1
+attack_d",Arabs? What's an Arab? Iranians are terrorists.,fewshot,13674,69
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9640289466497911,"here are the ratings for the given comments:
+
+comment: ""#virginiabeachstrong a cowardly closet hating white nationalist home grown terrorist will kill at this magnitude.""
+sentiment 1
+respect 1
+insult ",#VirginiaBeachStrong a cowardly closet hating white nationalist home grown terrorist will kill at th,fewshot,22918,70
+2.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9660631841219236,"here are the ratings for the given comments:
+
+comment: ""they all need to be kicked, taken out of our country. obama brought them all in illegally. send the trash back to there own country""
+
+sentiment ","They all need to be Kicked, taken out of our country. Obama brought them all in Illegally. Send the ",fewshot,20020,71
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9723989235873205,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",No one will like you. No one will love you. You should die like that baby you killed. You're trash. ,fewshot,24631,72
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.928829829599823,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",Nay I'm not against sex and sexuality. I'm for people doing what makes them happy (and doesn't harm ,fewshot,6616,73
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.8794653917004212,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","""Hamas started as a violent group and has slowly grown into..."" implying they are no longer violent.",fewshot,17732,74
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9203790317234916,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",No he is happily married for decades. I should take pictures of the inside and post them to the inte,fewshot,10476,75
+5.0,2.0,1.0,1.0,2.0,1.0,1.0,1.0,1.0,0.0,0.948510382332463,"here are the ratings for the given comments:
+
+comment: ""**ben shapiro debunks black lives matter with facts and logic.**""
+sentiment 5
+respect 2
+insult 1
+humiliate 1
+status 2
+dehumanize 1
+violence 1
+ge",**Ben Shapiro Debunks Black Lives Matter with FACTS and LOGIC.**,fewshot,2747,76
+1.0,1.0,4.0,3.0,1.0,1.0,1.0,1.0,4.0,1.0,0.9620608461748296,"here are the ratings for the given comments:
+
+comment: ""go back to russia you pos""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 4
+hatespeech 1
+",Go back to Russia you POS,fewshot,15026,77
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.8662019661664334,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",Perspective: I'm a dual citizen of the U.S. and Britain. But people rarely consider me an immigrant.,fewshot,31779,78
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9521389881487866,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","Meagan the Stallion done gave these bitches the definition of ""hot girl"" now they done REDEFINED THE",fewshot,30261,79
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9690137086266769,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","Yeah, that too!  Plus, I don't know about you, but as I grow older I kinda get tired of these people",fewshot,8503,80
+2.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9474132651065409,"here are the ratings for the given comments:
+
+comment: ""i hate lame ass niggas. who tf birthed y'all""
+
+sentiment 2
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 1
+genocide 1
+attack_def",I hate lame ass niggas. Who tf birthed y'all,fewshot,30061,81
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9611617115785525,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","Awww man don't let it affect you like that. If people stare at you, just stay close your head up and",fewshot,2952,82
+1.0,1.0,4.0,3.0,1.0,1.0,2.0,1.0,4.0,1.0,0.957208085481156,"here are the ratings for the given comments:
+
+comment: ""this bitch deserves to burn in hell.""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 1
+violence 2
+genocide 1
+attack_defend 4
+ha",This bitch deserves to burn in hell.,fewshot,25918,83
+1.0,1.0,4.0,3.0,1.0,1.0,2.0,1.0,4.0,1.0,0.9615832700158014,"here are the ratings for the given comments:
+
+comment: ""oompa loompa doopity dock, why don' you just go suck on my cock.""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 1
+violence 2
+g","Oompa loompa doopity dock, why don't you just go suck on my cock.",fewshot,18090,84
+2.0,1.0,4.0,3.0,1.0,1.0,1.0,1.0,4.0,1.0,0.9512668024797623,"here are the ratings for the given comments:
+
+comment: ""this nigga look gay as hell im dead""
+sentiment 2
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 4
+hate",this nigga look gay as hell iM DEAD,fewshot,23301,85
+5.0,2.0,1.0,1.0,2.0,1.0,1.0,1.0,1.0,0.0,0.8330814618003171,"here are the ratings for the given comments:
+
+comment: ""i'm so excited to see the new season of my favorite show!""
+sentiment 5
+respect 2
+insult 1
+humiliate 1
+status 2
+dehumanize 1
+violence 1
+genocide ",3 years ago today i came out to my madre,fewshot,39711,86
+5.0,2.0,1.0,1.0,2.0,1.0,1.0,1.0,1.0,0.0,0.8447992071990748,"here are the ratings for the given comments:
+
+comment: ""i'm so glad to see people finally standing up against this oppressive regime.""
+sentiment 5
+respect 2
+insult 1
+humiliate 1
+status 2
+dehumanize 1
+",It's just really pointless and insulting to people who actually experience racism by implying our so,fewshot,20052,87
+4.0,2.0,1.0,1.0,2.0,1.0,1.0,1.0,2.0,0.0,0.9506553486933021,"here are the ratings for the given comments:
+
+comment: ""but why did they kill off the only lgbt character? (an actual complaint by some tumblrina)""
+
+sentiment 4
+respect 2
+insult 1
+humiliate 1
+status 2",But why did they kill off the only LGBT character? (an actual complaint by some Tumblrina),fewshot,18496,88
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.8693152012721785,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+1
+1
+4
+3
+1
+2
+2
+1
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+",All I wanted by Paramore Pristine by Snail Mail Wish you were gay by Billie Eilish,fewshot,10031,89
+2.0,1.0,2.0,1.0,1.0,1.0,1.0,1.0,3.0,0.0,0.9494263799165279,"here are the ratings for the given comments:
+
+comment: ""y are girls so mean""
+sentiment 2
+respect 1
+insult 2
+humiliate 1
+status 1
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 3
+hatespeech 0
+confide",y are girls so mean,fewshot,38528,90
+2.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.956539969810023,"here are the ratings for the given comments:
+
+comment: ""these niggas is too cock sucker""
+
+sentiment 2
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 1
+genocide 1
+attack_defend 4
+hatespe",These niggas is too Cock sucker,fewshot,28547,91
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9215465648310807,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",For escaping rapists  only she didn't escape them at all  not in a man's world  where women exist  s,fewshot,8603,92
+2.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9428454833041159,"here are the ratings for the third comment:
+
+sentiment 2
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 1
+genocide 1
+attack_defend 4
+hatespeech 1
+confidence 0.8",She cheated on him with Jesus,fewshot,17157,93
+2.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9676933470512683,"here are the ratings for the given comments:
+
+comment: ""one black children on sexual clip??? wtf  ? colective insanity !!! open your eyes! this clip reduct your mind at the street dog in copulation in",One black children on sexual clip??? Wtf ? Colective insanity !!! Open your eyes! This clip reduct y,fewshot,45259,94
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9691415384969715,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",❤️ = the fight between masculinity and femininity  🧡= the homophobia in churches 💛= discovering the ,fewshot,41924,95
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9632857612965532,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","The reason they keep fucking kids is becuase they practice an ancient babylonian religion , in were ",fewshot,15118,96
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.958174883540666,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","Hey ,muslim dickhead !!!!!!!! Why don;t you go and shove Allah or whatever the fuck you call the ret",fewshot,20010,97
+5.0,2.0,1.0,1.0,2.0,1.0,1.0,1.0,1.0,0.0,0.9572074471892078,"here are the ratings for the given comments:
+
+comment: ""guess who gets thanked for amazing birthday parties. is it pride month, or gay pride month?""
+
+sentiment 5
+respect 2
+insult 1
+humiliate 1
+status ","Guess who gets thanked for amazing birthday parties. Is it pride month, or gay pride month?",fewshot,4762,98
+4.0,2.0,1.0,1.0,1.0,1.0,1.0,1.0,2.0,0.0,0.9545142821320167,"here are the ratings for the given comments:
+
+comment: ""if the gospel in your church can't go beyond skin colours , tribe , social boundaries then that's not gospel  ..🤔🤔🤔 if segregation and racism ca","If the gospel in your church can't go beyond skin colours , tribe , social boundaries then that's no",fewshot,36873,99
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9399815185676689,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+
+3","GEEZ..... I think #NorthKorea may be right. #BarackObama is a monkey! Surely acts like one.   URL""",fewshot,20015,100
+4.0,2.0,1.0,1.0,2.0,1.0,1.0,1.0,2.0,0.0,0.9351609330230277,"here are the ratings for the given comments:
+
+comment: ""hahasorry thought maybe it was homosexual slang""
+
+sentiment 4
+respect 2
+insult 1
+humiliate 1
+status 2
+dehumanize 1
+violence 1
+genocide 1
+attack_",Hahasorry Thought maybe it was homosexual slang,fewshot,5212,101
+1.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9540520100896904,"here are the ratings for the given comments:
+
+comment: ""bitch got thag nigga fucking her ass till he feed her all that nut url""
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violenc",Bitch got thag nigga fucking her ass till he feed her all that nut URL,fewshot,25804,102
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9711247679912108,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",And as for men- we have said this before and it's good to reiterate it again- IF you have to beat a ,fewshot,25862,103
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9677689059098924,"here are the ratings for the given comments:
+
+comment: ""what are cishet aces even talking abt bitch i'm gnna k*ll u""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 2
+genoci",what are cishet aces even talking abt bitch i'm gnna k*ll u,fewshot,23517,104
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9669995082369918,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",Weak ass bitch gonna cry again. Just like you cried when you realized you're not even good at being ,fewshot,4145,105
+1.0,1.0,4.0,3.0,1.0,1.0,2.0,1.0,4.0,1.0,0.9618022877527511,"here are the ratings for the given comments:
+
+comment: ""bitch was sucking my dick so good i had to punch her in the head""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 1
+violence 2
+g",Bitch was sucking my dick so good I had to punch her in the head,fewshot,21006,106
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9592491061881467,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",Bitch FUCK YOU!!! Fucking dumb ass bitch I hope someone fucks you up for this,fewshot,39561,107
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9394037399616493,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+
+3","YTA for calling it ""a gay ass thing"" - homophobia is not cool by any stretch. And yeah you're an ass",fewshot,1550,108
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.968240955127223,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",THE ISLAMIST COMMUNIST BABY KILLERS SHOULD HAVE GONE AHEAD WITH IT JUST TO BE DEFEATED AND BECOME TH,fewshot,29939,109
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9719823511071086,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","At 7:19 is why I hate people, women especially look how mad she got just because the dog splashed he",fewshot,20013,110
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9459644091391453,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",@RussofjrRusso @CBSEveningNews @CBSNews @PressSec @weijia People don't make the journey because of l,fewshot,22394,111
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9559875261515187,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+1
+1
+4
+3
+1
+2
+2
+1
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+",@brickMNYbishop No you a bitch for talking about a nigga that takes care his kid and nothing but his,fewshot,34734,112
+3.0,2.0,1.0,1.0,2.0,1.0,1.0,1.0,2.0,0.0,0.9470556572291988,"here are the ratings for the given comments:
+
+comment: ""kabbalah zohar comes from people who rejected jesus as the messiah.""
+
+sentiment 3
+respect 2
+insult 1
+humiliate 1
+status 2
+dehumanize 1
+violence ",Kabbalah Zohar comes from people who rejected Jesus as the Messiah.,fewshot,40455,113
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9665117212913023,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",trump is the only jews true friend. I hope trump will be the next US president and help Israel to ki,fewshot,20068,114
+1.0,1.0,4.0,3.0,1.0,1.0,1.0,1.0,4.0,1.0,0.9604378138337796,"here are the ratings for the given comments:
+
+comment: ""dumb bitch, dumb shit!""
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 4
+hatespeech 1
+conf","Dumb bitch, dumb shit!",fewshot,21406,115
+2.0,2.0,2.0,1.0,1.0,1.0,1.0,1.0,3.0,0.0,0.9448891037117553,"here are the ratings for the given comment:
+
+sentiment 2
+respect 2
+insult 2
+humiliate 1
+status 1
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 3
+hatespeech 0
+confidence 0.8",@brumbyoz @yehlog @shahfaesal @OmarAbdullah Suppose a kashmiri muslim also make fun of any verse fro,fewshot,30665,116
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9722779678388124,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","Being a woman had fuck all go do with her failure, her being a paedophile protecting globalist Zioni",fewshot,20026,117
+5.0,2.0,1.0,1.0,2.0,1.0,1.0,1.0,1.0,0.0,0.9540337456382567,"here are the ratings for the given comments:
+
+comment: ""happy pride month i'm gay url""
+sentiment 5
+respect 2
+insult 1
+humiliate 1
+status 2
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 1
+hatespeech",happy pride month i'm gay URL,fewshot,20059,118
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9707265710541222,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 2
+genocide 1
+attack_defend 4",Nah this country is technically in one of its best states it's ever been in. As a whole there is mor,fewshot,8994,119
+5.0,2.0,1.0,1.0,2.0,1.0,1.0,1.0,1.0,0.0,0.869966983069072,"here are the ratings for the given comments:
+
+comment: ""i think the group is doing a great job, keep up the good work!""
+sentiment 5
+respect 2
+insult 1
+humiliate 1
+status 2
+dehumanize 1
+violence 1
+geno","Yes, in barbaric, authoritarian cultures that have since been condemned. Interesting that Christians",fewshot,20024,120
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.967558621848982,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",Your language for one dumb fuck. I know your ultra Americanized brain has rejected any notion of Ara,fewshot,4587,121
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9637191760412596,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",You've made me stink among all the people of this land—among all the Canaanites and Perizzites. We a,fewshot,26493,122
+2.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.8222834750937735,"here are the ratings for the given comments:
+
+comment: ""i hate your stupid opinions, you're all just a bunch of ignorant fools.""
+sentiment 2
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violen","Aint nobody wearing those new Westbrook ""Jordan's"" but Mexicans & trailer park trash white girls.",fewshot,20038,123
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9685990897208528,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",ugly hater go get a life she so beautiful and it is more than we could say about you. stop talking a,fewshot,43442,124
+1.0,1.0,4.0,3.0,1.0,1.0,1.0,1.0,4.0,1.0,0.9652993534661556,"here are the ratings for the given comments:
+
+comment: ""and this bitch has the audacity to cry??""
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 4",AND THIS BITCH HAS THE AUDACITY TO CRY??,fewshot,16178,125
+1.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9707898446291953,"here are the ratings for the given comments:
+
+comment: ""go back yo europe. you have no right to be in native homelands. youre nothing but a poarasitic invader murderer and thief""
+
+sentiment 1
+respect ",go back yo europe. you have no right to be in native homelands. youre nothing but a poarasitic invad,fewshot,47205,126
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9583316286396735,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","@_AyParcasi64 Merhaba fatma , just wanted to inform you that this phrase ""men are trash"" goes agains",fewshot,26842,127
+1.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9576514945363914,"here are the ratings for the given comments:
+
+comment: ""niggas ain'nt meant to be fucked wit nd bitches ain'nt meant to be trusted""
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+vio",niggas ain't meant to be fucked wit nd bitches ain't meant to be trusted,fewshot,21275,128
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9718177418925998,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+
+3",Muslims are turning Germany into a nightmare! Thanks to all leftist liberal pagan politicians that h,fewshot,27786,129
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9546911661400767,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",Yes! The Palestinians terrorist state needs to be wiped from the face of the earth. While we're at i,fewshot,32962,130
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9525638177095012,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",This chick is an embarrassment to her gender. We used to have to look to Maxine Waters for this leve,fewshot,49016,131
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.8852504155831828,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",Hitler didn't finish it. Can u. If a nigger ur Jew confronts u in the street what then.,fewshot,20045,132
+2.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.949879007949092,"here are the ratings for the given comments:
+
+comment: ""the amount of women hating incels in this thread lmao i know you niggas not getting any play from women""
+
+sentiment 2
+respect 1
+insult 4
+humilia",The amount of women hating incels in this thread lmao I know you niggas not getting any play from wo,fewshot,7479,133
+4.0,2.0,1.0,1.0,2.0,1.0,1.0,1.0,1.0,0.0,0.9523637309351956,"here are the ratings for the third comment:
+
+sentiment 4
+respect 2
+insult 1
+humiliate 1
+status 2
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 1
+hatespeech 0
+confidence 0.8",Trans rights are human rights,fewshot,20069,134
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9624780911793487,"here are the ratings for the given comments:
+
+comment: ""i hate niggas you complain like suck it up you little bitch""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 2
+genoci",I hate niggas you complain like suck it up you little bitch,fewshot,20088,135
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9708684283647241,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",Are you so deep in the incel world that you think cleavage is soft core porn? Lol holy shit you guys,fewshot,2088,136
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9685341025793751,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",>I am sorry did i hurt your white pride ? In what world does India have more rape per capita than US,fewshot,18346,137
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9757837652788115,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 2
+genocide 1
+attack_defend 4",I was commenting on one of my American follower's tweet. So as i was replying i typed the word nigga,fewshot,26170,138
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9686838996091358,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","[TRANS] guys, sbd said they're keumdong's classmate and asked him ""what do u think about by9?"" and t",fewshot,36180,139
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9629284039192127,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",Fuck you fuck you you stupid cheating bitch go lick a dick and die ur a stupid nigger bitch,fewshot,20008,140
+2.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9610620147642612,"here are the ratings for the given comments:
+
+comment: ""i hate bitches who get around dudes & have a brand new personality, act regular ugly lol""
+sentiment 2
+respect 1
+insult 4
+humiliate 3
+status 1
+de","i hate bitches who get around dudes & have a brand new personality, act regular ugly lol",fewshot,22489,141
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9641230429790185,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","Not sure a cheap slut like you deserve to be used and abused by a real man, you're so stupid you cov",fewshot,19431,142
+1.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9530941084326934,"here are the ratings for the given comments:
+
+comment: ""dump the nigga""
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 1
+genocide 1
+attack_defend 4
+hatespeech 1
+confidence 1",Dump the nigga,fewshot,1645,143
+3.0,2.0,1.0,1.0,2.0,1.0,1.0,1.0,1.0,0.0,0.9458848266507651,"here are the ratings for the given comments:
+
+comment: ""normally a bad diet and lack of exercise url""
+sentiment 3
+respect 2
+insult 1
+humiliate 1
+status 2
+dehumanize 1
+violence 1
+genocide 1
+attack_defe",Normally a bad diet and lack of exercise URL,fewshot,28525,144
+2.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9661786426359594,"here are the ratings for the given comments:
+
+comment: ""my god look at these barbaric ppl. and these pigs all watching. they r a very, very sick culture. and omar and rashid want this crap here. this ","My God look at these BARBARIC PPL. And these pigs all watching. They r a very, very sick culture. An",fewshot,20017,145
+2.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9596295429675937,"here are the ratings for the given comments:
+
+comment: ""niggas disgust me, & you bitches irritate me.""
+
+sentiment 2
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 1
+genocide 1
+attack_de","niggas disgust me, & you bitches irritate me.",fewshot,28203,146
+3.0,2.0,1.0,1.0,2.0,1.0,1.0,1.0,2.0,0.0,0.933241271759069,"here are the ratings for the given comments:
+
+comment: ""this is what google shows you when you type in 'bitter, frustrated lesbian'""
+
+sentiment 3
+respect 2
+insult 1
+humiliate 1
+status 2
+dehumanize 1
+v","This is what google shows you when you type in ""bitter, frustrated lesbian""",fewshot,12852,147
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9749844266336058,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 2
+genocide 1
+attack_defend 4
+",🍉 Dane Jones Hot teen with plump bum fucks her older lovers fat cock URL,fewshot,31411,148
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9728817735510319,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 2
+genocide 1
+attack_defend 4","Copts are Oriental Orthodox, not Eastern Orthodox. Granted, do have a few Copts here, because the tw",fewshot,17197,149
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,2.0,4.0,1.0,0.9646295287169906,"here are the ratings for the given comments:
+
+comment: ""nothing. religion is an evil and all religious people should be killed for the greater good.""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status",Nothing. Religion is an evil and all religious people should be killed for the greater good.,fewshot,6827,150
+2.0,1.0,2.0,1.0,1.0,1.0,1.0,1.0,3.0,1.0,0.9505075039373968,"here are the ratings for the given comments:
+
+comment: ""muslims will take over""
+sentiment 2
+respect 1
+insult 2
+humiliate 1
+status 1
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 3
+hatespeech 1
+conf",Muslims will take over,fewshot,13252,151
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9701763301705061,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 2
+genocide 1
+attack_defend 4
+",@WhyDarkYT @WtfBuildz Lmao now he disrespecting religion lmao I'm getting yo adress from the booster,fewshot,28929,152
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9515307843155866,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","To the ""Things"" with vaginas in the world, I don't care anymore whether or not you get an abortion ,",fewshot,24983,153
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9501066399059355,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",@billmaher Hahaha! How can Catholics say they are for small government when the Vatican/church has t,fewshot,20925,154
+1.0,1.0,4.0,1.0,1.0,1.0,1.0,1.0,4.0,1.0,0.9179659145583636,"here are the ratings for the given comments:
+
+comment: ""go fuck yourself"" - male octopus
+
+sentiment 1
+respect 1
+insult 4
+humiliate 1
+status 1
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 4
+hatespe","""go fuck yourself"" - male octopus",fewshot,9989,155
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9337155510729038,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","It's sad that LGBT rights are a political issue. It should be basic, granted, given! But I am loving",fewshot,23012,156
+2.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9567538469489668,"here are the ratings for the given comments:
+
+comment: ""i wish these pussy niggahs would tell me to my face instead of hiding behind some screen 😴""
+
+sentiment 2
+respect 1
+insult 4
+humiliate 3
+status 1",i wish these pussy niggahs would tell me to my face instead of hiding behind some screen 😴,fewshot,20685,157
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.944302018713682,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","I, a Catholic and a Jesuit, am grateful for this Muslim holy season for challenging me to be a more ",fewshot,20061,158
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9593290697404275,"here are the ratings for the given comments:
+
+comment: ""i want to ram my throbbing cock into that pussy.""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 2
+genocide 1
+attack",I want to ram my throbbing cock into that pussy.,fewshot,6032,159
+2.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9560383726271617,"here are the ratings for the given comments:
+
+comment: ""why are all you desert people so fucking gay?""
+sentiment 2
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 1
+genocide 1
+attack_def",Why are all you desert people so fucking gay?,fewshot,616,160
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9268720814433001,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",+Rick Ghosh that's an inaccurate statement because every country has faced issue with several religi,fewshot,46051,161
+2.0,1.0,4.0,3.0,1.0,1.0,1.0,1.0,4.0,1.0,0.9521489091430696,"here are the ratings for the given comments:
+
+comment: ""look how racist this cunt is.""
+
+sentiment 2
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 4
+hatespeec",Look how racist this cunt is.,fewshot,23093,162
+2.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9453464394424933,"here are the ratings for the given comment:
+
+sentiment 2
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 2
+genocide 1
+attack_defend 4
+hatespeech 1
+confidence 1.0",@BullPup2A @breckbuzz @POTUS She needs to be thrown out of the country. Send her to Somalia where sh,fewshot,20851,163
+1.0,1.5,1.0,1.0,1.5,1.0,1.0,2.0,1.0,1.0,0.9679562693079974,"here are the ratings for the given comments:
+
+comment: ""@l1ltr4p fucking losers wetbacks #sorrynotsorry""
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 1
+genocide 1
+attack_d",@L1LTR4P fucking losers wetbacks #SorryNotSorry,fewshot,20025,164
+2.0,1.0,3.0,2.0,1.0,1.0,1.0,1.0,3.0,1.0,0.944723587338646,"here are the ratings for the given comments:
+
+comment: ""oh that' s cute. you didn' t even read the thing you claim to support. there is nothing biologically inherent in women that would make them less",oh that's cute. you didn't even read the thing you claim to support. there is nothing biologically i,fewshot,20054,165
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.8905516132057272,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",@Zabehulah_M33 We already know that your enemies are Afghanistan's Muslims not Americans.. Killing o,fewshot,39129,166
+4.0,2.0,1.0,1.0,2.0,1.0,1.0,1.0,2.0,0.0,0.9500833295516986,"here are the ratings for the given comments:
+
+comment: ""women love to be told that. truly.""
+sentiment 4
+respect 2
+insult 1
+humiliate 1
+status 2
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 2
+hates",Women love to be told that. Truly.,fewshot,18417,167
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9653133133179651,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+1
+1
+4
+3
+1
+2
+2
+1
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+",I'm a married Christian woman and I do not feel repressed. I feel like having faith in God helps me ,fewshot,47401,168
+3.0,2.0,1.0,1.0,2.0,1.0,1.0,1.0,1.0,0.0,0.9594193548007307,"here are the ratings for the third comment:
+
+sentiment 3
+respect 2
+insult 1
+humiliate 1
+status 2
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 1
+hatespeech 0
+confidence 0.8",I didn't know that jacob is a filipino,fewshot,47047,169
+2.0,1.0,3.0,2.0,1.0,1.0,1.0,1.0,3.0,1.0,0.9643862454147315,"here are the ratings for the given comments:
+
+comment: ""women on here love masculinity above all its by nature. they respect strength above all. all that 'toxic masculinity' talk is them putting up a ","women on here love masculinity above all its by nature. they respect strength above all. all that ""t",fewshot,28486,170
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9771775889412019,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 2
+genocide 1
+attack_defend 4",Bianca Reis Who wouldn't love to try to deep throat this monster cock? Only on URL celebrating 15 ye,fewshot,30007,171
+3.0,1.5,2.0,1.0,2.0,1.0,1.0,1.0,1.0,1.0,0.946782998828831,"here are the ratings for the given comments:
+
+comment: ""for the same reason @ilhan came here... they were killing christians in somalia so we brought 40,000 muslims here?! it not logic, it's invasion.","For the same reason @Ilhan came here... they were killing Christians in Somalia so we bright 40,000 ",fewshot,20998,172
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.97380435653585,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 2
+genocide 1
+attack_defend 4","I don't care how threatened you feel, you can't go throwing respect for human rights and due process",fewshot,20050,173
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9389636344867076,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",A lot of West indians that were born/raised outside the region were still very much raised in the cu,fewshot,32127,174
+1.0,1.0,4.0,3.0,1.0,1.0,1.0,1.0,4.0,1.0,0.9565577940482163,"here are the ratings for the given comments:
+
+comment: ""i totally agree with you. she's a dumb fucking cunt.""
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 1
+violence 1
+genocide 1
+att",I totally agree with you. She's a dumb fucking cunt.,fewshot,17959,175
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,2.0,4.0,1.0,0.9553201271748288,"here are the ratings for the given comments:
+
+comment: ""all men have a gay orgy to stop future generations from existing""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 2
+g",All men have a gay orgy to stop future generations from existing,fewshot,12278,176
+2.0,1.0,2.0,1.0,1.0,1.0,1.0,1.0,3.0,0.0,0.9536169534389806,"here are the ratings for the given comments:
+
+comment: ""anti zion is that the best you got? iran's population is starving and you are talking nonsense""
+
+sentiment 2
+respect 1
+insult 2
+humiliate 1
+stat",anti zion Is that the best you got? Iran's population is starving and you are talking nonsense,fewshot,48434,177
+1.0,1.0,4.0,3.0,1.0,1.0,1.0,1.0,4.0,1.0,0.9556160304371778,"here are the ratings for the given comments:
+
+comment: ""females are fucking stupid""
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 4
+hatespeech 1
+",Females are fucking stupid,fewshot,23725,178
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.888493284511576,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+1
+1
+4
+3
+1
+2
+2
+1
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+","@PattonlyPerfect Logan eagerly tasted his mouth, noticing the cookie dough from this morning. He kis",fewshot,38133,179
+2.0,2.0,2.0,1.0,2.0,1.0,1.0,1.0,3.0,0.0,0.9539162025882474,"here are the ratings for the given comments:
+
+comment: ""i'm guessing the person who said they just wanted to film someone attacking them was their goal, so they could use the video to make pro-immigra","I'm guessing the person who said they just wanted to film someone attacking them was their goal, so ",fewshot,19687,180
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.956410855558434,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","Because alot of them view Catholicism as some sort of paganism, that Catholics worship Mary and the ",fewshot,19040,181
+1.0,1.0,4.0,3.0,1.0,1.0,1.0,1.0,4.0,1.0,0.947264488318487,"here are the ratings for the given comments:
+
+comment: ""bad fucking bitch""
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 4
+hatespeech 1
+confidenc",Bad fucking bitch,fewshot,38354,182
+2.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9577948414770144,"here are the ratings for the given comments:
+
+comment: ""real bitch go hard for they nigga""
+sentiment 2
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 1
+genocide 1
+attack_defend 4
+hatesp",real bitch go hard for they nigga,fewshot,27791,183
+1.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9731720390870158,"here are the ratings for the given comments:
+
+comment: ""like the filthy little cum dumpster whore you are.""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 1
+genocide 1
+atta",Like the filthy little cum dumpster whore you are.,fewshot,1787,184
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9514508965806764,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","You shouldn't be both visually and deeply unattractive AND mean for no reason. You can, at least, be",fewshot,26953,185
+1.0,1.0,4.0,3.0,1.0,1.0,1.0,1.0,4.0,1.0,0.9570895380769542,"here are the ratings for the given comments:
+
+comment: ""i bet that cunt is drafty you dumbass""
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 1
+violence 1
+genocide 1
+attack_defend 4
+ha",I bet that cunt is drafty you dumbass,fewshot,2317,186
+2.0,1.0,3.0,2.0,1.0,1.0,1.0,1.0,3.0,1.0,0.9554831219347013,"here are the ratings for the given comments:
+
+comment: ""i'm sure there were several others, but islam is definitely the worst""
+
+sentiment 2
+respect 1
+insult 3
+humiliate 2
+status 1
+dehumanize 1
+violenc","I'm sure there were several others, but Islam is definitely the worst",fewshot,20041,187
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9545641399059267,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+1
+1
+4
+3
+1
+2
+2
+1
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+",2-10% of reported rape accusations are proven false. 2% of reported rape accusations are proven true,fewshot,6830,188
+2.0,1.0,2.0,2.0,1.0,1.0,1.0,1.0,3.0,0.0,0.9625028924735994,"here are the ratings for the given comments:
+
+comment: ""how disrespectful of these unhinged women to yell at the president and interrupt him while he is speaking! who are those unhinged women!? why no",How disrespectful of these unhinged women to yell at the President and interrupt him while he is spe,fewshot,48629,189
+1.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9630238708941405,"here are the ratings for the given comments:
+
+comment: ""ok suck your own dick nigga i know i can'""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 1
+genocide 1
+attack_defend",Ok suck your own dick nigga i know i can't,fewshot,38703,190
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9690755077455009,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",I'd leave that fuck hole dripping with cum like the whore you are and then call my friends to dump t,fewshot,19705,191
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,4.0,1.0,0.9725396105079235,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 2
+genocide 1
+attack_defend 4",#I'll suck your dick and give you lots of aftercare and love that you need. ^(Not bi. No.),fewshot,10043,192
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.8904632377051575,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2","Daammnn you're beautiful and sexy, I would love to have you sit down on my face and I'll eat your pu",fewshot,14213,193
+2.0,1.0,2.0,2.0,1.0,2.0,1.0,1.0,3.0,1.0,0.9521596779903684,"here are the ratings for the given comments:
+
+comment: ""he has no empathy for these people because he looks at them as subhuman. the way the nazis did the jews. this is something that can't be changed",He has no empathy for these people because he looks at them as subhuman. The way the Nazis did the J,fewshot,46750,194
+1.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9656277907111437,"here are the ratings for the given comments:
+
+comment: ""fuck you dumb ass ugly ass bitch""
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+violence 1
+genocide 1
+attack_defend 4
+hatespe",fuck you dumb ass ugly ass bitch,fewshot,39511,195
+2.0,1.0,3.0,2.0,1.0,1.0,1.0,1.0,3.0,1.0,0.9691447805819413,"here are the ratings for the given comments:
+
+comment: ""people like her are what give feminists a whiny bad name and just hurt their own cause, but of course tell that to a feminist and they just star","People like her are what give feminists a whiny bad name and just hurt their own cause, but of cours",fewshot,8717,196
+1.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9597022484350546,"here are the ratings for the given comments:
+
+comment: ""no insult cant think of shit with those holes in ur brain? lame ass nigga.""
+
+sentiment 1
+respect 1
+insult 4
+humiliate 3
+status 1
+dehumanize 2
+vi",No insult cant think of shit with those holes in ur brain? Lame ass nigga.,fewshot,13734,197
+1.0,1.0,4.0,3.0,1.0,2.0,2.0,1.0,1.0,1.0,0.9638372914972702,"here are the ratings for the given comments:
+
+comment: ""i hope you all die, you filthy animals.""
+1
+1
+4
+3
+1
+2
+2
+4
+1
+1.0
+
+comment: ""i disagree with your opinion, but i respect your right to say it.""
+3
+2",She is such POS and a F ing drama queen. She has no clue what this country is really all about. She ,fewshot,48979,198
+2.0,1.0,4.0,3.0,1.0,2.0,1.0,1.0,4.0,1.0,0.9680695738856232,"here are the ratings for the given comments:
+
+comment: ""bitches always wanna raise up on the female their man is cheating with. babygirl, yall two* agreed to be together. yall. not you him and her. th","Bitches always wanna raise up on the female their man is cheating with. Babygirl, YALL TWO* agreed t",fewshot,28698,199

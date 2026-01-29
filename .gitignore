@@ -1,0 +1,27 @@
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Environments
+.venv/
+venv/
+
+# Slurm logs
+slurm-*.out
+slurm-*.err
+
+# Model binaries and large files
+*.gguf
+
+# Results and visualizations (uncomment if you prefer tracking outputs)
+# **/results/**
+# **/visualizations/**
+
+# OS/editor junk
+.DS_Store
+Thumbs.db
