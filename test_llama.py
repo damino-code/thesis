@@ -36,7 +36,7 @@ what is the difference between a dielemma and a problem ?<|eot_id|><|start_heade
 print("\nGenerating response...\n")
 output = llm(
     prompt,
-    max_tokens=50,
+    max_tokens=100,
     stop=["<|eot_id|>"],
     echo=False
 )

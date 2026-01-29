@@ -1,0 +1,19 @@
+name: llm-research
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.10
+  - huggingface_hub
+  - pandas
+  - numpy
+  - tqdm
+  - ipykernel
+  - notebook
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - pip
+  - pip:
+    - llama-cpp-python
+    - ollama
