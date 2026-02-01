@@ -1,103 +1,28 @@
 import re
 import math
 import numpy as np
+import os
+import json
 
 class SingleAttributeAnalyzer:
     def __init__(self, llm_model):
         self.model = llm_model
-        
-        self.prompts = {
-            'sentiment': """
-SCORING CRITERIA (Answer based on the definitions below):
-- SENTIMENT (1-5): Question: How would you describe the sentiment? Meaning: Overall emotional tone. 1=Strongly negative, 2=Somewhat negative, 3=Neutral, 4=Somewhat positive, 5=Strongly positive
+        self.prompts = self._load_prompts()
 
-Analyze this comment for SENTIMENT:
-Comment: "{text}"
-
-RESPOND WITH ONLY THE NUMBER (1-5).
-""",
-            'respect': """
-SCORING CRITERIA (Answer based on the definitions below):
-- RESPECT (1-2): Question: Is this comment respectful towards the group? Meaning: Shows respect/disrespect. 1=Disrespectful/Rude, 2=Respectful/Polite
-
-Analyze this comment for RESPECT:
-Comment: "{text}"
-
-RESPOND WITH ONLY THE NUMBER (1-2).
-""",
-            'insult': """
-SCORING CRITERIA (Answer based on the definitions below):
-- INSULT (1-4): Question: Is this comment insulting towards the group? Meaning: Contains insulting language. 1=Strongly Disagree (None), 2=Disagree (Mild), 3=Agree (Clear), 4=Strongly Agree (Severe)
-
-Analyze this comment for INSULT:
-Comment: "{text}"
-
-RESPOND WITH ONLY THE NUMBER (1-4).
-""",
-            'humiliate': """
-SCORING CRITERIA (Answer based on the definitions below):
-- HUMILIATE (1-3): Question: Is this comment humiliating towards the group? Meaning: Humiliates the group. 1=Strongly Disagree (None), 2=Agree (Attempt), 3=Strongly Agree (Degrading)
-
-Analyze this comment for HUMILIATION:
-Comment: "{text}"
-
-RESPOND WITH ONLY THE NUMBER (1-3).
-""",
-            'status': """
-SCORING CRITERIA (Answer based on the definitions below):
-- STATUS (1-2): Question: Does this comment frame the group as inferior? Meaning: Framed as inferior or superior. 1=Inferior, 2=Equal/Superior
-
-Analyze this comment for STATUS:
-Comment: "{text}"
-
-RESPOND WITH ONLY THE NUMBER (1-2).
-""",
-            'dehumanize': """
-SCORING CRITERIA (Answer based on the definitions below):
-- DEHUMANIZE (1-2): Question: Does the comment portray the group as less than human? Meaning: Animalistic/vermin comparisons. 1=No, 2=Yes
-
-Analyze this comment for DEHUMANIZATION:
-Comment: "{text}"
-
-RESPOND WITH ONLY THE NUMBER (1-2).
-""",
-            'violence': """
-SCORING CRITERIA (Answer based on the definitions below):
-- VIOLENCE (1-2): Question: Does the comment call for violence against the group? Meaning: Calls for physical harm/death. 1=No, 2=Yes
-
-Analyze this comment for VIOLENCE:
-Comment: "{text}"
-
-RESPOND WITH ONLY THE NUMBER (1-2).
-""",
-            'genocide': """
-SCORING CRITERIA (Answer based on the definitions below):
-- GENOCIDE (1-2): Question: Does the comment call for the deliberate killing of a large group? Meaning: Calls for/supports genocide. 1=No, 2=Yes
-
-Analyze this comment for GENOCIDE:
-Comment: "{text}"
-
-RESPOND WITH ONLY THE NUMBER (1-2).
-""",
-            'attack_defend': """
-SCORING CRITERIA (Answer based on the definitions below):
-- ATTACK_DEFEND (1-4): Question: Is the comment attacking or defending the group? Meaning: Explicit aggression or defense. 1=Strongly defending, 2=Defending, 3=Attacking, 4=Strongly attacking
-
-Analyze this comment for ATTACK vs DEFENSE:
-Comment: "{text}"
-
-RESPOND WITH ONLY THE NUMBER (1-4).
-""",
-            'hatespeech': """
-SCORING CRITERIA (Answer based on the definitions below):
-- HATESPEECH (0-1): Question: Does this comment contain hate speech? Meaning: Bias-motivated, hostile, and malicious language targeted at a group. 0=No, 1=Yes
-
-Analyze this comment for HATE SPEECH:
-Comment: "{text}"
-
-RESPOND WITH ONLY THE NUMBER (0 or 1).
-"""
-        }
+    def _load_prompts(self):
+        prompts = {}
+        prompt_dir = os.path.join(os.path.dirname(__file__), 'prompts')
+        for filename in os.listdir(prompt_dir):
+            if filename.endswith(".json"):
+                attribute = os.path.splitext(filename)[0]
+                with open(os.path.join(prompt_dir, filename), 'r') as f:
+                    data = json.load(f)
+                    # Join list of strings into a single prompt string with newlines
+                    if isinstance(data['prompt'], list):
+                        prompts[attribute] = '\n'.join(data['prompt'])
+                    else:
+                        prompts[attribute] = data['prompt']
+        return prompts
 
     def analyze_attribute(self, text, attribute):
         """Analyze a comment for a single attribute"""

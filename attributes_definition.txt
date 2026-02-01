@@ -1,0 +1,48 @@
+Sentiment: How would you describe the sentiment of this comment?
+sentiment_meaning: Overall emotional tone of the comment.
+response: Strongly negative, somewhat negative, neutral, somewhat positive, strongly positive
+scale: Strongly negative → Strongly positive (5 levels)
+-------------------------
+respect:Is this comment respectful towards the group(s) you previously identified?
+respect_meaning: (Disrespect) – Whether the comment shows respect or disrespect toward the targeted group.
+Scale: Strongly disrespectful → Strongly respectful (5 levels) .
+Spectrum: More disrespect = more hateful .
+-------------------------
+Insult: Do you agree or disagree with the following statement: This comment is insulting towards the group(s) you previously identified.
+Insult_meaning: – Whether the comment contains insulting language toward the group.
+Scale: Strongly disagree → Strongly agree (5 → recoded to 4 levels) .
+Spectrum: Insults increase hatefulness severity.
+-------------------------
+Humiliate: Do you agree or disagree with the following statement: This comment is humiliating towards the group(s) you previously identified.
+Humiliate – Whether the comment humiliates the group.
+Scale: Strongly disagree → Strongly agree (5 → recoded to 3 levels) .
+Spectrum: Positioned higher than “insult,” as humiliation is deeper derogation.
+-------------------------
+Status: Do you agree or disagree with the following statement: This comment is humiliating towards the group(s) you previously identified.
+Status_meaning: – Whether the group is framed as inferior or superior.
+Scale: Strongly inferior → Strongly superior (5 → recoded to 2 levels) .
+Spectrum: Asserting inferiority increases hatefulness.
+-------------------------
+Dehumanize: This comment states that the group(s) you previously identified is:
+Dehumanize_meaning: – Whether the comment portrays the group as less than human (e.g., animals, objects).
+Scale: Strongly disagree → Strongly agree (5 → recoded to 2 levels) .
+Spectrum: Higher severity than humiliation/status.
+-------------------------
+Violence: Do you agree or disagree with the following statement: This comment calls for using violence against the group(s) you previously identified.
+Violence_meaning: – Whether the comment calls for violence against the group.
+Scale: Strongly disagree → Strongly agree (5 → recoded to 2 levels) .
+Spectrum: Very high on hatefulness (few comments reached this level) .
+-------------------------
+Genocide: Do you agree or disagree with the following statement: This comment calls for the deliberate killing of a large group of people from the group(s) you previously identified.
+Genocide_meaning: – Whether the comment calls for or supports genocide.
+Scale: Binary or 2 levels (Agree/Disagree) .
+Spectrum: Highest severity; most “difficult” for a comment to reach .
+-------------------------
+Attack/Defend: Is the comment attacking or defending the group(s) you previously identified?
+Attack/Defend_meaning: – Whether the comment attacks or defends the group.
+Scale: Strongly defending → Strongly attacking (5 → recoded to 4 levels) .
+Spectrum: Captures explicit aggression or defense.
+-------------------------
+Hate Speech: Does this comment contain hate speech, defined as “bias-motivated, hostile and malicious language targeted at a person/group because of their actual or perceived innate characteristics, especially when the group is unnecessarily labeled? 
+Hate Speech_meaning – Overall judgment: does this comment contain hate speech?
+Scale: Yes, No, Unclear (3 → recoded to 2 levels) 

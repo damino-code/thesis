@@ -9,93 +9,93 @@ class SingleAttributeAnalyzer:
         self.prompts = {
             'sentiment': """
 SCORING CRITERIA (Answer based on the definitions below):
-- SENTIMENT (1-5): Question: How would you describe the sentiment? Meaning: Overall emotional tone. 1=Strongly negative, 2=Somewhat negative, 3=Neutral, 4=Somewhat positive, 5=Strongly positive
+- SENTIMENT (0-4): Question: How would you describe the sentiment? 0=Strongly negative, 1=Somewhat negative, 2=Neutral, 3=Somewhat positive, 4=Strongly positive
 
 Analyze this comment for SENTIMENT:
 Comment: "{text}"
 
-RESPOND WITH ONLY THE NUMBER (1-5).
+RESPOND WITH ONLY THE NUMBER (0-4).
 """,
             'respect': """
 SCORING CRITERIA (Answer based on the definitions below):
-- RESPECT (1-2): Question: Is this comment respectful towards the group? Meaning: Shows respect/disrespect. 1=Disrespectful/Rude, 2=Respectful/Polite
+- RESPECT (0-4): Question: Is this comment respectful towards the group? 0=Strongly disrespectful, 1=Disrespectful/Rude, 2=Neutral, 3=Respectful/Polite, 4=Strongly respectful
 
 Analyze this comment for RESPECT:
 Comment: "{text}"
 
-RESPOND WITH ONLY THE NUMBER (1-2).
+RESPOND WITH ONLY THE NUMBER (0-4).
 """,
             'insult': """
 SCORING CRITERIA (Answer based on the definitions below):
-- INSULT (1-4): Question: Is this comment insulting towards the group? Meaning: Contains insulting language. 1=Strongly Disagree (None), 2=Disagree (Mild), 3=Agree (Clear), 4=Strongly Agree (Severe)
+- INSULT (0-4): Question: Is this comment insulting towards the group? 0=Strongly Disagree (None), 1=Disagree (Mild), 2=Neutral/Unsure, 3=Agree (Clear), 4=Strongly Agree (Severe)
 
 Analyze this comment for INSULT:
 Comment: "{text}"
 
-RESPOND WITH ONLY THE NUMBER (1-4).
+RESPOND WITH ONLY THE NUMBER (0-4).
 """,
             'humiliate': """
 SCORING CRITERIA (Answer based on the definitions below):
-- HUMILIATE (1-3): Question: Is this comment humiliating towards the group? Meaning: Humiliates the group. 1=Strongly Disagree (None), 2=Agree (Attempt), 3=Strongly Agree (Degrading)
+- HUMILIATE (0-4): Question: Is this comment humiliating towards the group? 0=Strongly Disagree (None), 1=Disagree (Mild), 2=Neutral/Unsure, 3=Agree (Attempt), 4=Strongly Agree (Degrading)
 
 Analyze this comment for HUMILIATION:
 Comment: "{text}"
 
-RESPOND WITH ONLY THE NUMBER (1-3).
+RESPOND WITH ONLY THE NUMBER (0-4).
 """,
             'status': """
 SCORING CRITERIA (Answer based on the definitions below):
-- STATUS (1-2): Question: Does this comment frame the group as inferior? Meaning: Framed as inferior or superior. 1=Inferior, 2=Equal/Superior
+- STATUS (0-4): Question: Does this comment frame the group as inferior? 0=Strongly inferior, 1=Inferior, 2=Equal/Neutral, 3=Superior, 4=Strongly superior
 
 Analyze this comment for STATUS:
 Comment: "{text}"
 
-RESPOND WITH ONLY THE NUMBER (1-2).
+RESPOND WITH ONLY THE NUMBER (0-4).
 """,
             'dehumanize': """
 SCORING CRITERIA (Answer based on the definitions below):
-- DEHUMANIZE (1-2): Question: Does the comment portray the group as less than human? Meaning: Animalistic/vermin comparisons. 1=No, 2=Yes
+- DEHUMANIZE (0-4): Question: Does the comment portray the group as less than human? 0=Strongly no, 1=No, 2=Unclear/Neutral, 3=Yes, 4=Strongly yes
 
 Analyze this comment for DEHUMANIZATION:
 Comment: "{text}"
 
-RESPOND WITH ONLY THE NUMBER (1-2).
+RESPOND WITH ONLY THE NUMBER (0-4).
 """,
             'violence': """
 SCORING CRITERIA (Answer based on the definitions below):
-- VIOLENCE (1-2): Question: Does the comment call for violence against the group? Meaning: Calls for physical harm/death. 1=No, 2=Yes
+- VIOLENCE (0-4): Question: Does the comment call for violence against the group? 0=Strongly no, 1=No, 2=Unclear/Neutral, 3=Yes, 4=Strongly yes
 
 Analyze this comment for VIOLENCE:
 Comment: "{text}"
 
-RESPOND WITH ONLY THE NUMBER (1-2).
+RESPOND WITH ONLY THE NUMBER (0-4).
 """,
             'genocide': """
 SCORING CRITERIA (Answer based on the definitions below):
-- GENOCIDE (1-2): Question: Does the comment call for the deliberate killing of a large group? Meaning: Calls for/supports genocide. 1=No, 2=Yes
+- GENOCIDE (0-4): Question: Does the comment call for the deliberate killing of a large group? 0=Strongly no, 1=No, 2=Unclear/Neutral, 3=Yes, 4=Strongly yes
 
 Analyze this comment for GENOCIDE:
 Comment: "{text}"
 
-RESPOND WITH ONLY THE NUMBER (1-2).
+RESPOND WITH ONLY THE NUMBER (0-4).
 """,
             'attack_defend': """
 SCORING CRITERIA (Answer based on the definitions below):
-- ATTACK_DEFEND (1-4): Question: Is the comment attacking or defending the group? Meaning: Explicit aggression or defense. 1=Strongly defending, 2=Defending, 3=Attacking, 4=Strongly attacking
+- ATTACK_DEFEND (0-4): Question: Is the comment attacking or defending the group? 0=Strongly defending, 1=Defending, 2=Neutral/Mixed, 3=Attacking, 4=Strongly attacking
 
 Analyze this comment for ATTACK vs DEFENSE:
 Comment: "{text}"
 
-RESPOND WITH ONLY THE NUMBER (1-4).
+RESPOND WITH ONLY THE NUMBER (0-4).
 """,
             'hatespeech': """
 SCORING CRITERIA (Answer based on the definitions below):
-- HATESPEECH (0-1): Question: Does this comment contain hate speech? Meaning: Bias-motivated, hostile, and malicious language targeted at a group. 0=No, 1=Yes
+- HATESPEECH (0-4): Question: Does this comment contain hate speech? 0=Strongly no, 1=No, 2=Unclear/Neutral, 3=Yes, 4=Strongly yes
 
 Analyze this comment for HATE SPEECH:
 Comment: "{text}"
 
-RESPOND WITH ONLY THE NUMBER (0 or 1).
+RESPOND WITH ONLY THE NUMBER (0-4).
 """
         }
 
@@ -104,11 +104,11 @@ RESPOND WITH ONLY THE NUMBER (0 or 1).
         if attribute not in self.prompts:
             raise ValueError(f"Unknown attribute: {attribute}")
             
-        full_prompt = f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
-
-You are an expert content moderator.<|eot_id|><|start_header_id|>user<|end_header_id|>
-{self.prompts[attribute].format(text=text[:500])}
-<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+        full_prompt = f"""<|im_start|>system
+You are an expert content moderator.<|im_end|>
+<|im_start|>user
+{self.prompts[attribute].format(text=text[:500])}<|im_end|>
+<|im_start|>assistant
 """
 
         try:
@@ -116,7 +116,7 @@ You are an expert content moderator.<|eot_id|><|start_header_id|>user<|end_heade
                 full_prompt,
                 max_tokens=10,
                 temperature=0.1,
-                stop=["<|eot_id|>"],
+                stop=["<|im_end|>"],
                 logprobs=1  # Request logprobs for the top token
             )
             choice = response['choices'][0]

@@ -72,18 +72,90 @@ def evaluate_single_attribute(attribute_name):
         mae = mean_absolute_error(valid_df[human_col], valid_df[llm_col])
         
         # Classification Metrics (Accuracy, F1)
+        # Round predictions to nearest integer for classification comparison
         y_true = valid_df[human_col].round().astype(int)
         y_pred = valid_df[llm_col].round().astype(int)
-        accuracy = accuracy_score(y_true, y_pred)
-        f1 = f1_score(y_true, y_pred)
         
-        print(f"📊 Metrics for {attribute_name.upper()}:")
-        print(f"   Correlation: {corr:.4f}")
-        print(f"   MAE: {mae:.4f}")
-        print(f"   Accuracy: {accuracy:.4f}")
-        print(f"   F1 Score: {f1:.4f}")
+        accuracy = accuracy_score(y_true, y_pred)
+        # Use 'weighted' average to account for class imbalance and multiclass/binary cases
+        f1 = f1_score(y_true, y_pred, average='weighted', zero_division=0)
+
+        print(f"\n📈 Results for {attribute_name.upper()}:")
+        print(f"   • Correlation: {corr:.4f}")
+        print(f"   • MAE:         {mae:.4f}")
+        print(f"   • Accuracy:    {accuracy:.4f}")
+        print(f"   • F1 Score:    {f1:.4f} (weighted)")
+        
+        # 5. Save Metrics & Customize Visualization Folder
+        # Create folder for this attribute
+        attr_viz_folder = os.path.join(config.VISUALIZATIONS_FOLDER, attribute_name)
+        os.makedirs(attr_viz_folder, exist_ok=True)
+        
+        # Save Metrics to JSON
+        metrics = {
+            'attribute': attribute_name,
+            'correlation': float(corr),
+            'mae': float(mae),
+            'accuracy': float(accuracy),
+            'f1_score_weighted': float(f1),
+            'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        }
+        
+        metrics_filename = f"metrics_{attribute_name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        metrics_path = os.path.join(attr_viz_folder, metrics_filename)
+        
+        with open(metrics_path, 'w') as f:
+            json.dump(metrics, f, indent=4)
+        print(f"\n💾 Metrics saved to: {metrics_path}")
+
+        # 6. Visualize
+        try:
+            print("\n🎨 Generating Visualizations...")
+            
+            # Temporarily redirect global visualization folder so plot_scatter_plots saves here
+            original_viz_folder = config.VISUALIZATIONS_FOLDER
+            config.VISUALIZATIONS_FOLDER = attr_viz_folder
+            
+            # 1. Scatter Plot
+            plot_scatter_plots(eval_df, [attribute_name])
+            print(f"🖼️  Scatter plot saved to {attr_viz_folder}")
+            
+            # Restore viz folder
+            config.VISUALIZATIONS_FOLDER = original_viz_folder
+
+        except Exception as e:
+            print(f"⚠️ Visualization failed: {e}")
+            config.VISUALIZATIONS_FOLDER = original_viz_folder
+            
+    else:
+        print("⚠️ No valid numeric data pairs for evaluation.")
+
+
 
 if __name__ == "__main__":
-    attributes = ["sentiment", "topic", "emotion", "intent", "entity"]
-    for attribute in attributes:
-        evaluate_single_attribute(attribute)
+    if len(sys.argv) > 1:
+        # Run for the specific attribute provided
+        attr = sys.argv[1]
+        evaluate_single_attribute(attr)
+    else:
+        # Auto-discover all attributes with results
+        print("🔍 specific attribute not provided. Scanning for available results...")
+        base_results_dir = os.path.join(config.RESULTS_FOLDER, "single_attribute_analyser")
+        
+        if os.path.exists(base_results_dir):
+            # List subdirectories
+            found_attrs = [d for d in os.listdir(base_results_dir) 
+                          if os.path.isdir(os.path.join(base_results_dir, d))]
+            
+            if found_attrs:
+                print(f"🎉 Found results for: {', '.join(found_attrs)}")
+                for attr in found_attrs:
+                    print(f"\n{'='*40}")
+                    try:
+                        evaluate_single_attribute(attr)
+                    except Exception as e:
+                        print(f"❌ Failed to evaluate {attr}: {e}")
+            else:
+                print(f"❌ No attribute folders found in {base_results_dir}")
+        else:
+            print(f"❌ Results directory not found: {base_results_dir}")
