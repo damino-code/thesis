@@ -1,12 +1,12 @@
 {
     "prompt": [
         "SCORING CRITERIA (Answer based on the definitions below):",
-        "- HATESPEECH (0-4): Question: Does this comment contain hate speech? 0=Strongly no, 1=No, 2=Unclear/Neutral, 3=Yes, 4=Strongly yes",
+        "- HATESPEECH (0-2): Question: Does this comment contain hate speech? 0=yes , 1=No, 2=Unclear/Neutral",
         "",
         "Analyze this comment for HATE",
         "SPEECH:",
         "Comment: \"{text}\"",
         "",
-        "RESPOND WITH ONLY THE NUMBER (0-4)."
+        "RESPOND WITH ONLY THE NUMBER (0-2)."
     ]
 }
