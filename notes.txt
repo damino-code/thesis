@@ -1,9 +1,0 @@
-- try qwen 2.5 7B
-- focus on feature
-- improve seperate attribute prompt
-----------------------------------------
-anthropic sonnet 4.5
-gemini 3 pro flash
-chat gpt 5.2
-
-3 models with new algorithms
