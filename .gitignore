@@ -25,3 +25,4 @@ slurm-*.err
 # OS/editor junk
 .DS_Store
 Thumbs.db
+notes.txt
