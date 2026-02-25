@@ -30,20 +30,33 @@ repo_id = "Qwen/Qwen2.5-7B-Instruct-GGUF"
 # Desired quantization preference order
 preferred = ["Q4_K_M", "Q4_K_S", "Q6_K", "Q5_K_M", "Q5_K_S", "Q4_0"]
 
-def choose_filename(repo_id: str) -> str:
+def choose_filenames(repo_id: str) -> list[str]:
     files = list_repo_files(repo_id)
     gguf_files = [f for f in files if f.lower().endswith(".gguf")]
     if not gguf_files:
         raise RuntimeError("No .gguf files found in repo: " + repo_id)
+    
+    selected_base = None
     # Try preferred quantizations first
     for quant in preferred:
         for f in gguf_files:
             if quant.lower() in f.lower():
-                return f
+                # If it's a shard, get the base name pattern
+                if "-00001-of-" in f:
+                    selected_base = f.split("-00001-of-")[0]
+                    break
+                elif "-of-" not in f:
+                    return [f]
+        if selected_base:
+            break
+            
+    if selected_base:
+        return [f for f in gguf_files if f.startswith(selected_base)]
+        
     # Fallback: first gguf file
-    return gguf_files[0]
+    return [gguf_files[0]]
 
-filename = choose_filename(repo_id)
+filenames = choose_filenames(repo_id)
 
 def small_request_test(repo_id: str, filename: str | None = None) -> None:
     try:
@@ -103,39 +116,47 @@ def run_llama_smoke_test(model_path: str) -> None:
 
 # --- DOWNLOAD ---
 print(f"Target directory selected: {model_folder}")
-print(f"Selected file: {filename}")
-small_request_test(repo_id, filename)
-target_path = os.path.join(model_folder, filename)
-print(f"Downloading from {repo_id}...")
+print(f"Selected files: {filenames}")
 
-if is_file_downloaded(model_folder, filename):
-    print(f"ℹ️ File already present: {target_path}")
-    path = target_path
-else:
-    try:
-        path = hf_hub_download(
-            repo_id=repo_id,
-            filename=filename,
-            local_dir=model_folder,
-        )
-        print(f"✅ Download complete! File saved to: {path}")
-    except Exception as e:
-        print(f"❌ Download failed: {e}")
-        path = None
+paths = []
+for filename in filenames:
+    small_request_test(repo_id, filename)
+    target_path = os.path.join(model_folder, filename)
+    print(f"Checking {filename}...")
+
+    if is_file_downloaded(model_folder, filename):
+        print(f"ℹ️ File already present: {target_path}")
+        paths.append(target_path)
+    else:
+        try:
+            print(f"Downloading {filename} from {repo_id}...")
+            path = hf_hub_download(
+                repo_id=repo_id,
+                filename=filename,
+                local_dir=model_folder,
+            )
+            print(f"✅ Download complete! File saved to: {path}")
+            paths.append(path)
+        except Exception as e:
+            print(f"❌ Download failed for {filename}: {e}")
 
 # --- QUICK TEST ---
-if path and os.path.isfile(path):
+if paths:
+    # Use the first shard/file for the smoke test (llama-cpp handles shards automatically if they share a base name)
+    main_path = paths[0]
     try:
-        size_mb = os.path.getsize(path) / (1024 * 1024)
-        print(f"File size: {size_mb:.2f} MB")
-        ok = verify_gguf_magic(path)
+        total_size = sum(os.path.getsize(p) for p in paths) / (1024 * 1024)
+        print(f"Total model size ({len(paths)} files): {total_size:.2f} MB")
+        
+        ok = verify_gguf_magic(main_path)
         if ok:
-            print("✅ GGUF header verified (magic 'GGUF' detected).")
+            print(f"✅ GGUF header verified in {os.path.basename(main_path)}.")
         else:
-            print("⚠️ Could not verify GGUF header; file may be incomplete or not GGUF.")
+            print(f"⚠️ Could not verify GGUF header in {os.path.basename(main_path)}.")
     except Exception as e:
         print(f"⚠️ Test failed: {e}")
-    # Run a tiny inference to confirm the model loads
-    run_llama_smoke_test(path)
+    
+    # Run a tiny inference
+    run_llama_smoke_test(main_path)
 else:
-    print("⚠️ No file to test.")
+    print("⚠️ No files to test.")
