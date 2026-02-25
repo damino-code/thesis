@@ -40,6 +40,7 @@ def extract_negative_correlation_samples(attribute='respect'):
         
     # 4. Prepare matched dataframe
     llm_df['human_score'] = llm_df['comment_id'].map(human_df[attribute])
+    llm_df['text'] = llm_df['comment_id'].map(human_df['text'])
     
     # Drop rows without human scores
     matched_df = llm_df.dropna(subset=['human_score', pred_col]).copy()
