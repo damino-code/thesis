@@ -17,13 +17,15 @@ import config
 from data_loader import load_dataset
 from visualization import plot_scatter_plots, plot_correlation_matrix
 
-def evaluate_single_attribute(attribute_name):
-    print(f"📊 EVALUATING SINGLE ATTRIBUTE: {attribute_name.upper()}")
+def evaluate_single_attribute(attribute_name, persona=None):
+    persona_label = f" [{persona.upper()}]" if persona else ""
+    print(f"📊 EVALUATING SINGLE ATTRIBUTE: {attribute_name.upper()}{persona_label}")
     
     # 1. Locate the specific result file
-    # If the user wants a specific file, they might need to specify it. 
-    # For now, let's find the latest file for this attribute.
-    base_results_dir = os.path.join(config.RESULTS_FOLDER, "single_attribute_analyser", attribute_name)
+    if persona:
+        base_results_dir = os.path.join(config.RESULTS_FOLDER, "persona_results", persona, attribute_name)
+    else:
+        base_results_dir = os.path.join(config.RESULTS_FOLDER, "single_attribute_analyser", attribute_name)
     
     csv_files = glob.glob(os.path.join(base_results_dir, "*.csv"))
     if not csv_files:
@@ -91,7 +93,10 @@ def evaluate_single_attribute(attribute_name):
         
         # 5. Save Metrics & Customize Visualization Folder
         # Create folder for this attribute
-        attr_viz_folder = os.path.join(config.VISUALIZATIONS_FOLDER, attribute_name)
+        if persona:
+            attr_viz_folder = os.path.join(config.VISUALIZATIONS_FOLDER, "persona_results", persona, attribute_name)
+        else:
+            attr_viz_folder = os.path.join(config.VISUALIZATIONS_FOLDER, attribute_name)
         os.makedirs(attr_viz_folder, exist_ok=True)
         
         # Save Metrics to JSON
@@ -136,17 +141,44 @@ def evaluate_single_attribute(attribute_name):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
+    # Check for Persona in arguments
+    # Usage: python evaluate_single.py [attribute] [persona]
+    # Or just walkthrough if no args
+    
+    attr_arg = sys.argv[1] if len(sys.argv) > 1 else None
+    persona_arg = sys.argv[2] if len(sys.argv) > 2 else None
+
+    if attr_arg and attr_arg != "all":
         # Run for the specific attribute provided
-        attr = sys.argv[1]
-        evaluate_single_attribute(attr)
+        evaluate_single_attribute(attr_arg, persona=persona_arg)
     else:
-        # Auto-discover all attributes with results
-        print("🔍 specific attribute not provided. Scanning for available results...")
-        base_results_dir = os.path.join(config.RESULTS_FOLDER, "single_attribute_analyser")
+        # Walkthrough or Auto-discover
+        persona_base_dir = os.path.join(src_dir, 'persona_prompts')
+        personas = []
+        if os.path.exists(persona_base_dir):
+            personas = [d for d in os.listdir(persona_base_dir) if os.path.isdir(os.path.join(persona_base_dir, d))]
+        
+        print("\nAvailable Personas for Evaluation:")
+        print("0. Standard (No Persona)")
+        for i, p in enumerate(personas, 1):
+            print(f"{i}. {p.replace('_', ' ').title()}")
+        
+        choice = input("\nSelect persona (number) [Default 0]: ").strip()
+        selected_persona = None
+        if choice.isdigit():
+            idx = int(choice)
+            if 1 <= idx <= len(personas):
+                selected_persona = personas[idx-1]
+        
+        # 1. Determine base results dir
+        if selected_persona:
+            base_results_dir = os.path.join(config.RESULTS_FOLDER, "persona_results", selected_persona)
+        else:
+            base_results_dir = os.path.join(config.RESULTS_FOLDER, "single_attribute_analyser")
+            
+        print(f"🔍 Scanning for available results in: {base_results_dir}")
         
         if os.path.exists(base_results_dir):
-            # List subdirectories
             found_attrs = [d for d in os.listdir(base_results_dir) 
                           if os.path.isdir(os.path.join(base_results_dir, d))]
             
@@ -155,7 +187,7 @@ if __name__ == "__main__":
                 for attr in found_attrs:
                     print(f"\n{'='*40}")
                     try:
-                        evaluate_single_attribute(attr)
+                        evaluate_single_attribute(attr, persona=selected_persona)
                     except Exception as e:
                         print(f"❌ Failed to evaluate {attr}: {e}")
             else:

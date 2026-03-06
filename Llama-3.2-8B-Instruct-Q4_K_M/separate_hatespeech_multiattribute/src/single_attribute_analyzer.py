@@ -5,13 +5,24 @@ import os
 import json
 
 class SingleAttributeAnalyzer:
-    def __init__(self, llm_model):
+    def __init__(self, llm_model, persona=None):
         self.model = llm_model
+        self.persona = persona
         self.prompts = self._load_prompts()
 
     def _load_prompts(self):
         prompts = {}
-        prompt_dir = os.path.join(os.path.dirname(__file__), 'prompts')
+        # Decide prompt directory based on persona
+        if self.persona:
+            prompt_dir = os.path.join(os.path.dirname(__file__), 'persona_prompts', self.persona)
+            print(f"📂 Loading persona-specific prompts from: {self.persona}")
+        else:
+            prompt_dir = os.path.join(os.path.dirname(__file__), 'prompts')
+            print("📂 Loading standard prompts...")
+
+        if not os.path.exists(prompt_dir):
+            raise FileNotFoundError(f"❌ Prompt directory not found: {prompt_dir}")
+
         for filename in os.listdir(prompt_dir):
             if filename.endswith(".json"):
                 attribute = os.path.splitext(filename)[0]
@@ -29,9 +40,11 @@ class SingleAttributeAnalyzer:
         if attribute not in self.prompts:
             raise ValueError(f"Unknown attribute: {attribute}")
             
+        persona_prefix = f"You are a {self.persona.replace('_', ' ').title()} annotator." if self.persona else "You are an expert content moderator."
+            
         full_prompt = f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
-You are an expert content moderator.<|eot_id|><|start_header_id|>user<|end_header_id|>
+{persona_prefix}<|eot_id|><|start_header_id|>user<|end_header_id|>
 {self.prompts[attribute].format(text=text[:500])}
 <|eot_id|><|start_header_id|>assistant<|end_header_id|>
 """

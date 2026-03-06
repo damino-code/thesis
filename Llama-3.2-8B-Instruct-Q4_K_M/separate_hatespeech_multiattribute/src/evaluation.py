@@ -12,19 +12,58 @@ from data_loader import load_dataset
 def load_predictions():
     print("🔍 Searching for MERGED analysis results...")
     
-    # Look for merged files from merge_results.py
-    pattern = os.path.join(config.RESULTS_FOLDER, "merged_single_attributes_*.csv")
+    # 1. Ask for Persona first
+    persona_base_dir = os.path.join(os.path.dirname(__file__), 'persona_prompts')
+    personas = []
+    if os.path.exists(persona_base_dir):
+        personas = [d for d in os.listdir(persona_base_dir) if os.path.isdir(os.path.join(persona_base_dir, d))]
+    
+    print("\nAvailable Personas for Evaluation:")
+    print("0. Standard (No Persona)")
+    for i, p in enumerate(personas, 1):
+        print(f"{i}. {p.replace('_', ' ').title()}")
+    
+    p_choice = input("\nSelect persona (number) [Default 0]: ").strip()
+    selected_persona = None
+    if p_choice.isdigit():
+        idx = int(p_choice)
+        if 1 <= idx <= len(personas):
+            selected_persona = personas[idx-1]
+
+    # 2. Look for merged files in the correct directory
+    if selected_persona:
+        search_dir = os.path.join(config.RESULTS_FOLDER, "persona_results", selected_persona)
+        pattern = os.path.join(search_dir, f"merged_{selected_persona}_*.csv")
+    else:
+        search_dir = config.RESULTS_FOLDER
+        pattern = os.path.join(search_dir, "merged_single_attributes_*.csv")
+
     files = glob.glob(pattern)
     
     # Sort by modification time (newest first)
     unique_files = sorted(list(set(files)), key=os.path.getmtime, reverse=True)
     
     if not unique_files:
-        print(f"❌ No merged result files found in {config.RESULTS_FOLDER}")
-        print("💡 Tip: Run 'python src/merge_results.py' first to combine your attribute files!")
-        raise FileNotFoundError("No merged prediction files found.")
+        print(f"❌ No merged result files found in {search_dir}")
+        print(f"🔄 Attempting to run merge script for {selected_persona if selected_persona else 'Standard'}...")
+        
+        try:
+            from merge_results import merge_results
+            merge_results(persona=selected_persona)
+            # Re-search after merging
+            files = glob.glob(pattern)
+            unique_files = sorted(list(set(files)), key=os.path.getmtime, reverse=True)
+            if not unique_files:
+                raise FileNotFoundError(f"Failed to find merged file even after running merge_results.")
+        except Exception as e:
+            print(f"❌ Auto-merge failed: {e}")
+            if selected_persona:
+                print(f"💡 Tip: Run 'python src/merge_results.py {selected_persona}' manually first!")
+            else:
+                print("💡 Tip: Run 'python src/merge_results.py' manually first!")
+            raise FileNotFoundError("No merged prediction files found.")
     
-    print("\nRecent merged files found:")
+    print(f"\nRecent merged files found for {selected_persona if selected_persona else 'Standard'}:")
     for i, f in enumerate(unique_files[:5], 1):
         timestamp = datetime.fromtimestamp(os.path.getmtime(f)).strftime('%Y-%m-%d %H:%M:%S')
         print(f"  {i}. {os.path.basename(f)} ({timestamp})")
@@ -45,10 +84,10 @@ def load_predictions():
             selected_file = unique_files[0]
 
     print(f"📂 Loading predictions from: {selected_file}")
-    return pd.read_csv(selected_file), selected_file
+    return pd.read_csv(selected_file), selected_file, selected_persona
 
-def evaluate_predictions(llm_df, human_df):
-    print("📊 EVALUATION: LLM vs Human Annotations")
+def evaluate_predictions(llm_df, human_df, persona=None):
+    print(f"📊 EVALUATION: LLM ({persona if persona else 'Standard'}) vs Human Annotations")
     print("=" * 70)
 
     # Merge LLM predictions with human annotations
@@ -165,7 +204,18 @@ def evaluate_predictions(llm_df, human_df):
         'hate_speech_metrics': {'accuracy': accuracy, 'f1': f1, 'mae': mae_hs}
     }
     
-    metrics_path = os.path.join(config.RESULTS_FOLDER, f"evaluation_metrics_merged_{timestamp}.json")
+    metrics_filename = f"evaluation_metrics_merged_{timestamp}.json"
+    if persona:
+        metrics_dir = os.path.join(config.RESULTS_FOLDER, "persona_results", persona)
+        os.makedirs(metrics_dir, exist_ok=True)
+        metrics_path = os.path.join(metrics_dir, metrics_filename)
+        # Also save visualizations to persona subfolders
+        viz_dir = os.path.join(os.path.dirname(config.RESULTS_FOLDER), "visualizations", "persona_results", persona)
+        os.makedirs(viz_dir, exist_ok=True)
+        # Tip: Update plotting code if it exists to use viz_dir
+    else:
+        metrics_path = os.path.join(config.RESULTS_FOLDER, metrics_filename)
+        
     with open(metrics_path, 'w') as f:
         json.dump(metrics, f, indent=2)
     print(f"\n💾 Evaluation metrics saved to: {metrics_path}")
@@ -173,17 +223,22 @@ def evaluate_predictions(llm_df, human_df):
 def main():
     try:
         # 1. Load Merged Predictions
-        llm_df, filename = load_predictions()
+        result = load_predictions()
+        if result is None:
+            return
+            
+        llm_df, filename, persona = result
         
         # 2. Load Human Data
         human_df = load_dataset()
         
         # 3. Run Evaluation
-        evaluate_predictions(llm_df, human_df)
+        evaluate_predictions(llm_df, human_df, persona)
         
     except Exception as e:
         print(f"\n❌ Error during evaluation: {e}")
-        # print(traceback.format_exc()) # if we imported traceback
+        import traceback
+        traceback.print_exc()
 
 if __name__ == "__main__":
     main()
