@@ -14,8 +14,8 @@ from model_loader import download_model, load_model
 from data_loader import load_dataset, get_text_column
 from single_attribute_analyzer import SingleAttributeAnalyzer
 
-def run_attribute_analysis(attribute_name, sample_size='all'):
-    print(f"🚀 STARTING ANALYSIS FOR: {attribute_name.upper()}")
+def run_attribute_analysis(attribute_name, sample_size='all', persona=None):
+    print(f"🚀 STARTING ANALYSIS FOR: {attribute_name.upper()} [{'Persona: ' + persona if persona else 'Vanilla'}]")
     
     # 1. Setup
     model_path = download_model()
@@ -43,12 +43,16 @@ def run_attribute_analysis(attribute_name, sample_size='all'):
 
     print(f"   Analyzing {len(df_sample)} comments...")
 
-    # 2. Logic
-    analyzer = SingleAttributeAnalyzer(llm)
+    # 2. Logic (pass persona)
+    analyzer = SingleAttributeAnalyzer(llm, persona_path=persona)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
     # Create attribute specific folder in results
-    attr_result_folder = os.path.join(config.RESULTS_FOLDER, "single_attribute_analyser", attribute_name)
+    if persona:
+        attr_result_folder = os.path.join(config.RESULTS_FOLDER, "persona_results", persona, attribute_name)
+    else:
+        attr_result_folder = os.path.join(config.RESULTS_FOLDER, "single_attribute_analyser", attribute_name)
+    
     os.makedirs(attr_result_folder, exist_ok=True)
 
     results = []

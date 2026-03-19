@@ -12,19 +12,63 @@ from data_loader import load_dataset
 def load_predictions():
     print("🔍 Searching for MERGED analysis results...")
     
-    # Look for merged files from merge_results.py
-    pattern = os.path.join(config.RESULTS_FOLDER, "merged_single_attributes_*.csv")
+    # 1. Choose Persona (Recursive Search)
+    persona_base_dir = os.path.join(os.path.dirname(__file__), 'persona_prompts')
+    all_personas = []
+    if os.path.exists(persona_base_dir):
+        for root, dirs, files in os.walk(persona_base_dir):
+            if any(f.endswith('.json') for f in files):
+                rel_path = os.path.relpath(root, persona_base_dir)
+                all_personas.append(rel_path)
+    
+    all_personas.sort()
+    
+    print("\nAvailable Personas for Evaluation:")
+    print("0. Standard (No Persona)")
+    for i, p in enumerate(all_personas, 1):
+        print(f"{i}. {p.replace('_', ' ').title()}")
+    
+    p_choice = input("\nSelect persona (number) [Default 0]: ").strip()
+    selected_persona = None
+    if p_choice.isdigit():
+        idx = int(p_choice)
+        if 1 <= idx <= len(all_personas):
+            selected_persona = all_personas[idx-1]
+
+    # 2. Look for merged files in the correct directory
+    if selected_persona:
+        search_dir = os.path.join(config.RESULTS_FOLDER, "persona_results", selected_persona)
+        pattern = os.path.join(search_dir, f"merged_{selected_persona.replace(os.sep, '_')}_*.csv")
+    else:
+        search_dir = config.RESULTS_FOLDER
+        pattern = os.path.join(search_dir, "merged_single_attributes_*.csv")
+
     files = glob.glob(pattern)
     
     # Sort by modification time (newest first)
     unique_files = sorted(list(set(files)), key=os.path.getmtime, reverse=True)
     
     if not unique_files:
-        print(f"❌ No merged result files found in {config.RESULTS_FOLDER}")
-        print("💡 Tip: Run 'python src/merge_results.py' first to combine your attribute files!")
-        raise FileNotFoundError("No merged prediction files found.")
+        print(f"❌ No merged result files found in {search_dir}")
+        print(f"🔄 Attempting to run merge script for {selected_persona if selected_persona else 'Standard'}...")
+        
+        try:
+            from merge_results import merge_results
+            merge_results(persona=selected_persona)
+            # Re-search after merging
+            files = glob.glob(pattern)
+            unique_files = sorted(list(set(files)), key=os.path.getmtime, reverse=True)
+            if not unique_files:
+                raise FileNotFoundError(f"Failed to find merged file even after running merge_results.")
+        except Exception as e:
+            print(f"❌ Auto-merge failed: {e}")
+            if selected_persona:
+                print(f"💡 Tip: Run 'python src/merge_results.py \"{selected_persona}\"' manually first!")
+            else:
+                print("💡 Tip: Run 'python src/merge_results.py' manually first!")
+            raise FileNotFoundError("No merged prediction files found.")
     
-    print("\nRecent merged files found:")
+    print(f"\nRecent merged files found for {selected_persona if selected_persona else 'Standard'}:")
     for i, f in enumerate(unique_files[:5], 1):
         timestamp = datetime.fromtimestamp(os.path.getmtime(f)).strftime('%Y-%m-%d %H:%M:%S')
         print(f"  {i}. {os.path.basename(f)} ({timestamp})")
@@ -45,10 +89,10 @@ def load_predictions():
             selected_file = unique_files[0]
 
     print(f"📂 Loading predictions from: {selected_file}")
-    return pd.read_csv(selected_file), selected_file
+    return pd.read_csv(selected_file), selected_file, selected_persona
 
-def evaluate_predictions(llm_df, human_df):
-    print("📊 EVALUATION: LLM vs Human Annotations")
+def evaluate_predictions(llm_df, human_df, persona=None):
+    print(f"📊 EVALUATION: LLM ({persona if persona else 'Standard'}) vs Human Annotations")
     print("=" * 70)
 
     # Merge LLM predictions with human annotations
@@ -115,7 +159,7 @@ def evaluate_predictions(llm_df, human_df):
             f1 = f1_score(human_classes, llm_classes, average='binary', zero_division=0)
             mae_hs = mean_absolute_error(hs_data['hatespeech_human'], hs_data['hatespeech'])
             
-            print("\n🏯 HATE SPEECH CLASSIFICATION METRICS:")
+            print("\n🎯 HATE SPEECH CLASSIFICATION METRICS:")
             print(f"   • Accuracy:  {accuracy:.3f}")
             print(f"   • F1-Score:  {f1:.3f}")
             print(f"   • MAE:       {mae_hs:.3f}")
@@ -123,7 +167,7 @@ def evaluate_predictions(llm_df, human_df):
             cm = confusion_matrix(human_classes, llm_classes)
             # Visualize Confusion Matrix
             try:
-                plot_confusion_matrix(cm)
+                plot_confusion_matrix(cm, persona=persona)
             except Exception as e:
                 print(f"⚠️ Failed to plot confusion matrix: {e}")
 
@@ -131,10 +175,6 @@ def evaluate_predictions(llm_df, human_df):
     print("\n🎨 Generating Visualizations...")
     
     # 1. Correlation Matrix of all attributes (Human vs LLM)
-    # We construct a DataFrame with just the numeric comparisons we want
-    # We want to see how ALL LLM attributes correlate with ALL Human attributes (or at least their pairs)
-    # Usually we plot the correlation of the columns in 'eval_df'
-    # Let's select the relevant columns
     cols_to_plot = []
     for attr in config.ATTRIBUTES:
         if attr in eval_df.columns: cols_to_plot.append(attr)
@@ -143,18 +183,18 @@ def evaluate_predictions(llm_df, human_df):
     if cols_to_plot:
         corr_data = eval_df[cols_to_plot].dropna()
         if len(corr_data) > 0:
-            plot_correlation_matrix(corr_data)
+            plot_correlation_matrix(corr_data, persona=persona)
         else:
             print("⚠️ Not enough data for Correlation Matrix.")
 
     # 2. Scatter Plots
     numeric_comparison_cols = [attr for attr in config.ATTRIBUTES if attr in correlations]
     if numeric_comparison_cols:
-        plot_scatter_plots(eval_df, numeric_comparison_cols)
+        plot_scatter_plots(eval_df, numeric_comparison_cols, persona=persona)
 
     # 3. Correlation Bar Chart
     if correlations:
-        plot_correlation_bars(correlations)
+        plot_correlation_bars(correlations, persona=persona)
 
 
     # Save Metrics to JSON
@@ -165,7 +205,15 @@ def evaluate_predictions(llm_df, human_df):
         'hate_speech_metrics': {'accuracy': accuracy, 'f1': f1, 'mae': mae_hs}
     }
     
-    metrics_path = os.path.join(config.RESULTS_FOLDER, f"evaluation_metrics_merged_{timestamp}.json")
+    metrics_filename = f"evaluation_metrics_merged_{timestamp}.json"
+    if persona:
+        metrics_dir = os.path.join(config.RESULTS_FOLDER, "persona_results", persona)
+        os.makedirs(metrics_dir, exist_ok=True)
+        metrics_path = os.path.join(metrics_dir, metrics_filename)
+        # Visualizations are already handled via the visualization module (persona-aware)
+    else:
+        metrics_path = os.path.join(config.RESULTS_FOLDER, metrics_filename)
+        
     with open(metrics_path, 'w') as f:
         json.dump(metrics, f, indent=2)
     print(f"\n💾 Evaluation metrics saved to: {metrics_path}")
@@ -173,17 +221,22 @@ def evaluate_predictions(llm_df, human_df):
 def main():
     try:
         # 1. Load Merged Predictions
-        llm_df, filename = load_predictions()
+        result = load_predictions()
+        if result is None:
+            return
+            
+        llm_df, filename, persona = result
         
         # 2. Load Human Data
         human_df = load_dataset()
         
         # 3. Run Evaluation
-        evaluate_predictions(llm_df, human_df)
+        evaluate_predictions(llm_df, human_df, persona)
         
     except Exception as e:
         print(f"\n❌ Error during evaluation: {e}")
-        # print(traceback.format_exc()) # if we imported traceback
+        import traceback
+        traceback.print_exc()
 
 if __name__ == "__main__":
     main()

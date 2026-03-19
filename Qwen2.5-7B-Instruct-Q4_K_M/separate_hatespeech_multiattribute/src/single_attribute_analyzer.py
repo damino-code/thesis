@@ -5,13 +5,17 @@ import os
 import json
 
 class SingleAttributeAnalyzer:
-    def __init__(self, llm_model):
+    def __init__(self, llm_model, persona_path=None):
         self.model = llm_model
+        self.persona_path = persona_path
         self.prompts = self._load_prompts()
+        self.persona_info = self._load_persona()
 
     def _load_prompts(self):
         prompts = {}
         prompt_dir = os.path.join(os.path.dirname(__file__), "prompts")
+        if not os.path.exists(prompt_dir):
+            return {}
         for filename in os.listdir(prompt_dir):
             if filename.endswith(".json"):
                 attribute = os.path.splitext(filename)[0]
@@ -23,14 +27,32 @@ class SingleAttributeAnalyzer:
                         prompts[attribute] = data.get("prompt", "")
         return prompts
 
+    def _load_persona(self):
+        if not self.persona_path:
+            return None
+        
+        # persona_path is rel to persona_prompts/
+        full_path = os.path.join(os.path.dirname(__file__), "persona_prompts", self.persona_path + ".json")
+        if os.path.exists(full_path):
+            with open(full_path, "r") as f:
+                return json.load(f)
+        return None
+
     def analyze_attribute(self, text, attribute):
         """Analyze a comment for a single attribute"""
         if attribute not in self.prompts:
             raise ValueError(f"Unknown attribute: {attribute}")
             
         prompt_text = self.prompts[attribute].format(text=text[:500])
+        
+        # Apply Persona if set
+        system_content = "You are an expert content moderator."
+        if self.persona_info:
+            persona_desc = self.persona_info.get("persona", "")
+            system_content = f"You are an expert content moderator. {persona_desc}"
+
         full_prompt = f"""<|im_start|>system
-You are an expert content moderator.<|im_end|>
+{system_content}<|im_end|>
 <|im_start|>user
     {prompt_text}<|im_end|>
 <|im_start|>assistant
