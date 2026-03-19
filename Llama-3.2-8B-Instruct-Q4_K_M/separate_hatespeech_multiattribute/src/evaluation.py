@@ -12,28 +12,34 @@ from data_loader import load_dataset
 def load_predictions():
     print("🔍 Searching for MERGED analysis results...")
     
-    # 1. Ask for Persona first
+    # 1. Choose Persona (Recursive Search)
     persona_base_dir = os.path.join(os.path.dirname(__file__), 'persona_prompts')
-    personas = []
+    all_personas = []
     if os.path.exists(persona_base_dir):
-        personas = [d for d in os.listdir(persona_base_dir) if os.path.isdir(os.path.join(persona_base_dir, d))]
+        for root, dirs, files in os.walk(persona_base_dir):
+            # Check for specific leaf personas (containing json prompts)
+            if any(f.endswith('.json') for f in files):
+                rel_path = os.path.relpath(root, persona_base_dir)
+                all_personas.append(rel_path)
+    
+    all_personas.sort()
     
     print("\nAvailable Personas for Evaluation:")
     print("0. Standard (No Persona)")
-    for i, p in enumerate(personas, 1):
+    for i, p in enumerate(all_personas, 1):
         print(f"{i}. {p.replace('_', ' ').title()}")
     
     p_choice = input("\nSelect persona (number) [Default 0]: ").strip()
     selected_persona = None
     if p_choice.isdigit():
         idx = int(p_choice)
-        if 1 <= idx <= len(personas):
-            selected_persona = personas[idx-1]
+        if 1 <= idx <= len(all_personas):
+            selected_persona = all_personas[idx-1]
 
     # 2. Look for merged files in the correct directory
     if selected_persona:
         search_dir = os.path.join(config.RESULTS_FOLDER, "persona_results", selected_persona)
-        pattern = os.path.join(search_dir, f"merged_{selected_persona}_*.csv")
+        pattern = os.path.join(search_dir, f"merged_{selected_persona.replace(os.sep, '_')}_*.csv")
     else:
         search_dir = config.RESULTS_FOLDER
         pattern = os.path.join(search_dir, "merged_single_attributes_*.csv")
@@ -162,7 +168,7 @@ def evaluate_predictions(llm_df, human_df, persona=None):
             cm = confusion_matrix(human_classes, llm_classes)
             # Visualize Confusion Matrix
             try:
-                plot_confusion_matrix(cm)
+                plot_confusion_matrix(cm, persona=persona)
             except Exception as e:
                 print(f"⚠️ Failed to plot confusion matrix: {e}")
 
@@ -170,10 +176,6 @@ def evaluate_predictions(llm_df, human_df, persona=None):
     print("\n🎨 Generating Visualizations...")
     
     # 1. Correlation Matrix of all attributes (Human vs LLM)
-    # We construct a DataFrame with just the numeric comparisons we want
-    # We want to see how ALL LLM attributes correlate with ALL Human attributes (or at least their pairs)
-    # Usually we plot the correlation of the columns in 'eval_df'
-    # Let's select the relevant columns
     cols_to_plot = []
     for attr in config.ATTRIBUTES:
         if attr in eval_df.columns: cols_to_plot.append(attr)
@@ -182,18 +184,18 @@ def evaluate_predictions(llm_df, human_df, persona=None):
     if cols_to_plot:
         corr_data = eval_df[cols_to_plot].dropna()
         if len(corr_data) > 0:
-            plot_correlation_matrix(corr_data)
+            plot_correlation_matrix(corr_data, persona=persona)
         else:
             print("⚠️ Not enough data for Correlation Matrix.")
 
     # 2. Scatter Plots
     numeric_comparison_cols = [attr for attr in config.ATTRIBUTES if attr in correlations]
     if numeric_comparison_cols:
-        plot_scatter_plots(eval_df, numeric_comparison_cols)
+        plot_scatter_plots(eval_df, numeric_comparison_cols, persona=persona)
 
     # 3. Correlation Bar Chart
     if correlations:
-        plot_correlation_bars(correlations)
+        plot_correlation_bars(correlations, persona=persona)
 
 
     # Save Metrics to JSON

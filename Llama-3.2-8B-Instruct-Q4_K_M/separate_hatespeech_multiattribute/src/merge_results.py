@@ -54,7 +54,8 @@ def merge_results(persona=None):
 
     if merged_df is not None:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        output_filename = f"{output_prefix}{timestamp}.csv"
+        persona_tag = persona.replace(os.sep, "_") if persona else "single_attributes"
+        output_filename = f"merged_{persona_tag}_{timestamp}.csv"
         # If persona, save inside persona folder
         if persona:
             output_path = os.path.join(config.RESULTS_FOLDER, "persona_results", persona, output_filename)
