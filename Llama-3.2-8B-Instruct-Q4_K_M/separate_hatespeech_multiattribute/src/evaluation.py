@@ -9,73 +9,24 @@ import config
 from visualization import plot_correlation_matrix, plot_scatter_plots, plot_confusion_matrix, plot_correlation_bars
 from data_loader import load_dataset
 
-def get_available_merged_personas():
-    """Scan the RESULTS folder for merged CSV files within persona directories."""
-    persona_results_dir = os.path.join(config.RESULTS_FOLDER, "persona_results")
-    if not os.path.exists(persona_results_dir):
-        return []
-    
-    merged_personas = []
-    # We look for files starting with 'merged_persona_'
-    for root, dirs, files in os.walk(persona_results_dir):
-        if any(f.startswith('merged_persona_') and f.endswith('.csv') for f in files):
-            rel_path = os.path.relpath(root, persona_results_dir)
-            if rel_path != ".":
-                merged_personas.append(rel_path)
-    return sorted(list(set(merged_personas)))
-
 def load_predictions():
     print("🔍 Searching for MERGED analysis results...")
     
-    # 1. Check for Standard merged files first
     standard_pattern = os.path.join(config.RESULTS_FOLDER, "merged_standard_results_*.csv")
     standard_files = glob.glob(standard_pattern)
-    
-    # 2. Check for Persona merged files
-    available_merged_personas = get_available_merged_personas()
-    
-    print("\n--- Available Merged Results for Evaluation ---")
-    print("0. Standard (No Persona)" + (" (Found)" if standard_files else " (Not found)"))
-    for i, p in enumerate(available_merged_personas, 1):
-        print(f"{i}. Persona: {p}")
-        
-    p_choice = input("\nSelect result to evaluate (number) [Default 1]: ").strip()
-    
-    selected_persona = None
-    if not p_choice:
-        if standard_files:
-            selected_persona = None
-        elif available_merged_personas:
-            selected_persona = available_merged_personas[0]
-    elif p_choice == '0':
-        selected_persona = None
-    elif p_choice.isdigit():
-        idx = int(p_choice) - 1
-        if 0 <= idx < len(available_merged_personas):
-            selected_persona = available_merged_personas[idx]
 
-    # 3. Define search pattern based on selection
-    if selected_persona:
-        search_dir = os.path.join(config.RESULTS_FOLDER, "persona_results", selected_persona)
-        # Match the new naming: merged_persona_[tag]_results_[timestamp].csv
-        tag = selected_persona.replace(os.sep, "_")
-        pattern = os.path.join(search_dir, f"merged_persona_{tag}_results_*.csv")
-    else:
-        search_dir = config.RESULTS_FOLDER
-        pattern = standard_pattern
-
-    files = glob.glob(pattern)
+    files = glob.glob(standard_pattern)
     unique_files = sorted(list(set(files)), key=os.path.getmtime, reverse=True)
     
     if not unique_files:
-        print(f"❌ No merged result files found for {selected_persona if selected_persona else 'Standard'}.")
-        print(f"🔄 Attempting to run merge script for {selected_persona if selected_persona else 'Standard'}...")
+        print(f"❌ No merged result files found.")
+        print(f"🔄 Attempting to run merge script...")
         
         try:
             from merge_results import merge_results
-            merge_results(persona=selected_persona)
+            merge_results()
             # Re-search after merging
-            files = glob.glob(pattern)
+            files = glob.glob(standard_pattern)
             unique_files = sorted(list(set(files)), key=os.path.getmtime, reverse=True)
             if not unique_files:
                 raise FileNotFoundError(f"Failed to find merged file even after running merge_results.")
@@ -102,10 +53,10 @@ def load_predictions():
             selected_file = unique_files[0]
 
     print(f"📂 Loading predictions from: {selected_file}")
-    return pd.read_csv(selected_file), selected_file, selected_persona
+    return pd.read_csv(selected_file), selected_file
 
-def evaluate_predictions(llm_df, human_df, persona=None):
-    print(f"📊 EVALUATION: LLM ({persona if persona else 'Standard'}) vs Human Annotations")
+def evaluate_predictions(llm_df, human_df):
+    print(f"📈 EVALUATION: LLM vs Human Annotations")
     print("=" * 70)
 
     # Merge LLM predictions with human annotations
@@ -180,7 +131,7 @@ def evaluate_predictions(llm_df, human_df, persona=None):
             cm = confusion_matrix(human_classes, llm_classes)
             # Visualize Confusion Matrix
             try:
-                plot_confusion_matrix(cm, persona=persona)
+                plot_confusion_matrix(cm)
             except Exception as e:
                 print(f"⚠️ Failed to plot confusion matrix: {e}")
 
@@ -196,18 +147,18 @@ def evaluate_predictions(llm_df, human_df, persona=None):
     if cols_to_plot:
         corr_data = eval_df[cols_to_plot].dropna()
         if len(corr_data) > 0:
-            plot_correlation_matrix(corr_data, persona=persona)
+            plot_correlation_matrix(corr_data)
         else:
             print("⚠️ Not enough data for Correlation Matrix.")
 
     # 2. Scatter Plots
     numeric_comparison_cols = [attr for attr in config.ATTRIBUTES if attr in correlations]
     if numeric_comparison_cols:
-        plot_scatter_plots(eval_df, numeric_comparison_cols, persona=persona)
+        plot_scatter_plots(eval_df, numeric_comparison_cols)
 
     # 3. Correlation Bar Chart
     if correlations:
-        plot_correlation_bars(correlations, persona=persona)
+        plot_correlation_bars(correlations)
 
 
     # Save Metrics to JSON
@@ -223,27 +174,14 @@ def evaluate_predictions(llm_df, human_df, persona=None):
     model_name = "Llama-3.2-8B" # hardcoded for this folder
     
     metrics_filename = f"evaluation_metrics_standard_{timestamp}.json"
-    if persona:
-        persona_tag = persona.replace(os.sep, "_")
-        metrics_filename = f"evaluation_metrics_persona_{persona_tag}_{timestamp}.json"
-        
-        # LOCAL Save
-        local_dir = os.path.join(config.RESULTS_FOLDER, "persona_results", persona)
-        os.makedirs(local_dir, exist_ok=True)
-        local_path = os.path.join(local_dir, metrics_filename)
-        
-        # GLOBAL Save
-        global_dir = os.path.join(global_viz_root, model_name, "persona", persona)
-        os.makedirs(global_dir, exist_ok=True)
-        global_path = os.path.join(global_dir, metrics_filename)
-    else:
-        # LOCAL Save
-        local_path = os.path.join(config.RESULTS_FOLDER, metrics_filename)
-        
-        # GLOBAL Save
-        global_dir = os.path.join(global_viz_root, model_name, "vanilla")
-        os.makedirs(global_dir, exist_ok=True)
-        global_path = os.path.join(global_dir, metrics_filename)
+    
+    # LOCAL Save
+    local_path = os.path.join(config.RESULTS_FOLDER, metrics_filename)
+    
+    # GLOBAL Save
+    global_dir = os.path.join(global_viz_root, model_name, "vanilla")
+    os.makedirs(global_dir, exist_ok=True)
+    global_path = os.path.join(global_dir, metrics_filename)
         
     # Save to both
     with open(local_path, 'w') as f:
@@ -261,13 +199,13 @@ def main():
         if result is None:
             return
             
-        llm_df, filename, persona = result
+        llm_df, filename = result
         
         # 2. Load Human Data
         human_df = load_dataset()
         
         # 3. Run Evaluation
-        evaluate_predictions(llm_df, human_df, persona)
+        evaluate_predictions(llm_df, human_df)
         
     except Exception as e:
         print(f"\n❌ Error during evaluation: {e}")
