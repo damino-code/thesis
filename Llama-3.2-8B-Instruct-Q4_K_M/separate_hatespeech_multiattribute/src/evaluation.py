@@ -9,48 +9,66 @@ import config
 from visualization import plot_correlation_matrix, plot_scatter_plots, plot_confusion_matrix, plot_correlation_bars
 from data_loader import load_dataset
 
+def get_available_merged_personas():
+    """Scan the RESULTS folder for merged CSV files within persona directories."""
+    persona_results_dir = os.path.join(config.RESULTS_FOLDER, "persona_results")
+    if not os.path.exists(persona_results_dir):
+        return []
+    
+    merged_personas = []
+    # We look for files starting with 'merged_persona_'
+    for root, dirs, files in os.walk(persona_results_dir):
+        if any(f.startswith('merged_persona_') and f.endswith('.csv') for f in files):
+            rel_path = os.path.relpath(root, persona_results_dir)
+            if rel_path != ".":
+                merged_personas.append(rel_path)
+    return sorted(list(set(merged_personas)))
+
 def load_predictions():
     print("🔍 Searching for MERGED analysis results...")
     
-    # 1. Choose Persona (Recursive Search)
-    persona_base_dir = os.path.join(os.path.dirname(__file__), 'persona_prompts')
-    all_personas = []
-    if os.path.exists(persona_base_dir):
-        for root, dirs, files in os.walk(persona_base_dir):
-            # Check for specific leaf personas (containing json prompts)
-            if any(f.endswith('.json') for f in files):
-                rel_path = os.path.relpath(root, persona_base_dir)
-                all_personas.append(rel_path)
+    # 1. Check for Standard merged files first
+    standard_pattern = os.path.join(config.RESULTS_FOLDER, "merged_standard_results_*.csv")
+    standard_files = glob.glob(standard_pattern)
     
-    all_personas.sort()
+    # 2. Check for Persona merged files
+    available_merged_personas = get_available_merged_personas()
     
-    print("\nAvailable Personas for Evaluation:")
-    print("0. Standard (No Persona)")
-    for i, p in enumerate(all_personas, 1):
-        print(f"{i}. {p.replace('_', ' ').title()}")
+    print("\n--- Available Merged Results for Evaluation ---")
+    print("0. Standard (No Persona)" + (" (Found)" if standard_files else " (Not found)"))
+    for i, p in enumerate(available_merged_personas, 1):
+        print(f"{i}. Persona: {p}")
+        
+    p_choice = input("\nSelect result to evaluate (number) [Default 1]: ").strip()
     
-    p_choice = input("\nSelect persona (number) [Default 0]: ").strip()
     selected_persona = None
-    if p_choice.isdigit():
-        idx = int(p_choice)
-        if 1 <= idx <= len(all_personas):
-            selected_persona = all_personas[idx-1]
+    if not p_choice:
+        if standard_files:
+            selected_persona = None
+        elif available_merged_personas:
+            selected_persona = available_merged_personas[0]
+    elif p_choice == '0':
+        selected_persona = None
+    elif p_choice.isdigit():
+        idx = int(p_choice) - 1
+        if 0 <= idx < len(available_merged_personas):
+            selected_persona = available_merged_personas[idx]
 
-    # 2. Look for merged files in the correct directory
+    # 3. Define search pattern based on selection
     if selected_persona:
         search_dir = os.path.join(config.RESULTS_FOLDER, "persona_results", selected_persona)
-        pattern = os.path.join(search_dir, f"merged_{selected_persona.replace(os.sep, '_')}_*.csv")
+        # Match the new naming: merged_persona_[tag]_results_[timestamp].csv
+        tag = selected_persona.replace(os.sep, "_")
+        pattern = os.path.join(search_dir, f"merged_persona_{tag}_results_*.csv")
     else:
         search_dir = config.RESULTS_FOLDER
-        pattern = os.path.join(search_dir, "merged_single_attributes_*.csv")
+        pattern = standard_pattern
 
     files = glob.glob(pattern)
-    
-    # Sort by modification time (newest first)
     unique_files = sorted(list(set(files)), key=os.path.getmtime, reverse=True)
     
     if not unique_files:
-        print(f"❌ No merged result files found in {search_dir}")
+        print(f"❌ No merged result files found for {selected_persona if selected_persona else 'Standard'}.")
         print(f"🔄 Attempting to run merge script for {selected_persona if selected_persona else 'Standard'}...")
         
         try:
@@ -63,13 +81,9 @@ def load_predictions():
                 raise FileNotFoundError(f"Failed to find merged file even after running merge_results.")
         except Exception as e:
             print(f"❌ Auto-merge failed: {e}")
-            if selected_persona:
-                print(f"💡 Tip: Run 'python src/merge_results.py {selected_persona}' manually first!")
-            else:
-                print("💡 Tip: Run 'python src/merge_results.py' manually first!")
             raise FileNotFoundError("No merged prediction files found.")
     
-    print(f"\nRecent merged files found for {selected_persona if selected_persona else 'Standard'}:")
+    print(f"\nRecent merged files found:")
     for i, f in enumerate(unique_files[:5], 1):
         timestamp = datetime.fromtimestamp(os.path.getmtime(f)).strftime('%Y-%m-%d %H:%M:%S')
         print(f"  {i}. {os.path.basename(f)} ({timestamp})")
@@ -83,10 +97,8 @@ def load_predictions():
             if 0 <= idx < len(unique_files):
                 selected_file = unique_files[idx]
             else:
-                print("Invalid choice, using most recent.")
                 selected_file = unique_files[0]
         except ValueError:
-            print("Invalid input, using most recent.")
             selected_file = unique_files[0]
 
     print(f"📂 Loading predictions from: {selected_file}")
@@ -206,21 +218,41 @@ def evaluate_predictions(llm_df, human_df, persona=None):
         'hate_speech_metrics': {'accuracy': accuracy, 'f1': f1, 'mae': mae_hs}
     }
     
-    metrics_filename = f"evaluation_metrics_merged_{timestamp}.json"
+    # Global Visualization folder setup
+    global_viz_root = "/storage/home/amine/thesis/global_visualisation"
+    model_name = "Llama-3.2-8B" # hardcoded for this folder
+    
+    metrics_filename = f"evaluation_metrics_standard_{timestamp}.json"
     if persona:
-        metrics_dir = os.path.join(config.RESULTS_FOLDER, "persona_results", persona)
-        os.makedirs(metrics_dir, exist_ok=True)
-        metrics_path = os.path.join(metrics_dir, metrics_filename)
-        # Also save visualizations to persona subfolders
-        viz_dir = os.path.join(os.path.dirname(config.RESULTS_FOLDER), "visualizations", "persona_results", persona)
-        os.makedirs(viz_dir, exist_ok=True)
-        # Tip: Update plotting code if it exists to use viz_dir
-    else:
-        metrics_path = os.path.join(config.RESULTS_FOLDER, metrics_filename)
+        persona_tag = persona.replace(os.sep, "_")
+        metrics_filename = f"evaluation_metrics_persona_{persona_tag}_{timestamp}.json"
         
-    with open(metrics_path, 'w') as f:
+        # LOCAL Save
+        local_dir = os.path.join(config.RESULTS_FOLDER, "persona_results", persona)
+        os.makedirs(local_dir, exist_ok=True)
+        local_path = os.path.join(local_dir, metrics_filename)
+        
+        # GLOBAL Save
+        global_dir = os.path.join(global_viz_root, model_name, "persona", persona)
+        os.makedirs(global_dir, exist_ok=True)
+        global_path = os.path.join(global_dir, metrics_filename)
+    else:
+        # LOCAL Save
+        local_path = os.path.join(config.RESULTS_FOLDER, metrics_filename)
+        
+        # GLOBAL Save
+        global_dir = os.path.join(global_viz_root, model_name, "vanilla")
+        os.makedirs(global_dir, exist_ok=True)
+        global_path = os.path.join(global_dir, metrics_filename)
+        
+    # Save to both
+    with open(local_path, 'w') as f:
         json.dump(metrics, f, indent=2)
-    print(f"\n💾 Evaluation metrics saved to: {metrics_path}")
+    with open(global_path, 'w') as f:
+        json.dump(metrics, f, indent=2)
+        
+    print(f"\n💾 Evaluation metrics saved to LOCAL: {local_path}")
+    print(f"💾 Evaluation metrics saved to GLOBAL: {global_path}")
 
 def main():
     try:

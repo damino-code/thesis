@@ -205,18 +205,41 @@ def evaluate_predictions(llm_df, human_df, persona=None):
         'hate_speech_metrics': {'accuracy': accuracy, 'f1': f1, 'mae': mae_hs}
     }
     
-    metrics_filename = f"evaluation_metrics_merged_{timestamp}.json"
+    # Global Visualization folder setup
+    global_viz_root = "/storage/home/amine/thesis/global_visualisation"
+    model_name = "Qwen2.5-7B" # hardcoded for this folder
+    
+    metrics_filename = f"evaluation_metrics_standard_{timestamp}.json"
     if persona:
-        metrics_dir = os.path.join(config.RESULTS_FOLDER, "persona_results", persona)
-        os.makedirs(metrics_dir, exist_ok=True)
-        metrics_path = os.path.join(metrics_dir, metrics_filename)
-        # Visualizations are already handled via the visualization module (persona-aware)
-    else:
-        metrics_path = os.path.join(config.RESULTS_FOLDER, metrics_filename)
+        persona_tag = persona.replace(os.sep, "_")
+        metrics_filename = f"evaluation_metrics_persona_{persona_tag}_{timestamp}.json"
         
-    with open(metrics_path, 'w') as f:
+        # LOCAL Save
+        local_dir = os.path.join(config.RESULTS_FOLDER, "persona_results", persona)
+        os.makedirs(local_dir, exist_ok=True)
+        local_path = os.path.join(local_dir, metrics_filename)
+        
+        # GLOBAL Save
+        global_dir = os.path.join(global_viz_root, model_name, "persona", persona)
+        os.makedirs(global_dir, exist_ok=True)
+        global_path = os.path.join(global_dir, metrics_filename)
+    else:
+        # LOCAL Save
+        local_path = os.path.join(config.RESULTS_FOLDER, metrics_filename)
+        
+        # GLOBAL Save
+        global_dir = os.path.join(global_viz_root, model_name, "vanilla")
+        os.makedirs(global_dir, exist_ok=True)
+        global_path = os.path.join(global_dir, metrics_filename)
+        
+    # Save to both
+    with open(local_path, 'w') as f:
         json.dump(metrics, f, indent=2)
-    print(f"\n💾 Evaluation metrics saved to: {metrics_path}")
+    with open(global_path, 'w') as f:
+        json.dump(metrics, f, indent=2)
+        
+    print(f"\n💾 Evaluation metrics saved to LOCAL: {local_path}")
+    print(f"💾 Evaluation metrics saved to GLOBAL: {global_path}")
 
 def main():
     try:

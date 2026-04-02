@@ -5,14 +5,26 @@ import sys
 from datetime import datetime
 import config
 
+def get_available_personas():
+    persona_results_dir = os.path.join(config.RESULTS_FOLDER, "persona_results")
+    if not os.path.exists(persona_results_dir):
+        return []
+    
+    personas = []
+    # We look for directories that contain attribute subfolders
+    for root, dirs, files in os.walk(persona_results_dir):
+        # If this directory has any of our attributes as subdirectories, it's a persona result leaf
+        if any(attr in dirs for attr in config.ATTRIBUTES):
+            rel_path = os.path.relpath(root, persona_results_dir)
+            personas.append(rel_path)
+    return sorted(personas)
+
 def merge_results(persona=None):
     if persona:
         print(f"Preparing to merge attribute results for persona: {persona.upper()}...")
-        base_results_dir = os.path.join(config.RESULTS_FOLDER, "persona_results", persona)
-        output_prefix = f"merged_{persona}_"
+        output_prefix = f"merged_{persona.replace(os.sep, '_')}_"
     else:
         print("Preparing to merge attribute results (Standard)...")
-        base_results_dir = os.path.join(config.RESULTS_FOLDER, "single_attribute_analyser")
         output_prefix = "merged_single_attributes_"
     
     # Attributes to look for
@@ -54,12 +66,15 @@ def merge_results(persona=None):
 
     if merged_df is not None:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        persona_tag = persona.replace(os.sep, "_") if persona else "single_attributes"
-        output_filename = f"merged_{persona_tag}_{timestamp}.csv"
-        # If persona, save inside persona folder
+        persona_tag = persona.replace(os.sep, "_") if persona else "standard"
+        # Naming: merged_persona_[path_as_str]_results_[timestamp].csv
+        output_filename = f"merged_persona_{persona_tag}_results_{timestamp}.csv"
+        
+        # Always save in a consistent place or relative to persona
         if persona:
             output_path = os.path.join(config.RESULTS_FOLDER, "persona_results", persona, output_filename)
         else:
+            output_filename = f"merged_standard_results_{timestamp}.csv"
             output_path = os.path.join(config.RESULTS_FOLDER, output_filename)
         
         # Create dir if missing
@@ -69,8 +84,36 @@ def merge_results(persona=None):
         print(f"\n✅ Successfully merged {files_found} attributes.")
         print(f"💾 Saved to: {output_path}")
     else:
-        print("\n❌ No data found to merge.")
+        print(f"\n❌ No data found to merge for {persona if persona else 'Standard'}.")
 
 if __name__ == "__main__":
-    p = sys.argv[1] if len(sys.argv) > 1 else None
-    merge_results(persona=p)
+    if len(sys.argv) > 1:
+        merge_results(persona=sys.argv[1])
+    else:
+        print("\n--- Result Merger ---")
+        print("0. Standard (No Persona)")
+        personas = get_available_personas()
+        for i, p in enumerate(personas, 1):
+            print(f"{i}. Persona: {p}")
+            
+        choice = input("\nSelect mode (numbers e.g. 1,2,3, 'all', or 'q' to quit): ").strip().lower()
+        
+        if choice == '0':
+            merge_results(None)
+        elif choice == 'all':
+            merge_results(None)
+            for p in personas:
+                merge_results(p)
+        elif ',' in choice or choice.isdigit():
+            # Handle comma separated list (e.g. 1,2,3)
+            try:
+                indices = [int(x.strip()) for x in choice.split(',')]
+                for idx in indices:
+                    if idx == 0:
+                        merge_results(None)
+                    elif 1 <= idx <= len(personas):
+                        merge_results(personas[idx-1])
+            except ValueError:
+                print("Invalid numeric selection.")
+        elif choice == 'q':
+            sys.exit()

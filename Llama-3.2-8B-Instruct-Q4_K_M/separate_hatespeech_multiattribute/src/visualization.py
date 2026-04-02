@@ -6,14 +6,35 @@ from datetime import datetime
 import config
 
 def save_plot(filename, persona=None):
-    if persona:
-        path = os.path.join(config.VISUALIZATIONS_FOLDER, "persona_results", persona, filename)
-    else:
-        path = os.path.join(config.VISUALIZATIONS_FOLDER, filename)
+    # Determine model name from path
+    model_name = "Llama-3.2-8B" # Default fallback
+    if "Llama-3.2-8B" in __file__: model_name = "Llama-3.2-8B"
+    elif "llama-3.3-70b" in __file__: model_name = "Llama-3.3-70B"
+    elif "Qwen2.5-7B" in __file__: model_name = "Qwen2.5-7B"
+    elif "qwen3-next-80b" in __file__: model_name = "Qwen3-Next-80B"
+
+    # Define global visualization path
+    global_viz_root = "/storage/home/amine/thesis/global_visualisation"
     
+    if persona:
+        # nested under model/persona_type/persona_path
+        path = os.path.join(global_viz_root, model_name, "persona", persona, filename)
+        # Also keep a local copy in the model's own visualization folder for safety
+        local_path = os.path.join(config.VISUALIZATIONS_FOLDER, "persona_results", persona, filename)
+    else:
+        # nested under model/vanilla
+        path = os.path.join(global_viz_root, model_name, "vanilla", filename)
+        local_path = os.path.join(config.VISUALIZATIONS_FOLDER, filename)
+    
+    # Ensure all directories exist
     os.makedirs(os.path.dirname(path), exist_ok=True)
+    os.makedirs(os.path.dirname(local_path), exist_ok=True)
+    
+    # Save to both locations
     plt.savefig(path)
-    print(f"💾 Plot saved to: {path}")
+    plt.savefig(local_path)
+    print(f"💾 Plot saved to GLOBAL: {path}")
+    print(f"💾 Plot saved to LOCAL: {local_path}")
     plt.close()
 
 def plot_correlation_matrix(corr_data, persona=None):
