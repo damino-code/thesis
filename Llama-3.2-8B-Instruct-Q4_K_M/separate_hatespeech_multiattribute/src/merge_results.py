@@ -5,8 +5,9 @@ import sys
 from datetime import datetime
 import config
 
-def merge_results():
-    print("Preparing to merge attribute results (Standard)...")
+def merge_results(use_dynamic=False):
+    mode_name = "Feature-based" if use_dynamic else "Standard"
+    print(f"Preparing to merge attribute results ({mode_name})...")
     
     # Attributes to look for
     attributes = config.ATTRIBUTES
@@ -14,9 +15,15 @@ def merge_results():
     merged_df = None
     files_found = 0
     
+    # Determine which folder to search
+    if use_dynamic:
+        search_base_dir = os.path.join(config.RESULTS_FOLDER, "persona_results")
+    else:
+        search_base_dir = os.path.join(config.RESULTS_FOLDER, "single_attribute_analyser")
+    
     for attr in attributes:
-        # Search results under standard folder
-        attr_dir = os.path.join(config.RESULTS_FOLDER, "single_attribute_analyser", attr)
+        # Search results under appropriate folder
+        attr_dir = os.path.join(search_base_dir, attr)
         
         if not os.path.exists(attr_dir):
             continue
@@ -44,8 +51,17 @@ def merge_results():
 
     if merged_df is not None:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        output_filename = f"merged_standard_results_{timestamp}.csv"
-        output_path = os.path.join(config.RESULTS_FOLDER, output_filename)
+        
+        # Create output filename based on mode
+        if use_dynamic:
+            output_filename = f"merged_persona_results_{timestamp}.csv"
+            output_path = os.path.join(config.RESULTS_FOLDER, "persona_results", output_filename)
+        else:
+            output_filename = f"merged_standard_results_{timestamp}.csv"
+            output_path = os.path.join(config.RESULTS_FOLDER, output_filename)
+        
+        # Ensure output directory exists
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
         
         merged_df.to_csv(output_path, index=False)
         print(f"\n✅ Successfully merged {files_found} attributes.")
@@ -54,4 +70,8 @@ def merge_results():
         print(f"\n❌ No data found to merge.")
 
 if __name__ == "__main__":
-    merge_results()
+    if len(sys.argv) > 1:
+        use_dynamic = sys.argv[1].lower() == 'dynamic'
+        merge_results(use_dynamic=use_dynamic)
+    else:
+        merge_results()

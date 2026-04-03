@@ -12,21 +12,35 @@ from data_loader import load_dataset
 def load_predictions():
     print("🔍 Searching for MERGED analysis results...")
     
-    standard_pattern = os.path.join(config.RESULTS_FOLDER, "merged_standard_results_*.csv")
-    standard_files = glob.glob(standard_pattern)
-
-    files = glob.glob(standard_pattern)
+    # 1. Choose which results to evaluate
+    print("\nSelect Results to Evaluate:")
+    print("1. Standard (Vanilla prompts)")
+    print("2. Persona (Feature-based dynamic prompts)")
+    
+    mode_choice = input("\nEnter choice (1 or 2) [Default: 1]: ").strip()
+    
+    if mode_choice == '2':
+        pattern = os.path.join(config.RESULTS_FOLDER, "persona_results", "merged_persona_results_*.csv")
+        mode_name = "Persona"
+    else:
+        pattern = os.path.join(config.RESULTS_FOLDER, "merged_standard_results_*.csv")
+        mode_name = "Standard"
+    
+    print(f"\n✓ Selected: {mode_name} results")
+    
+    files = glob.glob(pattern)
     unique_files = sorted(list(set(files)), key=os.path.getmtime, reverse=True)
     
     if not unique_files:
-        print(f"❌ No merged result files found.")
+        print(f"❌ No merged {mode_name.lower()} result files found.")
         print(f"🔄 Attempting to run merge script...")
         
         try:
             from merge_results import merge_results
-            merge_results()
+            use_dynamic = (mode_choice == '2')
+            merge_results(use_dynamic=use_dynamic)
             # Re-search after merging
-            files = glob.glob(standard_pattern)
+            files = glob.glob(pattern)
             unique_files = sorted(list(set(files)), key=os.path.getmtime, reverse=True)
             if not unique_files:
                 raise FileNotFoundError(f"Failed to find merged file even after running merge_results.")

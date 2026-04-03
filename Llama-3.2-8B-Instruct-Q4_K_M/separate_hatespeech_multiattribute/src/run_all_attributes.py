@@ -5,12 +5,23 @@ from single_attribute_analyser.shared_runner import run_attribute_analysis
 def main():
     print("🚀 STARTING BATCH ATTRIBUTE ANALYSIS")
     
-    # Choose Sample Size
-    sample_size = input("Enter sample size (or 'all'): ").strip()
+    # 1. Choose Analysis Mode
+    print("\nSelect Analysis Mode:")
+    print("1. Vanilla (Standard static prompts)")
+    print("2. Feature (Annotator-specific dynamic prompts)")
     
-    # Run Analysis for all attributes
+    mode_choice = input("\nEnter choice (1 or 2) [Default: 1]: ").strip()
+    use_dynamic = mode_choice == '2'
+    
+    mode_name = "Feature-based" if use_dynamic else "Vanilla"
+    print(f"\n✓ Selected: {mode_name} mode")
+    
+    # 2. Choose Sample Size
+    sample_size = input("\nEnter sample size (or 'all'): ").strip()
+    
+    # 3. Run Analysis for all attributes
     print(f"\n=============================================")
-    print(f"🌟 RUNNING STANDARD ANALYSIS")
+    print(f"🌟 RUNNING {mode_name.upper()} ANALYSIS")
     print(f"=============================================")
     
     for attribute in config.ATTRIBUTES:
@@ -18,7 +29,7 @@ def main():
         print(f"Processing: {attribute.upper()}")
         print(f"---------------------------------------------")
         try:
-            run_attribute_analysis(attribute, sample_size=sample_size)
+            run_attribute_analysis(attribute, sample_size=sample_size, use_dynamic=use_dynamic)
         except Exception as e:
             print(f"❌ Failed to run {attribute}: {e}")
 
