@@ -1,0 +1,98 @@
+============================================================
+  HATE SPEECH SCORE – MODEL COMPARISON
+  Llama-3.2  vs  Qwen-2.5
+  Generated: 2026-04-03
+============================================================
+
+SETUP
+  Total samples : 200
+  Train (75%)   : 150   |   Test (25%) : 50
+  CV strategy   : 5-fold on training set
+  Model         : Ridge regression (weights learned per attribute)
+  Formula       : HateScore = Σ ( Attribute_i × Confidence_i × Correlation_i )
+
+============================================================
+CROSS-VALIDATION (on training set, Ridge)
+============================================================
+
+  Metric          Llama-3.2        Qwen-2.5
+  -------         ---------        --------
+  Best alpha      10.0             100.0
+  CV R² mean      0.5436           0.7101       ← Qwen +0.1665
+  CV R² std       ±0.1106          ±0.0711      ← Qwen more stable
+
+============================================================
+TEST SET EVALUATION (held-out 25%, Ridge)
+============================================================
+
+  Metric          Llama-3.2        Qwen-2.5
+  -------         ---------        --------
+  R²              0.7461           0.8263       ← Qwen +0.080
+  MAE             0.9437           0.7725       ← Qwen −0.171
+  RMSE            1.1312           0.9357       ← Qwen −0.196
+
+============================================================
+LEARNED WEIGHTS / CORRELATIONS (Ridge)
+============================================================
+
+  Attribute        Llama-3.2      Qwen-2.5    Agreement
+  ---------        ---------      --------    ---------
+  sentiment        -0.373333      -0.278160   ✓  both negative (neutral/pos sentiment = less hate)
+  respect          -1.030645      -0.142470   ✓  both negative (more respect = less hate)
+  insult            0.297958       0.216482   ✓  both positive
+  humiliate        -0.037120       0.184291   ✗  sign flip
+  status           -0.206570      -0.043779   ✓  both negative
+  dehumanize        0.043262       0.262003   ✓  both positive
+  violence          0.101430       0.225519   ✓  both positive
+  genocide          0.193594       0.107579   ✓  both positive
+  attack_defend    -0.141078       0.159033   ✗  sign flip
+  hatespeech       -0.606745       0.172170   ✗  sign flip (Llama counterintuitive)
+
+  Intercept         0.536656      -2.520934
+
+  Attributes with consistent sign across both models (8/10):
+    sentiment, respect, insult, status, dehumanize, violence, genocide, (humiliate near-zero in Llama)
+
+  Sign disagreements (2/10):
+    humiliate    – Llama weight near-zero (−0.037), Qwen positive (0.184)
+    attack_defend – Llama negative (−0.141), Qwen positive (0.159)
+    hatespeech   – Llama strongly negative (−0.607), Qwen positive (0.172)
+                   → Llama likely overcalls hatespeech, making the predictor noisy
+
+============================================================
+SUMMARY
+============================================================
+
+  Qwen-2.5 produces better weights by every metric:
+    - Higher test R² (0.826 vs 0.746)
+    - Lower prediction error (MAE 0.773 vs 0.944)
+    - More stable CV (std 0.071 vs 0.111)
+    - More semantically coherent weights (hatespeech weight positive)
+
+  Recommended weights for downstream use: Qwen-2.5 Ridge coefficients
+    insult       +0.2165
+    dehumanize   +0.2620
+    violence     +0.2255
+    humiliate    +0.1843
+    hatespeech   +0.1721
+    attack_defend+0.1590
+    genocide     +0.1076
+    status       −0.0438
+    respect      −0.1425
+    sentiment    −0.2782
+    intercept    −2.5209
+
+============================================================
+FILES
+  Llama-3.2/results/weights.json
+  Llama-3.2/results/evaluation_report.txt
+  Llama-3.2/results/cv_results.png
+  Llama-3.2/results/predictions_vs_actual.png
+  Llama-3.2/results/attribute_weights.png
+
+  Qwen-2.5/results/weights.json
+  Qwen-2.5/results/evaluation_report.txt
+  Qwen-2.5/results/cv_results.png
+  Qwen-2.5/results/predictions_vs_actual.png
+  Qwen-2.5/results/attribute_weights.png
+============================================================
