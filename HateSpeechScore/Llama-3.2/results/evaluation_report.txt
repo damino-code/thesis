@@ -1,0 +1,53 @@
+============================================================
+  HATE SPEECH SCORE – WEIGHT TRAINING REPORT
+  Generated: 2026-04-03T04:11:39.096737
+============================================================
+
+DATA SPLIT
+  Total samples  : 200
+  Train (75%)    : 150
+  Test  (25%)    : 50
+
+CROSS-VALIDATION (5-fold on training set)
+  Ridge best α   : 10.0
+  Ridge CV R²    : 0.5436 ± 0.1106
+  NNLS  CV R²    : -0.0728 ± 0.1147
+
+TEST SET EVALUATION
+  Ridge:
+    R²   = 0.7461
+    MAE  = 0.9437
+    RMSE = 1.1312
+  NNLS:
+    R²   = 0.1157
+    MAE  = 1.7189
+    RMSE = 2.1111
+
+LEARNED WEIGHTS (Correlations)
+  Attribute                  Ridge        NNLS
+  --------------------------------------------
+  sentiment              -0.373333    0.000000
+  respect                -1.030645    0.000000
+  insult                  0.297958    0.000000
+  humiliate              -0.037120    0.000000
+  status                 -0.206570    0.000000
+  dehumanize              0.043262    0.000000
+  violence                0.101430    0.276863
+  genocide                0.193594    0.000000
+  attack_defend          -0.141078    0.000000
+  hatespeech             -0.606745    0.000000
+
+  Ridge intercept : 0.536656
+
+HOW TO INTERPRET RESULTS
+  R² = 1.0  → model perfectly explains variance in hate speech scores
+  R² = 0.0  → model no better than predicting the mean
+  R² < 0    → model worse than predicting the mean (bad fit)
+
+  Good weights show POSITIVE values for hate-related attributes
+  (insult, dehumanize, violence, genocide, hatespeech)
+  and NEGATIVE values for protective attributes (respect, sentiment).
+
+  Convergence between Ridge and NNLS weights = more stable estimates.
+  Low CV std-dev relative to mean R² = stable across folds (good).
+============================================================
