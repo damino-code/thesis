@@ -1,0 +1,15 @@
+/var/spool/slurm/d/job346894/slurm_script: line 35: 269252 Done                    echo -e "2\nall\n"
+     269253 Aborted                 (core dumped) | python src/run_all_attributes.py
+Traceback (most recent call last):
+  File "/storage/home/amine/thesis/Llama-3.2-8B-Instruct-Q4_K_M/separate_hatespeech_multiattribute/src/evaluation.py", line 46, in load_predictions
+    raise FileNotFoundError(f"Failed to find merged file even after running merge_results.")
+FileNotFoundError: Failed to find merged file even after running merge_results.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/storage/home/amine/thesis/Llama-3.2-8B-Instruct-Q4_K_M/separate_hatespeech_multiattribute/src/evaluation.py", line 212, in main
+    result = load_predictions()
+  File "/storage/home/amine/thesis/Llama-3.2-8B-Instruct-Q4_K_M/separate_hatespeech_multiattribute/src/evaluation.py", line 49, in load_predictions
+    raise FileNotFoundError("No merged prediction files found.")
+FileNotFoundError: No merged prediction files found.

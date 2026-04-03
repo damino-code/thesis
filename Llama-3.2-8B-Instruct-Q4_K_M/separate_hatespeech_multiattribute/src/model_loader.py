@@ -23,6 +23,21 @@ def load_model(model_path=None, n_gpu_layers=-1, n_ctx=8192, verbose=False):
         model_path = config.MODEL_PATH
 
     print("Loading model into RAM...")
+    
+    # Check if CUDA is available
+    try:
+        import torch
+        cuda_available = torch.cuda.is_available()
+        print(f"🔍 CUDA available: {cuda_available}")
+        if not cuda_available:
+            print("⚠️  CUDA not available, falling back to CPU")
+            n_gpu_layers = 0
+    except ImportError:
+        print("⚠️  PyTorch not available, using CPU")
+        n_gpu_layers = 0
+    
+    print(f"Using n_gpu_layers={n_gpu_layers}")
+    
     llm = Llama(
         model_path=model_path,
         n_gpu_layers=n_gpu_layers,

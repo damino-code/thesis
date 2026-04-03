@@ -134,24 +134,19 @@ Evaluate this comment from your perspective as this annotator."""
         if attribute not in self.prompts:
             raise ValueError(f"Unknown attribute: {attribute}")
         
-        print(f"   📝 analyze_attribute called: attribute={attribute}, comment_id={comment_id}, text_len={len(text) if text else 0}")
-        
         # Build prompt - either dynamic (with features) or vanilla (standard)
         if self.use_dynamic and comment_id is not None:
             # Use attribute-specific dynamic prompt
             user_message = self._build_dynamic_prompt(attribute, comment_id, text)
             if user_message is None:
                 # Fallback to vanilla if dynamic prompt fails
-                print(f"⚠️  Falling back to vanilla prompt for attribute: {attribute}")
                 user_message = self.prompts[attribute].format(text=text[:500])
                 system_message = "You are an expert content annotator."
             else:
                 # Dynamic prompt includes system message (persona + criteria)
-                print(f"✅ Using dynamic prompt for attribute: {attribute}")
                 system_message = ""
         else:
             # Use standard vanilla prompt
-            print(f"📄 Using vanilla prompt for attribute: {attribute}")
             system_message = "You are an expert content annotator."
             user_message = self.prompts[attribute].format(text=text[:500])
         
@@ -173,7 +168,10 @@ You are an expert content annotator responding from the perspective defined in t
 """
 
         try:
-            print(f"   🔄 Calling LLM for {attribute}... (prompt length: {len(full_prompt)})")
+            import sys
+            print(f"   [PRE-CALL] About to call LLM", file=sys.stderr, flush=True)
+            sys.stderr.flush()
+            
             response = self.model(
                 full_prompt,
                 max_tokens=10,
@@ -181,7 +179,10 @@ You are an expert content annotator responding from the perspective defined in t
                 stop=["<|eot_id|>"],
                 logprobs=1  # Request logprobs for the top token
             )
-            print(f"   ✅ LLM returned response")
+            
+            print(f"   [POST-CALL] LLM returned", file=sys.stderr, flush=True)
+            sys.stderr.flush()
+            
             choice = response['choices'][0]
             output = choice['text'].strip()
             
@@ -191,7 +192,8 @@ You are an expert content annotator responding from the perspective defined in t
                 val = float(numbers[0])
                 
                 # Calculate Logit-Based Confidence
-                # We use the geometric mean of the probabilities (exp of mean log-probs) of the response tokens
+                import math
+                import numpy as np
                 confidence = 0.0
                 if 'logprobs' in choice and choice['logprobs'] and 'token_logprobs' in choice['logprobs']:
                     logprobs = choice['logprobs']['token_logprobs']
@@ -201,8 +203,7 @@ You are an expert content annotator responding from the perspective defined in t
                     if valid_logprobs:
                         avg_logprob = np.mean(valid_logprobs)
                         confidence = math.exp(avg_logprob)
-                
-                # Cap confidence at 1.0 (though exp(logprob) <= 1 always)
+                        
                 return {attribute: val, 'confidence': confidence}
             else:
                 return {attribute: None, 'confidence': 0.0}

@@ -69,7 +69,7 @@ def load_predictions():
     print(f"📂 Loading predictions from: {selected_file}")
     return pd.read_csv(selected_file), selected_file
 
-def evaluate_predictions(llm_df, human_df):
+def evaluate_predictions(llm_df, human_df, mode_dir="vanilla"):
     print(f"📈 EVALUATION: LLM vs Human Annotations")
     print("=" * 70)
 
@@ -145,7 +145,7 @@ def evaluate_predictions(llm_df, human_df):
             cm = confusion_matrix(human_classes, llm_classes)
             # Visualize Confusion Matrix
             try:
-                plot_confusion_matrix(cm)
+                plot_confusion_matrix(cm, mode_dir=mode_dir)
             except Exception as e:
                 print(f"⚠️ Failed to plot confusion matrix: {e}")
 
@@ -161,18 +161,18 @@ def evaluate_predictions(llm_df, human_df):
     if cols_to_plot:
         corr_data = eval_df[cols_to_plot].dropna()
         if len(corr_data) > 0:
-            plot_correlation_matrix(corr_data)
+            plot_correlation_matrix(corr_data, mode_dir=mode_dir)
         else:
             print("⚠️ Not enough data for Correlation Matrix.")
 
     # 2. Scatter Plots
     numeric_comparison_cols = [attr for attr in config.ATTRIBUTES if attr in correlations]
     if numeric_comparison_cols:
-        plot_scatter_plots(eval_df, numeric_comparison_cols)
+        plot_scatter_plots(eval_df, numeric_comparison_cols, mode_dir=mode_dir)
 
     # 3. Correlation Bar Chart
     if correlations:
-        plot_correlation_bars(correlations)
+        plot_correlation_bars(correlations, mode_dir=mode_dir)
 
 
     # Save Metrics to JSON
@@ -187,13 +187,14 @@ def evaluate_predictions(llm_df, human_df):
     global_viz_root = "/storage/home/amine/thesis/global_visualisation"
     model_name = "Llama-3.2-8B" # hardcoded for this folder
     
-    metrics_filename = f"evaluation_metrics_standard_{timestamp}.json"
+    mode_filename_part = "persona" if mode_dir == "persona" else "standard"
+    metrics_filename = f"evaluation_metrics_{mode_filename_part}_{timestamp}.json"
     
     # LOCAL Save
     local_path = os.path.join(config.RESULTS_FOLDER, metrics_filename)
     
     # GLOBAL Save
-    global_dir = os.path.join(global_viz_root, model_name, "vanilla")
+    global_dir = os.path.join(global_viz_root, model_name, mode_dir)
     os.makedirs(global_dir, exist_ok=True)
     global_path = os.path.join(global_dir, metrics_filename)
         
@@ -215,11 +216,14 @@ def main():
             
         llm_df, filename = result
         
+        # Determine mode from filename
+        mode_dir = "persona" if "persona" in filename.lower() else "vanilla"
+        
         # 2. Load Human Data
         human_df = load_dataset()
         
         # 3. Run Evaluation
-        evaluate_predictions(llm_df, human_df)
+        evaluate_predictions(llm_df, human_df, mode_dir=mode_dir)
         
     except Exception as e:
         print(f"\n❌ Error during evaluation: {e}")

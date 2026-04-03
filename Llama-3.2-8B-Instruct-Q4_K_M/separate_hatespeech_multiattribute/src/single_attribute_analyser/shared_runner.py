@@ -47,30 +47,30 @@ def run_attribute_analysis(attribute_name, sample_size='all', use_dynamic=False)
     analyzer = SingleAttributeAnalyzer(llm, use_dynamic=use_dynamic)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
-    # Warmup call to initialize GPU/model on first inference
-    print("\n🔥 Warming up model with test call...")
-    try:
-        warmup_result = analyzer.analyze_attribute("This is a test comment for warming up the model.", attribute_name, comment_id=None)
-        print(f"✅ Warmup complete: {warmup_result}")
-    except Exception as e:
-        print(f"⚠️  Warmup failed (continuing anyway): {e}")
+    print(f"\n🎯 Starting analysis for: {attribute_name}")
     
     # Create attribute specific folder in results - use persona_results for dynamic mode
     if use_dynamic:
         attr_result_folder = os.path.join(config.RESULTS_FOLDER, "persona_results", attribute_name)
     else:
         attr_result_folder = os.path.join(config.RESULTS_FOLDER, "single_attribute_analyser", attribute_name)
-        
+    
+    print(f"📁 Creating results folder: {attr_result_folder}")
     os.makedirs(attr_result_folder, exist_ok=True)
+    print(f"✅ Ready to process {len(df_sample)} comments")
 
     results = []
     
     for i, (idx, row) in enumerate(df_sample.iterrows(), 1):
+        print(f"   [{i:3d}/{len(df_sample)}] Starting processing...", end=' ', flush=True)
         comment = str(row[text_column])
         comment_id = row.get('comment_id', idx) if use_dynamic else None
         
         try:
+            print(f"LLM call...", end=' ', flush=True)
             res = analyzer.analyze_attribute(comment, attribute_name, comment_id)
+            print(f"✓ {res.get(attribute_name)}")
+            
             # Always keep comment_id if present, else fallback to index
             if 'comment_id' in row:
                 res['comment_id'] = row['comment_id']
@@ -79,14 +79,8 @@ def run_attribute_analysis(attribute_name, sample_size='all', use_dynamic=False)
             res['index'] = idx
             
             results.append(res)
-            
-            # Print progress for every comment
-            if i % 10 == 0 or i == 1:
-                print(f"   [{i:3d}/{len(df_sample)}] ✓ Processed - {attribute_name}: {res.get(attribute_name)}")
         except Exception as e:
-            print(f"   [{i:3d}/{len(df_sample)}] ❌ ERROR on item: {e}")
-            import traceback
-            traceback.print_exc()
+            print(f"❌ ERROR: {e}")
             # Continue processing even if one fails
             results.append({attribute_name: None, 'confidence': 0.0, 'comment_id': row.get('comment_id', idx), 'index': idx})
 

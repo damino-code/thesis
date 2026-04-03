@@ -1,0 +1,6 @@
+/var/spool/slurm/d/job346893/slurm_script: line 32: 269138 Done                    echo -e "2\nall\n"
+     269139 Aborted                 (core dumped) | python src/run_all_attributes.py
+Traceback (most recent call last):
+  File "/storage/home/amine/thesis/Llama-3.2-8B-Instruct-Q4_K_M/separate_hatespeech_multiattribute/src/evaluation.py", line 6, in <module>
+    from sklearn.metrics import f1_score, accuracy_score, mean_absolute_error, confusion_matrix
+ModuleNotFoundError: No module named 'sklearn'
