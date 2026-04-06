@@ -1,18 +1,18 @@
 #!/bin/bash
-#SBATCH --job-name=feature_prompt_run
+#SBATCH --job-name=async_feature_run
 #SBATCH --partition=compute
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:nvidia:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
-#SBATCH --time=12:00:00
+#SBATCH --time=04:00:00
 #SBATCH --output=logs/dynamic_%j.out
 #SBATCH --error=logs/dynamic_%j.err
 
 # Print basic job information
 echo "=========================================================="
-echo "Starting Llama 3.2 8B Analysis - DYNAMIC PROMPTS"
+echo "Starting Llama 3.2 8B Analysis - DYNAMIC PROMPTS (ASYNC BATCHING)"
 echo "Job ID: $SLURM_JOB_ID"
 echo "Node: $SLURMD_NODENAME"
 echo "Date: $(date)"
@@ -26,13 +26,17 @@ cd /storage/home/amine/thesis/Llama-3.2-8B-Instruct-Q4_K_M/separate_hatespeech_m
 # Check GPU availability
 nvidia-smi
 
-# Activate correct Python environment
-source /storage/home/amine/miniforge3/bin/activate llm-research
+# Source the Mamba/Conda initialization script so the 'mamba' command works in batch mode
+source /storage/home/amine/miniforge3/etc/profile.d/conda.sh
+source /storage/home/amine/miniforge3/etc/profile.d/mamba.sh
+
+# Activate your environment
+mamba activate llm-research
 
 echo ""
-echo "1. RUNNING ALL ATTRIBUTES (Feature/Dynamic Mode)..."
-# We pipe '2' (Dynamic mode) and 'all' (Sample size) to the python script
-echo -e "2\nall\n" | python src/run_all_attributes.py
+echo "1. RUNNING ALL ATTRIBUTES (Feature/Dynamic Mode) USING ASYNC BATCHING..."
+# We pipe '2' (Dynamic mode) and '3' (Sample size) to the new async batching script
+echo -e "2\nall\n" | python src/async_batch_runner.py
 
 echo ""
 echo "2. MERGING RESULTS..."
@@ -47,4 +51,3 @@ echo "2" | python src/evaluation.py
 echo ""
 echo "=========================================================="
 echo "Analysis completely finished at $(date)"
-echo "=========================================================="

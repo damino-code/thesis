@@ -1,0 +1,85 @@
+Starting batch test on GPU node: gpu-nvidia-h200-3
+Model found at /scratch/amine/models/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf.
+Starting llama_cpp.server in the background (logging to server.log)...
+Waiting for server to become ready (this may take up to 2 minutes)...
+Server is up and running!
+Starting batch processing of 10 prompts...
+
+--- RESULTS ---
+
+Prompt: Write a short, funny haiku about a sleepy cat.
+Response: Fluffy, furry lump
+Sleeping beauty's snore is loud
+Purr-haps I'll join her
+
+
+Prompt: What is the capital of France?
+Response: The capital of France is Paris.
+
+
+Prompt: Explain quantum computing in one simple sentence.
+Response: Quantum computing is a type of computing that uses the principles of quantum mechanics to perform calculations and process information in ways that are fundamentally different from classical computers, allowing it to solve complex problems exponentially faster.
+
+
+Prompt: Give me a quick recipe for scrambled eggs.
+Response: Here's a quick and simple recipe for scrambled eggs:
+
+Ingredients:
+
+* 2 eggs
+* Salt and pepper to taste
+* 1 tablespoon butter or non-stick cooking spray
+
+Instructions:
+
+1. Crack the eggs into a bowl and whisk them together with a fork until they're well-beaten.
+2. Heat a non-stick pan over medium heat and add the butter or non-stick cooking spray.
+3. Once the butter has melted, pour in the eggs.
+4. Let the eggs cook for about 30 seconds until the edges start to set.
+5. Use a spatula to gently scramble the eggs, breaking them up into small curds. Don't overmix!
+6. Continue cooking for another 1-2 minutes
+
+
+Prompt: Translate 'Hello, how are you?' into Spanish.
+Response: The translation of "Hello, how are you?" into Spanish is:
+
+"Hola, ¿cómo estás?"
+
+Here's a breakdown of the translation:
+
+* "Hello" is translated to "Hola"
+* "how" is translated to "¿cómo" (which is an interrogative phrase meaning "what" or "how")
+* "are you" is translated to "estás" (the verb "estar" in the second person singular, which means "to be" in a temporary or changing state)
+
+So, when you put it all together, "Hola, ¿cómo estás?" is the polite and common way to greet someone in Spanish and ask about their well-being.
+
+
+Prompt: Name three planets in our solar system.
+Response: Here are three planets in our solar system:
+
+1. Earth
+2. Mars
+3. Jupiter
+
+
+Prompt: Who wrote the play Romeo and Juliet?
+Response: The play "Romeo and Juliet" was written by the English playwright and poet William Shakespeare.
+
+
+Prompt: What is the square root of 144?
+Response: The square root of 144 is 12, since 12 × 12 = 144.
+
+
+Prompt: Write a 2-sentence summary of the movie The Matrix.
+Response: Here is a 2-sentence summary of The Matrix:
+
+In a dystopian future, humanity is unknowingly trapped within a simulated reality called the Matrix, created by sentient machines to distract humans while their bodies are harvested for energy. Neo (Keanu Reeves), a computer hacker who begins to question the nature of his reality, is awakened to this truth by the resistance leader Morpheus and must join forces with him to free humanity from its virtual prison.
+
+
+Prompt: Why is the sky blue? Answer in one short sentence.
+Response: The sky appears blue because of a phenomenon called Rayleigh scattering, in which shorter (blue) wavelengths of light are scattered more than longer (red) wavelengths by the tiny molecules of gases in the atmosphere.
+
+Total time taken: 3.31 seconds
+
+Shutting down the background server process...
+Job finished!

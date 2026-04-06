@@ -73,28 +73,6 @@ class SingleAttributeAnalyzer:
         print(f"📊 Available attributes in dynamic_prompts: {list(dynamic_prompts.keys())}")
         return dynamic_prompts
 
-    def _build_dynamic_persona(self, comment_id):
-        """Build system prompt with annotator features based on comment_id"""
-        if comment_id is None or self.features_loader is None:
-            return "You are an expert content annotator."
-        
-        features = self.features_loader.get_features(comment_id)
-        
-        if features is None:
-            return "You are an expert content annotator."
-        
-        # Build contextual prompt with annotator characteristics
-        prompt = f"""You are a content annotator with the following characteristics:
-- Gender: {features['gender']}
-- Age: {features['age']}
-- Race: {features['race']}
-- Religion: {features['religion']}
-- Ideology: {features['ideology']}
-
-Evaluate this comment from your perspective as this annotator."""
-        
-        return prompt
-
     def _build_dynamic_prompt(self, attribute, comment_id, text):
         """Build complete dynamic prompt with features injected for a specific attribute"""
         if attribute not in self.dynamic_prompts:
@@ -129,8 +107,8 @@ Evaluate this comment from your perspective as this annotator."""
             print(f"❌ Error formatting dynamic prompt: {e}")
             return None
 
-    def analyze_attribute(self, text, attribute, comment_id=None):
-        """Analyze a comment for a single attribute"""
+    def build_prompt(self, text, attribute, comment_id=None):
+        """Build the full Llama-3 formatted prompt without calling the model."""
         if attribute not in self.prompts:
             raise ValueError(f"Unknown attribute: {attribute}")
         
@@ -153,7 +131,6 @@ Evaluate this comment from your perspective as this annotator."""
         # Build full prompt
         if system_message:
             full_prompt = f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
-
 {system_message}<|eot_id|><|start_header_id|>user<|end_header_id|>
 {user_message}
 <|eot_id|><|start_header_id|>assistant<|end_header_id|>
@@ -161,11 +138,16 @@ Evaluate this comment from your perspective as this annotator."""
         else:
             # For dynamic prompts, all content is in user message
             full_prompt = f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
-
 You are an expert content annotator responding from the perspective defined in the following instructions.<|eot_id|><|start_header_id|>user<|end_header_id|>
 {user_message}
 <|eot_id|><|start_header_id|>assistant<|end_header_id|>
 """
+        
+        return full_prompt
+
+    def analyze_attribute(self, text, attribute, comment_id=None):
+        """Analyze a comment for a single attribute"""
+        full_prompt = self.build_prompt(text, attribute, comment_id)
 
         try:
             import sys

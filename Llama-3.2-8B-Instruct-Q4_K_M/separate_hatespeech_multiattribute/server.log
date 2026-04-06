@@ -1,6 +1,6 @@
-ggml_cuda_init: found 1 CUDA devices (Total VRAM: 143157 MiB):
-  Device 0: NVIDIA H200 NVL, compute capability 9.0, VMM: yes, VRAM: 143157 MiB
-llama_model_load_from_file_impl: using device CUDA0 (NVIDIA H200 NVL) (0000:c7:00.0) - 142630 MiB free
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 95321 MiB):
+  Device 0: NVIDIA H100 NVL, compute capability 9.0, VMM: yes, VRAM: 95321 MiB
+llama_model_load_from_file_impl: using device CUDA0 (NVIDIA H100 NVL) (0000:4a:00.0) - 94794 MiB free
 llama_model_loader: loaded meta data with 22 key-value pairs and 291 tensors from /scratch/amine/models/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf (version GGUF V3 (latest))
 llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
 llama_model_loader: - kv   0:                       general.architecture str              = llama
@@ -750,7 +750,7 @@ sched_reserve:      CUDA0 compute buffer size =  4260.01 MiB
 sched_reserve:  CUDA_Host compute buffer size =   148.01 MiB
 sched_reserve: graph nodes  = 1158
 sched_reserve: graph splits = 2
-sched_reserve: reserve took 32.97 ms, sched copies = 1
+sched_reserve: reserve took 54.03 ms, sched copies = 1
 CUDA : ARCHS = 700,750,800,860,890,900 | FORCE_MMQ = 1 | USE_GRAPHS = 1 | PEER_MAX_BATCH_SIZE = 128 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
 Model metadata: {'tokenizer.chat_template': "{% set loop_messages = messages %}{% for message in loop_messages %}{% set content = '<|start_header_id|>' + message['role'] + '<|end_header_id|>\n\n'+ message['content'] | trim + '<|eot_id|>' %}{% if loop.index0 == 0 %}{% set content = bos_token + content %}{% endif %}{{ content }}{% endfor %}{{ '<|start_header_id|>assistant<|end_header_id|>\n\n' }}", 'tokenizer.ggml.eos_token_id': '128009', 'general.quantization_version': '2', 'tokenizer.ggml.model': 'gpt2', 'general.architecture': 'llama', 'llama.rope.freq_base': '500000.000000', 'llama.context_length': '8192', 'general.name': 'hub', 'llama.vocab_size': '128256', 'general.file_type': '15', 'llama.embedding_length': '4096', 'llama.feed_forward_length': '14336', 'llama.attention.layer_norm_rms_epsilon': '0.000010', 'llama.rope.dimension_count': '128', 'tokenizer.ggml.bos_token_id': '128000', 'llama.attention.head_count': '32', 'llama.block_count': '32', 'llama.attention.head_count_kv': '8'}
 Available chat formats from metadata: chat_template.default
@@ -761,100 +761,261 @@ Using gguf chat template: {% set loop_messages = messages %}{% for message in lo
 ' }}
 Using chat eos_token: <|eot_id|>
 Using chat bos_token: <|begin_of_text|>
-INFO:     Started server process [853856]
+INFO:     Started server process [3729150]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     127.0.0.1:44812 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55078 - "GET /v1/models HTTP/1.1" 200 OK
 ggml_backend_cuda_graph_compute: CUDA graph warmup complete
-llama_perf_context_print:        load time =       0.21 ms
-llama_perf_context_print: prompt eval time =       0.05 ms /    23 tokens (    0.00 ms per token, 425925.93 tokens per second)
-llama_perf_context_print:        eval time =     117.35 ms /    23 runs   (    5.10 ms per token,   196.00 tokens per second)
-llama_perf_context_print:       total time =     189.70 ms /    46 tokens
-llama_perf_context_print:    graphs reused =         22
-INFO:     127.0.0.1:44828 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-Llama.generate: 6 prefix-match hit, remaining 13 prompt tokens to eval
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =       0.57 ms /   243 tokens (    0.00 ms per token, 425569.18 tokens per second)
+llama_perf_context_print:        eval time =     129.82 ms /     9 runs   (   14.42 ms per token,    69.33 tokens per second)
+llama_perf_context_print:       total time =     536.44 ms /   252 tokens
+llama_perf_context_print:    graphs reused =          8
+INFO:     127.0.0.1:55084 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 21 prefix-match hit, remaining 252 prompt tokens to eval
 ggml_backend_cuda_graph_compute: CUDA graph warmup reset
 ggml_backend_cuda_graph_compute: CUDA graph warmup complete
-llama_perf_context_print:        load time =       0.21 ms
-llama_perf_context_print: prompt eval time =      11.92 ms /    13 tokens (    0.92 ms per token,  1090.24 tokens per second)
-llama_perf_context_print:        eval time =      96.50 ms /    20 runs   (    4.82 ms per token,   207.26 tokens per second)
-llama_perf_context_print:       total time =     118.98 ms /    33 tokens
-llama_perf_context_print:    graphs reused =         19
-INFO:     127.0.0.1:44834 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-Llama.generate: 6 prefix-match hit, remaining 13 prompt tokens to eval
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =       0.55 ms /   252 tokens (    0.00 ms per token, 460694.70 tokens per second)
+llama_perf_context_print:        eval time =      50.59 ms /     9 runs   (    5.62 ms per token,   177.90 tokens per second)
+llama_perf_context_print:       total time =     227.53 ms /   261 tokens
+llama_perf_context_print:    graphs reused =          8
+INFO:     127.0.0.1:55098 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 21 prefix-match hit, remaining 181 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup reset
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      41.15 ms /   181 tokens (    0.23 ms per token,  4398.97 tokens per second)
+llama_perf_context_print:        eval time =       6.37 ms /     1 runs   (    6.37 ms per token,   157.04 tokens per second)
+llama_perf_context_print:       total time =      67.21 ms /   182 tokens
+llama_perf_context_print:    graphs reused =          0
+INFO:     127.0.0.1:55110 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 84 prefix-match hit, remaining 125 prompt tokens to eval
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      31.58 ms /   125 tokens (    0.25 ms per token,  3957.95 tokens per second)
+llama_perf_context_print:        eval time =       6.33 ms /     1 runs   (    6.33 ms per token,   157.88 tokens per second)
+llama_perf_context_print:       total time =      53.67 ms /   126 tokens
+llama_perf_context_print:    graphs reused =          0
+INFO:     127.0.0.1:55138 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 27 prefix-match hit, remaining 223 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup complete
 ggml_backend_cuda_graph_compute: CUDA graph warmup reset
 ggml_backend_cuda_graph_compute: CUDA graph warmup complete
-llama_perf_context_print:        load time =       0.21 ms
-llama_perf_context_print: prompt eval time =      10.34 ms /    13 tokens (    0.80 ms per token,  1257.01 tokens per second)
-llama_perf_context_print:        eval time =      96.31 ms /    20 runs   (    4.82 ms per token,   207.67 tokens per second)
-llama_perf_context_print:       total time =     117.03 ms /    33 tokens
-llama_perf_context_print:    graphs reused =         19
-INFO:     127.0.0.1:44846 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-Llama.generate: 6 prefix-match hit, remaining 12 prompt tokens to eval
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      45.58 ms /   223 tokens (    0.20 ms per token,  4893.03 tokens per second)
+llama_perf_context_print:        eval time =      49.65 ms /     9 runs   (    5.52 ms per token,   181.28 tokens per second)
+llama_perf_context_print:       total time =     115.81 ms /   232 tokens
+llama_perf_context_print:    graphs reused =          7
+INFO:     127.0.0.1:55118 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 21 prefix-match hit, remaining 259 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup reset
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =       0.49 ms /   259 tokens (    0.00 ms per token, 532921.81 tokens per second)
+llama_perf_context_print:        eval time =       6.45 ms /     1 runs   (    6.45 ms per token,   154.99 tokens per second)
+llama_perf_context_print:       total time =     140.56 ms /   260 tokens
+llama_perf_context_print:    graphs reused =          0
+INFO:     127.0.0.1:55122 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 82 prefix-match hit, remaining 209 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup complete
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      43.02 ms /   209 tokens (    0.21 ms per token,  4858.43 tokens per second)
+llama_perf_context_print:        eval time =      49.03 ms /     9 runs   (    5.45 ms per token,   183.56 tokens per second)
+llama_perf_context_print:       total time =     114.47 ms /   218 tokens
+llama_perf_context_print:    graphs reused =          8
+INFO:     127.0.0.1:55166 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 21 prefix-match hit, remaining 240 prompt tokens to eval
 ggml_backend_cuda_graph_compute: CUDA graph warmup reset
 ggml_backend_cuda_graph_compute: CUDA graph warmup complete
-llama_perf_context_print:        load time =       0.21 ms
-llama_perf_context_print: prompt eval time =      11.60 ms /    12 tokens (    0.97 ms per token,  1034.39 tokens per second)
-llama_perf_context_print:        eval time =      34.79 ms /     7 runs   (    4.97 ms per token,   201.22 tokens per second)
-llama_perf_context_print:       total time =      50.21 ms /    19 tokens
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      45.22 ms /   240 tokens (    0.19 ms per token,  5307.62 tokens per second)
+llama_perf_context_print:        eval time =      48.52 ms /     9 runs   (    5.39 ms per token,   185.50 tokens per second)
+llama_perf_context_print:       total time =     114.13 ms /   249 tokens
+llama_perf_context_print:    graphs reused =          8
+INFO:     127.0.0.1:55152 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 27 prefix-match hit, remaining 193 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup reset
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      38.74 ms /   193 tokens (    0.20 ms per token,  4981.93 tokens per second)
+llama_perf_context_print:        eval time =       6.16 ms /     1 runs   (    6.16 ms per token,   162.34 tokens per second)
+llama_perf_context_print:       total time =      55.11 ms /   194 tokens
+llama_perf_context_print:    graphs reused =          0
+INFO:     127.0.0.1:55178 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 21 prefix-match hit, remaining 275 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup complete
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =       0.46 ms /   275 tokens (    0.00 ms per token, 595238.10 tokens per second)
+llama_perf_context_print:        eval time =      48.65 ms /     9 runs   (    5.41 ms per token,   185.01 tokens per second)
+llama_perf_context_print:       total time =     188.72 ms /   284 tokens
+llama_perf_context_print:    graphs reused =          8
+INFO:     127.0.0.1:55196 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 21 prefix-match hit, remaining 245 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup reset
+ggml_backend_cuda_graph_compute: CUDA graph warmup complete
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      47.95 ms /   245 tokens (    0.20 ms per token,  5109.06 tokens per second)
+llama_perf_context_print:        eval time =      48.56 ms /     9 runs   (    5.40 ms per token,   185.35 tokens per second)
+llama_perf_context_print:       total time =     118.17 ms /   254 tokens
+llama_perf_context_print:    graphs reused =          8
+INFO:     127.0.0.1:55182 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 27 prefix-match hit, remaining 198 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup reset
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      41.38 ms /   198 tokens (    0.21 ms per token,  4784.80 tokens per second)
+llama_perf_context_print:        eval time =       6.16 ms /     1 runs   (    6.16 ms per token,   162.39 tokens per second)
+llama_perf_context_print:       total time =      58.42 ms /   199 tokens
+llama_perf_context_print:    graphs reused =          0
+INFO:     127.0.0.1:55198 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 27 prefix-match hit, remaining 217 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup complete
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      39.64 ms /   217 tokens (    0.18 ms per token,  5474.54 tokens per second)
+llama_perf_context_print:        eval time =      46.22 ms /     9 runs   (    5.14 ms per token,   194.73 tokens per second)
+llama_perf_context_print:       total time =     104.72 ms /   226 tokens
+llama_perf_context_print:    graphs reused =          8
+INFO:     127.0.0.1:55204 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 27 prefix-match hit, remaining 176 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup reset
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      37.56 ms /   176 tokens (    0.21 ms per token,  4686.34 tokens per second)
+llama_perf_context_print:        eval time =       6.18 ms /     1 runs   (    6.18 ms per token,   161.89 tokens per second)
+llama_perf_context_print:       total time =      53.48 ms /   177 tokens
+llama_perf_context_print:    graphs reused =          0
+INFO:     127.0.0.1:55222 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 21 prefix-match hit, remaining 253 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup complete
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      45.41 ms /   253 tokens (    0.18 ms per token,  5571.58 tokens per second)
+llama_perf_context_print:        eval time =      48.60 ms /     9 runs   (    5.40 ms per token,   185.18 tokens per second)
+llama_perf_context_print:       total time =     114.99 ms /   262 tokens
+llama_perf_context_print:    graphs reused =          8
+INFO:     127.0.0.1:55216 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 21 prefix-match hit, remaining 188 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup reset
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      35.78 ms /   188 tokens (    0.19 ms per token,  5254.77 tokens per second)
+llama_perf_context_print:        eval time =       6.18 ms /     1 runs   (    6.18 ms per token,   161.92 tokens per second)
+llama_perf_context_print:       total time =      52.14 ms /   189 tokens
+llama_perf_context_print:    graphs reused =          0
+INFO:     127.0.0.1:55254 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 27 prefix-match hit, remaining 223 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup complete
+ggml_backend_cuda_graph_compute: CUDA graph warmup reset
+ggml_backend_cuda_graph_compute: CUDA graph warmup complete
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      41.39 ms /   223 tokens (    0.19 ms per token,  5387.25 tokens per second)
+llama_perf_context_print:        eval time =      50.07 ms /     9 runs   (    5.56 ms per token,   179.76 tokens per second)
+llama_perf_context_print:       total time =     111.47 ms /   232 tokens
+llama_perf_context_print:    graphs reused =          7
+INFO:     127.0.0.1:55234 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 21 prefix-match hit, remaining 259 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup reset
+ggml_backend_cuda_graph_compute: CUDA graph warmup complete
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      48.59 ms /   259 tokens (    0.19 ms per token,  5330.75 tokens per second)
+llama_perf_context_print:        eval time =      48.50 ms /     9 runs   (    5.39 ms per token,   185.56 tokens per second)
+llama_perf_context_print:       total time =     119.70 ms /   268 tokens
+llama_perf_context_print:    graphs reused =          8
+INFO:     127.0.0.1:55248 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 21 prefix-match hit, remaining 187 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup reset
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      35.15 ms /   187 tokens (    0.19 ms per token,  5320.66 tokens per second)
+llama_perf_context_print:        eval time =       6.19 ms /     1 runs   (    6.19 ms per token,   161.45 tokens per second)
+llama_perf_context_print:       total time =      50.70 ms /   188 tokens
+llama_perf_context_print:    graphs reused =          0
+INFO:     127.0.0.1:55294 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 21 prefix-match hit, remaining 258 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup complete
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      50.00 ms /   258 tokens (    0.19 ms per token,  5160.10 tokens per second)
+llama_perf_context_print:        eval time =      48.52 ms /     9 runs   (    5.39 ms per token,   185.49 tokens per second)
+llama_perf_context_print:       total time =     120.19 ms /   267 tokens
+llama_perf_context_print:    graphs reused =          8
+INFO:     127.0.0.1:55280 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 21 prefix-match hit, remaining 228 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup reset
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      43.71 ms /   228 tokens (    0.19 ms per token,  5215.84 tokens per second)
+llama_perf_context_print:        eval time =       6.18 ms /     1 runs   (    6.18 ms per token,   161.92 tokens per second)
+llama_perf_context_print:       total time =      61.13 ms /   229 tokens
+llama_perf_context_print:    graphs reused =          0
+INFO:     127.0.0.1:55264 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 21 prefix-match hit, remaining 259 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup complete
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      49.58 ms /   259 tokens (    0.19 ms per token,  5224.20 tokens per second)
+llama_perf_context_print:        eval time =      48.55 ms /     9 runs   (    5.39 ms per token,   185.38 tokens per second)
+llama_perf_context_print:       total time =     119.86 ms /   268 tokens
+llama_perf_context_print:    graphs reused =          8
+INFO:     127.0.0.1:55320 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 21 prefix-match hit, remaining 229 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup reset
+ggml_backend_cuda_graph_compute: CUDA graph warmup complete
+ggml_backend_cuda_graph_compute: CUDA graph warmup reset
+ggml_backend_cuda_graph_compute: CUDA graph warmup complete
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      44.07 ms /   229 tokens (    0.19 ms per token,  5195.92 tokens per second)
+llama_perf_context_print:        eval time =      44.34 ms /     8 runs   (    5.54 ms per token,   180.42 tokens per second)
+llama_perf_context_print:       total time =     106.96 ms /   237 tokens
 llama_perf_context_print:    graphs reused =          6
-INFO:     127.0.0.1:44858 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-Llama.generate: 6 prefix-match hit, remaining 14 prompt tokens to eval
+INFO:     127.0.0.1:55306 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 27 prefix-match hit, remaining 182 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup reset
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      35.09 ms /   182 tokens (    0.19 ms per token,  5186.22 tokens per second)
+llama_perf_context_print:        eval time =       6.19 ms /     1 runs   (    6.19 ms per token,   161.68 tokens per second)
+llama_perf_context_print:       total time =      51.02 ms /   183 tokens
+llama_perf_context_print:    graphs reused =          0
+INFO:     127.0.0.1:55336 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 21 prefix-match hit, remaining 258 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup complete
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      48.27 ms /   258 tokens (    0.19 ms per token,  5344.93 tokens per second)
+llama_perf_context_print:        eval time =      48.51 ms /     9 runs   (    5.39 ms per token,   185.54 tokens per second)
+llama_perf_context_print:       total time =     117.88 ms /   267 tokens
+llama_perf_context_print:    graphs reused =          8
+INFO:     127.0.0.1:55358 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 21 prefix-match hit, remaining 187 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup reset
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      36.79 ms /   187 tokens (    0.20 ms per token,  5082.63 tokens per second)
+llama_perf_context_print:        eval time =       6.15 ms /     1 runs   (    6.15 ms per token,   162.71 tokens per second)
+llama_perf_context_print:       total time =      52.95 ms /   188 tokens
+llama_perf_context_print:    graphs reused =          0
+INFO:     127.0.0.1:55362 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 27 prefix-match hit, remaining 222 prompt tokens to eval
+ggml_backend_cuda_graph_compute: CUDA graph warmup complete
 ggml_backend_cuda_graph_compute: CUDA graph warmup reset
 ggml_backend_cuda_graph_compute: CUDA graph warmup complete
-llama_perf_context_print:        load time =       0.21 ms
-llama_perf_context_print: prompt eval time =      11.63 ms /    14 tokens (    0.83 ms per token,  1203.27 tokens per second)
-llama_perf_context_print:        eval time =     190.74 ms /    40 runs   (    4.77 ms per token,   209.71 tokens per second)
-llama_perf_context_print:       total time =     223.52 ms /    54 tokens
-llama_perf_context_print:    graphs reused =         39
-INFO:     127.0.0.1:44860 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-Llama.generate: 6 prefix-match hit, remaining 18 prompt tokens to eval
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      42.19 ms /   222 tokens (    0.19 ms per token,  5261.54 tokens per second)
+llama_perf_context_print:        eval time =      48.98 ms /     9 runs   (    5.44 ms per token,   183.74 tokens per second)
+llama_perf_context_print:       total time =     111.26 ms /   231 tokens
+llama_perf_context_print:    graphs reused =          7
+INFO:     127.0.0.1:55342 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 84 prefix-match hit, remaining 149 prompt tokens to eval
 ggml_backend_cuda_graph_compute: CUDA graph warmup reset
-ggml_backend_cuda_graph_compute: CUDA graph warmup complete
-llama_perf_context_print:        load time =       0.21 ms
-llama_perf_context_print: prompt eval time =      11.78 ms /    18 tokens (    0.65 ms per token,  1527.62 tokens per second)
-llama_perf_context_print:        eval time =     436.23 ms /    92 runs   (    4.74 ms per token,   210.90 tokens per second)
-llama_perf_context_print:       total time =     500.32 ms /   110 tokens
-llama_perf_context_print:    graphs reused =         91
-INFO:     127.0.0.1:44862 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-Llama.generate: 6 prefix-match hit, remaining 14 prompt tokens to eval
-ggml_backend_cuda_graph_compute: CUDA graph warmup reset
-ggml_backend_cuda_graph_compute: CUDA graph warmup complete
-llama_perf_context_print:        load time =       0.21 ms
-llama_perf_context_print: prompt eval time =      10.64 ms /    14 tokens (    0.76 ms per token,  1315.79 tokens per second)
-llama_perf_context_print:        eval time =     705.06 ms /   149 runs   (    4.73 ms per token,   211.33 tokens per second)
-llama_perf_context_print:       total time =     801.24 ms /   163 tokens
-llama_perf_context_print:    graphs reused =        148
-INFO:     127.0.0.1:44872 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-Llama.generate: 6 prefix-match hit, remaining 17 prompt tokens to eval
-ggml_backend_cuda_graph_compute: CUDA graph warmup reset
-ggml_backend_cuda_graph_compute: CUDA graph warmup complete
-llama_perf_context_print:        load time =       0.21 ms
-llama_perf_context_print: prompt eval time =      12.13 ms /    17 tokens (    0.71 ms per token,  1401.60 tokens per second)
-llama_perf_context_print:        eval time =     666.71 ms /   141 runs   (    4.73 ms per token,   211.48 tokens per second)
-llama_perf_context_print:       total time =     758.05 ms /   158 tokens
-llama_perf_context_print:    graphs reused =        140
-INFO:     127.0.0.1:44884 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-Llama.generate: 6 prefix-match hit, remaining 17 prompt tokens to eval
-ggml_backend_cuda_graph_compute: CUDA graph warmup reset
-ggml_backend_cuda_graph_compute: CUDA graph warmup complete
-llama_perf_context_print:        load time =       0.21 ms
-llama_perf_context_print: prompt eval time =      11.78 ms /    17 tokens (    0.69 ms per token,  1443.74 tokens per second)
-llama_perf_context_print:        eval time =     195.40 ms /    41 runs   (    4.77 ms per token,   209.82 tokens per second)
-llama_perf_context_print:       total time =     229.36 ms /    58 tokens
-llama_perf_context_print:    graphs reused =         40
-INFO:     127.0.0.1:44886 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-Llama.generate: 6 prefix-match hit, remaining 14 prompt tokens to eval
-ggml_backend_cuda_graph_compute: CUDA graph warmup reset
-ggml_backend_cuda_graph_compute: CUDA graph warmup complete
-llama_perf_context_print:        load time =       0.21 ms
-llama_perf_context_print: prompt eval time =      10.28 ms /    14 tokens (    0.73 ms per token,  1362.53 tokens per second)
-llama_perf_context_print:        eval time =      96.19 ms /    20 runs   (    4.81 ms per token,   207.92 tokens per second)
-llama_perf_context_print:       total time =     117.14 ms /    34 tokens
-llama_perf_context_print:    graphs reused =         19
-INFO:     127.0.0.1:44894 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      35.15 ms /   149 tokens (    0.24 ms per token,  4238.86 tokens per second)
+llama_perf_context_print:        eval time =       6.17 ms /     1 runs   (    6.17 ms per token,   162.15 tokens per second)
+llama_perf_context_print:       total time =      49.91 ms /   150 tokens
+llama_perf_context_print:    graphs reused =          0
+INFO:     127.0.0.1:55374 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 21 prefix-match hit, remaining 242 prompt tokens to eval
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      44.91 ms /   242 tokens (    0.19 ms per token,  5388.91 tokens per second)
+llama_perf_context_print:        eval time =       6.44 ms /     1 runs   (    6.44 ms per token,   155.26 tokens per second)
+llama_perf_context_print:       total time =      63.04 ms /   243 tokens
+llama_perf_context_print:    graphs reused =          0
+INFO:     127.0.0.1:55382 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Llama.generate: 21 prefix-match hit, remaining 171 prompt tokens to eval
+llama_perf_context_print:        load time =       1.75 ms
+llama_perf_context_print: prompt eval time =      34.43 ms /   171 tokens (    0.20 ms per token,  4966.31 tokens per second)
+llama_perf_context_print:        eval time =       6.18 ms /     1 runs   (    6.18 ms per token,   161.76 tokens per second)
+llama_perf_context_print:       total time =      49.93 ms /   172 tokens
+llama_perf_context_print:    graphs reused =          0
+INFO:     127.0.0.1:55390 - "POST /v1/chat/completions HTTP/1.1" 200 OK
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [853856]
+INFO:     Finished server process [3729150]
