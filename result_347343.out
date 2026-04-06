@@ -1,0 +1,92 @@
+Starting batch test on GPU node: gpu-nvidia-h200-3
+Model found at /scratch/amine/models/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf.
+Starting llama_cpp.server in the background (logging to server.log)...
+Waiting for server to become ready (this may take up to 2 minutes)...
+Server is up and running!
+Starting batch processing of 10 prompts...
+
+--- RESULTS ---
+
+Prompt: Write a short, funny haiku about a sleepy cat.
+Response: Fluffy, furry lump
+Sleeping beauty's snore is loud
+Purr-haps I'll join her
+
+
+Prompt: What is the capital of France?
+Response: The capital of France is Paris.
+
+
+Prompt: Explain quantum computing in one simple sentence.
+Response: Quantum computing is a type of computing that uses the principles of quantum mechanics to perform calculations and operations on data, allowing it to process vast amounts of information much faster and more efficiently than classical computers.
+
+
+Prompt: Give me a quick recipe for scrambled eggs.
+Response: A classic! Here's a simple recipe for scrambled eggs:
+
+**Ingredients:**
+
+* 2 eggs
+* Salt and pepper to taste
+* 1 tablespoon butter or oil
+
+**Instructions:**
+
+1. Crack the eggs into a bowl and whisk them together with a fork until the whites and yolks are fully incorporated.
+2. Add a pinch of salt and pepper to taste.
+3. Heat a non-stick pan over medium heat and add the butter or oil.
+4. Once the butter has melted, pour in the egg mixture.
+5. Let the eggs cook for about 30 seconds until the edges start to set.
+6. Use a spatula to gently scramble the eggs, breaking them up into small curds.
+7. Continue
+
+
+Prompt: Translate 'Hello, how are you?' into Spanish.
+Response: The translation of "Hello, how are you?" into Spanish is:
+
+"Hola, ¿cómo estás?"
+
+Here's a breakdown of the translation:
+
+* "Hola" means "hello"
+* "¿cómo" is a question word that means "how"
+* "estás" is the verb "estar", which is used to ask about someone's physical or emotional state. The subject-verb agreement is changed depending on the person being addressed, so it would be:
+	+ "estás" for informal address (to a friend)
+	+ "está" for formal address (to someone you don't know well)
+
+So, "Hola, ¿cómo estás?" is a polite way to greet someone and ask about
+
+
+Prompt: Name three planets in our solar system.
+Response: Here are three planets in our solar system:
+
+1. Earth
+2. Mars
+3. Jupiter
+
+
+Prompt: Who wrote the play Romeo and Juliet?
+Response: The play "Romeo and Juliet" was written by William Shakespeare. It is one of his most famous tragedies and has become a classic of world literature. The play tells the story of two young lovers from feuding families in Verona, Italy, who fall in love and ultimately meet their tragic ends.
+
+The exact date of the play's composition is not known, but it is believed to have been written between 1591 and 1595. It was first published in 1597 and has since been performed countless times and translated into many languages.
+
+Shakespeare's "Romeo and Juliet" is considered one of the greatest works of literature ever written, and its themes of love, passion, and tragedy continue to resonate with audiences around
+
+
+Prompt: What is the square root of 144?
+Response: The square root of 144 is 12.
+
+
+Prompt: Write a 2-sentence summary of the movie The Matrix.
+Response: Here is a 2-sentence summary of the movie The Matrix:
+
+In a dystopian future, humanity is unknowingly trapped within a simulated reality called the Matrix, created by intelligent machines to distract humans while their bodies are harvested for energy. Neo (Keanu Reeves), a computer hacker, discovers the truth and must join a group of rebels led by Morpheus (Laurence Fishburne) to free humanity from its enslavement and fight against the machines.
+
+
+Prompt: Why is the sky blue? Answer in one short sentence.
+Response: The sky appears blue because of a phenomenon called Rayleigh scattering, where shorter wavelengths of light (like blue and violet) are scattered more than longer wavelengths (like red and orange) by the tiny molecules of gases in the atmosphere.
+
+Total time taken: 4.19 seconds
+
+Shutting down the background server process...
+Job finished!
