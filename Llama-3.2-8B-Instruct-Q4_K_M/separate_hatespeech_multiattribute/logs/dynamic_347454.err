@@ -1,0 +1,214 @@
+Task exception was never retrieved
+future: <Task finished name='Task-834' coro=<AsyncClient.aclose() done, defined at /storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 1329, in aclose
+    self._transport.close()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/selector_events.py", line 706, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/base_events.py", line 753, in call_soon
+    self._check_closed()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/base_events.py", line 515, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Task exception was never retrieved
+future: <Task finished name='Task-1718' coro=<AsyncClient.aclose() done, defined at /storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 1329, in aclose
+    self._transport.close()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/selector_events.py", line 706, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/base_events.py", line 753, in call_soon
+    self._check_closed()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/base_events.py", line 515, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Task exception was never retrieved
+future: <Task finished name='Task-1719' coro=<AsyncClient.aclose() done, defined at /storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 1329, in aclose
+    self._transport.close()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/selector_events.py", line 706, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/base_events.py", line 753, in call_soon
+    self._check_closed()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/base_events.py", line 515, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Task exception was never retrieved
+future: <Task finished name='Task-2573' coro=<AsyncClient.aclose() done, defined at /storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 1329, in aclose
+    self._transport.close()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/selector_events.py", line 706, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/base_events.py", line 753, in call_soon
+    self._check_closed()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/base_events.py", line 515, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Task exception was never retrieved
+future: <Task finished name='Task-2574' coro=<AsyncClient.aclose() done, defined at /storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 1329, in aclose
+    self._transport.close()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/selector_events.py", line 706, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/base_events.py", line 753, in call_soon
+    self._check_closed()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/base_events.py", line 515, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Task exception was never retrieved
+future: <Task finished name='Task-3512' coro=<AsyncClient.aclose() done, defined at /storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 1329, in aclose
+    self._transport.close()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/selector_events.py", line 706, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/base_events.py", line 753, in call_soon
+    self._check_closed()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/base_events.py", line 515, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Task exception was never retrieved
+future: <Task finished name='Task-3513' coro=<AsyncClient.aclose() done, defined at /storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 1329, in aclose
+    self._transport.close()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/selector_events.py", line 706, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/base_events.py", line 753, in call_soon
+    self._check_closed()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/base_events.py", line 515, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Task exception was never retrieved
+future: <Task finished name='Task-4171' coro=<AsyncClient.aclose() done, defined at /storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 1329, in aclose
+    self._transport.close()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/selector_events.py", line 706, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/base_events.py", line 753, in call_soon
+    self._check_closed()
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/asyncio/base_events.py", line 515, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Traceback (most recent call last):
+  File "/storage/home/amine/thesis/Llama-3.2-8B-Instruct-Q4_K_M/separate_hatespeech_multiattribute/src/evaluation.py", line 213, in main
+    result = load_predictions()
+  File "/storage/home/amine/thesis/Llama-3.2-8B-Instruct-Q4_K_M/separate_hatespeech_multiattribute/src/evaluation.py", line 56, in load_predictions
+    choice = input("\nSelect file number to evaluate (default 1): ").strip()
+EOFError: EOF when reading a line

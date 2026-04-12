@@ -1,1 +1,6 @@
 Starting batch test on GPU node: gpu-nvidia-h200-3
+Model found at /scratch/amine/models/Meta-Llama-3-8B-Instruct.Q4_K_M.gguf.
+Starting llama_cpp.server in the background (logging to server.log)...
+Waiting for server to become ready (this may take up to 2 minutes)...
+Error: Server failed to start within the timeout. Check server.log for details.
+Job finished!

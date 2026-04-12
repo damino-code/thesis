@@ -26,6 +26,19 @@ cd /storage/home/amine/thesis/Llama-3.2-8B-Instruct-Q4_K_M/separate_hatespeech_m
 # Check GPU availability
 nvidia-smi
 
+# Use SYSTEM CUDA 13.1 (from /usr/local/cuda) instead of conda CUDA 12.6 for driver compatibility
+export CUDA_HOME=/usr/local/cuda
+export CUDA_PATH=/usr/local/cuda  
+export CUDA_VERSION=13.1
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64:/storage/home/amine/miniforge3/lib:$LD_LIBRARY_PATH
+export FORCE_CUDA=1
+
+echo "CUDA Environment:"
+which nvcc
+nvcc --version
+echo "LD_LIBRARY_PATH: $LD_LIBRARY_PATH"
+
 # Source the Mamba/Conda initialization script so the 'mamba' command works in batch mode
 source /storage/home/amine/miniforge3/etc/profile.d/conda.sh
 source /storage/home/amine/miniforge3/etc/profile.d/mamba.sh
@@ -33,6 +46,11 @@ source /storage/home/amine/miniforge3/etc/profile.d/mamba.sh
 # Activate your environment
 mamba activate llm-research
 
+# CRITICAL: Set LD_LIBRARY_PATH for CUDA runtime libraries
+export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/lib64:$LD_LIBRARY_PATH
+
+echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
 echo ""
 echo "1. RUNNING ALL ATTRIBUTES (Feature/Dynamic Mode) USING ASYNC BATCHING..."
 # We pipe '2' (Dynamic mode) and '3' (Sample size) to the new async batching script

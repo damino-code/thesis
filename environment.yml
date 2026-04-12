@@ -1,9 +1,15 @@
 name: llm-research
 channels:
   - conda-forge
+  - nvidia
   - nodefaults
 dependencies:
   - python=3.10
+  - cuda-toolkit=12.4
+  - gcc_linux-64
+  - gxx_linux-64
+  - cmake
+  - ninja
   - huggingface_hub
   - pandas
   - numpy

@@ -24,7 +24,7 @@ llm = Llama(
     model_path=model_path,
     n_gpu_layers=-1,      # -1 = Offload ALL layers to GPU
     n_ctx=2048,           # Small context for a quick test
-    verbose=False         # Set to True if you want to see the layer loading logs
+    verbose=True         # Set to True if you want to see the layer loading logs
 )
 
 # --- STEP 3: SEND PROMPT ---
