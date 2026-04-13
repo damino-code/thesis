@@ -59,7 +59,6 @@ def start_server(model_path):
         "--n_gpu_layers", "-1",
         "--n_ctx",      str(N_CTX),
         "--n_batch",    str(N_BATCH),
-        "--n_parallel", str(N_PARALLEL),
         "--host",       "0.0.0.0",
         "--port",       "8000",
     ]
