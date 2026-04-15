@@ -11,68 +11,53 @@ from data_loader import load_dataset
 
 def load_predictions():
     print("🔍 Searching for MERGED analysis results...")
-    
-    # 1. Choose Persona (Recursive Search)
-    persona_base_dir = os.path.join(os.path.dirname(__file__), 'persona_prompts')
-    all_personas = []
-    if os.path.exists(persona_base_dir):
-        for root, dirs, files in os.walk(persona_base_dir):
-            if any(f.endswith('.json') for f in files):
-                rel_path = os.path.relpath(root, persona_base_dir)
-                all_personas.append(rel_path)
-    
-    all_personas.sort()
-    
-    print("\nAvailable Personas for Evaluation:")
-    print("0. Standard (No Persona)")
-    for i, p in enumerate(all_personas, 1):
-        print(f"{i}. {p.replace('_', ' ').title()}")
-    
-    p_choice = input("\nSelect persona (number) [Default 0]: ").strip()
-    selected_persona = None
-    if p_choice.isdigit():
-        idx = int(p_choice)
-        if 1 <= idx <= len(all_personas):
-            selected_persona = all_personas[idx-1]
 
-    # 2. Look for merged files in the correct directory
-    if selected_persona:
-        search_dir = os.path.join(config.RESULTS_FOLDER, "persona_results", selected_persona)
-        pattern = os.path.join(search_dir, f"merged_{selected_persona.replace(os.sep, '_')}_*.csv")
+    # 1. Choose which results to evaluate
+    print("\nSelect Results to Evaluate:")
+    print("1. Standard (Vanilla prompts)")
+    print("2. Feature (Annotator-specific dynamic prompts)")
+
+    mode_choice = input("\nEnter choice (1 or 2) [Default: 1]: ").strip()
+
+    if mode_choice == '2':
+        pattern = os.path.join(config.RESULTS_FOLDER, "persona_results", "merged_persona_results_*.csv")
+        mode_name = "Feature"
+        persona_out = "feature"
     else:
-        search_dir = config.RESULTS_FOLDER
-        pattern = os.path.join(search_dir, "merged_single_attributes_*.csv")
+        pattern = os.path.join(config.RESULTS_FOLDER, "merged_single_attributes_*.csv")
+        mode_name = "Standard"
+        persona_out = None
+
+    print(f"\n✓ Selected: {mode_name} results")
 
     files = glob.glob(pattern)
-    
-    # Sort by modification time (newest first)
     unique_files = sorted(list(set(files)), key=os.path.getmtime, reverse=True)
-    
+
     if not unique_files:
-        print(f"❌ No merged result files found in {search_dir}")
-        print(f"🔄 Attempting to run merge script for {selected_persona if selected_persona else 'Standard'}...")
-        
+        print(f"❌ No merged {mode_name.lower()} result files found.")
+        print(f"🔄 Attempting to run merge script...")
+
         try:
             from merge_results import merge_results
-            merge_results(persona=selected_persona)
-            # Re-search after merging
+            if mode_choice == '2':
+                merge_results(use_dynamic=True)
+            else:
+                merge_results()
             files = glob.glob(pattern)
             unique_files = sorted(list(set(files)), key=os.path.getmtime, reverse=True)
             if not unique_files:
                 raise FileNotFoundError(f"Failed to find merged file even after running merge_results.")
         except Exception as e:
             print(f"❌ Auto-merge failed: {e}")
-            if selected_persona:
-                print(f"💡 Tip: Run 'python src/merge_results.py \"{selected_persona}\"' manually first!")
-            else:
-                print("💡 Tip: Run 'python src/merge_results.py' manually first!")
+            tip = "python src/merge_results.py dynamic" if mode_choice == '2' else "python src/merge_results.py"
+            print(f"💡 Tip: Run '{tip}' manually first!")
             raise FileNotFoundError("No merged prediction files found.")
-    
-    print(f"\nRecent merged files found for {selected_persona if selected_persona else 'Standard'}:")
+
+    print(f"\nRecent merged files found:")
     for i, f in enumerate(unique_files[:5], 1):
         timestamp = datetime.fromtimestamp(os.path.getmtime(f)).strftime('%Y-%m-%d %H:%M:%S')
         print(f"  {i}. {os.path.basename(f)} ({timestamp})")
-        
+
     choice = input("\nSelect file number to evaluate (default 1): ").strip()
     if not choice:
         selected_file = unique_files[0]
@@ -89,7 +74,7 @@ def load_predictions():
             selected_file = unique_files[0]
 
     print(f"📂 Loading predictions from: {selected_file}")
-    return pd.read_csv(selected_file), selected_file, selected_persona
+    return pd.read_csv(selected_file), selected_file, persona_out
 
 def evaluate_predictions(llm_df, human_df, persona=None):
     print(f"📊 EVALUATION: LLM ({persona if persona else 'Standard'}) vs Human Annotations")
