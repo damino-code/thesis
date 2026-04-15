@@ -14,12 +14,13 @@ from model_loader import download_model, load_model
 from data_loader import load_dataset, get_text_column
 from single_attribute_analyzer import SingleAttributeAnalyzer
 
-def run_attribute_analysis(attribute_name, sample_size='all', use_dynamic=False):
+def run_attribute_analysis(attribute_name, sample_size='all', use_dynamic=False, llm=None):
     print(f"🚀 STARTING ANALYSIS FOR: {attribute_name.upper()}")
-    
-    # 1. Setup
+
+    # 1. Setup — reuse a pre-loaded model if provided, otherwise load now
     model_path = download_model()
-    llm = load_model(model_path)
+    if llm is None:
+        llm = load_model(model_path)
     
     try:
         df = load_dataset()
@@ -63,12 +64,13 @@ def run_attribute_analysis(attribute_name, sample_size='all', use_dynamic=False)
     
     for i, (idx, row) in enumerate(df_sample.iterrows(), 1):
         print(f"   [{i:3d}/{len(df_sample)}] Starting processing...", end=' ', flush=True)
-        comment = str(row[text_column])
-        comment_id = row.get('comment_id', idx) if use_dynamic else None
-        
+        comment      = str(row[text_column])
+        comment_id   = row.get('comment_id',   idx)  if use_dynamic else None
+        annotator_id = row.get('annotator_id', None) if use_dynamic else None
+
         try:
             print(f"LLM call...", end=' ', flush=True)
-            res = analyzer.analyze_attribute(comment, attribute_name, comment_id)
+            res = analyzer.analyze_attribute(comment, attribute_name, comment_id, annotator_id)
             print(f"✓ {res.get(attribute_name)}")
             
             # Always keep comment_id if present, else fallback to index

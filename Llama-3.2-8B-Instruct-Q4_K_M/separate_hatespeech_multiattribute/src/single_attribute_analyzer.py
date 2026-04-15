@@ -73,16 +73,21 @@ class SingleAttributeAnalyzer:
         print(f"📊 Available attributes in dynamic_prompts: {list(dynamic_prompts.keys())}")
         return dynamic_prompts
 
-    def _build_dynamic_prompt(self, attribute, comment_id, text):
-        """Build complete dynamic prompt with features injected for a specific attribute"""
+    def _build_dynamic_prompt(self, attribute, comment_id, text, annotator_id=None):
+        """Build complete dynamic prompt with features injected for a specific attribute.
+
+        annotator_id must be passed so the correct annotator's demographics are
+        used. Without it, get_features() falls back to the first matching row,
+        which will be wrong whenever a comment has multiple annotators.
+        """
         if attribute not in self.dynamic_prompts:
             print(f"❌ Attribute '{attribute}' not in dynamic_prompts. Available: {list(self.dynamic_prompts.keys())}")
             return None
-        
-        # Get features
-        features = self.features_loader.get_features(comment_id)
+
+        # Get features — pass annotator_id so we match the exact row
+        features = self.features_loader.get_features(comment_id, annotator_id)
         if features is None:
-            print(f"❌ No features found for comment_id: {comment_id}")
+            print(f"❌ No features found for comment_id={comment_id}, annotator_id={annotator_id}")
             return None
         
         # Format dynamic prompt template with features and text
@@ -107,15 +112,15 @@ class SingleAttributeAnalyzer:
             print(f"❌ Error formatting dynamic prompt: {e}")
             return None
 
-    def build_prompt(self, text, attribute, comment_id=None):
+    def build_prompt(self, text, attribute, comment_id=None, annotator_id=None):
         """Build the full Llama-3 formatted prompt without calling the model."""
         if attribute not in self.prompts:
             raise ValueError(f"Unknown attribute: {attribute}")
-        
+
         # Build prompt - either dynamic (with features) or vanilla (standard)
         if self.use_dynamic and comment_id is not None:
             # Use attribute-specific dynamic prompt
-            user_message = self._build_dynamic_prompt(attribute, comment_id, text)
+            user_message = self._build_dynamic_prompt(attribute, comment_id, text, annotator_id)
             if user_message is None:
                 # Fallback to vanilla if dynamic prompt fails
                 user_message = self.prompts[attribute].format(text=text[:500])
@@ -145,9 +150,9 @@ You are an expert content annotator responding from the perspective defined in t
         
         return full_prompt
 
-    def analyze_attribute(self, text, attribute, comment_id=None):
+    def analyze_attribute(self, text, attribute, comment_id=None, annotator_id=None):
         """Analyze a comment for a single attribute"""
-        full_prompt = self.build_prompt(text, attribute, comment_id)
+        full_prompt = self.build_prompt(text, attribute, comment_id, annotator_id)
 
         try:
             import sys
@@ -183,8 +188,7 @@ You are an expert content annotator responding from the perspective defined in t
                     valid_logprobs = [lp for lp in logprobs if lp is not None]
                     
                     if valid_logprobs:
-                        avg_logprob = np.mean(valid_logprobs)
-                        confidence = math.exp(avg_logprob)
+                        confidence = math.exp(valid_logprobs[0])
                         
                 return {attribute: val, 'confidence': confidence}
             else:
