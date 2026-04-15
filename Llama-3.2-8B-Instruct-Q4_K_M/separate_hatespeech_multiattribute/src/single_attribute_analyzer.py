@@ -172,27 +172,21 @@ You are an expert content annotator responding from the perspective defined in t
             
             choice = response['choices'][0]
             output = choice['text'].strip()
-            
+
+            # Compute confidence from first token logprob regardless of outcome
+            confidence = 0.0
+            if 'logprobs' in choice and choice['logprobs'] and 'token_logprobs' in choice['logprobs']:
+                valid_logprobs = [lp for lp in choice['logprobs']['token_logprobs'] if lp is not None]
+                if valid_logprobs:
+                    confidence = math.exp(valid_logprobs[0])
+
             # Extract number
             numbers = re.findall(r"[-+]?\d*\.\d+|\d+", output)
             if numbers:
-                val = float(numbers[0])
-                
-                # Calculate Logit-Based Confidence
-                import math
-                import numpy as np
-                confidence = 0.0
-                if 'logprobs' in choice and choice['logprobs'] and 'token_logprobs' in choice['logprobs']:
-                    logprobs = choice['logprobs']['token_logprobs']
-                    # Filter out None values just in case
-                    valid_logprobs = [lp for lp in logprobs if lp is not None]
-                    
-                    if valid_logprobs:
-                        confidence = math.exp(valid_logprobs[0])
-                        
-                return {attribute: val, 'confidence': confidence}
+                return {attribute: float(numbers[0]), 'confidence': confidence}
             else:
-                return {attribute: None, 'confidence': 0.0}
+                print(f"⚠️  No number in response: {repr(output)}")
+                return {attribute: None, 'confidence': confidence, 'raw_response': output}
 
         except Exception as e:
             print(f"❌ LLM Error in analyze_attribute({attribute}): {type(e).__name__}: {e}")
