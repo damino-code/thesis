@@ -38,9 +38,11 @@ def merge_results(use_dynamic=False):
         df = pd.read_csv(latest_file)
         files_found += 1
         
-        # Rename confidence column to avoid collision/ambiguity
+        # Rename per-attribute columns to avoid collisions during merge
         if 'confidence' in df.columns:
             df = df.rename(columns={'confidence': f'{attr}_confidence'})
+        if 'raw_response' in df.columns:
+            df = df.rename(columns={'raw_response': f'{attr}_raw_response'})
             
         if merged_df is None:
             merged_df = df

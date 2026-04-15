@@ -190,22 +190,23 @@ def evaluate_predictions(llm_df, human_df, mode_dir="vanilla"):
     mode_filename_part = "persona" if mode_dir == "persona" else "standard"
     metrics_filename = f"evaluation_metrics_{mode_filename_part}_{timestamp}.json"
     
-    # LOCAL Save
+    # Always save locally
     local_path = os.path.join(config.RESULTS_FOLDER, metrics_filename)
-    
-    # GLOBAL Save
-    global_dir = os.path.join(global_viz_root, model_name, mode_dir)
-    os.makedirs(global_dir, exist_ok=True)
-    global_path = os.path.join(global_dir, metrics_filename)
-        
-    # Save to both
     with open(local_path, 'w') as f:
         json.dump(metrics, f, indent=2)
-    with open(global_path, 'w') as f:
-        json.dump(metrics, f, indent=2)
-        
     print(f"\n💾 Evaluation metrics saved to LOCAL: {local_path}")
-    print(f"💾 Evaluation metrics saved to GLOBAL: {global_path}")
+
+    # Save to global path only when the server filesystem is reachable
+    if os.path.isdir(global_viz_root):
+        try:
+            global_dir = os.path.join(global_viz_root, model_name, mode_dir)
+            os.makedirs(global_dir, exist_ok=True)
+            global_path = os.path.join(global_dir, metrics_filename)
+            with open(global_path, 'w') as f:
+                json.dump(metrics, f, indent=2)
+            print(f"💾 Evaluation metrics saved to GLOBAL: {global_path}")
+        except OSError as e:
+            print(f"⚠️  Could not save to global path: {e}")
 
 def main():
     try:
