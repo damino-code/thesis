@@ -1,0 +1,31 @@
+{
+  "correlations": {
+    "sentiment": -0.5411215304381052,
+    "respect": -0.6564878638809517,
+    "insult": 0.65807742797198,
+    "humiliate": 0.6074551886472853,
+    "status": -0.15914590281249122,
+    "dehumanize": 0.5624916878109186,
+    "violence": 0.49055838526499806,
+    "genocide": 0.46271657969176777,
+    "attack_defend": 0.4168924162077446,
+    "hatespeech": 0.12764200131342263
+  },
+  "maes": {
+    "sentiment": 2.525,
+    "respect": 2.545,
+    "insult": 0.76,
+    "humiliate": 0.895,
+    "status": 1.42,
+    "dehumanize": 0.975,
+    "violence": 1.165,
+    "genocide": 0.545,
+    "attack_defend": 0.765,
+    "hatespeech": 0.97
+  },
+  "hate_speech_metrics": {
+    "accuracy": 0.515,
+    "f1": 0.662020905923345,
+    "mae": 0.97
+  }
+}
