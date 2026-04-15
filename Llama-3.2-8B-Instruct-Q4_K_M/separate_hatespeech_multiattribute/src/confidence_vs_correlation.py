@@ -15,7 +15,7 @@ from data_loader import load_dataset
 
 def load_latest_merged_results():
     print("🔍 Searching for MERGED analysis results...")
-    pattern = os.path.join(config.RESULTS_FOLDER, "merged_single_attributes_*.csv")
+    pattern = os.path.join(config.RESULTS_FOLDER, "merged_standard_results_*.csv")
     files = glob.glob(pattern)
     
     if not files:
