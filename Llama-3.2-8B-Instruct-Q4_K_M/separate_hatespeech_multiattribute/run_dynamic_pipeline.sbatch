@@ -12,7 +12,7 @@
 
 # Print basic job information
 echo "=========================================================="
-echo "Starting Llama 3.2 8B Analysis - DYNAMIC PROMPTS (ASYNC BATCHING)"
+echo "Starting Llama 3.2 8B Analysis - DYNAMIC PROMPTS"
 echo "Job ID: $SLURM_JOB_ID"
 echo "Node: $SLURMD_NODENAME"
 echo "Date: $(date)"
@@ -52,9 +52,9 @@ export LD_LIBRARY_PATH=/lib64:$LD_LIBRARY_PATH
 
 echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
 echo ""
-echo "1. RUNNING ALL ATTRIBUTES (Feature/Dynamic Mode) USING ASYNC BATCHING..."
-# We pipe '2' (Dynamic mode) and '3' (Sample size) to the new async batching script
-echo -e "2\nall\n" | python src/async_batch_runner.py
+echo "1. RUNNING ALL ATTRIBUTES (Feature/Dynamic Mode)..."
+# We pipe '2' (Dynamic mode) and 'all' (Sample size) to the run_all_attributes script
+echo -e "2\nall\n" | python src/run_all_attributes.py
 
 echo ""
 echo "2. MERGING RESULTS..."

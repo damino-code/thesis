@@ -24,3 +24,4 @@ dependencies:
     - llama-cpp-python
     - ollama
     - openai
+    - llama-cpp-python[server]
