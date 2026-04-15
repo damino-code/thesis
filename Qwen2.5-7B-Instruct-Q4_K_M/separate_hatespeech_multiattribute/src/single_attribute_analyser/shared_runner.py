@@ -14,13 +14,14 @@ from model_loader import download_model, load_model
 from data_loader import load_dataset, get_text_column
 from single_attribute_analyzer import SingleAttributeAnalyzer
 
-def run_attribute_analysis(attribute_name, sample_size='all', persona=None):
-    print(f"🚀 STARTING ANALYSIS FOR: {attribute_name.upper()} [{'Persona: ' + persona if persona else 'Vanilla'}]")
-    
-    # 1. Setup
+def run_attribute_analysis(attribute_name, sample_size='all', use_dynamic=False, llm=None):
+    print(f"🚀 STARTING ANALYSIS FOR: {attribute_name.upper()} [{'Feature' if use_dynamic else 'Vanilla'}]")
+
+    # 1. Setup — reuse a pre-loaded model if provided, otherwise load now
     model_path = download_model()
-    llm = load_model(model_path)
-    
+    if llm is None:
+        llm = load_model(model_path)
+
     try:
         df = load_dataset()
     except FileNotFoundError as e:
@@ -43,35 +44,38 @@ def run_attribute_analysis(attribute_name, sample_size='all', persona=None):
 
     print(f"   Analyzing {len(df_sample)} comments...")
 
-    # 2. Logic (pass persona)
-    analyzer = SingleAttributeAnalyzer(llm, persona_path=persona)
+    # 2. Logic (initialize with or without dynamic features)
+    analyzer = SingleAttributeAnalyzer(llm, use_dynamic=use_dynamic)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    
+
     # Create attribute specific folder in results
-    if persona:
-        attr_result_folder = os.path.join(config.RESULTS_FOLDER, "persona_results", persona, attribute_name)
+    if use_dynamic:
+        attr_result_folder = os.path.join(config.RESULTS_FOLDER, "persona_results", attribute_name)
     else:
         attr_result_folder = os.path.join(config.RESULTS_FOLDER, "single_attribute_analyser", attribute_name)
-    
+
     os.makedirs(attr_result_folder, exist_ok=True)
 
     results = []
-    
+
     for i, (idx, row) in enumerate(df_sample.iterrows(), 1):
-        comment = str(row[text_column])
-        
+        comment      = str(row[text_column])
+        comment_id   = row.get('comment_id',   idx)  if use_dynamic else None
+        annotator_id = row.get('annotator_id', None) if use_dynamic else None
+
         try:
-            res = analyzer.analyze_attribute(comment, attribute_name)
+            res = analyzer.analyze_attribute(comment, attribute_name, comment_id, annotator_id)
             # Always keep comment_id if present, else fallback to index
             if 'comment_id' in row:
                 res['comment_id'] = row['comment_id']
             else:
                 res['comment_id'] = idx
             res['index'] = idx
-            
+
             results.append(res)
         except Exception as e:
             print(f"   Error on item {i}: {e}")
+            results.append({attribute_name: None, 'confidence': 0.0, 'comment_id': row.get('comment_id', idx), 'index': idx})
 
         if i % 10 == 0:
             print(f"   Processed {i}/{len(df_sample)}...")
@@ -85,6 +89,6 @@ def run_attribute_analysis(attribute_name, sample_size='all', persona=None):
         out_df = out_df[cols]
     filename = f"results_{attribute_name}_{timestamp}.csv"
     save_path = os.path.join(attr_result_folder, filename)
-    
+
     out_df.to_csv(save_path, index=False)
     print(f"✅ Finished {attribute_name}. Saved to: {save_path}")

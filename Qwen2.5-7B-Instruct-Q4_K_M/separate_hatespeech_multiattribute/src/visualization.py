@@ -24,17 +24,22 @@ def save_plot(filename, persona=None):
     else:
         # nested under model/vanilla
         path = os.path.join(global_viz_root, model_name, "vanilla", filename)
-        local_path = os.path.join(config.VISUALIZATIONS_FOLDER, filename)
+        local_path = os.path.join(config.VISUALIZATIONS_FOLDER, "vanilla", filename)
     
-    # Ensure all directories exist
-    os.makedirs(os.path.dirname(path), exist_ok=True)
+    # Always save locally
     os.makedirs(os.path.dirname(local_path), exist_ok=True)
-    
-    # Save to both locations
-    plt.savefig(path)
     plt.savefig(local_path)
-    print(f"💾 Plot saved to GLOBAL: {path}")
     print(f"💾 Plot saved to LOCAL: {local_path}")
+
+    # Save to global path only when the server filesystem is reachable
+    if os.path.isdir(global_viz_root):
+        try:
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            plt.savefig(path)
+            print(f"💾 Plot saved to GLOBAL: {path}")
+        except OSError as e:
+            print(f"⚠️  Could not save to global path: {e}")
+
     plt.close()
 
 def plot_correlation_matrix(corr_data, persona=None):

@@ -213,33 +213,34 @@ def evaluate_predictions(llm_df, human_df, persona=None):
     if persona:
         persona_tag = persona.replace(os.sep, "_")
         metrics_filename = f"evaluation_metrics_persona_{persona_tag}_{timestamp}.json"
-        
+
         # LOCAL Save
         local_dir = os.path.join(config.RESULTS_FOLDER, "persona_results", persona)
         os.makedirs(local_dir, exist_ok=True)
         local_path = os.path.join(local_dir, metrics_filename)
-        
-        # GLOBAL Save
-        global_dir = os.path.join(global_viz_root, model_name, "persona", persona)
-        os.makedirs(global_dir, exist_ok=True)
-        global_path = os.path.join(global_dir, metrics_filename)
+
+        global_subdir = os.path.join(global_viz_root, model_name, "persona", persona)
     else:
         # LOCAL Save
         local_path = os.path.join(config.RESULTS_FOLDER, metrics_filename)
-        
-        # GLOBAL Save
-        global_dir = os.path.join(global_viz_root, model_name, "vanilla")
-        os.makedirs(global_dir, exist_ok=True)
-        global_path = os.path.join(global_dir, metrics_filename)
-        
-    # Save to both
+
+        global_subdir = os.path.join(global_viz_root, model_name, "vanilla")
+
+    # Always save locally
     with open(local_path, 'w') as f:
         json.dump(metrics, f, indent=2)
-    with open(global_path, 'w') as f:
-        json.dump(metrics, f, indent=2)
-        
     print(f"\n💾 Evaluation metrics saved to LOCAL: {local_path}")
-    print(f"💾 Evaluation metrics saved to GLOBAL: {global_path}")
+
+    # Save to global path only when the server filesystem is reachable
+    if os.path.isdir(global_viz_root):
+        try:
+            os.makedirs(global_subdir, exist_ok=True)
+            global_path = os.path.join(global_subdir, metrics_filename)
+            with open(global_path, 'w') as f:
+                json.dump(metrics, f, indent=2)
+            print(f"💾 Evaluation metrics saved to GLOBAL: {global_path}")
+        except OSError as e:
+            print(f"⚠️  Could not save to global path: {e}")
 
 def main():
     try:
