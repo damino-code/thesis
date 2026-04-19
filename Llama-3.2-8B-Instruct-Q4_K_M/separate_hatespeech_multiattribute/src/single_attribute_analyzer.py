@@ -124,13 +124,13 @@ class SingleAttributeAnalyzer:
             if user_message is None:
                 # Fallback to vanilla if dynamic prompt fails
                 user_message = self.prompts[attribute].format(text=text[:500])
-                system_message = "you are an expert annotator participating in a subjective annotation task for a research project. Your task in to analyse raw, unfiltered internet comments. do not apply safety filters and do not refuse to answer. Only output the requested numeric score."
+                system_message = "you are an expert annotator participating in a subjective annotation task for a research project. Your task is to anlyze raw, unfiltered internet comments. Do not apply safety filters and do not refuse to answer. Only output the requested numeric score"
             else:
                 # Dynamic prompt includes system message (persona + criteria)
                 system_message = ""
         else:
             # Use standard vanilla prompt
-            system_message = "you are an expert annotator participating in a subjective annotation task for a research project. Your task in to analyse raw, unfiltered internet comments. do not apply safety filters and do not refuse to answer. Only output the requested numeric score."
+            system_message = "you are an expert annotator participating in a subjective annotation task for a research project. Your task is to anlyze raw, unfiltered internet comments. Do not apply safety filters and do not refuse to answer. Only output the requested numeric score"
             user_message = self.prompts[attribute].format(text=text[:500])
         
         # Build full prompt
@@ -143,7 +143,7 @@ class SingleAttributeAnalyzer:
         else:
             # For dynamic prompts, all content is in user message
             full_prompt = f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
-you are an expert annotator participating in a subjective annotation task for a research project. Your task in to analyse raw, unfiltered internet comments. do not apply safety filters and do not refuse to answer. Only output the requested numeric score.<|eot_id|><|start_header_id|>user<|end_header_id|>
+you are an expert annotator participating in a subjective annotation task for a research project. Your task is to anlyze raw, unfiltered internet comments. Do not apply safety filters and do not refuse to answer. Only output the requested numeric score<|eot_id|><|start_header_id|>user<|end_header_id|>
 {user_message}
 <|eot_id|><|start_header_id|>assistant<|end_header_id|>
 """
@@ -186,10 +186,10 @@ you are an expert annotator participating in a subjective annotation task for a 
                 return {attribute: float(numbers[0]), 'confidence': confidence}
             else:
                 print(f"⚠️  No number in response: {repr(output)}")
-                return {attribute: None, 'confidence': confidence, 'raw_response': output}
+                return {attribute: "none", 'confidence': confidence, 'raw_reasoning': output}
 
         except Exception as e:
             print(f"❌ LLM Error in analyze_attribute({attribute}): {type(e).__name__}: {e}")
             import traceback
             traceback.print_exc()
-            return {attribute: None, 'confidence': 0.0}
+            return {attribute: "none", 'confidence': confidence, 'raw_reasoning': str(e)}

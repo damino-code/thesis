@@ -7,36 +7,44 @@ echo "=========================================="
 echo "Installing llama-cpp-python with CUDA support"
 echo "=========================================="
 
+# Fix conda CUDA header paths (conda puts them in targets/x86_64-linux/include/)
+if [ -d "$CONDA_PREFIX/targets/x86_64-linux/include" ]; then
+    echo "Symlinking CUDA headers to \$CONDA_PREFIX/include/..."
+    ln -sf $CONDA_PREFIX/targets/x86_64-linux/include/*.h $CONDA_PREFIX/include/ 2>/dev/null || true
+fi
+
 # Use conda environment variables for CUDA
 export CUDA_PATH=$CONDA_PREFIX
 export CUDA_HOME=$CONDA_PREFIX
-export PATH=$CONDA_PREFIX/bin:$PATH
-export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$CONDA_PREFIX/targets/x86_64-linux/lib:$LD_LIBRARY_PATH
+export CMAKE_ARGS="-DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=90 -DCUDAToolkit_INCLUDE_DIR=$CONDA_PREFIX/targets/x86_64-linux/include"
 
-# Install with CUDA support enabled
-# CMAKE_CUDA_ARCHITECTURES=90 is for H200 GPU (compute capability 9.0)
-pip install llama-cpp-python --force-reinstall --no-cache-dir \
-  --config-settings='cmake.args=-DGGML_CUDA=ON;-DCMAKE_CUDA_ARCHITECTURES=90' \
-  -v
+pip install llama-cpp-python --force-reinstall --no-cache-dir -v
 
 echo ""
 echo "=========================================="
-echo "Installation complete!"
-echo "Verifying CUDA support..."
+echo "Installation complete! Verifying..."
 echo "=========================================="
 
+# Verify CUDA is linked
+CUDA_LIBS=$(ldd $(python -c "import llama_cpp; import os; print(os.path.dirname(llama_cpp.__file__))")/lib*.so 2>&1 | grep -i cuda)
+if [ -n "$CUDA_LIBS" ]; then
+    echo "CUDA support confirmed:"
+    echo "$CUDA_LIBS"
+else
+    echo "WARNING: No CUDA libraries linked. Build may have fallen back to CPU-only."
+fi
+
+# Check GPU compute mode
+COMPUTE_MODE=$(nvidia-smi -q -d COMPUTE 2>/dev/null | grep "Compute Mode" | awk '{print $NF}')
+if [ "$COMPUTE_MODE" = "Prohibited" ]; then
+    echo ""
+    echo "WARNING: GPU Compute Mode is 'Prohibited' on this node ($(hostname))."
+    echo "Try a different node: exit and run:"
+    echo "  srun --partition=compute --gres=gpu:nvidia:1 --exclude=$(hostname) --cpus-per-task=8 --mem=64G --time=04:00:00 --pty bash"
+fi
+
 python -c "
-import llama_cpp
-print('✓ llama-cpp-python version:', llama_cpp.__version__)
-try:
-    from llama_cpp import Llama
-    print('✓ Can import Llama class')
-    # Try to see if CUDA backend is available
-    import llama_cpp.llama_cpp as cpp
-    if hasattr(cpp, 'LLAMA_CUDA'):
-        print('✓ CUDA support detected')
-    else:
-        print('⚠ CUDA support may not be detected in bindings, but could still work')
-except Exception as e:
-    print('✗ Error:', e)
+from llama_cpp import Llama
+print('llama-cpp-python imported successfully')
 "
