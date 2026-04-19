@@ -28,6 +28,10 @@ source /storage/home/amine/miniforge3/etc/profile.d/conda.sh
 source /storage/home/amine/miniforge3/etc/profile.d/mamba.sh
 mamba activate llm-research
 
+# Load environment variables (.env) and fix libstdc++
+set -a; source /storage/home/amine/thesis/.env; set +a
+export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
+
 echo ""
 echo "1. RUNNING ALL ATTRIBUTES (Feature/Dynamic Mode)..."
 echo -e "2\nall\n" | python src/run_all_attributes.py

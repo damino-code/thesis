@@ -25,3 +25,5 @@ dependencies:
     - ollama
     - openai
     - llama-cpp-python[server]
+    - vllm
+    - python-dotenv

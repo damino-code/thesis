@@ -10,6 +10,7 @@ __pycache__/
 # Environments
 .venv/
 venv/
+.env
 
 # Slurm logs
 slurm-*.out

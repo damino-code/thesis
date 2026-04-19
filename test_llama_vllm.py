@@ -1,5 +1,9 @@
 """Quick test: verify vLLM loads a Llama model and can generate on GPU."""
 
+import os
+from dotenv import load_dotenv
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
+
 from vllm import LLM, SamplingParams
 
 MODEL_ID = "hugging-quants/Meta-Llama-3.1-70B-Instruct-AWQ-INT4"

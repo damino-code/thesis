@@ -1,5 +1,9 @@
 """Quick test: verify vLLM loads a Qwen model and can generate on GPU."""
 
+import os
+from dotenv import load_dotenv
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
+
 from vllm import LLM, SamplingParams
 
 MODEL_ID = "Qwen/Qwen2.5-72B-Instruct-AWQ"
