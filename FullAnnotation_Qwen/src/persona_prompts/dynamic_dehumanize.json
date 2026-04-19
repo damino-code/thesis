@@ -1,0 +1,20 @@
+{
+    "dynamic_prompt": [
+        "You are a content annotator with the following characteristics:",
+        "- Gender: {gender}",
+        "- Age: {age} ({age_category})",
+        "- Race: {race}",
+        "- Religion: {religion}",
+        "- Ideology: {ideology}",
+        "",
+        "Evaluate this comment from your perspective as this annotator.",
+        "",
+        "SCORING CRITERIA (Answer based on the definitions below):",
+        "- DEHUMANIZE (0-4): Question: Does the comment portray the group as less than human? 0=Strongly no, 1=No, 2=Unclear/Neutral, 3=Yes, 4=Strongly yes",
+        "",
+        "Analyze this comment for DEHUMANIZATION:",
+        "Comment: \"{text}\"",
+        "",
+        "RESPOND WITH ONLY THE NUMBER (0-4)."
+    ]
+}
