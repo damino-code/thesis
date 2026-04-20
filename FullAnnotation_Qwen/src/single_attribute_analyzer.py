@@ -6,11 +6,38 @@ from vllm import SamplingParams
 from annotator_features_loader import AnnotatorFeaturesLoader
 
 
+def softmax_dict(score_dict):
+    """Apply softmax over a dict of {label: logprob}."""
+    m = max(score_dict.values())
+    exps = {k: math.exp(v - m) for k, v in score_dict.items()}
+    z = sum(exps.values())
+    return {k: v / z for k, v in exps.items()}
+
+
+def confidence_from_label_logprobs(label_logprobs):
+    """Compute confidence, predicted label, and margin from label logprobs."""
+    probs = softmax_dict(label_logprobs)
+    ranked = sorted(probs.items(), key=lambda x: x[1], reverse=True)
+
+    pred_label, conf = ranked[0]
+    second_prob = ranked[1][1] if len(ranked) > 1 else 0.0
+    margin = conf - second_prob
+
+    return {
+        "label": pred_label,
+        "confidence": conf,
+        "margin": margin,
+        "probs": probs,
+    }
+
+
 class SingleAttributeAnalyzer:
     def __init__(self, llm_model, use_dynamic=False):
         self.model = llm_model
         self.use_dynamic = use_dynamic
-        self.prompts = self._load_prompts()
+        self.prompts = {}
+        self.labels = {}
+        self._load_prompts()
         self.dynamic_prompts = self._load_dynamic_prompts() if use_dynamic else {}
 
         # Load the tokenizer from vLLM for chat template formatting
@@ -25,14 +52,14 @@ class SingleAttributeAnalyzer:
             print("Using Vanilla standard prompts")
 
         self.sampling_params = SamplingParams(
-            max_tokens=10,
-            temperature=0.1,
-            logprobs=5,
+            max_tokens=1,
+            temperature=0.0,
+            top_p=1.0,
+            logprobs=10,
             seed=42,
         )
 
     def _load_prompts(self):
-        prompts = {}
         prompt_dir = os.path.join(os.path.dirname(__file__), 'prompts')
 
         if not os.path.exists(prompt_dir):
@@ -44,10 +71,10 @@ class SingleAttributeAnalyzer:
                 with open(os.path.join(prompt_dir, filename), 'r') as f:
                     data = json.load(f)
                     if isinstance(data['prompt'], list):
-                        prompts[attribute] = '\n'.join(data['prompt'])
+                        self.prompts[attribute] = '\n'.join(data['prompt'])
                     else:
-                        prompts[attribute] = data['prompt']
-        return prompts
+                        self.prompts[attribute] = data['prompt']
+                    self.labels[attribute] = data.get('labels', ["0", "1", "2", "3", "4"])
 
     def _load_dynamic_prompts(self):
         dynamic_prompts = {}
@@ -65,6 +92,9 @@ class SingleAttributeAnalyzer:
                         dynamic_prompts[attribute] = '\n'.join(data['dynamic_prompt'])
                     else:
                         dynamic_prompts[attribute] = data['dynamic_prompt']
+                    # Update labels from dynamic prompt file if present
+                    if 'labels' in data:
+                        self.labels[attribute] = data['labels']
         return dynamic_prompts
 
     def _build_dynamic_prompt(self, attribute, comment_id, text, annotator_id=None):
@@ -114,11 +144,41 @@ class SingleAttributeAnalyzer:
             {"role": "user", "content": user_message},
         ]
 
-        # Use the model's built-in chat template
         full_prompt = self.tokenizer.apply_chat_template(
             messages, tokenize=False, add_generation_prompt=True
         )
         return full_prompt
+
+    def _extract_result(self, output, attribute):
+        """Extract label, confidence, and margin from a single vLLM output."""
+        generated_text = output.outputs[0].text.strip()
+        valid_labels = self.labels.get(attribute, ["0", "1", "2", "3", "4"])
+
+        # Extract logprobs for valid label tokens from the first (only) generated token
+        label_logprobs = {}
+        if output.outputs[0].logprobs:
+            first_token_logprobs = output.outputs[0].logprobs[0]
+            if first_token_logprobs:
+                for token_id, logprob_obj in first_token_logprobs.items():
+                    decoded = logprob_obj.decoded_token.strip()
+                    if decoded in valid_labels:
+                        label_logprobs[decoded] = logprob_obj.logprob
+
+        if label_logprobs:
+            result = confidence_from_label_logprobs(label_logprobs)
+            return {
+                attribute: float(result["label"]),
+                'confidence': result["confidence"],
+            }
+        else:
+            # Fallback: try to parse the generated text
+            numbers = re.findall(r"[-+]?\d*\.\d+|\d+", generated_text)
+            if numbers:
+                return {attribute: float(numbers[0]), 'confidence': 0.0}
+            else:
+                print(f"  No valid label in logprobs or response: {repr(generated_text)}")
+                return {attribute: None, 'confidence': 0.0,
+                        'raw_response': generated_text}
 
     def analyze_attribute(self, text, attribute, comment_id=None, annotator_id=None):
         """Analyze a single comment for a single attribute."""
@@ -126,25 +186,7 @@ class SingleAttributeAnalyzer:
 
         try:
             outputs = self.model.generate([full_prompt], self.sampling_params)
-            output = outputs[0]
-            generated_text = output.outputs[0].text.strip()
-
-            # Extract confidence from logprobs
-            confidence = 0.0
-            if output.outputs[0].logprobs:
-                first_token_logprobs = output.outputs[0].logprobs[0]
-                if first_token_logprobs:
-                    # Get the logprob of the actually sampled token
-                    top_logprob = max(first_token_logprobs.values(),
-                                      key=lambda x: x.logprob)
-                    confidence = math.exp(top_logprob.logprob)
-
-            numbers = re.findall(r"[-+]?\d*\.\d+|\d+", generated_text)
-            if numbers:
-                return {attribute: float(numbers[0]), 'confidence': confidence}
-            else:
-                print(f"  No number in response: {repr(generated_text)}")
-                return {attribute: None, 'confidence': confidence, 'raw_response': generated_text}
+            return self._extract_result(outputs[0], attribute)
 
         except Exception as e:
             print(f"LLM Error in analyze_attribute({attribute}): {type(e).__name__}: {e}")
@@ -153,12 +195,7 @@ class SingleAttributeAnalyzer:
             return {attribute: None, 'confidence': 0.0}
 
     def batch_analyze(self, texts, attribute, comment_ids=None, annotator_ids=None):
-        """Batch analyze multiple comments for a single attribute.
-
-        This is significantly faster than calling analyze_attribute one at a time
-        because vLLM processes all prompts in a single forward pass with
-        continuous batching.
-        """
+        """Batch analyze multiple comments for a single attribute."""
         prompts = []
         for i, text in enumerate(texts):
             cid = comment_ids[i] if comment_ids else None
@@ -170,21 +207,6 @@ class SingleAttributeAnalyzer:
 
         results = []
         for output in outputs:
-            generated_text = output.outputs[0].text.strip()
-
-            confidence = 0.0
-            if output.outputs[0].logprobs:
-                first_token_logprobs = output.outputs[0].logprobs[0]
-                if first_token_logprobs:
-                    top_logprob = max(first_token_logprobs.values(),
-                                      key=lambda x: x.logprob)
-                    confidence = math.exp(top_logprob.logprob)
-
-            numbers = re.findall(r"[-+]?\d*\.\d+|\d+", generated_text)
-            if numbers:
-                results.append({attribute: float(numbers[0]), 'confidence': confidence})
-            else:
-                results.append({attribute: None, 'confidence': confidence,
-                                'raw_response': generated_text})
+            results.append(self._extract_result(output, attribute))
 
         return results

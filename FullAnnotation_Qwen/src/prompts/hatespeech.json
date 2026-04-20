@@ -8,5 +8,10 @@
         "Comment: \"{text}\"",
         "",
         "RESPOND WITH ONLY THE NUMBER (0-2)."
+    ],
+    "labels": [
+        "0",
+        "1",
+        "2"
     ]
 }
