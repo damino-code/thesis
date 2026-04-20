@@ -15,20 +15,27 @@ def softmax_dict(score_dict):
 
 
 def confidence_from_label_logprobs(label_logprobs):
-    """Compute confidence, predicted label, and margin from label logprobs."""
+    """Compute confidence and predicted label from label logprobs."""
     probs = softmax_dict(label_logprobs)
     ranked = sorted(probs.items(), key=lambda x: x[1], reverse=True)
 
     pred_label, conf = ranked[0]
-    second_prob = ranked[1][1] if len(ranked) > 1 else 0.0
-    margin = conf - second_prob
 
     return {
         "label": pred_label,
         "confidence": conf,
-        "margin": margin,
-        "probs": probs,
     }
+
+
+def extract_label_logprobs(logprobs_dict, valid_labels):
+    """Extract logprobs for valid label tokens from a vLLM logprobs dict."""
+    label_logprobs = {}
+    if logprobs_dict:
+        for token_id, logprob_obj in logprobs_dict.items():
+            decoded = logprob_obj.decoded_token.strip()
+            if decoded in valid_labels:
+                label_logprobs[decoded] = logprob_obj.logprob
+    return label_logprobs
 
 
 class SingleAttributeAnalyzer:
@@ -56,6 +63,14 @@ class SingleAttributeAnalyzer:
             temperature=0.0,
             top_p=1.0,
             logprobs=10,
+            seed=42,
+        )
+
+        self.retry_sampling_params = SamplingParams(
+            max_tokens=1,
+            temperature=0.0,
+            top_p=1.0,
+            logprobs=20,
             seed=42,
         )
 
@@ -92,7 +107,6 @@ class SingleAttributeAnalyzer:
                         dynamic_prompts[attribute] = '\n'.join(data['dynamic_prompt'])
                     else:
                         dynamic_prompts[attribute] = data['dynamic_prompt']
-                    # Update labels from dynamic prompt file if present
                     if 'labels' in data:
                         self.labels[attribute] = data['labels']
         return dynamic_prompts
@@ -149,50 +163,65 @@ class SingleAttributeAnalyzer:
         )
         return full_prompt
 
-    def _extract_result(self, output, attribute):
-        """Extract label, confidence, and margin from a single vLLM output."""
-        generated_text = output.outputs[0].text.strip()
-        valid_labels = self.labels.get(attribute, ["0", "1", "2", "3", "4"])
-
-        # Extract logprobs for valid label tokens from the first (only) generated token
-        label_logprobs = {}
+    def _extract_label_logprobs_from_output(self, output, valid_labels):
+        """Extract logprobs for valid label tokens from a vLLM output."""
         if output.outputs[0].logprobs:
-            first_token_logprobs = output.outputs[0].logprobs[0]
-            if first_token_logprobs:
-                for token_id, logprob_obj in first_token_logprobs.items():
-                    decoded = logprob_obj.decoded_token.strip()
-                    if decoded in valid_labels:
-                        label_logprobs[decoded] = logprob_obj.logprob
+            return extract_label_logprobs(output.outputs[0].logprobs[0], valid_labels)
+        return {}
 
-        if label_logprobs:
+    def _extract_result(self, output, attribute, all_labels_required=True):
+        """Extract label and confidence from a single vLLM output.
+
+        Returns None for confidence if not all labels are present and
+        all_labels_required is True (signals that a retry is needed).
+        """
+        valid_labels = self.labels.get(attribute, ["0", "1", "2", "3", "4"])
+        label_logprobs = self._extract_label_logprobs_from_output(output, valid_labels)
+
+        if label_logprobs and len(label_logprobs) == len(valid_labels):
+            # All labels present — confidence is accurate
             result = confidence_from_label_logprobs(label_logprobs)
             return {
                 attribute: float(result["label"]),
                 'confidence': result["confidence"],
             }
+        elif label_logprobs and not all_labels_required:
+            # Missing some labels but this is the retry — mark invalid
+            return {attribute: "invalid", 'confidence': 0.0}
+        elif label_logprobs:
+            # Missing some labels — signal retry needed
+            return None
         else:
-            # Fallback: try to parse the generated text
+            # No valid labels at all
+            generated_text = output.outputs[0].text.strip()
             numbers = re.findall(r"[-+]?\d*\.\d+|\d+", generated_text)
             if numbers:
-                return {attribute: float(numbers[0]), 'confidence': 0.0}
+                return {attribute: "invalid", 'confidence': 0.0}
             else:
-                print(f"  No valid label in logprobs or response: {repr(generated_text)}")
-                return {attribute: None, 'confidence': 0.0,
-                        'raw_response': generated_text}
+                return {attribute: "invalid", 'confidence': 0.0}
 
     def analyze_attribute(self, text, attribute, comment_id=None, annotator_id=None):
         """Analyze a single comment for a single attribute."""
         full_prompt = self.build_prompt(text, attribute, comment_id, annotator_id)
 
         try:
+            # First attempt with logprobs=10
             outputs = self.model.generate([full_prompt], self.sampling_params)
-            return self._extract_result(outputs[0], attribute)
+            result = self._extract_result(outputs[0], attribute, all_labels_required=True)
+
+            if result is not None:
+                return result
+
+            # Retry with logprobs=20
+            outputs = self.model.generate([full_prompt], self.retry_sampling_params)
+            result = self._extract_result(outputs[0], attribute, all_labels_required=False)
+            return result
 
         except Exception as e:
             print(f"LLM Error in analyze_attribute({attribute}): {type(e).__name__}: {e}")
             import traceback
             traceback.print_exc()
-            return {attribute: None, 'confidence': 0.0}
+            return {attribute: "invalid", 'confidence': 0.0}
 
     def batch_analyze(self, texts, attribute, comment_ids=None, annotator_ids=None):
         """Batch analyze multiple comments for a single attribute."""
@@ -203,10 +232,26 @@ class SingleAttributeAnalyzer:
             prompt = self.build_prompt(text, attribute, cid, aid)
             prompts.append(prompt)
 
+        # First pass with logprobs=10
         outputs = self.model.generate(prompts, self.sampling_params)
 
-        results = []
-        for output in outputs:
-            results.append(self._extract_result(output, attribute))
+        results = [None] * len(outputs)
+        retry_indices = []
+        retry_prompts = []
+
+        for i, output in enumerate(outputs):
+            result = self._extract_result(output, attribute, all_labels_required=True)
+            if result is not None:
+                results[i] = result
+            else:
+                retry_indices.append(i)
+                retry_prompts.append(prompts[i])
+
+        # Retry missing ones with logprobs=20
+        if retry_prompts:
+            retry_outputs = self.model.generate(retry_prompts, self.retry_sampling_params)
+            for j, output in enumerate(retry_outputs):
+                idx = retry_indices[j]
+                results[idx] = self._extract_result(output, attribute, all_labels_required=False)
 
         return results

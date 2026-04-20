@@ -1,120 +1,127 @@
 {
-  "description": "Dynamic Prompt Examples - Shows how the system injects annotator features into prompts",
-  "timestamp": "2025-01-15",
-  "examples": [
-    {
-      "example_id": 1,
-      "scenario": "Conservative Old White Christian Woman evaluating Middle East comments",
-      "comment_id": 39073,
-      "annotator_metadata": {
-        "gender": "Women",
-        "age": 81.0,
-        "age_category": "old",
-        "race": "White",
-        "religion": "Christian",
-        "ideology": "Conservative"
-      },
-      "original_comment": "Afghanistan will rise. Kashmir will rise. Palestine will rise. The Islamic world will rise.",
-      "attribute_being_evaluated": "SENTIMENT",
-      "system_prompt": "You are a content annotator with the following characteristics:\n- Gender: Women\n- Age: 81.0\n- Race: White\n- Religion: Christian\n- Ideology: Conservative\n\nEvaluate this comment from your perspective as this annotator.",
-      "scoring_rubric": "SENTIMENT (0-4): Question: How would you describe the sentiment? 0=Strongly negative, 1=Somewhat negative, 2=Neutral, 3=Somewhat positive, 4=Strongly positive",
-      "expected_llm_output": "0",
-      "reasoning": "From this annotator's perspective as an old Conservative Christian, repeated references to 'rise' relating to Middle East and Islamic world may be interpreted as strongly negative.",
-      "note": "The LLM will respond as if it IS this annotator, evaluating the comment through their demographic lens"
+    "description": "Dynamic Prompt Examples - Shows how the system injects annotator features into prompts",
+    "timestamp": "2025-01-15",
+    "examples": [
+        {
+            "example_id": 1,
+            "scenario": "Conservative Old White Christian Woman evaluating Middle East comments",
+            "comment_id": 39073,
+            "annotator_metadata": {
+                "gender": "Women",
+                "age": 81.0,
+                "age_category": "old",
+                "race": "White",
+                "religion": "Christian",
+                "ideology": "Conservative"
+            },
+            "original_comment": "Afghanistan will rise. Kashmir will rise. Palestine will rise. The Islamic world will rise.",
+            "attribute_being_evaluated": "SENTIMENT",
+            "system_prompt": "You are a content annotator with the following characteristics:\n- Gender: Women\n- Age: 81.0\n- Race: White\n- Religion: Christian\n- Ideology: Conservative\n\nEvaluate this comment from your perspective as this annotator.",
+            "scoring_rubric": "SENTIMENT (0-4): Question: How would you describe the sentiment? 0=Strongly negative, 1=Somewhat negative, 2=Neutral, 3=Somewhat positive, 4=Strongly positive",
+            "expected_llm_output": "0",
+            "reasoning": "From this annotator's perspective as an old Conservative Christian, repeated references to 'rise' relating to Middle East and Islamic world may be interpreted as strongly negative.",
+            "note": "The LLM will respond as if it IS this annotator, evaluating the comment through their demographic lens"
+        },
+        {
+            "example_id": 2,
+            "scenario": "Slightly Liberal Young Asian Christian male with same comment",
+            "comment_id": 20012,
+            "annotator_metadata": {
+                "gender": "Men",
+                "age": 40.0,
+                "age_category": "young",
+                "race": "Asian",
+                "religion": "Christian",
+                "ideology": "Slightly Liberal"
+            },
+            "original_comment": "Afghanistan will rise. Kashmir will rise. Palestine will rise. The Islamic world will rise.",
+            "attribute_being_evaluated": "SENTIMENT",
+            "system_prompt": "You are a content annotator with the following characteristics:\n- Gender: Men\n- Age: 40.0\n- Race: Asian\n- Religion: Christian\n- Ideology: Slightly Liberal\n\nEvaluate this comment from your perspective as this annotator.",
+            "scoring_rubric": "SENTIMENT (0-4): Question: How would you describe the sentiment? 0=Strongly negative, 1=Somewhat negative, 2=Neutral, 3=Somewhat positive, 4=Strongly positive",
+            "expected_llm_output": "2",
+            "reasoning": "From this annotator's perspective as young and slightly liberal, the comment may be interpreted more neutrally - expressing aspirations rather than threats.",
+            "comparison_to_example_1": "Same comment, different annotator demographics and age categories (old vs young), likely different prediction. This demonstrates PERSPECTIVE-TAKING ability."
+        },
+        {
+            "example_id": 3,
+            "scenario": "Woman with non-Christian religion and missing ideology (Old age)",
+            "comment_id": 20067,
+            "annotator_metadata": {
+                "gender": "Women",
+                "age": 72.0,
+                "age_category": "old",
+                "race": "White",
+                "religion": "Nothing",
+                "ideology": "Not specified"
+            },
+            "original_comment": "Afghanistan will rise. Kashmir will rise. Palestine will rise. The Islamic world will rise.",
+            "attribute_being_evaluated": "SENTIMENT",
+            "system_prompt": "You are a content annotator with the following characteristics:\n- Gender: Women\n- Age: 72.0\n- Race: White\n- Religion: Nothing\n- Ideology: Not specified\n\nEvaluate this comment from your perspective as this annotator.",
+            "scoring_rubric": "SENTIMENT (0-4): 0=Strongly negative, 1=Somewhat negative, 2=Neutral, 3=Somewhat positive, 4=Strongly positive",
+            "expected_llm_output": "2 or 3",
+            "reasoning": "With no religious affiliation, secular perspective may view this as aspirational/positive or neutral without religious bias. Being old may introduce some caution though.",
+            "note_about_missing_values": "Missing/NaN values are converted to 'Not specified' - this is handled gracefully without errors. The LLM adapts its perspective accordingly."
+        },
+        {
+            "example_id": 4,
+            "scenario": "HATESPEECH attribute - Young Black Liberal Woman evaluating targeting comment",
+            "comment_id": 15234,
+            "annotator_metadata": {
+                "gender": "Women",
+                "age": 25.0,
+                "age_category": "young",
+                "race": "Black",
+                "religion": "Christian",
+                "ideology": "Liberal"
+            },
+            "original_comment": "Black people are taking over our country",
+            "attribute_being_evaluated": "HATESPEECH",
+            "system_prompt": "You are a content annotator with the following characteristics:\n- Gender: Women\n- Age: 25.0\n- Race: Black\n- Religion: Christian\n- Ideology: Liberal\n\nEvaluate this comment from your perspective as this annotator.",
+            "scoring_rubric": "HATESPEECH (0-2): Question: Does this comment contain hate speech? 0=yes , 1=No, 2=Unclear/Neutral",
+            "expected_llm_output": "0",
+            "reasoning": "From a young, Black, Liberal woman's perspective, this is clearly targeting her demographic group. Predicted as 0=yes, definitely hate speech.",
+            "research_implication": "Same comment, dramatically different evaluation based on demographic context. Enables fairness analysis."
+        },
+        {
+            "example_id": 5,
+            "scenario": "Same HATESPEECH comment - Old Conservative White Man perspective",
+            "comment_id": 15234,
+            "annotator_metadata": {
+                "gender": "Men",
+                "age": 65.0,
+                "age_category": "old",
+                "race": "White",
+                "religion": "Christian",
+                "ideology": "Conservative"
+            },
+            "original_comment": "Black people are taking over our country",
+            "attribute_being_evaluated": "HATESPEECH",
+            "system_prompt": "You are a content annotator with the following characteristics:\n- Gender: Men\n- Age: 65.0\n- Race: White\n- Religion: Christian\n- Ideology: Conservative\n\nEvaluate this comment from your perspective as this annotator.",
+            "scoring_rubric": "HATESPEECH (0-2): Question: Does this comment contain hate speech? 0=yes , 1=No, 2=Unclear/Neutral",
+            "expected_llm_output": "1 or 2",
+            "reasoning": "From old Conservative White man perspective, may interpret as political statement rather than hate speech. Predicted as 1=No or 2=Unclear, demonstrating demographic bias.",
+            "comparison_to_example_4": "CRITICAL: Same comment, same attribute, different demographics and age categories \u2192 Different model predictions (0 vs 1-2). This is the core research value of the dynamic prompts system."
+        }
+    ],
+    "implementation_details": {
+        "feature_extraction": "Features come from selected_comments.csv via annotator_gender|age|race|religion|ideology columns",
+        "lookup_mechanism": "Each comment_id is looked up in the CSV to retrieve its original annotator's features",
+        "error_handling": "NaN/missing values \u2192 'Not specified'. Comment not found \u2192 standard prompt used.",
+        "caching": "Features cached in memory after first lookup to avoid repeated CSV reads",
+        "prompting_strategy": "System role defined to be annotator with X characteristics, then standard evaluation prompt follows"
     },
-    {
-      "example_id": 2,
-      "scenario": "Slightly Liberal Young Asian Christian male with same comment",
-      "comment_id": 20012,
-      "annotator_metadata": {
-        "gender": "Men",
-        "age": 40.0,
-        "age_category": "young",
-        "race": "Asian",
-        "religion": "Christian",
-        "ideology": "Slightly Liberal"
-      },
-      "original_comment": "Afghanistan will rise. Kashmir will rise. Palestine will rise. The Islamic world will rise.",
-      "attribute_being_evaluated": "SENTIMENT",
-      "system_prompt": "You are a content annotator with the following characteristics:\n- Gender: Men\n- Age: 40.0\n- Race: Asian\n- Religion: Christian\n- Ideology: Slightly Liberal\n\nEvaluate this comment from your perspective as this annotator.",
-      "scoring_rubric": "SENTIMENT (0-4): Question: How would you describe the sentiment? 0=Strongly negative, 1=Somewhat negative, 2=Neutral, 3=Somewhat positive, 4=Strongly positive",
-      "expected_llm_output": "2",
-      "reasoning": "From this annotator's perspective as young and slightly liberal, the comment may be interpreted more neutrally - expressing aspirations rather than threats.",
-      "comparison_to_example_1": "Same comment, different annotator demographics and age categories (old vs young), likely different prediction. This demonstrates PERSPECTIVE-TAKING ability."
-    },
-    {
-      "example_id": 3,
-      "scenario": "Woman with non-Christian religion and missing ideology (Old age)",
-      "comment_id": 20067,
-      "annotator_metadata": {
-        "gender": "Women",
-        "age": 72.0,
-        "age_category": "old",
-        "race": "White",
-        "religion": "Nothing",
-        "ideology": "Not specified"
-      },
-      "original_comment": "Afghanistan will rise. Kashmir will rise. Palestine will rise. The Islamic world will rise.",
-      "attribute_being_evaluated": "SENTIMENT",
-      "system_prompt": "You are a content annotator with the following characteristics:\n- Gender: Women\n- Age: 72.0\n- Race: White\n- Religion: Nothing\n- Ideology: Not specified\n\nEvaluate this comment from your perspective as this annotator.",
-      "scoring_rubric": "SENTIMENT (0-4): 0=Strongly negative, 1=Somewhat negative, 2=Neutral, 3=Somewhat positive, 4=Strongly positive",
-      "expected_llm_output": "2 or 3",
-      "reasoning": "With no religious affiliation, secular perspective may view this as aspirational/positive or neutral without religious bias. Being old may introduce some caution though.",
-      "note_about_missing_values": "Missing/NaN values are converted to 'Not specified' - this is handled gracefully without errors. The LLM adapts its perspective accordingly."
-    },
-    {
-      "example_id": 4,
-      "scenario": "HATESPEECH attribute - Young Black Liberal Woman evaluating targeting comment",
-      "comment_id": 15234,
-      "annotator_metadata": {
-        "gender": "Women",
-        "age": 25.0,
-        "age_category": "young",
-        "race": "Black",
-        "religion": "Christian",
-        "ideology": "Liberal"
-      },
-      "original_comment": "Black people are taking over our country",
-      "attribute_being_evaluated": "HATESPEECH",
-      "system_prompt": "You are a content annotator with the following characteristics:\n- Gender: Women\n- Age: 25.0\n- Race: Black\n- Religion: Christian\n- Ideology: Liberal\n\nEvaluate this comment from your perspective as this annotator.",
-      "scoring_rubric": "HATESPEECH (0-2): Question: Does this comment contain hate speech? 0=yes , 1=No, 2=Unclear/Neutral",
-      "expected_llm_output": "0",
-      "reasoning": "From a young, Black, Liberal woman's perspective, this is clearly targeting her demographic group. Predicted as 0=yes, definitely hate speech.",
-      "research_implication": "Same comment, dramatically different evaluation based on demographic context. Enables fairness analysis."
-    },
-    {
-      "example_id": 5,
-      "scenario": "Same HATESPEECH comment - Old Conservative White Man perspective",
-      "comment_id": 15234,
-      "annotator_metadata": {
-        "gender": "Men",
-        "age": 65.0,
-        "age_category": "old",
-        "race": "White",
-        "religion": "Christian",
-        "ideology": "Conservative"
-      },
-      "original_comment": "Black people are taking over our country",
-      "attribute_being_evaluated": "HATESPEECH",
-      "system_prompt": "You are a content annotator with the following characteristics:\n- Gender: Men\n- Age: 65.0\n- Race: White\n- Religion: Christian\n- Ideology: Conservative\n\nEvaluate this comment from your perspective as this annotator.",
-      "scoring_rubric": "HATESPEECH (0-2): Question: Does this comment contain hate speech? 0=yes , 1=No, 2=Unclear/Neutral",
-      "expected_llm_output": "1 or 2",
-      "reasoning": "From old Conservative White man perspective, may interpret as political statement rather than hate speech. Predicted as 1=No or 2=Unclear, demonstrating demographic bias.",
-      "comparison_to_example_4": "CRITICAL: Same comment, same attribute, different demographics and age categories → Different model predictions (0 vs 1-2). This is the core research value of the dynamic prompts system."
-    }
-  ],
-  "implementation_details": {
-    "feature_extraction": "Features come from selected_comments.csv via annotator_gender|age|race|religion|ideology columns",
-    "lookup_mechanism": "Each comment_id is looked up in the CSV to retrieve its original annotator's features",
-    "error_handling": "NaN/missing values → 'Not specified'. Comment not found → standard prompt used.",
-    "caching": "Features cached in memory after first lookup to avoid repeated CSV reads",
-    "prompting_strategy": "System role defined to be annotator with X characteristics, then standard evaluation prompt follows"
-  },
-  "research_questions_addressed": [
-    "Q1: How do demographic factors influence hate speech detection?",
-    "Q2: Does the model exhibit perspectival reasoning based on demographic context?",
-    "Q3: Are there fairness disparities in how different identities evaluate hate speech?",
-    "Q4: Can LLM predictions align with human annotators from their same demographic?",
-    "Q5: What role does annotator identity play in content moderation decisions?"
-  ]
+    "research_questions_addressed": [
+        "Q1: How do demographic factors influence hate speech detection?",
+        "Q2: Does the model exhibit perspectival reasoning based on demographic context?",
+        "Q3: Are there fairness disparities in how different identities evaluate hate speech?",
+        "Q4: Can LLM predictions align with human annotators from their same demographic?",
+        "Q5: What role does annotator identity play in content moderation decisions?"
+    ],
+    "labels": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4"
+    ]
 }

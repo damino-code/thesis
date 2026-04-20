@@ -6,13 +6,37 @@ import json
 import pandas as pd
 from annotator_features_loader import AnnotatorFeaturesLoader
 
+
+def softmax_dict(score_dict):
+    """Apply softmax over a dict of {label: logprob}."""
+    m = max(score_dict.values())
+    exps = {k: math.exp(v - m) for k, v in score_dict.items()}
+    z = sum(exps.values())
+    return {k: v / z for k, v in exps.items()}
+
+
+def confidence_from_label_logprobs(label_logprobs):
+    """Compute confidence and predicted label from label logprobs."""
+    probs = softmax_dict(label_logprobs)
+    ranked = sorted(probs.items(), key=lambda x: x[1], reverse=True)
+
+    pred_label, conf = ranked[0]
+
+    return {
+        "label": pred_label,
+        "confidence": conf,
+    }
+
+
 class SingleAttributeAnalyzer:
     def __init__(self, llm_model, use_dynamic=False):
         self.model = llm_model
         self.use_dynamic = use_dynamic
-        self.prompts = self._load_prompts()
+        self.prompts = {}
+        self.labels = {}
+        self._load_prompts()
         self.dynamic_prompts = self._load_dynamic_prompts() if use_dynamic else {}
-        
+
         # Load feature loader only if dynamic mode is enabled
         if self.use_dynamic:
             self.features_loader = AnnotatorFeaturesLoader()
@@ -24,7 +48,6 @@ class SingleAttributeAnalyzer:
             print("📄 Using Vanilla standard prompts")
 
     def _load_prompts(self):
-        prompts = {}
         # Load standard prompts
         prompt_dir = os.path.join(os.path.dirname(__file__), 'prompts')
         print("📂 Loading standard prompts...")
@@ -37,12 +60,11 @@ class SingleAttributeAnalyzer:
                 attribute = os.path.splitext(filename)[0]
                 with open(os.path.join(prompt_dir, filename), 'r') as f:
                     data = json.load(f)
-                    # Join list of strings into a single prompt string with newlines
                     if isinstance(data['prompt'], list):
-                        prompts[attribute] = '\n'.join(data['prompt'])
+                        self.prompts[attribute] = '\n'.join(data['prompt'])
                     else:
-                        prompts[attribute] = data['prompt']
-        return prompts
+                        self.prompts[attribute] = data['prompt']
+                    self.labels[attribute] = data.get('labels', ["0", "1", "2", "3", "4"])
 
     def _load_dynamic_prompts(self):
         """Load attribute-specific dynamic prompt templates"""
@@ -67,8 +89,10 @@ class SingleAttributeAnalyzer:
                         dynamic_prompts[attribute] = '\n'.join(data['dynamic_prompt'])
                     else:
                         dynamic_prompts[attribute] = data['dynamic_prompt']
+                    if 'labels' in data:
+                        self.labels[attribute] = data['labels']
                     print(f"  ✅ Loaded dynamic prompt for: {attribute}")
-        
+
         print(f"📊 Total dynamic prompts loaded: {len(dynamic_prompts)}")
         print(f"📊 Available attributes in dynamic_prompts: {list(dynamic_prompts.keys())}")
         return dynamic_prompts
@@ -150,46 +174,69 @@ you are an expert annotator participating in a subjective annotation task for a 
         
         return full_prompt
 
+    def _extract_label_logprobs(self, choice, valid_labels):
+        """Extract logprobs for valid label tokens from a llama-cpp-python response choice."""
+        label_logprobs = {}
+        if 'logprobs' in choice and choice['logprobs'] and 'top_logprobs' in choice['logprobs']:
+            top_logprobs = choice['logprobs']['top_logprobs']
+            if top_logprobs and top_logprobs[0]:
+                for token, logprob in top_logprobs[0].items():
+                    token_stripped = token.strip()
+                    if token_stripped in valid_labels:
+                        label_logprobs[token_stripped] = logprob
+        return label_logprobs
+
     def analyze_attribute(self, text, attribute, comment_id=None, annotator_id=None):
         """Analyze a comment for a single attribute"""
         full_prompt = self.build_prompt(text, attribute, comment_id, annotator_id)
+        valid_labels = self.labels.get(attribute, ["0", "1", "2", "3", "4"])
 
         try:
-            import sys
-            print(f"   [PRE-CALL] About to call LLM", file=sys.stderr, flush=True)
-            sys.stderr.flush()
-            
-            response = self.model(
-                full_prompt,
-                max_tokens=10,
-                temperature=0.1,
-                stop=["<|eot_id|>"],
-                logprobs=1  # Request logprobs for the top token
+            # First attempt with logprobs=10
+            response = self.model.create_completion(
+                prompt=full_prompt,
+                max_tokens=1,
+                temperature=0.0,
+                top_p=1.0,
+                logprobs=10,
+                echo=False,
             )
-            
-            print(f"   [POST-CALL] LLM returned", file=sys.stderr, flush=True)
-            sys.stderr.flush()
-            
+
             choice = response['choices'][0]
-            output = choice['text'].strip()
+            label_logprobs = self._extract_label_logprobs(choice, valid_labels)
 
-            # Compute confidence from first token logprob regardless of outcome
-            confidence = 0.0
-            if 'logprobs' in choice and choice['logprobs'] and 'token_logprobs' in choice['logprobs']:
-                valid_logprobs = [lp for lp in choice['logprobs']['token_logprobs'] if lp is not None]
-                if valid_logprobs:
-                    confidence = math.exp(valid_logprobs[0])
+            if label_logprobs and len(label_logprobs) == len(valid_labels):
+                # All labels present — confidence is accurate
+                result = confidence_from_label_logprobs(label_logprobs)
+                return {
+                    attribute: float(result["label"]),
+                    'confidence': result["confidence"],
+                }
 
-            # Extract number
-            numbers = re.findall(r"[-+]?\d*\.\d+|\d+", output)
-            if numbers:
-                return {attribute: float(numbers[0]), 'confidence': confidence}
+            # Retry with logprobs=20
+            response = self.model.create_completion(
+                prompt=full_prompt,
+                max_tokens=1,
+                temperature=0.0,
+                top_p=1.0,
+                logprobs=20,
+                echo=False,
+            )
+
+            choice = response['choices'][0]
+            label_logprobs = self._extract_label_logprobs(choice, valid_labels)
+
+            if label_logprobs and len(label_logprobs) == len(valid_labels):
+                result = confidence_from_label_logprobs(label_logprobs)
+                return {
+                    attribute: float(result["label"]),
+                    'confidence': result["confidence"],
+                }
             else:
-                print(f"⚠️  No number in response: {repr(output)}")
-                return {attribute: "none", 'confidence': confidence, 'raw_reasoning': output}
+                return {attribute: "invalid", 'confidence': 0.0}
 
         except Exception as e:
             print(f"❌ LLM Error in analyze_attribute({attribute}): {type(e).__name__}: {e}")
             import traceback
             traceback.print_exc()
-            return {attribute: "none", 'confidence': confidence, 'raw_reasoning': str(e)}
+            return {attribute: "invalid", 'confidence': 0.0}
