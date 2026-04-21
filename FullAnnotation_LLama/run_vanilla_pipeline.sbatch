@@ -7,7 +7,7 @@
 #SBATCH --gres=gpu:nvidia:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=64G
-#SBATCH --time=04:00:00
+#SBATCH --time=08:00:00
 #SBATCH --output=/storage/home/amine/thesis/FullAnnotation_LLama/logs/llama70b_vanilla_%j.out
 #SBATCH --error=/storage/home/amine/thesis/FullAnnotation_LLama/logs/llama70b_vanilla_%j.err
 
