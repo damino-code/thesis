@@ -1,23 +1,22 @@
 #!/bin/bash
 #SBATCH --job-name=qwen72b_vllm
 #SBATCH --partition=compute
+#SBATCH --exclude=gpu-nvidia-h200-3
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:nvidia:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=64G
 #SBATCH --time=12:00:00
-#SBATCH --output=logs/qwen72b_%j.out
-#SBATCH --error=logs/qwen72b_%j.err
+#SBATCH --output=/storage/home/amine/thesis/FullAnnotation_Qwen/logs/qwen72b_%j.out
+#SBATCH --error=/storage/home/amine/thesis/FullAnnotation_Qwen/logs/qwen72b_%j.err
 
 echo "=========================================================="
-echo "Starting Qwen2.5 72B Analysis (vLLM) - DYNAMIC PROMPTS"
+echo "Starting Qwen2.5 72B AWQ Analysis (vLLM) - DYNAMIC PROMPTS"
 echo "Job ID: $SLURM_JOB_ID"
 echo "Node: $SLURMD_NODENAME"
 echo "Date: $(date)"
 echo "=========================================================="
-
-mkdir -p logs
 
 cd /storage/home/amine/thesis/FullAnnotation_Qwen
 
@@ -31,6 +30,9 @@ mamba activate llm-research
 # Load environment variables (.env) and fix libstdc++
 set -a; source /storage/home/amine/thesis/.env; set +a
 export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
+
+# Ensure model download dir exists on shared storage
+mkdir -p /storage/nobackup/amine/models
 
 echo ""
 echo "1. RUNNING ALL ATTRIBUTES (Feature/Dynamic Mode)..."

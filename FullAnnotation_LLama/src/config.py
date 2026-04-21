@@ -11,7 +11,7 @@ DATASET_PATH = os.path.join(DATASET_FOLDER, DATASET_FILENAME)
 
 # Model — vLLM uses HuggingFace model IDs (downloaded automatically)
 MODEL_ID = "hugging-quants/Meta-Llama-3.1-70B-Instruct-AWQ-INT4"
-MODEL_DOWNLOAD_DIR = "/scratch/amine/models"
+MODEL_DOWNLOAD_DIR = "/storage/nobackup/amine/models"
 
 # vLLM settings
 GPU_MEMORY_UTILIZATION = 0.90
