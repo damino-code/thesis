@@ -3,13 +3,13 @@ import os
 
 
 class AnnotatorFeaturesLoader:
-    """Load and cache annotator features from selected_comments.csv"""
+    """Load and cache annotator features from processed_dataset.csv"""
 
     def __init__(self, csv_path=None):
         if csv_path is None:
             src_dir = os.path.dirname(os.path.abspath(__file__))
-            base_dir = os.path.dirname(os.path.dirname(os.path.dirname(src_dir)))
-            csv_path = os.path.join(base_dir, "Dataset", "selected_comments.csv")
+            base_dir = os.path.dirname(os.path.dirname(src_dir))
+            csv_path = os.path.join(base_dir, "Dataset", "processed_dataset.csv")
         self.csv_path = csv_path
         self.features_df = None
         self.features_cache = {}

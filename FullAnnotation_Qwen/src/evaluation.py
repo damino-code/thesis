@@ -3,10 +3,16 @@ import numpy as np
 import json
 import os
 import glob
-from sklearn.metrics import f1_score, accuracy_score, mean_absolute_error, confusion_matrix
+from sklearn.metrics import f1_score, accuracy_score, mean_absolute_error, mean_squared_error, confusion_matrix
 from datetime import datetime
 import config
-from visualization import plot_correlation_matrix, plot_scatter_plots, plot_confusion_matrix, plot_correlation_bars
+from visualization import (
+    plot_correlation_matrix,
+    plot_scatter_plots,
+    plot_confusion_matrix,
+    plot_correlation_bars,
+    plot_spearman_bars,
+)
 from data_loader import load_dataset
 
 
@@ -72,29 +78,34 @@ def evaluate_predictions(llm_df, human_df, mode_dir="vanilla"):
     print(f"EVALUATION: LLM vs Human Annotations")
     print("=" * 70)
 
-    eval_df = llm_df.copy()
-    human_df_indexed = human_df.set_index('comment_id') if 'comment_id' in human_df.columns else human_df
+    join_keys = ['comment_id', 'annotator_id']
+    missing_llm = [k for k in join_keys if k not in llm_df.columns]
+    missing_human = [k for k in join_keys if k not in human_df.columns]
+    if missing_llm or missing_human:
+        raise ValueError(
+            f"Missing join keys — LLM missing {missing_llm}, human missing {missing_human}. "
+            "Re-run merge_results.py to attach annotator_id to the LLM predictions."
+        )
 
-    matched_count = 0
-    for idx, row in eval_df.iterrows():
-        comment_id = row.get('comment_id', row.get('index'))
+    human_cols = join_keys + [a for a in config.ATTRIBUTES if a in human_df.columns]
+    human_subset = human_df[human_cols].rename(
+        columns={a: f'{a}_human' for a in config.ATTRIBUTES if a in human_df.columns}
+    )
 
-        if comment_id in human_df_indexed.index:
-            human_row = human_df_indexed.loc[comment_id]
-            if isinstance(human_row, pd.DataFrame):
-                human_row = human_row.iloc[0]
+    eval_df = pd.merge(llm_df, human_subset, on=join_keys, how='inner')
+    print(f"Matched {len(eval_df)} (comment_id, annotator_id) pairs for evaluation.")
 
-            for attr in config.ATTRIBUTES:
-                if attr in human_row:
-                    eval_df.at[idx, f'{attr}_human'] = human_row[attr]
-            matched_count += 1
-
-    print(f"Matched {matched_count} comments for evaluation.")
+    # Coerce LLM columns to numeric (the analyzer can write "invalid" strings).
+    for attr in config.ATTRIBUTES:
+        if attr in eval_df.columns:
+            eval_df[attr] = pd.to_numeric(eval_df[attr], errors='coerce')
 
     correlations = {}
+    spearman_correlations = {}
     maes = {}
+    rmses = {}
 
-    print(f"\n{'Attribute':<20} {'Correlation':<15} {'MAE':<10} {'Strength'}")
+    print(f"\n{'Attribute':<14} {'Pearson':<10} {'Spearman':<10} {'MAE':<8} {'RMSE':<8} {'Strength'}")
     print("-" * 70)
 
     for attr in config.ATTRIBUTES:
@@ -105,10 +116,14 @@ def evaluate_predictions(llm_df, human_df, mode_dir="vanilla"):
 
             if len(llm_vals) > 0:
                 corr = llm_vals.corr(human_vals)
+                spearman = llm_vals.corr(human_vals, method='spearman')
                 mae = mean_absolute_error(human_vals, llm_vals)
+                rmse = float(np.sqrt(mean_squared_error(human_vals, llm_vals)))
 
                 correlations[attr] = corr
+                spearman_correlations[attr] = spearman
                 maes[attr] = mae
+                rmses[attr] = rmse
 
                 if abs(corr) >= 0.7:
                     strength = "Strong"
@@ -118,9 +133,9 @@ def evaluate_predictions(llm_df, human_df, mode_dir="vanilla"):
                     strength = "Weak"
                 else:
                     strength = "Very Weak"
-                print(f"{attr:<20} {corr:+.4f}          {mae:.4f}     {strength}")
+                print(f"{attr:<14} {corr:+.4f}   {spearman:+.4f}   {mae:.3f}   {rmse:.3f}   {strength}")
 
-    accuracy, f1, mae_hs = 0, 0, 0
+    accuracy, f1, mae_hs, rmse_hs = 0, 0, 0, 0
     if 'hatespeech' in eval_df.columns and 'hatespeech_human' in eval_df.columns:
         hs_data = eval_df.dropna(subset=['hatespeech', 'hatespeech_human'])
         if len(hs_data) > 0:
@@ -130,11 +145,13 @@ def evaluate_predictions(llm_df, human_df, mode_dir="vanilla"):
             accuracy = accuracy_score(human_classes, llm_classes)
             f1 = f1_score(human_classes, llm_classes, average='binary', zero_division=0)
             mae_hs = mean_absolute_error(hs_data['hatespeech_human'], hs_data['hatespeech'])
+            rmse_hs = float(np.sqrt(mean_squared_error(hs_data['hatespeech_human'], hs_data['hatespeech'])))
 
             print(f"\nHATE SPEECH CLASSIFICATION METRICS:")
             print(f"  Accuracy:  {accuracy:.3f}")
             print(f"  F1-Score:  {f1:.3f}")
             print(f"  MAE:       {mae_hs:.3f}")
+            print(f"  RMSE:      {rmse_hs:.3f}")
 
             cm = confusion_matrix(human_classes, llm_classes)
             try:
@@ -162,12 +179,21 @@ def evaluate_predictions(llm_df, human_df, mode_dir="vanilla"):
 
     if correlations:
         plot_correlation_bars(correlations, mode_dir=mode_dir)
+    if spearman_correlations:
+        plot_spearman_bars(spearman_correlations, mode_dir=mode_dir)
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     metrics = {
         'correlations': correlations,
+        'spearman_correlations': spearman_correlations,
         'maes': maes,
-        'hate_speech_metrics': {'accuracy': accuracy, 'f1': f1, 'mae': mae_hs}
+        'rmses': rmses,
+        'hate_speech_metrics': {
+            'accuracy': accuracy,
+            'f1': f1,
+            'mae': mae_hs,
+            'rmse': rmse_hs,
+        },
     }
 
     global_viz_root = "/storage/home/amine/thesis/global_visualisation"

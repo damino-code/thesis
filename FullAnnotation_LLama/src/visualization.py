@@ -115,3 +115,33 @@ def plot_correlation_bars(correlations, mode_dir="vanilla"):
 
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         save_plot(f"correlation_bars_{timestamp}.png", mode_dir)
+
+
+def plot_spearman_bars(correlations, mode_dir="vanilla"):
+    title_suffix = "Persona" if mode_dir == "persona" else "Standard"
+    if correlations:
+        attrs = list(correlations.keys())
+        corr_values = list(correlations.values())
+
+        sorted_indices = np.argsort(corr_values)
+        sorted_attrs = [attrs[i] for i in sorted_indices]
+        sorted_corr_values = [corr_values[i] for i in sorted_indices]
+
+        plt.figure(figsize=(12, 7))
+        bars = plt.barh(sorted_attrs, sorted_corr_values,
+                        color=['steelblue' if c > 0 else 'darkorange' for c in sorted_corr_values])
+        plt.xlabel('Spearman Correlation (LLM vs Human)')
+        plt.ylabel('Attribute')
+        plt.title(f'Spearman Correlation ({title_suffix})')
+        plt.xlim([-1.0, 1.0])
+        plt.grid(axis='x', linestyle='--', alpha=0.7)
+
+        for bar in bars:
+            plt.text(bar.get_width(), bar.get_y() + bar.get_height() / 2,
+                     f'{bar.get_width():.2f}',
+                     va='center', ha='left' if bar.get_width() >= 0 else 'right')
+
+        plt.tight_layout()
+
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        save_plot(f"spearman_bars_{timestamp}.png", mode_dir)

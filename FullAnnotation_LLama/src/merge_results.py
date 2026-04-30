@@ -4,6 +4,7 @@ import glob
 import sys
 from datetime import datetime
 import config
+from data_loader import load_dataset
 
 
 def merge_results(use_dynamic=False):
@@ -40,29 +41,55 @@ def merge_results(use_dynamic=False):
         if 'raw_response' in df.columns:
             df = df.rename(columns={'raw_response': f'{attr}_raw_response'})
 
+        # Merge on `index` because comment_id is non-unique
+        # (same comment annotated by several annotators).
         if merged_df is None:
             merged_df = df
         else:
-            common_cols = ['comment_id', 'index', 'text', 'raw_output']
-            cols_to_use = ['comment_id'] + [c for c in df.columns if c not in common_cols]
-            merged_df = pd.merge(merged_df, df[cols_to_use], on='comment_id', how='outer')
+            drop_cols = ['comment_id', 'text', 'raw_output']
+            cols_to_use = ['index'] + [c for c in df.columns if c not in drop_cols and c != 'index']
+            merged_df = pd.merge(merged_df, df[cols_to_use], on='index', how='outer')
 
-    if merged_df is not None:
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    if merged_df is None:
+        print("\nNo data found to merge.")
+        return
 
-        if use_dynamic:
-            output_filename = f"merged_persona_results_{timestamp}.csv"
-            output_path = os.path.join(config.RESULTS_FOLDER, "persona_results", output_filename)
-        else:
-            output_filename = f"merged_standard_results_{timestamp}.csv"
-            output_path = os.path.join(config.RESULTS_FOLDER, output_filename)
+    # Attach annotator_id from the source dataset using the row index.
+    print("\nAttaching annotator_id from dataset...")
+    ds = load_dataset()
+    ds = ds.reset_index().rename(columns={'index': '_ds_index'})
+    keys = ds[['_ds_index', 'comment_id', 'annotator_id']]
+    merged_df = pd.merge(
+        merged_df,
+        keys,
+        left_on='index', right_on='_ds_index',
+        how='left',
+        suffixes=('', '_ds'),
+    )
+    if 'comment_id_ds' in merged_df.columns:
+        merged_df['comment_id'] = merged_df['comment_id'].fillna(merged_df['comment_id_ds'])
+        merged_df = merged_df.drop(columns=['comment_id_ds'])
+    merged_df = merged_df.drop(columns=['_ds_index'])
 
-        os.makedirs(os.path.dirname(output_path), exist_ok=True)
-        merged_df.to_csv(output_path, index=False)
-        print(f"\nSuccessfully merged {files_found} attributes.")
-        print(f"Saved to: {output_path}")
+    # Reorder so the join keys are at the front.
+    front = ['index', 'comment_id', 'annotator_id']
+    front = [c for c in front if c in merged_df.columns]
+    other = [c for c in merged_df.columns if c not in front]
+    merged_df = merged_df[front + other]
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    if use_dynamic:
+        output_filename = f"merged_persona_results_{timestamp}.csv"
+        output_path = os.path.join(config.RESULTS_FOLDER, "persona_results", output_filename)
     else:
-        print(f"\nNo data found to merge.")
+        output_filename = f"merged_standard_results_{timestamp}.csv"
+        output_path = os.path.join(config.RESULTS_FOLDER, output_filename)
+
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    merged_df.to_csv(output_path, index=False)
+    print(f"\nSuccessfully merged {files_found} attributes ({len(merged_df)} rows).")
+    print(f"Saved to: {output_path}")
 
 
 if __name__ == "__main__":

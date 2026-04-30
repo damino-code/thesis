@@ -149,7 +149,9 @@ class SingleAttributeAnalyzer:
         if self.use_dynamic and comment_id is not None:
             user_message = self._build_dynamic_prompt(attribute, comment_id, text, annotator_id)
             if user_message is None:
-                user_message = self.prompts[attribute].format(text=text[:500])
+                # Persona features missing — caller marks this row invalid
+                # rather than silently falling back to the vanilla prompt.
+                return None
         else:
             user_message = self.prompts[attribute].format(text=text[:500])
 
@@ -204,6 +206,9 @@ class SingleAttributeAnalyzer:
         """Analyze a single comment for a single attribute."""
         full_prompt = self.build_prompt(text, attribute, comment_id, annotator_id)
 
+        if full_prompt is None:
+            return {attribute: "invalid", 'confidence': 0.0}
+
         try:
             # First attempt with logprobs=10
             outputs = self.model.generate([full_prompt], self.sampling_params)
@@ -225,27 +230,38 @@ class SingleAttributeAnalyzer:
 
     def batch_analyze(self, texts, attribute, comment_ids=None, annotator_ids=None):
         """Batch analyze multiple comments for a single attribute."""
-        prompts = []
+        results = [None] * len(texts)
+        valid_prompts = []
+        valid_indices = []
+
         for i, text in enumerate(texts):
             cid = comment_ids[i] if comment_ids else None
             aid = annotator_ids[i] if annotator_ids else None
             prompt = self.build_prompt(text, attribute, cid, aid)
-            prompts.append(prompt)
+            if prompt is None:
+                # Persona features unavailable — mark invalid, skip the LLM.
+                results[i] = {attribute: "invalid", 'confidence': 0.0}
+            else:
+                valid_prompts.append(prompt)
+                valid_indices.append(i)
+
+        if not valid_prompts:
+            return results
 
         # First pass with logprobs=10
-        outputs = self.model.generate(prompts, self.sampling_params)
+        outputs = self.model.generate(valid_prompts, self.sampling_params)
 
-        results = [None] * len(outputs)
         retry_indices = []
         retry_prompts = []
 
-        for i, output in enumerate(outputs):
+        for j, output in enumerate(outputs):
+            idx = valid_indices[j]
             result = self._extract_result(output, attribute, all_labels_required=True)
             if result is not None:
-                results[i] = result
+                results[idx] = result
             else:
-                retry_indices.append(i)
-                retry_prompts.append(prompts[i])
+                retry_indices.append(idx)
+                retry_prompts.append(valid_prompts[j])
 
         # Retry missing ones with logprobs=20
         if retry_prompts:
