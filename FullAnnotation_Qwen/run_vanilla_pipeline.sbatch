@@ -44,7 +44,7 @@ python src/merge_results.py
 
 echo ""
 echo "3. EVALUATING..."
-echo "1" | python src/evaluation.py
+printf '1\n\n' | python src/evaluation.py
 
 echo ""
 echo "=========================================================="

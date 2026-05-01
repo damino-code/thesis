@@ -44,7 +44,7 @@ python src/merge_results.py dynamic
 
 echo ""
 echo "3. EVALUATING..."
-echo "2" | python src/evaluation.py
+printf '2\n\n' | python src/evaluation.py
 
 echo ""
 echo "=========================================================="
