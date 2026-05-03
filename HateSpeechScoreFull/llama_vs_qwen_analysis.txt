@@ -1,0 +1,108 @@
+================================================================
+  HATE SPEECH SCORE — Llama-3.3-70B vs. Qwen2.5-72B
+  Why Llama wins the multivariate fit
+================================================================
+
+DATA
+  Setup        : 39,565 unique comments (aggregated across annotators)
+  Target       : mean IRT hate_speech_score per comment
+                 (range [-8.34, 6.30], mean = -0.944, std = 2.073)
+  Features     : score_adj_i = attribute_i × confidence_i, per attribute
+  Model        : Ridge regression (alpha grid: 1e-4 ... 100)
+  Validation   : pure 5-fold CV (4 folds fit / 1 fold test, rotated)
+
+OVERALL RESULTS  (5-fold Ridge R^2, standard mode)
+  Llama-3.3-70B : 0.7055 +/- 0.006   (best alpha = 100)
+  Qwen2.5-72B   : 0.6891 +/- 0.006   (best alpha = 100)
+  Gap           : 0.0164  (consistent across folds; ~3 fold-stds apart)
+
+----------------------------------------------------------------
+  1. PER-ATTRIBUTE SOLO RIDGE R^2  (5-fold, single-feature model)
+----------------------------------------------------------------
+  attribute         Llama       Qwen      Delta
+  --------------------------------------------------
+  sentiment        0.5122     0.5478     -0.036
+  respect          0.5611     0.5970     -0.036
+  insult           0.5692     0.5889     -0.020
+  humiliate        0.6063     0.5662     +0.040
+  status           0.5182     0.5118     +0.006
+  dehumanize       0.5544     0.4306     +0.124   <-- biggest
+  violence         0.3264     0.2881     +0.038
+  genocide         0.1193     0.1197     -0.000
+  attack_defend    0.6000     0.5513     +0.049
+  hatespeech       0.4814     0.4284     +0.053
+
+  Top-3 attributes per model (solo R^2):
+    Llama : humiliate (0.606), attack_defend (0.600), insult (0.569)
+    Qwen  : respect   (0.597), insult        (0.589), humiliate (0.566)
+
+----------------------------------------------------------------
+  2. PREDICTION SPREAD  (std of attr * confidence after aggregation)
+----------------------------------------------------------------
+  attribute         Llama std   Qwen std
+  ---------------------------------------
+  sentiment           1.16        1.06
+  respect             1.09        1.02
+  insult              1.58        1.33
+  humiliate           1.56        1.27
+  dehumanize          1.39        1.10
+  attack_defend       1.37        1.11
+
+  Llama uses more of the 0-4 scale; Qwen clusters values in the middle.
+  Ridge needs spread in the predictors to fit a slope, so a compressed
+  predictor caps how much variance it can explain.
+
+----------------------------------------------------------------
+  3. WHY THE MULTIVARIATE GAP  (where the 0.0164 R^2 comes from)
+----------------------------------------------------------------
+  The IRT hate_speech_score blends two axes:
+
+    Axis A — Politeness <-> Rudeness    (sentiment, respect, insult)
+    Axis B — Hate severity              (dehumanize, humiliate,
+                                         attack_defend, violence,
+                                         hatespeech)
+
+  Qwen's three strongest signals all live on Axis A. Adding the 2nd and
+  3rd axis-A attributes buys Ridge very little extra variance because
+  they are highly correlated with each other -- pure redundancy.
+
+  Llama's top three already span both axes (rudeness + direct attack),
+  and then `dehumanize` (solo R^2 = 0.554) comes in 4th carrying genuine
+  Axis-B information that Qwen cannot match (Qwen's `dehumanize`
+  R^2 = 0.431 -- a 0.124 gap).
+
+  Net effect:
+    - Qwen wins +0.04 R^2 on Axis A (respect, sentiment).
+    - Llama wins much more on Axis B (dehumanize +0.124, attack_defend
+      +0.049, hatespeech +0.053, violence +0.038, humiliate +0.040).
+    - The target depends on both axes; Ridge picks up Llama's
+      complementary Axis-B signal while Qwen runs out of new variance.
+
+----------------------------------------------------------------
+  4. WHAT THIS IS NOT
+----------------------------------------------------------------
+  - Not a confidence issue.
+      Qwen's mean confidences are roughly equal or slightly higher
+      (e.g., respect 0.90 vs 0.87, insult 0.87 vs 0.81). Multiplying
+      by confidence does not penalise Qwen.
+
+  - Not a per-attribute correlation issue at the row level.
+      Several pairwise corr(attr, target) values favour Qwen
+      (insult, sentiment, respect). The advantage only appears once
+      Ridge fits multiple attributes jointly and has to find
+      *complementary* signal.
+
+  - Not a "Llama is a better hate detector" claim.
+      Qwen is slightly better at scoring the politeness/rudeness axis
+      in isolation. On a binary classification target (hate vs. not),
+      the gap could shrink or invert.
+
+----------------------------------------------------------------
+  5. ONE-LINE SUMMARY
+----------------------------------------------------------------
+  Llama wins because it provides Ridge with diverse, well-spread
+  predictors across both axes of the IRT score; Qwen concentrates its
+  predictive power in one redundant axis and gives up ground on
+  hate-severity attributes (especially dehumanize), which is precisely
+  where the IRT target needs help.
+================================================================

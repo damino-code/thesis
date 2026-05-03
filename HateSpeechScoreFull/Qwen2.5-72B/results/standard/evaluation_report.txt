@@ -1,0 +1,40 @@
+================================================================
+  HATE SPEECH SCORE — FULL ANNOTATION (Qwen2.5-72B)
+  Mode      : STANDARD
+  Generated : 2026-05-03T23:08:35.496887
+================================================================
+
+DATA
+  Predictions file : merged_standard_results_20260430_021949.csv
+  Unique comments  : 39565
+  CV scheme        : 5-fold (4 folds fit / 1 fold test)
+
+CROSS-VALIDATION (mean ± std across 5 folds)
+  Ridge best α     : 100.0
+  Ridge R²         : 0.6891 ± 0.0056
+  Ridge MAE        : 0.8853 ± 0.0056
+  Ridge RMSE       : 1.1558 ± 0.0103
+
+FINAL WEIGHTS (re-fit on all unique comments)
+  Attribute                  Ridge
+  --------------------------------
+  sentiment              -0.198684
+  respect                -0.448228
+  insult                  0.167197
+  humiliate               0.262663
+  status                 -0.074538
+  dehumanize              0.133948
+  violence                0.137865
+  genocide                0.141448
+  attack_defend           0.234211
+  hatespeech             -0.190700
+
+  Ridge intercept : -2.207201
+
+INTERPRETATION
+  R² = 1.0  → predictions perfectly match hate_speech_score
+  R² = 0.0  → no better than predicting the mean
+  Positive weights expected on hate-related attributes
+  (insult, dehumanize, violence, genocide, hatespeech) and
+  negative weights on protective attributes (respect, sentiment).
+================================================================
