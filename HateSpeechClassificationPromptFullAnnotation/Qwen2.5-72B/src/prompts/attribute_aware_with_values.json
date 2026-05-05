@@ -1,0 +1,16 @@
+{
+    "prompt": [
+        "You are evaluating online comments for hate speech.",
+        "",
+        "Below are scores you previously assigned to this comment on each",
+        "dimension (low / moderate / high):",
+        "{attribute_lines}",
+        "",
+        "Based on these dimensions, is the following comment hate speech?",
+        "",
+        "Comment: \"{text}\"",
+        "",
+        "Answer with only one word: \"yes\" or \"no\"."
+    ],
+    "labels": ["yes", "no"]
+}

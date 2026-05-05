@@ -34,6 +34,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
+from scipy.stats import pearsonr, spearmanr
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import KFold
@@ -173,6 +174,16 @@ def summarise(per_fold: list) -> dict:
     }
 
 
+def correlations(y_true, y_pred) -> dict:
+    """Pearson + Spearman of predicted HateScore vs human hate_speech_score."""
+    pr, pr_p = pearsonr(y_true, y_pred)
+    sr, sr_p = spearmanr(y_true, y_pred)
+    return {
+        "pearson":  {"r":   float(pr), "p_value": float(pr_p)},
+        "spearman": {"rho": float(sr), "p_value": float(sr_p)},
+    }
+
+
 # ---------------------------------------------------------------------------
 # Plotting
 # ---------------------------------------------------------------------------
@@ -248,6 +259,8 @@ def plot_weights(ridge_w, names, out_dir: Path, mode: str):
 
 def save_report(results: dict, out_dir: Path):
     rs = results["ridge_cv_summary"]
+    co = results["correlations"]["oof"]
+    cf = results["correlations"]["final"]
     lines = [
         "=" * 64,
         f"  HATE SPEECH SCORE — FULL ANNOTATION ({results['model']})",
@@ -265,6 +278,12 @@ def save_report(results: dict, out_dir: Path):
         f"  Ridge R²         : {rs['r2']['mean']:.4f} ± {rs['r2']['std']:.4f}",
         f"  Ridge MAE        : {rs['mae']['mean']:.4f} ± {rs['mae']['std']:.4f}",
         f"  Ridge RMSE       : {rs['rmse']['mean']:.4f} ± {rs['rmse']['std']:.4f}",
+        "",
+        "CORRELATION WITH HUMAN HATE SPEECH SCORE  (predicted vs hate_speech_score)",
+        f"  OOF   Pearson r  : {co['pearson']['r']:.4f}   (p={co['pearson']['p_value']:.2e})",
+        f"  OOF   Spearman ρ : {co['spearman']['rho']:.4f}   (p={co['spearman']['p_value']:.2e})",
+        f"  Final Pearson r  : {cf['pearson']['r']:.4f}   (p={cf['pearson']['p_value']:.2e})   [in-sample]",
+        f"  Final Spearman ρ : {cf['spearman']['rho']:.4f}   (p={cf['spearman']['p_value']:.2e})   [in-sample]",
         "",
         "FINAL WEIGHTS (re-fit on all unique comments)",
         f"  {'Attribute':<20}  {'Ridge':>10}",
@@ -355,6 +374,15 @@ def run_mode(mode: str):
 
     # Final fit on all unique comments
     final_ridge = Ridge(alpha=best_alpha, fit_intercept=True).fit(X, y)
+    fit_ridge = final_ridge.predict(X)
+
+    # Correlations between predicted HateScore and human hate_speech_score
+    corr_oof = correlations(y, oof_ridge)
+    corr_fit = correlations(y, fit_ridge)
+    print(f"[corr]  OOF   Pearson r = {corr_oof['pearson']['r']:.4f}"
+          f"  Spearman ρ = {corr_oof['spearman']['rho']:.4f}")
+    print(f"[corr]  Final Pearson r = {corr_fit['pearson']['r']:.4f}"
+          f"  Spearman ρ = {corr_fit['spearman']['rho']:.4f}  (in-sample)")
 
     plot_cv_results(ridge_cv, best_alpha, out_dir, mode)
     plot_predictions(y, oof_ridge, out_dir, mode)
@@ -373,6 +401,10 @@ def run_mode(mode: str):
             str(a): [f for f in v] for a, v in ridge_cv.items()
         },
         "ridge_cv_summary": ridge_summary,
+        "correlations": {
+            "oof":   corr_oof,
+            "final": corr_fit,
+        },
         "weights": {
             "ridge": {
                 "intercept":    round(float(final_ridge.intercept_), 8),

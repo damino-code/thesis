@@ -1,0 +1,16 @@
+{
+    "prompt": [
+        "You are rating a comment on a hate-speech severity scale from 0 to 9.",
+        "",
+        "  0-1 : strongly counter-hate / supportive of the targeted group",
+        "  2-3 : mildly supportive or critical-of-hate",
+        "  4-5 : neutral, ambiguous, or off-topic",
+        "  6-7 : mildly hateful, derogatory, or biased",
+        "  8-9 : strongly hateful, dehumanising, or calling for harm",
+        "",
+        "Comment: \"{text}\"",
+        "",
+        "RESPOND WITH ONLY THE NUMBER (0-9)."
+    ],
+    "labels": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+}

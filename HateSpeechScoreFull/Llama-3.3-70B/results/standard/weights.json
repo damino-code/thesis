@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-03T23:08:27.680059",
+  "timestamp": "2026-05-05T17:07:14.940670",
   "model": "Llama-3.3-70B",
   "mode": "standard",
   "pred_file": "merged_standard_results_20260430_022603.csv",
@@ -229,6 +229,28 @@
         1.1384925291566939,
         1.1119236348022086
       ]
+    }
+  },
+  "correlations": {
+    "oof": {
+      "pearson": {
+        "r": 0.8399775646369454,
+        "p_value": 0.0
+      },
+      "spearman": {
+        "rho": 0.8304875951799736,
+        "p_value": 0.0
+      }
+    },
+    "final": {
+      "pearson": {
+        "r": 0.8401449732472737,
+        "p_value": 0.0
+      },
+      "spearman": {
+        "rho": 0.8306242907656659,
+        "p_value": 0.0
+      }
     }
   },
   "weights": {

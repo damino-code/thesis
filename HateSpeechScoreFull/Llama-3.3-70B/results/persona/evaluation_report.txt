@@ -1,7 +1,7 @@
 ================================================================
   HATE SPEECH SCORE — FULL ANNOTATION (Llama-3.3-70B)
   Mode      : PERSONA
-  Generated : 2026-05-03T23:08:29.031339
+  Generated : 2026-05-05T17:07:16.399972
 ================================================================
 
 DATA
@@ -14,6 +14,12 @@ CROSS-VALIDATION (mean ± std across 5 folds)
   Ridge R²         : 0.7070 ± 0.0045
   Ridge MAE        : 0.8537 ± 0.0088
   Ridge RMSE       : 1.1220 ± 0.0110
+
+CORRELATION WITH HUMAN HATE SPEECH SCORE  (predicted vs hate_speech_score)
+  OOF   Pearson r  : 0.8409   (p=0.00e+00)
+  OOF   Spearman ρ : 0.8322   (p=0.00e+00)
+  Final Pearson r  : 0.8410   (p=0.00e+00)   [in-sample]
+  Final Spearman ρ : 0.8323   (p=0.00e+00)   [in-sample]
 
 FINAL WEIGHTS (re-fit on all unique comments)
   Attribute                  Ridge

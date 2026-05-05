@@ -1,7 +1,7 @@
 ================================================================
   HATE SPEECH SCORE — FULL ANNOTATION (Qwen2.5-72B)
   Mode      : PERSONA
-  Generated : 2026-05-03T23:08:36.825276
+  Generated : 2026-05-05T17:07:17.861014
 ================================================================
 
 DATA
@@ -14,6 +14,12 @@ CROSS-VALIDATION (mean ± std across 5 folds)
   Ridge R²         : 0.6865 ± 0.0060
   Ridge MAE        : 0.8890 ± 0.0077
   Ridge RMSE       : 1.1606 ± 0.0097
+
+CORRELATION WITH HUMAN HATE SPEECH SCORE  (predicted vs hate_speech_score)
+  OOF   Pearson r  : 0.8286   (p=0.00e+00)
+  OOF   Spearman ρ : 0.8143   (p=0.00e+00)
+  Final Pearson r  : 0.8287   (p=0.00e+00)   [in-sample]
+  Final Spearman ρ : 0.8144   (p=0.00e+00)   [in-sample]
 
 FINAL WEIGHTS (re-fit on all unique comments)
   Attribute                  Ridge

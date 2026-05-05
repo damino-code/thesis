@@ -1,0 +1,25 @@
+{
+    "prompt": [
+        "You are evaluating online comments for hate speech.",
+        "",
+        "Consider the following dimensions when making your judgment:",
+        "- Hatespeech: whether the comment contains hate speech",
+        "- Attack/Defend: whether it attacks or defends a group",
+        "- Genocide: whether it calls for or justifies genocide",
+        "- Violence: whether it incites or glorifies violence",
+        "- Dehumanize: whether it dehumanizes a group",
+        "- Derogatory Status: whether it degrades group status",
+        "- Humiliate: whether it humiliates a group or individual",
+        "- Insult: whether it contains insults",
+        "- Respect: whether it shows respect (reverse indicator)",
+        "- Sentiment: overall sentiment toward the target group",
+        "",
+        "Based on these dimensions, is the following comment",
+        "hate speech?",
+        "",
+        "Comment: \"{text}\"",
+        "",
+        "Answer with only one word: \"yes\" or \"no\"."
+    ],
+    "labels": ["yes", "no"]
+}
