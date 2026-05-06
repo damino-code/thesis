@@ -1,0 +1,22 @@
+==============================================================================
+  HATE-SPEECH-SCORE PROMPT — STANDARD
+  Generated   : 2026-05-06T12:22:46.358833
+  Predictions : results_hate_speech_score_20260506_122242.csv
+==============================================================================
+
+PER-COMMENT (mean across annotators)
+  n           : 39565
+  Pearson r   : +0.7791   (p=0)
+  Spearman ρ  : +0.7752  (p=0)
+  R²          : -0.6369
+  MAE / RMSE  : 2.3562  /  2.6523
+
+  Threshold   : hate_speech_score >= 0.5
+  Positives   : 10437 / 39565
+  Accuracy    : 0.5484
+  F1          : 0.5358
+  Precision   : 0.3676
+  Recall      : 0.9879
+  AUROC       : 0.8733
+
+==============================================================================

@@ -1,0 +1,35 @@
+==============================================================================
+  HATE-SPEECH-SCORE PROMPT — PERSONA
+  Generated   : 2026-05-06T12:58:07.421880
+  Predictions : results_hate_speech_score_20260506_125803.csv
+==============================================================================
+
+PER-COMMENT (mean across annotators)
+  n           : 39565
+  Pearson r   : +0.7879   (p=0)
+  Spearman ρ  : +0.7824  (p=0)
+  R²          : -0.5777
+  MAE / RMSE  : 2.3163  /  2.6039
+
+  Threshold   : hate_speech_score >= 0.5
+  Positives   : 10437 / 39565
+  Accuracy    : 0.5469
+  F1          : 0.5358
+  Precision   : 0.3671
+  Recall      : 0.9912
+  AUROC       : 0.8780
+
+PER-ROW (joined on comment_id × annotator_id)
+  n           : 135556
+  Pearson r   : +0.8650   (p=0)
+  Spearman ρ  : +0.8856  (p=0)
+  R²          : 0.0131
+  MAE / RMSE  : 2.0715  /  2.3644
+
+  Accuracy    : 0.6414
+  F1          : 0.6691
+  Precision   : 0.5034
+  Recall      : 0.9974
+  AUROC       : 0.9355
+
+==============================================================================
