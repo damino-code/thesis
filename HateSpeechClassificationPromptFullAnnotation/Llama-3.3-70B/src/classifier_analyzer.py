@@ -62,7 +62,7 @@ class HateSpeechClassifier:
         )
         self.retry_sampling_params = SamplingParams(
             max_tokens=1, temperature=0.0, top_p=1.0,
-            logprobs=40, seed=config.SEED,
+            logprobs=20, seed=config.SEED,
         )
 
     def _load_prompt(self):
