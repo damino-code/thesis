@@ -106,3 +106,41 @@ Loaded 135556 comments
 #  STRATEGY: attribute_aware_no_values
 ######################################################################
   Running batch on 135556 comments…
+  Saved 135556 predictions → /storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.3-70B/results/attribute_aware_no_values/results_attribute_aware_no_values_20260506_134441.csv
+
+######################################################################
+#  STRATEGY: attribute_aware_with_values
+######################################################################
+[attr-values] Loading: merged_standard_results_20260430_022603.csv
+  Running batch on 135556 comments…
+(EngineCore pid=3541044) INFO 05-06 14:19:38 [core.py:1210] Shutdown initiated (timeout=0)
+(EngineCore pid=3541044) INFO 05-06 14:19:38 [core.py:1233] Shutdown complete
+  Saved 135556 predictions → /storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.3-70B/results/attribute_aware_with_values/results_attribute_aware_with_values_20260506_141938.csv
+
+All strategies done.
+
+2. EVALUATING (all strategies side-by-side)...
+[skip:zero_shot] No results CSV.
+[skip:definition] No results CSV.
+[eval:attribute_aware_no_values] results_attribute_aware_no_values_20260506_134441.csv
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+[eval:attribute_aware_with_values] results_attribute_aware_with_values_20260506_141938.csv
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+
+Saved: /storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.3-70B/results/classification_comparison.txt
+Saved: /storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.3-70B/results/classification_comparison.json
+
+======================================================================
+  SUMMARY (per-comment)
+  strategy                               F1    AUROC      acc
+  ------------------------------------------------------------
+  zero_shot                         (no data)
+  definition                        (no data)
+  attribute_aware_no_values          0.6030   0.8839   0.6697
+  attribute_aware_with_values        0.5491   0.8865   0.5749
+======================================================================
+
+==========================================================
+Analysis completely finished at Wed May  6 14:19:43 CEST 2026

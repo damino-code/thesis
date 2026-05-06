@@ -108,3 +108,39 @@ Loaded 135556 comments
 #  STRATEGY: attribute_aware_no_values
 ######################################################################
   Running batch on 135556 comments…
+[error:attribute_aware_no_values] Requested sample logprobs of 40, which is greater than max allowed: 20 (parameter=logprobs, value=40)
+
+######################################################################
+#  STRATEGY: attribute_aware_with_values
+######################################################################
+[attr-values] Loading: merged_standard_results_20260430_021949.csv
+  Running batch on 135556 comments…
+(EngineCore pid=3541032) INFO 05-06 14:14:54 [core.py:1210] Shutdown initiated (timeout=0)
+(EngineCore pid=3541032) INFO 05-06 14:14:54 [core.py:1233] Shutdown complete
+  Saved 135556 predictions → /storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Qwen2.5-72B/results/attribute_aware_with_values/results_attribute_aware_with_values_20260506_141453.csv
+
+All strategies done.
+
+2. EVALUATING (all strategies side-by-side)...
+[skip:zero_shot] No results CSV.
+[skip:definition] No results CSV.
+[skip:attribute_aware_no_values] No results CSV.
+[eval:attribute_aware_with_values] results_attribute_aware_with_values_20260506_141453.csv
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+
+Saved: /storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Qwen2.5-72B/results/classification_comparison.txt
+Saved: /storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Qwen2.5-72B/results/classification_comparison.json
+
+======================================================================
+  SUMMARY (per-comment)
+  strategy                               F1    AUROC      acc
+  ------------------------------------------------------------
+  zero_shot                         (no data)
+  definition                        (no data)
+  attribute_aware_no_values         (no data)
+  attribute_aware_with_values        0.5071   0.8689   0.4898
+======================================================================
+
+==========================================================
+Analysis completely finished at Wed May  6 14:15:00 CEST 2026
