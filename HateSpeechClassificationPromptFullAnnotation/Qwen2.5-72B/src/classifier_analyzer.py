@@ -123,22 +123,20 @@ class HateSpeechClassifier:
 
         p_yes, p_no = _softmax2(yes_lp, no_lp)
         return {
-            "p_yes":         float(p_yes),
-            "p_no":          float(p_no),
-            "pred_yes":      int(p_yes >= 0.5),
-            "confidence_max": float(max(p_yes, p_no)),
-            "saw_yes":       int(seen_yes),
-            "saw_no":        int(seen_no),
+            "p_yes":    float(p_yes),
+            "p_no":     float(p_no),
+            "pred_yes": int(p_yes >= 0.5),
+            "saw_yes":  int(seen_yes),
+            "saw_no":   int(seen_no),
         }
 
     def _invalid(self):
         return {
-            "p_yes":          float("nan"),
-            "p_no":           float("nan"),
-            "pred_yes":       -1,
-            "confidence_max": 0.0,
-            "saw_yes":        0,
-            "saw_no":         0,
+            "p_yes":    float("nan"),
+            "p_no":     float("nan"),
+            "pred_yes": -1,
+            "saw_yes":  0,
+            "saw_no":   0,
         }
 
     def batch_analyze(self, texts, comment_ids=None, annotator_ids=None):

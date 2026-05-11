@@ -33,7 +33,7 @@ mkdir -p /storage/nobackup/amine/models
 
 echo ""
 echo "1. RUNNING ALL 4 PROMPT STRATEGIES (model loaded once)..."
-echo -e "all\nall\n" | python src/run_classification.py
+echo -e "1,2\nall\n" | python src/run_classification.py
 
 echo ""
 echo "2. EVALUATING (all strategies side-by-side)..."
