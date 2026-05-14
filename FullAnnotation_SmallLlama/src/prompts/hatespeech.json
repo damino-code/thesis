@@ -1,0 +1,17 @@
+{
+    "prompt": [
+        "SCORING CRITERIA (Answer based on the definitions below):",
+        "- HATESPEECH (0-2): Question: Does this comment contain hate speech? 0=No, 1=Unclear/Neutral, 2=yes",
+        "",
+        "Analyze this comment for HATE",
+        "SPEECH:",
+        "Comment: \"{text}\"",
+        "",
+        "RESPOND WITH ONLY THE NUMBER (0-2)."
+    ],
+    "labels": [
+        "0",
+        "1",
+        "2"
+    ]
+}

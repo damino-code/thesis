@@ -186,10 +186,11 @@ class SingleAttributeAnalyzer:
             return {
                 attribute: float(result["label"]),
                 'confidence': result["confidence"],
+                'label_logprobs': label_logprobs,
             }
         elif label_logprobs and not all_labels_required:
             # Missing some labels but this is the retry — mark invalid
-            return {attribute: "invalid", 'confidence': 0.0}
+            return {attribute: "invalid", 'confidence': 0.0, 'label_logprobs': label_logprobs}
         elif label_logprobs:
             # Missing some labels — signal retry needed
             return None
@@ -198,16 +199,16 @@ class SingleAttributeAnalyzer:
             generated_text = output.outputs[0].text.strip()
             numbers = re.findall(r"[-+]?\d*\.\d+|\d+", generated_text)
             if numbers:
-                return {attribute: "invalid", 'confidence': 0.0}
+                return {attribute: "invalid", 'confidence': 0.0, 'label_logprobs': {}}
             else:
-                return {attribute: "invalid", 'confidence': 0.0}
+                return {attribute: "invalid", 'confidence': 0.0, 'label_logprobs': {}}
 
     def analyze_attribute(self, text, attribute, comment_id=None, annotator_id=None):
         """Analyze a single comment for a single attribute."""
         full_prompt = self.build_prompt(text, attribute, comment_id, annotator_id)
 
         if full_prompt is None:
-            return {attribute: "invalid", 'confidence': 0.0}
+            return {attribute: "invalid", 'confidence': 0.0, 'label_logprobs': {}}
 
         try:
             # First attempt with logprobs=10
@@ -240,7 +241,7 @@ class SingleAttributeAnalyzer:
             prompt = self.build_prompt(text, attribute, cid, aid)
             if prompt is None:
                 # Persona features unavailable — mark invalid, skip the LLM.
-                results[i] = {attribute: "invalid", 'confidence': 0.0}
+                results[i] = {attribute: "invalid", 'confidence': 0.0, 'label_logprobs': {}}
             else:
                 valid_prompts.append(prompt)
                 valid_indices.append(i)

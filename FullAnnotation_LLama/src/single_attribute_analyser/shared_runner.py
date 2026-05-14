@@ -76,6 +76,14 @@ def run_attribute_analysis(attribute_name, sample_size='all', use_dynamic=False,
         cols.insert(0, cols.pop(cols.index('comment_id')))
         out_df = out_df[cols]
 
+    # Save logprobs to a separate file, then drop the column from main results
+    if 'label_logprobs' in out_df.columns:
+        logprobs_df = out_df[['comment_id', 'index', 'label_logprobs']].copy() if 'comment_id' in out_df.columns else out_df[['index', 'label_logprobs']].copy()
+        logprobs_path = os.path.join(attr_result_folder, f"logprobs_{attribute_name}_{timestamp}.csv")
+        logprobs_df.to_csv(logprobs_path, index=False)
+        print(f"  Logprobs saved to: {logprobs_path}")
+        out_df = out_df.drop(columns=['label_logprobs'])
+
     filename = f"results_{attribute_name}_{timestamp}.csv"
     save_path = os.path.join(attr_result_folder, filename)
     out_df.to_csv(save_path, index=False)

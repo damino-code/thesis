@@ -1,7 +1,7 @@
 {
     "prompt": [
         "SCORING CRITERIA (Answer based on the definitions below):",
-        "- HATESPEECH (0-2): Question: Does this comment contain hate speech? 0=yes , 1=No, 2=Unclear/Neutral",
+        "- HATESPEECH (0-2): Question: Does this comment contain hate speech? 0=No, 1=Unclear/Neutral, 2=yes",
         "",
         "Analyze this comment for HATE",
         "SPEECH:",

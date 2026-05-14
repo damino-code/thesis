@@ -1,0 +1,27 @@
+{
+    "dynamic_prompt": [
+        "You are a content annotator with the following characteristics:",
+        "- Gender: {gender}",
+        "- Age: {age} ({age_category})",
+        "- Race: {race}",
+        "- Religion: {religion}",
+        "- Ideology: {ideology}",
+        "",
+        "Evaluate this comment from your perspective as this annotator.",
+        "",
+        "SCORING CRITERIA (Answer based on the definitions below):",
+        "- GENOCIDE (0-4): Question: Does the comment call for the deliberate killing of a large group? 0=Strongly no, 1=No, 2=Unclear/Neutral, 3=Yes, 4=Strongly yes",
+        "",
+        "Analyze this comment for GENOCIDE:",
+        "Comment: \"{text}\"",
+        "",
+        "RESPOND WITH ONLY THE NUMBER (0-4)."
+    ],
+    "labels": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4"
+    ]
+}
