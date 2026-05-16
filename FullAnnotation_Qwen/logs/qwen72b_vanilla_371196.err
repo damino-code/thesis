@@ -1,0 +1,18 @@
+Parse safetensors files:   0%|          | 0/11 [00:00<?, ?it/s]Parse safetensors files:   9%|▉         | 1/11 [00:00<00:02,  3.71it/s]Parse safetensors files: 100%|██████████| 11/11 [00:00<00:00, 30.06it/s]
+(EngineCore pid=348520) <frozen importlib._bootstrap_external>:1184: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+(EngineCore pid=348520) <frozen importlib._bootstrap_external>:1184: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
+(EngineCore pid=348520) Loading safetensors checkpoint shards:   0% Completed | 0/11 [00:00<?, ?it/s]
+(EngineCore pid=348520) Loading safetensors checkpoint shards:   9% Completed | 1/11 [00:12<02:07, 12.77s/it]
+(EngineCore pid=348520) Loading safetensors checkpoint shards:  18% Completed | 2/11 [00:13<00:52,  5.79s/it]
+(EngineCore pid=348520) Loading safetensors checkpoint shards:  27% Completed | 3/11 [00:14<00:28,  3.51s/it]
+(EngineCore pid=348520) Loading safetensors checkpoint shards:  36% Completed | 4/11 [00:15<00:17,  2.49s/it]
+(EngineCore pid=348520) Loading safetensors checkpoint shards:  45% Completed | 5/11 [00:16<00:11,  1.85s/it]
+(EngineCore pid=348520) Loading safetensors checkpoint shards:  55% Completed | 6/11 [00:16<00:07,  1.52s/it]
+(EngineCore pid=348520) Loading safetensors checkpoint shards:  64% Completed | 7/11 [00:17<00:05,  1.32s/it]
+(EngineCore pid=348520) Loading safetensors checkpoint shards:  73% Completed | 8/11 [00:18<00:03,  1.18s/it]
+(EngineCore pid=348520) Loading safetensors checkpoint shards:  82% Completed | 9/11 [00:19<00:02,  1.06s/it]
+(EngineCore pid=348520) Loading safetensors checkpoint shards:  91% Completed | 10/11 [00:20<00:00,  1.08it/s]
+(EngineCore pid=348520) Loading safetensors checkpoint shards: 100% Completed | 11/11 [00:20<00:00,  1.28it/s]
+(EngineCore pid=348520) Loading safetensors checkpoint shards: 100% Completed | 11/11 [00:20<00:00,  1.88s/it]
+(EngineCore pid=348520) 
+slurmstepd: error: *** JOB 371196 ON gpu-nvidia-h100 CANCELLED AT 2026-05-15T01:31:44 ***

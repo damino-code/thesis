@@ -101,3 +101,51 @@ Loaded 135556 comments
 #  STRATEGY: definition
 ######################################################################
   Running batch on 135556 comments…
+  Saved 135556 predictions → /storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Qwen2.5-72B/results/definition/results_definition_20260506_234832.csv
+
+######################################################################
+#  STRATEGY: attribute_aware_no_values
+######################################################################
+  Running batch on 135556 comments…
+  Saved 135556 predictions → /storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Qwen2.5-72B/results/attribute_aware_no_values/results_attribute_aware_no_values_20260507_002247.csv
+
+######################################################################
+#  STRATEGY: attribute_aware_with_values
+######################################################################
+[attr-values] Loading: merged_standard_results_20260430_021949.csv
+  Running batch on 135556 comments…
+(EngineCore pid=3806872) INFO 05-07 01:02:44 [core.py:1210] Shutdown initiated (timeout=0)
+(EngineCore pid=3806872) INFO 05-07 01:02:44 [core.py:1233] Shutdown complete
+  Saved 135556 predictions → /storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Qwen2.5-72B/results/attribute_aware_with_values/results_attribute_aware_with_values_20260507_010244.csv
+
+All strategies done.
+
+2. EVALUATING (all strategies side-by-side)...
+[eval:zero_shot] results_zero_shot_20260506_231536.csv
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+[eval:definition] results_definition_20260506_234832.csv
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+[eval:attribute_aware_no_values] results_attribute_aware_no_values_20260507_002247.csv
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+[eval:attribute_aware_with_values] results_attribute_aware_with_values_20260507_010244.csv
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+
+Saved: /storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Qwen2.5-72B/results/classification_comparison.txt
+Saved: /storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Qwen2.5-72B/results/classification_comparison.json
+
+======================================================================
+  SUMMARY (per-comment)
+  strategy                               F1    AUROC      acc
+  ------------------------------------------------------------
+  zero_shot                          0.5781   0.8880   0.6262
+  definition                         0.5706   0.8396   0.6318
+  attribute_aware_no_values          0.5699   0.8829   0.6114
+  attribute_aware_with_values        0.5071   0.8689   0.4898
+======================================================================
+
+==========================================================
+Analysis completely finished at Thu May  7 01:02:50 CEST 2026

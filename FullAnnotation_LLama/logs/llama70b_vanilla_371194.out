@@ -1,0 +1,72 @@
+==========================================================
+Starting Llama 3.1 70B AWQ Analysis (vLLM) - VANILLA PROMPTS
+Job ID: 371194
+Node: gpu-nvidia-h100
+Date: Fri May 15 01:30:33 CEST 2026
+==========================================================
+Fri May 15 01:30:33 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                On  |   00000000:61:00.0 Off |                    0 |
+| N/A   31C    P0             60W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+1. RUNNING ALL ATTRIBUTES (Vanilla Mode)...
+STARTING BATCH ATTRIBUTE ANALYSIS (vLLM)
+
+Select Analysis Mode:
+1. Vanilla (Standard static prompts)
+2. Feature (Annotator-specific dynamic prompts)
+
+Enter choice (1 or 2) [Default: 1]: 
+Selected: Vanilla mode
+
+Enter sample size (or 'all'): 
+Loading model (once for all attributes)...
+Loading model: hugging-quants/Meta-Llama-3.1-70B-Instruct-AWQ-INT4
+  GPU memory utilization: 0.9
+  Max model length: 1024
+  Max concurrent sequences: 256
+  Tensor parallel size: 1
+  Seed: 42
+INFO 05-15 01:30:44 [utils.py:233] non-default args: {'trust_remote_code': True, 'download_dir': '/storage/nobackup/amine/models', 'seed': 42, 'max_model_len': 1024, 'max_num_seqs': 256, 'disable_log_stats': True, 'quantization': 'awq', 'model': 'hugging-quants/Meta-Llama-3.1-70B-Instruct-AWQ-INT4'}
+INFO 05-15 01:30:45 [model.py:549] Resolved architecture: LlamaForCausalLM
+INFO 05-15 01:30:45 [model.py:1678] Using max model len 1024
+INFO 05-15 01:30:47 [awq_marlin.py:249] Detected that the model can run with awq_marlin, however you specified quantization=awq explicitly, so forcing awq. Use quantization=awq_marlin for faster inference
+INFO 05-15 01:30:47 [scheduler.py:238] Chunked prefill is enabled with max_num_batched_tokens=16384.
+INFO 05-15 01:30:48 [vllm.py:790] Asynchronous scheduling is enabled.
+(EngineCore pid=348234) INFO 05-15 01:30:50 [core.py:105] Initializing a V1 LLM engine (v0.19.1) with config: model='hugging-quants/Meta-Llama-3.1-70B-Instruct-AWQ-INT4', speculative_config=None, tokenizer='hugging-quants/Meta-Llama-3.1-70B-Instruct-AWQ-INT4', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=True, dtype=torch.float16, max_seq_len=1024, download_dir='/storage/nobackup/amine/models', load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=awq, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=42, served_model_name=hugging-quants/Meta-Llama-3.1-70B-Instruct-AWQ-INT4, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'splitting_ops': ['vllm::unified_attention', 'vllm::unified_attention_with_output', 'vllm::unified_mla_attention', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::linear_attention', 'vllm::plamo2_mamba_mixer', 'vllm::gdn_attention_core', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::kda_attention', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_images_per_batch': 0, 'compile_sizes': [], 'compile_ranges_endpoints': [16384], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'size_asserts': False, 'alignment_asserts': False, 'scalar_asserts': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 512, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': True, 'static_all_moe_layers': []}
+(EngineCore pid=348234) INFO 05-15 01:30:51 [parallel_state.py:1400] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://10.0.1.6:47009 backend=nccl
+(EngineCore pid=348234) INFO 05-15 01:30:51 [parallel_state.py:1716] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=348234) INFO 05-15 01:30:53 [gpu_model_runner.py:4735] Starting to load model hugging-quants/Meta-Llama-3.1-70B-Instruct-AWQ-INT4...
+(EngineCore pid=348234) INFO 05-15 01:31:01 [cuda.py:334] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(EngineCore pid=348234) INFO 05-15 01:31:01 [flash_attn.py:596] Using FlashAttention version 3
+(EngineCore pid=348234) INFO 05-15 01:31:04 [weight_utils.py:848] Prefetching checkpoint files into page cache started (in background)
+(EngineCore pid=348234) INFO 05-15 01:31:05 [weight_utils.py:825] Prefetching checkpoint files: 10% (1/9)
+(EngineCore pid=348234) INFO 05-15 01:31:06 [weight_utils.py:825] Prefetching checkpoint files: 20% (2/9)
+(EngineCore pid=348234) INFO 05-15 01:31:06 [weight_utils.py:825] Prefetching checkpoint files: 30% (3/9)
+(EngineCore pid=348234) INFO 05-15 01:31:06 [weight_utils.py:825] Prefetching checkpoint files: 40% (4/9)
+(EngineCore pid=348234) INFO 05-15 01:31:06 [weight_utils.py:825] Prefetching checkpoint files: 50% (5/9)
+(EngineCore pid=348234) INFO 05-15 01:31:06 [weight_utils.py:825] Prefetching checkpoint files: 60% (6/9)
+(EngineCore pid=348234) INFO 05-15 01:31:06 [weight_utils.py:825] Prefetching checkpoint files: 70% (7/9)
+(EngineCore pid=348234) INFO 05-15 01:31:06 [weight_utils.py:825] Prefetching checkpoint files: 80% (8/9)
+(EngineCore pid=348234) INFO 05-15 01:31:07 [weight_utils.py:825] Prefetching checkpoint files: 90% (9/9)
+(EngineCore pid=348234) INFO 05-15 01:31:07 [weight_utils.py:843] Prefetching checkpoint files into page cache finished in 3.09s
+(EngineCore pid=348234) INFO 05-15 01:31:14 [default_loader.py:384] Loading weights took 9.70 seconds
+(EngineCore pid=348234) INFO 05-15 01:31:14 [gpu_model_runner.py:4820] Model loading took 37.08 GiB memory and 20.341451 seconds
+(EngineCore pid=348234) INFO 05-15 01:31:34 [backends.py:1051] Using cache directory: /storage/home/amine/.cache/vllm/torch_compile_cache/12d2f1c1a2/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=348234) INFO 05-15 01:31:34 [backends.py:1111] Dynamo bytecode transform time: 19.35 s
