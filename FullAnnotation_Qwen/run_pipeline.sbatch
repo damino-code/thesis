@@ -7,7 +7,7 @@
 #SBATCH --gres=gpu:nvidia:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=64G
-#SBATCH --time=15:00:00
+#SBATCH --time=20:00:00
 #SBATCH --output=/storage/home/amine/thesis/FullAnnotation_Qwen/logs/qwen72b_%j.out
 #SBATCH --error=/storage/home/amine/thesis/FullAnnotation_Qwen/logs/qwen72b_%j.err
 
