@@ -1,0 +1,131 @@
+================================================================================
+  ANNOTATION EXAMPLES — Llama-3.3-70B (Standard/Vanilla)
+  Human annotations averaged across annotators per comment_id.
+  Llama annotations averaged across annotators per comment_id.
+  Ridge = OOF prediction from HateSpeechScoreFullWithCorrelation (formula B/C).
+  Both Human and Llama hatespeech use the same scale: 0=No, 1=Unclear, 2=Yes.
+  Human values from processed_dataset_modified.csv (remapped from original).
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+Example 1 — Clearly Not Hate Speech
+comment_id  : 5360
+text        : "Fellow trans girl here! Love and support confirmed!"
+hate_speech_score (ground truth) : -8.340
+Ridge prediction                 : -4.832
+────────────────────────────────────────────────────────────────────────────────
+Attribute         Human    Llama
+---------------------------------
+sentiment          0.00     4.00
+respect            0.00     4.00
+insult             0.00     0.00
+humiliate          0.00     0.00
+status             2.00     4.00
+dehumanize         0.00     0.00
+violence           0.00     0.00
+genocide           0.00     0.00
+attack_defend      0.25     0.00
+hatespeech         1.00     0.00
+---------------------------------
+Note: Human hatespeech=1 (Unclear), Llama hatespeech=0 (No) — both low.
+      Ridge undershoots but correct direction.
+
+────────────────────────────────────────────────────────────────────────────────
+Example 2 — Ambiguous / Borderline
+comment_id  : 12016
+text        : "Finally, something us Asians can finally fucking raid"
+hate_speech_score (ground truth) : -2.330
+Ridge prediction                 : -1.575
+────────────────────────────────────────────────────────────────────────────────
+Attribute         Human    Llama
+---------------------------------
+sentiment          2.50     3.00
+respect            2.25     1.00
+insult             1.50     1.00
+humiliate          0.75     3.00
+status             2.00     3.00
+dehumanize         1.00     2.00
+violence           1.00     2.00
+genocide           0.75     0.00
+attack_defend      1.75     3.00
+hatespeech         1.25     1.00
+---------------------------------
+Note: Llama rates humiliate and attack_defend higher than humans (3 vs <1).
+      Ridge prediction close to ground truth.
+
+────────────────────────────────────────────────────────────────────────────────
+Example 3 — Borderline
+comment_id  : 26061
+text        : "They ain't got no new niggas coming out???"
+hate_speech_score (ground truth) : -0.700
+Ridge prediction                 : -1.029
+────────────────────────────────────────────────────────────────────────────────
+Attribute         Human    Llama
+---------------------------------
+sentiment          3.25     1.00
+respect            3.25     1.00
+insult             2.75     3.00
+humiliate          2.75     3.00
+status             2.25     1.00
+dehumanize         2.25     3.00
+violence           1.25     0.00
+genocide           0.50     0.00
+attack_defend      2.25     3.00
+hatespeech         0.00     2.00
+---------------------------------
+Note: Large sentiment/respect divergence (humans ~3, Llama 1).
+      Humans say No hate speech (0), Llama says Yes (2) despite high insult/dehumanize scores.
+      Ridge slightly undershoots.
+
+────────────────────────────────────────────────────────────────────────────────
+Example 4 — Mild Hate Speech
+comment_id  : 32048
+text        : "Don't forget to find your soul mate in that nigga he told you stop texting"
+hate_speech_score (ground truth) :  0.570
+Ridge prediction                 : -0.657
+────────────────────────────────────────────────────────────────────────────────
+Attribute         Human    Llama
+---------------------------------
+sentiment          3.50     1.00
+respect            3.50     0.00
+insult             3.00     4.00
+humiliate          3.00     4.00
+status             3.00     1.00
+dehumanize         3.00     3.00
+violence           0.50     1.00
+genocide           0.00     0.00
+attack_defend      3.00     4.00
+hatespeech         0.00     2.00
+---------------------------------
+Note: Humans rate sentiment/respect high (3.5), Llama rates them low (0-1).
+      Humans say No hate speech (0), Llama says Yes (2).
+      Ridge predicts wrong sign — model underestimates this ambiguous case.
+
+────────────────────────────────────────────────────────────────────────────────
+Example 5 — Extreme Hate Speech
+comment_id  : 42821
+text        : "Dig burn PITS and treat them THE INVADING NAZIS ALL OVER EUROPE..."
+hate_speech_score (ground truth) :  6.300
+Ridge prediction                 :  1.875
+────────────────────────────────────────────────────────────────────────────────
+Attribute         Human    Llama
+---------------------------------
+sentiment          4.00     0.00
+respect            4.00     0.00
+insult             4.00     4.00
+humiliate          4.00     4.00
+status             4.00     0.00
+dehumanize         4.00     4.00
+violence           4.00     4.00
+genocide           4.00     4.00
+attack_defend      4.00     4.00
+hatespeech         0.00     2.00
+---------------------------------
+Note: Full agreement on insult/humiliate/dehumanize/violence/genocide (all 4).
+      Humans rate sentiment/respect/status at 4 (extreme negative framing).
+      Llama rates those at 0 (misses the framing).
+      Humans say No hate speech (0), Llama says Yes (2) — notable divergence
+      despite unanimous extreme scores on all other attributes.
+      Ridge heavily undershoots extremes — known regression-to-mean effect.
+
+================================================================================

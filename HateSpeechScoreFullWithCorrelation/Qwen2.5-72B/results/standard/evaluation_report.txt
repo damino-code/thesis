@@ -1,0 +1,44 @@
+======================================================================
+  HATE SPEECH SCORE — FULL ANNOTATION + SPEARMAN (Qwen2.5-72B)
+  Mode      : STANDARD
+  Generated : 2026-05-16T16:16:48.878765
+======================================================================
+
+DATA
+  Predictions file : merged_standard_results_20260515_072627.csv
+  Unique comments  : 39565
+  CV scheme        : 5-fold (4 folds fit / 1 fold test)
+
+CROSS-VALIDATION (mean ± std across 5 folds)
+  Ridge best α     : 100.0
+  Ridge R²         : 0.6884 ± 0.0055
+  Ridge MAE        : 0.8867 ± 0.0058
+  Ridge RMSE       : 1.1570 ± 0.0103
+
+CORRELATION WITH HUMAN HATE SPEECH SCORE  (predicted vs hate_speech_score)
+  OOF   Pearson r  : 0.8298   (p=0.00e+00)
+  OOF   Spearman ρ : 0.8162   (p=0.00e+00)
+  Final Pearson r  : 0.8299   (p=0.00e+00)   [in-sample]
+  Final Spearman ρ : 0.8163   (p=0.00e+00)   [in-sample]
+
+WEIGHTS (re-fit on all unique comments)
+  Attribute               Spearman ρ     Ridge w      Combined
+  --------------------------------------------------------
+  sentiment                -0.727802    0.252098     -0.183478
+  respect                  -0.744395    0.612741     -0.456121
+  insult                    0.711668    0.235517      0.167610
+  humiliate                 0.666977    0.394619      0.263202
+  status                   -0.561112    0.167901     -0.094211
+  dehumanize                0.578668    0.258362      0.149506
+  violence                  0.611705    0.235852      0.144272
+  genocide                  0.526048    0.258683      0.136080
+  attack_defend             0.648093    0.361671      0.234396
+  hatespeech               -0.513442   -0.118663      0.060927
+
+  Ridge intercept : -2.403765
+
+INTERPRETATION
+  score_adj_i = Attribute_i × Confidence_i × ρ_i
+  HateScore   = Σ( score_adj_i × w_i ) + intercept
+  ρ_i loaded from FullAnnotation evaluation_metrics_<mode>_*.json
+======================================================================

@@ -10,8 +10,8 @@ DATASET_FILENAME = "processed_dataset.csv"
 DATASET_PATH = os.path.join(DATASET_FOLDER, DATASET_FILENAME)
 
 # Model — vLLM uses HuggingFace model IDs (downloaded automatically)
-MODEL_ID = "Qwen/Qwen2.5-7B-Instruct"
-MODEL_QUANTIZATION = None
+MODEL_ID = "Qwen/Qwen2.5-7B-Instruct-AWQ"
+MODEL_QUANTIZATION = "awq"
 MODEL_DOWNLOAD_DIR = "/storage/nobackup/amine/models"
 
 # vLLM settings
