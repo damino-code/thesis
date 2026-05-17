@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=llama8b_vanilla
 #SBATCH --partition=compute
-#SBATCH --exclude=gpu-nvidia-h200-3
+#SBATCH --exclude=gpu-nvidia-h200-1,gpu-nvidia-h200-3
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:nvidia:1

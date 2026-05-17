@@ -1,0 +1,54 @@
+==========================================================
+Starting Llama 3.1 8B AWQ Analysis (vLLM) - VANILLA PROMPTS
+Job ID: 371831
+Node: gpu-nvidia-h200-1
+Date: Sat May 16 16:14:13 CEST 2026
+==========================================================
+No devices were found
+
+1. RUNNING ALL ATTRIBUTES (Vanilla Mode)...
+STARTING BATCH ATTRIBUTE ANALYSIS (vLLM)
+
+Select Analysis Mode:
+1. Vanilla (Standard static prompts)
+2. Feature (Annotator-specific dynamic prompts)
+
+Enter choice (1 or 2) [Default: 1]: 
+Selected: Vanilla mode
+
+Enter sample size (or 'all'): 
+Loading model (once for all attributes)...
+Loading model: hugging-quants/Meta-Llama-3.1-8B-Instruct-AWQ-INT4
+  GPU memory utilization: 0.9
+  Max model length: 1024
+  Max concurrent sequences: 256
+  Tensor parallel size: 1
+  Seed: 42
+INFO 05-16 16:14:20 [utils.py:233] non-default args: {'trust_remote_code': True, 'download_dir': '/storage/nobackup/amine/models', 'seed': 42, 'max_model_len': 1024, 'max_num_seqs': 256, 'disable_log_stats': True, 'quantization': 'awq', 'model': 'hugging-quants/Meta-Llama-3.1-8B-Instruct-AWQ-INT4'}
+INFO 05-16 16:14:21 [model.py:549] Resolved architecture: LlamaForCausalLM
+
+2. MERGING RESULTS...
+Preparing to merge attribute results (Standard)...
+
+No data found to merge.
+
+3. EVALUATING...
+Searching for MERGED analysis results...
+
+Select Results to Evaluate:
+1. Standard (Vanilla prompts)
+2. Persona (Feature-based dynamic prompts)
+
+Enter choice (1 or 2) [Default: 1]: 
+Selected: Standard results
+No merged standard result files found.
+Attempting to run merge script...
+Preparing to merge attribute results (Standard)...
+
+No data found to merge.
+Auto-merge failed: Failed to find merged file even after running merge_results.
+
+Error during evaluation: No merged prediction files found.
+
+==========================================================
+Analysis completely finished at Sat May 16 16:14:24 CEST 2026

@@ -1,0 +1,318 @@
+==========================================================
+Starting Qwen2.5 7B Analysis (vLLM) - DYNAMIC PROMPTS
+Job ID: 371857
+Node: gpu-nvidia-h200-2
+Date: Sat May 16 18:13:08 CEST 2026
+==========================================================
+Sat May 16 18:13:08 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H200 NVL                On  |   00000001:C8:00.0 Off |                    0 |
+| N/A   32C    P0             96W /  600W |       0MiB / 143771MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+1. RUNNING ALL ATTRIBUTES (Feature/Dynamic Mode)...
+STARTING BATCH ATTRIBUTE ANALYSIS (vLLM)
+
+Select Analysis Mode:
+1. Vanilla (Standard static prompts)
+2. Feature (Annotator-specific dynamic prompts)
+
+Enter choice (1 or 2) [Default: 1]: 
+Selected: Feature-based mode
+
+Enter sample size (or 'all'): 
+Loading model (once for all attributes)...
+Loading model: Qwen/Qwen2.5-7B-Instruct
+  GPU memory utilization: 0.9
+  Max model length: 1024
+  Max concurrent sequences: 256
+  Tensor parallel size: 1
+  Seed: 42
+INFO 05-16 18:13:15 [utils.py:233] non-default args: {'trust_remote_code': True, 'download_dir': '/storage/nobackup/amine/models', 'seed': 42, 'max_model_len': 1024, 'max_num_seqs': 256, 'disable_log_stats': True, 'model': 'Qwen/Qwen2.5-7B-Instruct'}
+INFO 05-16 18:13:16 [model.py:549] Resolved architecture: Qwen2ForCausalLM
+INFO 05-16 18:13:16 [model.py:1678] Using max model len 1024
+INFO 05-16 18:13:16 [scheduler.py:238] Chunked prefill is enabled with max_num_batched_tokens=16384.
+INFO 05-16 18:13:16 [vllm.py:790] Asynchronous scheduling is enabled.
+(EngineCore pid=1259149) INFO 05-16 18:13:18 [core.py:105] Initializing a V1 LLM engine (v0.19.1) with config: model='Qwen/Qwen2.5-7B-Instruct', speculative_config=None, tokenizer='Qwen/Qwen2.5-7B-Instruct', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=True, dtype=torch.bfloat16, max_seq_len=1024, download_dir='/storage/nobackup/amine/models', load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=42, served_model_name=Qwen/Qwen2.5-7B-Instruct, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'splitting_ops': ['vllm::unified_attention', 'vllm::unified_attention_with_output', 'vllm::unified_mla_attention', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::linear_attention', 'vllm::plamo2_mamba_mixer', 'vllm::gdn_attention_core', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::kda_attention', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_images_per_batch': 0, 'compile_sizes': [], 'compile_ranges_endpoints': [16384], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'size_asserts': False, 'alignment_asserts': False, 'scalar_asserts': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 512, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': True, 'static_all_moe_layers': []}
+(EngineCore pid=1259149) INFO 05-16 18:13:19 [parallel_state.py:1400] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://10.0.1.9:49479 backend=nccl
+(EngineCore pid=1259149) INFO 05-16 18:13:19 [parallel_state.py:1716] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=1259149) INFO 05-16 18:13:20 [gpu_model_runner.py:4735] Starting to load model Qwen/Qwen2.5-7B-Instruct...
+(EngineCore pid=1259149) INFO 05-16 18:13:21 [cuda.py:334] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(EngineCore pid=1259149) INFO 05-16 18:13:21 [flash_attn.py:596] Using FlashAttention version 3
+(EngineCore pid=1259149) INFO 05-16 18:17:19 [weight_utils.py:581] Time spent downloading weights for Qwen/Qwen2.5-7B-Instruct: 238.031152 seconds
+(EngineCore pid=1259149) INFO 05-16 18:17:20 [weight_utils.py:848] Prefetching checkpoint files into page cache started (in background)
+(EngineCore pid=1259149) INFO 05-16 18:17:25 [weight_utils.py:825] Prefetching checkpoint files: 10% (1/4)
+(EngineCore pid=1259149) INFO 05-16 18:17:25 [weight_utils.py:825] Prefetching checkpoint files: 20% (2/4)
+(EngineCore pid=1259149) INFO 05-16 18:17:26 [weight_utils.py:825] Prefetching checkpoint files: 30% (3/4)
+(EngineCore pid=1259149) INFO 05-16 18:17:27 [weight_utils.py:825] Prefetching checkpoint files: 40% (4/4)
+(EngineCore pid=1259149) INFO 05-16 18:17:27 [weight_utils.py:843] Prefetching checkpoint files into page cache finished in 6.90s
+(EngineCore pid=1259149) INFO 05-16 18:17:28 [default_loader.py:384] Loading weights took 8.00 seconds
+(EngineCore pid=1259149) INFO 05-16 18:17:29 [gpu_model_runner.py:4820] Model loading took 14.25 GiB memory and 247.439207 seconds
+(EngineCore pid=1259149) INFO 05-16 18:17:32 [backends.py:1051] Using cache directory: /storage/home/amine/.cache/vllm/torch_compile_cache/f5c985d5b8/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=1259149) INFO 05-16 18:17:32 [backends.py:1111] Dynamo bytecode transform time: 3.38 s
+(EngineCore pid=1259149) INFO 05-16 18:17:35 [backends.py:372] Cache the graph of compile range (1, 16384) for later use
+(EngineCore pid=1259149) INFO 05-16 18:17:38 [backends.py:390] Compiling a graph for compile range (1, 16384) takes 5.14 s
+(EngineCore pid=1259149) INFO 05-16 18:17:38 [decorators.py:655] saved AOT compiled function to /storage/home/amine/.cache/vllm/torch_compile_cache/torch_aot_compile/3dbc77731163344270ba743b7ed1557fc59b887766413c4d8dedcfe650428f42/rank_0_0/model
+(EngineCore pid=1259149) INFO 05-16 18:17:38 [monitor.py:48] torch.compile took 9.48 s in total
+(EngineCore pid=1259149) INFO 05-16 18:17:39 [monitor.py:76] Initial profiling/warmup run took 0.62 s
+(EngineCore pid=1259149) INFO 05-16 18:17:44 [kv_cache_utils.py:829] Overriding num_gpu_blocks=0 with num_gpu_blocks_override=512
+(EngineCore pid=1259149) INFO 05-16 18:17:44 [gpu_model_runner.py:5876] Profiling CUDA graph memory: PIECEWISE=51 (largest=512), FULL=35 (largest=256)
+(EngineCore pid=1259149) INFO 05-16 18:17:46 [gpu_model_runner.py:5955] Estimated CUDA graph memory: 0.41 GiB total
+(EngineCore pid=1259149) INFO 05-16 18:17:46 [gpu_worker.py:436] Available KV cache memory: 109.19 GiB
+(EngineCore pid=1259149) INFO 05-16 18:17:46 [gpu_worker.py:470] In v0.19, CUDA graph memory profiling will be enabled by default (VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1), which more accurately accounts for CUDA graph memory during KV cache allocation. To try it now, set VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1 and increase --gpu-memory-utilization from 0.9000 to 0.9030 to maintain the same effective KV cache size.
+(EngineCore pid=1259149) INFO 05-16 18:17:46 [kv_cache_utils.py:1319] GPU KV cache size: 2,044,528 tokens
+(EngineCore pid=1259149) INFO 05-16 18:17:46 [kv_cache_utils.py:1324] Maximum concurrency for 1,024 tokens per request: 1996.61x
+(EngineCore pid=1259149) INFO 05-16 18:17:49 [gpu_model_runner.py:6046] Graph capturing finished in 3 secs, took 0.46 GiB
+(EngineCore pid=1259149) INFO 05-16 18:17:49 [gpu_worker.py:597] CUDA graph pool memory: 0.46 GiB (actual), 0.41 GiB (estimated), difference: 0.04 GiB (9.0%).
+(EngineCore pid=1259149) INFO 05-16 18:17:49 [core.py:283] init engine (profile, create kv cache, warmup model) took 20.38 seconds
+Model loaded successfully.
+Model ready.
+
+=============================================
+RUNNING FEATURE-BASED ANALYSIS
+=============================================
+
+---------------------------------------------
+Processing: SENTIMENT
+---------------------------------------------
+STARTING ANALYSIS FOR: SENTIMENT
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+  Analyzing 135556 comments...
+Loaded 135556 annotator records from /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Using Feature-based dynamic prompts (10 templates)
+  Building prompts and running batch inference...
+  Logprobs saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/sentiment/logprobs_sentiment_20260516_181750.csv
+  Finished sentiment. Saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/sentiment/results_sentiment_20260516_181750.csv
+
+---------------------------------------------
+Processing: RESPECT
+---------------------------------------------
+STARTING ANALYSIS FOR: RESPECT
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+  Analyzing 135556 comments...
+Loaded 135556 annotator records from /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Using Feature-based dynamic prompts (10 templates)
+  Building prompts and running batch inference...
+  Logprobs saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/respect/logprobs_respect_20260516_182142.csv
+  Finished respect. Saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/respect/results_respect_20260516_182142.csv
+
+---------------------------------------------
+Processing: INSULT
+---------------------------------------------
+STARTING ANALYSIS FOR: INSULT
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+  Analyzing 135556 comments...
+Loaded 135556 annotator records from /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Using Feature-based dynamic prompts (10 templates)
+  Building prompts and running batch inference...
+  Logprobs saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/insult/logprobs_insult_20260516_182523.csv
+  Finished insult. Saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/insult/results_insult_20260516_182523.csv
+
+---------------------------------------------
+Processing: HUMILIATE
+---------------------------------------------
+STARTING ANALYSIS FOR: HUMILIATE
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+  Analyzing 135556 comments...
+Loaded 135556 annotator records from /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Using Feature-based dynamic prompts (10 templates)
+  Building prompts and running batch inference...
+  Logprobs saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/humiliate/logprobs_humiliate_20260516_182908.csv
+  Finished humiliate. Saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/humiliate/results_humiliate_20260516_182908.csv
+
+---------------------------------------------
+Processing: STATUS
+---------------------------------------------
+STARTING ANALYSIS FOR: STATUS
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+  Analyzing 135556 comments...
+Loaded 135556 annotator records from /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Using Feature-based dynamic prompts (10 templates)
+  Building prompts and running batch inference...
+  Logprobs saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/status/logprobs_status_20260516_183308.csv
+  Finished status. Saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/status/results_status_20260516_183308.csv
+
+---------------------------------------------
+Processing: DEHUMANIZE
+---------------------------------------------
+STARTING ANALYSIS FOR: DEHUMANIZE
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+  Analyzing 135556 comments...
+Loaded 135556 annotator records from /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Using Feature-based dynamic prompts (10 templates)
+  Building prompts and running batch inference...
+  Logprobs saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/dehumanize/logprobs_dehumanize_20260516_183704.csv
+  Finished dehumanize. Saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/dehumanize/results_dehumanize_20260516_183704.csv
+
+---------------------------------------------
+Processing: VIOLENCE
+---------------------------------------------
+STARTING ANALYSIS FOR: VIOLENCE
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+  Analyzing 135556 comments...
+Loaded 135556 annotator records from /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Using Feature-based dynamic prompts (10 templates)
+  Building prompts and running batch inference...
+  Logprobs saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/violence/logprobs_violence_20260516_184032.csv
+  Finished violence. Saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/violence/results_violence_20260516_184032.csv
+
+---------------------------------------------
+Processing: GENOCIDE
+---------------------------------------------
+STARTING ANALYSIS FOR: GENOCIDE
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+  Analyzing 135556 comments...
+Loaded 135556 annotator records from /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Using Feature-based dynamic prompts (10 templates)
+  Building prompts and running batch inference...
+  Logprobs saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/genocide/logprobs_genocide_20260516_184412.csv
+  Finished genocide. Saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/genocide/results_genocide_20260516_184412.csv
+
+---------------------------------------------
+Processing: ATTACK_DEFEND
+---------------------------------------------
+STARTING ANALYSIS FOR: ATTACK_DEFEND
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+  Analyzing 135556 comments...
+Loaded 135556 annotator records from /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Using Feature-based dynamic prompts (10 templates)
+  Building prompts and running batch inference...
+  Logprobs saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/attack_defend/logprobs_attack_defend_20260516_184741.csv
+  Finished attack_defend. Saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/attack_defend/results_attack_defend_20260516_184741.csv
+
+---------------------------------------------
+Processing: HATESPEECH
+---------------------------------------------
+STARTING ANALYSIS FOR: HATESPEECH
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+  Analyzing 135556 comments...
+Loaded 135556 annotator records from /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Using Feature-based dynamic prompts (10 templates)
+  Building prompts and running batch inference...
+(EngineCore pid=1259149) INFO 05-16 18:55:49 [core.py:1210] Shutdown initiated (timeout=0)
+(EngineCore pid=1259149) INFO 05-16 18:55:49 [core.py:1233] Shutdown complete
+  Logprobs saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/hatespeech/logprobs_hatespeech_20260516_185151.csv
+  Finished hatespeech. Saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/hatespeech/results_hatespeech_20260516_185151.csv
+
+All attributes processed.
+Run 'python src/merge_results.py' to combine the files.
+
+2. MERGING RESULTS...
+Preparing to merge attribute results (Feature-based)...
+  Found latest for sentiment: results_sentiment_20260516_181750.csv
+  Found latest for respect: results_respect_20260516_182142.csv
+  Found latest for insult: results_insult_20260516_182523.csv
+  Found latest for humiliate: results_humiliate_20260516_182908.csv
+  Found latest for status: results_status_20260516_183308.csv
+  Found latest for dehumanize: results_dehumanize_20260516_183704.csv
+  Found latest for violence: results_violence_20260516_184032.csv
+  Found latest for genocide: results_genocide_20260516_184412.csv
+  Found latest for attack_defend: results_attack_defend_20260516_184741.csv
+  Found latest for hatespeech: results_hatespeech_20260516_185151.csv
+
+Attaching annotator_id from dataset...
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+
+Successfully merged 10 attributes (135556 rows).
+Saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/merged_persona_results_20260516_185552.csv
+
+3. EVALUATING...
+Searching for MERGED analysis results...
+
+Select Results to Evaluate:
+1. Standard (Vanilla prompts)
+2. Persona (Feature-based dynamic prompts)
+
+Enter choice (1 or 2) [Default: 1]: 
+Selected: Persona results
+
+Recent merged files found:
+  1. merged_persona_results_20260516_185552.csv (2026-05-16 18:55:53)
+
+Select file number to evaluate (default 1): Loading predictions from: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/persona_results/merged_persona_results_20260516_185552.csv
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+EVALUATION: LLM vs Human Annotations
+======================================================================
+Matched 135556 (comment_id, annotator_id) pairs for evaluation.
+
+Attribute      Pearson    Spearman   MAE      RMSE     Strength
+----------------------------------------------------------------------
+sentiment      -0.5270   -0.5666   2.299   2.695   Moderate
+respect        -0.6790   -0.6497   2.365   2.661   Moderate
+insult         +0.6469   +0.6524   0.769   1.165   Moderate
+humiliate      +0.5914   +0.6084   0.948   1.309   Moderate
+status         +0.0904   -0.0886   1.192   1.613   Very Weak
+dehumanize     +0.5417   +0.5561   1.059   1.447   Moderate
+violence       +0.5767   +0.5349   1.018   1.453   Moderate
+genocide       +0.5772   +0.4106   0.547   1.090   Moderate
+attack_defend  +0.5765   +0.5998   0.635   0.982   Moderate
+hatespeech     -0.4396   -0.5020   1.005   1.204   Moderate
+
+HATE SPEECH CLASSIFICATION METRICS:
+  Accuracy:  0.753
+  F1-Score:  0.858
+  MAE:       1.005
+  RMSE:      1.204
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_SmallQwen/visualizations/persona/confusion_matrix_20260516_185554.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/confusion_matrix_20260516_185554.png
+
+Generating Visualizations...
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_SmallQwen/visualizations/persona/correlation_matrix_20260516_185555.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/correlation_matrix_20260516_185555.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_SmallQwen/visualizations/persona/scatter_plot_sentiment_20260516_185555.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_sentiment_20260516_185555.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_SmallQwen/visualizations/persona/scatter_plot_respect_20260516_185555.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_respect_20260516_185555.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_SmallQwen/visualizations/persona/scatter_plot_insult_20260516_185555.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_insult_20260516_185555.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_SmallQwen/visualizations/persona/scatter_plot_humiliate_20260516_185555.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_humiliate_20260516_185555.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_SmallQwen/visualizations/persona/scatter_plot_status_20260516_185555.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_status_20260516_185555.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_SmallQwen/visualizations/persona/scatter_plot_dehumanize_20260516_185555.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_dehumanize_20260516_185555.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_SmallQwen/visualizations/persona/scatter_plot_violence_20260516_185555.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_violence_20260516_185555.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_SmallQwen/visualizations/persona/scatter_plot_genocide_20260516_185555.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_genocide_20260516_185555.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_SmallQwen/visualizations/persona/scatter_plot_attack_defend_20260516_185555.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_attack_defend_20260516_185555.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_SmallQwen/visualizations/persona/scatter_plot_hatespeech_20260516_185555.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_hatespeech_20260516_185555.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_SmallQwen/visualizations/persona/correlation_bars_20260516_185637.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/correlation_bars_20260516_185637.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_SmallQwen/visualizations/persona/spearman_bars_20260516_185637.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/spearman_bars_20260516_185637.png
+
+Evaluation metrics saved to: /storage/home/amine/thesis/FullAnnotation_SmallQwen/results/evaluation_metrics_persona_20260516_185637.json
+Evaluation metrics saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/evaluation_metrics_persona_20260516_185637.json
+
+==========================================================
+Analysis completely finished at Sat May 16 18:56:37 CEST 2026

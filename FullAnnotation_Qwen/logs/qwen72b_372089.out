@@ -1,0 +1,127 @@
+==========================================================
+Starting Qwen2.5 72B AWQ Analysis (vLLM) - DYNAMIC PROMPTS
+Job ID: 372089
+Node: gpu-nvidia-h200-2
+Date: Sat May 16 21:38:32 CEST 2026
+==========================================================
+No devices were found
+
+1. RUNNING ALL ATTRIBUTES (Feature/Dynamic Mode)...
+STARTING BATCH ATTRIBUTE ANALYSIS (vLLM)
+
+Select Analysis Mode:
+1. Vanilla (Standard static prompts)
+2. Feature (Annotator-specific dynamic prompts)
+
+Enter choice (1 or 2) [Default: 1]: 
+Selected: Feature-based mode
+
+Enter sample size (or 'all'): 
+Loading model (once for all attributes)...
+Loading model: Qwen/Qwen2.5-72B-Instruct-AWQ
+  GPU memory utilization: 0.9
+  Max model length: 1024
+  Max concurrent sequences: 256
+  Tensor parallel size: 1
+  Seed: 42
+INFO 05-16 21:38:39 [utils.py:233] non-default args: {'trust_remote_code': True, 'download_dir': '/storage/nobackup/amine/models', 'seed': 42, 'max_model_len': 1024, 'max_num_seqs': 256, 'disable_log_stats': True, 'quantization': 'awq', 'model': 'Qwen/Qwen2.5-72B-Instruct-AWQ'}
+INFO 05-16 21:38:40 [model.py:549] Resolved architecture: Qwen2ForCausalLM
+
+2. MERGING RESULTS...
+Preparing to merge attribute results (Feature-based)...
+  Found latest for sentiment: results_sentiment_20260516_172300.csv
+  Found latest for respect: results_respect_20260516_190014.csv
+  Found latest for insult: results_insult_20260430_045916.csv
+  Found latest for humiliate: results_humiliate_20260430_060033.csv
+  Found latest for status: results_status_20260430_070505.csv
+  Found latest for dehumanize: results_dehumanize_20260430_080326.csv
+  Found latest for violence: results_violence_20260430_090109.csv
+  Found latest for genocide: results_genocide_20260430_100016.csv
+  Found latest for attack_defend: results_attack_defend_20260430_105800.csv
+  Found latest for hatespeech: results_hatespeech_20260430_115727.csv
+
+Attaching annotator_id from dataset...
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+
+Successfully merged 10 attributes (135556 rows).
+Saved to: /storage/home/amine/thesis/FullAnnotation_Qwen/results/persona_results/merged_persona_results_20260516_213842.csv
+
+3. EVALUATING...
+Searching for MERGED analysis results...
+
+Select Results to Evaluate:
+1. Standard (Vanilla prompts)
+2. Persona (Feature-based dynamic prompts)
+
+Enter choice (1 or 2) [Default: 1]: 
+Selected: Persona results
+
+Recent merged files found:
+  1. merged_persona_results_20260516_213842.csv (2026-05-16 21:38:44)
+  2. merged_persona_results_20260516_172432.csv (2026-05-16 17:24:33)
+  3. merged_persona_results_20260516_161334.csv (2026-05-16 16:13:35)
+  4. merged_persona_results_20260515_013512.csv (2026-05-15 01:35:13)
+  5. merged_persona_results_20260430_125227.csv (2026-04-30 12:52:28)
+
+Select file number to evaluate (default 1): Loading predictions from: /storage/home/amine/thesis/FullAnnotation_Qwen/results/persona_results/merged_persona_results_20260516_213842.csv
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+EVALUATION: LLM vs Human Annotations
+======================================================================
+Matched 135556 (comment_id, annotator_id) pairs for evaluation.
+
+Attribute      Pearson    Spearman   MAE      RMSE     Strength
+----------------------------------------------------------------------
+sentiment      -0.7692   -0.7175   2.806   3.075   Strong
+respect        -0.7698   -0.7418   2.652   2.962   Strong
+insult         +0.7270   +0.7067   0.655   1.049   Strong
+humiliate      +0.6764   +0.6669   0.797   1.162   Moderate
+status         -0.5450   -0.5603   1.875   2.385   Moderate
+dehumanize     +0.5753   +0.5777   0.946   1.351   Moderate
+violence       +0.7190   +0.6082   0.627   1.013   Strong
+genocide       +0.7154   +0.5331   0.458   0.869   Strong
+attack_defend  +0.6250   +0.6683   0.712   1.061   Moderate
+hatespeech     +0.4733   +0.5364   1.051   1.147   Moderate
+
+HATE SPEECH CLASSIFICATION METRICS:
+  Accuracy:  0.544
+  F1-Score:  0.691
+  MAE:       1.051
+  RMSE:      1.147
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_Qwen/visualizations/persona/confusion_matrix_20260516_213845.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/confusion_matrix_20260516_213845.png
+
+Generating Visualizations...
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_Qwen/visualizations/persona/correlation_matrix_20260516_213845.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/correlation_matrix_20260516_213845.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_Qwen/visualizations/persona/scatter_plot_sentiment_20260516_213846.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_sentiment_20260516_213846.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_Qwen/visualizations/persona/scatter_plot_respect_20260516_213846.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_respect_20260516_213846.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_Qwen/visualizations/persona/scatter_plot_insult_20260516_213846.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_insult_20260516_213846.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_Qwen/visualizations/persona/scatter_plot_humiliate_20260516_213846.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_humiliate_20260516_213846.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_Qwen/visualizations/persona/scatter_plot_status_20260516_213846.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_status_20260516_213846.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_Qwen/visualizations/persona/scatter_plot_dehumanize_20260516_213846.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_dehumanize_20260516_213846.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_Qwen/visualizations/persona/scatter_plot_violence_20260516_213846.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_violence_20260516_213846.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_Qwen/visualizations/persona/scatter_plot_genocide_20260516_213846.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_genocide_20260516_213846.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_Qwen/visualizations/persona/scatter_plot_attack_defend_20260516_213846.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_attack_defend_20260516_213846.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_Qwen/visualizations/persona/scatter_plot_hatespeech_20260516_213846.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/scatter_plot_hatespeech_20260516_213846.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_Qwen/visualizations/persona/correlation_bars_20260516_213929.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/correlation_bars_20260516_213929.png
+Plot saved to LOCAL: /storage/home/amine/thesis/FullAnnotation_Qwen/visualizations/persona/spearman_bars_20260516_213929.png
+Plot saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/spearman_bars_20260516_213929.png
+
+Evaluation metrics saved to: /storage/home/amine/thesis/FullAnnotation_Qwen/results/evaluation_metrics_persona_20260516_213929.json
+Evaluation metrics saved to GLOBAL: /storage/home/amine/thesis/global_visualisation/Qwen2.5-72B/persona/evaluation_metrics_persona_20260516_213929.json
+
+==========================================================
+Analysis completely finished at Sat May 16 21:39:29 CEST 2026
