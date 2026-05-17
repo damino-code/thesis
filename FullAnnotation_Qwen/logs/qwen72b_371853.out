@@ -167,3 +167,55 @@ Loaded 135556 comments
 Loaded 135556 annotator records from /storage/home/amine/thesis/Dataset/processed_dataset.csv
 Using Feature-based dynamic prompts (10 templates)
   Building prompts and running batch inference...
+  Logprobs saved to: /storage/home/amine/thesis/FullAnnotation_Qwen/results/persona_results/dehumanize/logprobs_dehumanize_20260517_020235.csv
+  Finished dehumanize. Saved to: /storage/home/amine/thesis/FullAnnotation_Qwen/results/persona_results/dehumanize/results_dehumanize_20260517_020235.csv
+
+---------------------------------------------
+Processing: VIOLENCE
+---------------------------------------------
+STARTING ANALYSIS FOR: VIOLENCE
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+  Analyzing 135556 comments...
+Loaded 135556 annotator records from /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Using Feature-based dynamic prompts (10 templates)
+  Building prompts and running batch inference...
+  Logprobs saved to: /storage/home/amine/thesis/FullAnnotation_Qwen/results/persona_results/violence/logprobs_violence_20260517_034307.csv
+  Finished violence. Saved to: /storage/home/amine/thesis/FullAnnotation_Qwen/results/persona_results/violence/results_violence_20260517_034307.csv
+
+---------------------------------------------
+Processing: GENOCIDE
+---------------------------------------------
+STARTING ANALYSIS FOR: GENOCIDE
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+  Analyzing 135556 comments...
+Loaded 135556 annotator records from /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Using Feature-based dynamic prompts (10 templates)
+  Building prompts and running batch inference...
+  Logprobs saved to: /storage/home/amine/thesis/FullAnnotation_Qwen/results/persona_results/genocide/logprobs_genocide_20260517_052444.csv
+  Finished genocide. Saved to: /storage/home/amine/thesis/FullAnnotation_Qwen/results/persona_results/genocide/results_genocide_20260517_052444.csv
+
+---------------------------------------------
+Processing: ATTACK_DEFEND
+---------------------------------------------
+STARTING ANALYSIS FOR: ATTACK_DEFEND
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+  Analyzing 135556 comments...
+Loaded 135556 annotator records from /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Using Feature-based dynamic prompts (10 templates)
+  Building prompts and running batch inference...
+  Logprobs saved to: /storage/home/amine/thesis/FullAnnotation_Qwen/results/persona_results/attack_defend/logprobs_attack_defend_20260517_070517.csv
+  Finished attack_defend. Saved to: /storage/home/amine/thesis/FullAnnotation_Qwen/results/persona_results/attack_defend/results_attack_defend_20260517_070517.csv
+
+---------------------------------------------
+Processing: HATESPEECH
+---------------------------------------------
+STARTING ANALYSIS FOR: HATESPEECH
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+  Analyzing 135556 comments...
+Loaded 135556 annotator records from /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Using Feature-based dynamic prompts (10 templates)
+  Building prompts and running batch inference...
