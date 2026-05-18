@@ -61,3 +61,48 @@ Accuracy       :  0.7534
 F1             :  0.8584
 MAE            :  1.0051
 RMSE           :  1.2035
+
+========================================================
+OBSERVATIONS & ANALYSIS
+========================================================
+
+PERSONA HURTS QWEN 7B — CONSISTENT REGRESSION
+  Persona mode degrades Qwen2.5-7B on almost every attribute:
+    sentiment   : -0.596 → -0.567  (-0.029)
+    respect     : -0.670 → -0.650  (-0.020)
+    insult      :  0.667 →  0.652  (-0.015)
+    status      : -0.316 → -0.089  (weakens substantially)
+    hatespeech F1: 0.889 → 0.858   (-0.031, substantial drop)
+  The only attribute that improves in persona mode is genocide:
+  0.368 → 0.411 (+0.043). This isolated gain is not enough to offset
+  the losses, and hatespeech accuracy drops from 0.801 → 0.753.
+
+STATUS: SUBSTANTIALLY WEAKENED UNDER PERSONA
+  status Spearman drops from -0.316 (standard) to -0.089 (persona) —
+  the signal nearly collapses. Persona context interferes with small
+  Qwen's directional calibration of the "derogatory status" attribute
+  even though the sign is preserved.
+
+  This is similar to the Llama-3.1-8B standard failure pattern —
+  demographic context appears to degrade status signal in small models
+  regardless of architecture.
+
+PATTERN ACROSS SMALL MODELS
+  Persona improves small Llama (especially sentiment: -0.016 → -0.433).
+  Persona hurts small Qwen (sentiment: -0.596 → -0.567).
+  The contrast suggests the two architectures respond differently to
+  persona context at 7-8B scale: Llama benefits from the added framing
+  on its weakest attribute, while Qwen already handles sentiment well
+  in standard mode and the persona context only adds noise.
+
+RIDGE CONSEQUENCE
+  Ridge persona underperforms vanilla for Qwen 7B: F1 0.561 → 0.546,
+  AUROC 0.861 → 0.858. This parallels the big Qwen result — persona is
+  the wrong mode for Qwen regardless of scale. For Qwen, vanilla is
+  strictly preferred for the Ridge pipeline.
+
+GENOCIDE ANOMALY
+  genocide Spearman improves: 0.368 → 0.411 (+0.043). The anomaly
+  is unexplained — possibly the annotator demographic context (age, race)
+  triggers sharper recognition of genocide-specific hate rhetoric that
+  Qwen 7B underscores in standard mode.

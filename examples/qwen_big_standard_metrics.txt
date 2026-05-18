@@ -61,3 +61,42 @@ Accuracy       :  0.7662
 F1             :  0.8671
 MAE            :  0.9784
 RMSE           :  1.1894
+
+========================================================
+OBSERVATIONS & ANALYSIS
+========================================================
+
+COMPARISON WITH LLAMA-3.1-70B STANDARD
+  Qwen2.5-72B standard slightly outperforms Llama on most attributes:
+    sentiment  : -0.728 vs -0.705  (+0.02)
+    respect    : -0.744 vs -0.730  (+0.01)
+    violence   :  0.612 vs  0.618  (-0.01)
+    genocide   :  0.526 vs  0.549  (-0.02)
+  The two models are closely matched but Qwen edges ahead on
+  protective attributes (sentiment, respect) while Llama leads on
+  violence and genocide.
+
+BEST DIRECT CLASSIFICATION
+  hatespeech F1=0.867 is the highest direct classification score
+  across all models and modes, including big models. Combined with
+  MAE=0.978 (lowest among big models), Qwen2.5-72B standard shows
+  the best attribute-level hate detection without Ridge.
+
+MAE / RMSE OBSERVATIONS
+  insult MAE (0.67) and genocide MAE (0.49) are the lowest across all
+  big models — Qwen is notably well-calibrated on these two binary/
+  near-binary scales. violence MAE (0.69) is also better than Llama.
+  sentiment and respect remain high-MAE (~2.85, ~2.72) due to scale
+  range, but lower than Llama's (~3.01, ~2.91).
+
+STATUS ATTRIBUTE
+  status correlation (-0.54) is weak and consistent with Llama.
+  This attribute is difficult for all large models — the 0/1 binary
+  scale has limited variance and "derogatory status" overlaps
+  conceptually with insult and dehumanize.
+
+STANDARD vs PERSONA (preview)
+  Unlike Llama, Qwen shows almost no gain from persona mode (see
+  qwen_big_persona_metrics.txt). F1 is essentially identical
+  (0.8671 vs 0.8672). Qwen may already saturate the available
+  signal at 72B without needing annotator context.

@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=baseline2000
 #SBATCH --partition=compute
-#SBATCH --exclude=gpu-nvidia-h200-3
+#SBATCH --exclude=gpu-nvidia-h200-1,gpu-nvidia-h200-3
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:nvidia:1
@@ -28,6 +28,10 @@ mamba activate llm-research
 
 set -a; source /storage/home/amine/thesis/.env; set +a
 export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
+
+# Redirect PyTorch inductor autotune cache away from /scratch (not available on all nodes)
+export TORCHINDUCTOR_AUTOTUNE_REMOTE_CACHE_DIR=/storage/home/amine/.cache/torchinductor_autotune
+mkdir -p /storage/home/amine/.cache/torchinductor_autotune
 
 mkdir -p /storage/nobackup/amine/models
 mkdir -p /storage/home/amine/thesis/baseline2000/logs

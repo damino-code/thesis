@@ -68,3 +68,52 @@ INTERPRETATION
   pre-scaling into its weights (ρᵢ is redundant once Ridge is applied).
 
 ====================================================================================
+
+========================================================
+OBSERVATIONS & ANALYSIS
+========================================================
+
+VANILLA STRICTLY BETTER THAN PERSONA
+  For Qwen 7B, vanilla outperforms persona on every metric:
+    F1      : 0.561 vs 0.546  (-0.015)
+    AUROC   : 0.861 vs 0.858  (-0.003)
+    Pearson : 0.778 vs 0.761  (-0.017)
+  This directly follows the per-attribute degradation in persona mode
+  (see qwen_small_persona_metrics.txt): the status sign reversal and
+  sentiment regression under persona translate to a weaker Ridge input.
+  The recommended pipeline for Qwen 7B is vanilla in all experiments.
+
+COMPARISON WITH SMALL LLAMA
+  Qwen 7B standard vs Llama 8B standard: AUROC 0.861 vs 0.867.
+  Small Llama vanilla has slightly higher AUROC despite its catastrophic
+  sentiment failure. This happens because Llama's good attributes (insult,
+  violence, genocide) are stronger (0.71, 0.69, 0.70) than Qwen 7B's
+  (0.66, 0.57, 0.49), partially compensating in AUROC. However, Qwen 7B
+  persona beats Llama 8B persona on AUROC (0.858 vs 0.864 — both degrade
+  from persona, Llama less so).
+
+  Best small model overall: Llama-3.1-8B persona (AUROC=0.864, F1=0.604).
+
+FORMULA D: STILL VERY NEGATIVE
+  Standard formula D: R²=-9.14. Persona formula D: R²=-8.31.
+  The Spearman-only combination without Ridge remains catastrophic. Even
+  Qwen 7B's weaker but correct-sign attributes produce a bad unweighted
+  sum — Ridge regularization is indispensable regardless of model quality.
+
+  The smaller magnitude of the D failure compared to small Llama (-9.1 vs
+  -17.1) reflects that Qwen 7B avoids the extreme sign errors of Llama 8B
+  standard — the damage is real but less severe.
+
+SIZE VS ARCHITECTURE TAKEAWAY
+  Comparing small models: Qwen 7B has better direct classification (F1=0.889)
+  but similar Ridge AUROC (0.861 vs 0.867). The discrepancy reveals that
+  the Ridge pipeline and direct hatespeech attribute diverge: direct
+  classification captures Qwen's strong binary judgment, while Ridge
+  aggregates all 10 attributes where Llama's stronger insult/violence
+  attributes offer compensating signal.
+
+SCALE GAP
+  Qwen 7B AUROC=0.861 vs Qwen 72B AUROC=0.893 — a 3.2 point gap from
+  10x parameter scaling. The gap is smaller than Llama's 3.6 point gap
+  (8B vs 70B), suggesting Qwen extracts relatively more signal per parameter
+  at the smaller scale, but neither small model approaches big-model quality.

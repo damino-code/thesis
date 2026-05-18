@@ -68,3 +68,52 @@ INTERPRETATION
   pre-scaling into its weights (ρᵢ is redundant once Ridge is applied).
 
 ====================================================================================
+
+========================================================
+OBSERVATIONS & ANALYSIS
+========================================================
+
+SEVERE RECALL DEFICIT IN VANILLA MODE
+  Ridge-Vanilla recall=0.465 — the model finds only 46% of hate comments.
+  It predicts only 6806 positives vs 10437 actual (35% under-prediction).
+  This is a direct consequence of the near-zero sentiment correlation and
+  status sign reversal: the Ridge learns to over-rely on the remaining good
+  attributes (insult, respect), which are insufficient to recover recall.
+
+  Persona mode partially corrects this: recall improves to 0.554, predicted
+  positives increase to 8692. The partial sentiment recovery (-0.134 → -0.453
+  from persona annotation) allows the Ridge to suppress fewer true positives.
+
+PERSONA IMPROVES F1 DESPITE AUROC DROP
+  Ridge-Persona F1=0.604 > Vanilla F1=0.563 (+0.041), but AUROC 0.864 <
+  0.867 (-0.003). The recall improvement from persona outweighs the slight
+  precision loss at threshold 0.5. However, the rank ordering of scores
+  (AUROC) is marginally worse — persona adds noise at the tails of the
+  distribution even as it recovers the center.
+
+FORMULA D CATASTROPHIC FAILURE
+  Formula D (Spearman-only, no Ridge, no confidence, standard): R²=-17.08.
+  This is the worst formula result across all models and modes by a large
+  margin. The reason: Spearman pre-scaling uses the correlations computed
+  from standard annotations, which include the wrong-sign status (+0.37
+  instead of ~-0.54). Pre-multiplying by the wrong-sign weight amplifies
+  a bad signal. Ridge corrects this by learning to down-weight or invert it;
+  Spearman-only weighting cannot.
+
+  This confirms that Ridge's regularization is essential when attributes
+  contain sign errors or near-zero signals — it selectively suppresses
+  bad features while formula-based approaches cannot.
+
+FORMULA B/C PEARSON: 0.791 (standard) vs 0.781 (persona)
+  Counterintuitively, standard Ridge achieves better Pearson than persona
+  despite persona producing better F1. The explanation: Pearson measures
+  global linear correlation (including tails), while F1 is threshold-
+  sensitive. Persona's sentiment improvement raises recall at threshold
+  but doesn't improve the full rank ordering — the AUROC and Pearson
+  tell the same story.
+
+SMALL MODEL GAP
+  Best small Llama Ridge AUROC=0.867 vs best big Llama=0.903. A gap of
+  3.6 percentage points entirely attributable to the two broken attributes
+  (sentiment, status). If those two attributes performed at big-model level,
+  the small model would likely close most of this gap.

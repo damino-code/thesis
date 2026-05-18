@@ -61,3 +61,49 @@ Accuracy       :  0.8012
 F1             :  0.8892
 MAE            :  0.9404
 RMSE           :  1.1380
+
+========================================================
+OBSERVATIONS & ANALYSIS
+========================================================
+
+BEST DIRECT HATESPEECH F1 ACROSS ALL MODELS AND MODES
+  hatespeech F1=0.889 is the single highest direct classification score
+  in the entire study — surpassing both Llama-3.1-70B (0.820) and
+  Qwen2.5-72B (0.867). This is surprising for a 7B model and suggests
+  Qwen2.5-7B has a strong prior for binary hate/no-hate judgment even
+  without Ridge. The accuracy of 0.801 is also the highest among all
+  small models.
+
+  A probable cause: Qwen2.5 architecture may have stronger instruction-
+  following for yes/no classification tasks even at 7B, where the direct
+  hatespeech prompt maps cleanly to a well-trained output format.
+
+QUALITATIVELY DIFFERENT FROM SMALL LLAMA
+  Qwen2.5-7B standard avoids the critical failure modes of Llama-3.1-8B:
+    sentiment   : -0.596 vs -0.016  (Qwen near big-model quality)
+    status      : -0.316 vs +0.387  (Qwen correct sign, though weak)
+  These two attributes — the most problematic for small Llama — are
+  meaningfully recovered by Qwen at the same scale. This suggests the
+  failure is architecture- or training-data-specific, not inherent to 7B.
+
+RESPECT: STRONG ACROSS SMALL MODELS
+  respect Spearman=-0.670 is close to Llama-3.1-8B standard (-0.703)
+  and approaches the big model range (-0.730 to -0.757). Both small
+  models show strong calibration on social respect/courtesy concepts,
+  suggesting this attribute is robust to model scale.
+
+STATUS: CORRECT SIGN BUT WEAK
+  status Spearman=-0.316 — negative (correct direction) but weak compared
+  to big models (-0.56). This is the smallest status signal among small
+  models in standard mode.
+
+GENOCIDE: WEAK SPEARMAN
+  genocide Spearman=0.368 is the weakest hate-positive attribute in this
+  model. The model likely clusters genocide scores around a few values
+  rather than producing a smooth distribution, limiting rank-based signal.
+
+MAE PATTERN
+  sentiment MAE=2.35 and respect MAE=2.41 are high due to wide 0-4 scale
+  range, but lower than big models (~3.0). This suggests the 7B model
+  outputs a more compressed range — less extreme scores — reducing absolute
+  error while potentially hurting correlation on tails.
