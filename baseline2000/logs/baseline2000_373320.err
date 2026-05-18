@@ -1,0 +1,158 @@
+slurmstepd: error: Unable to create TMPDIR [/scratch/amine/tmp]: No such file or directory
+slurmstepd: error: Setting TMPDIR to /tmp
+Parse safetensors files:   0%|          | 0/9 [00:00<?, ?it/s]Parse safetensors files:  11%|█         | 1/9 [00:00<00:02,  3.38it/s]Parse safetensors files: 100%|██████████| 9/9 [00:00<00:00, 25.76it/s]
+(EngineCore pid=661779) <frozen importlib._bootstrap_external>:1184: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+(EngineCore pid=661779) <frozen importlib._bootstrap_external>:1184: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
+(EngineCore pid=661779) Loading safetensors checkpoint shards:   0% Completed | 0/9 [00:00<?, ?it/s]
+(EngineCore pid=661779) Loading safetensors checkpoint shards:  11% Completed | 1/9 [00:00<00:05,  1.53it/s]
+(EngineCore pid=661779) Loading safetensors checkpoint shards:  22% Completed | 2/9 [00:01<00:03,  1.80it/s]
+(EngineCore pid=661779) Loading safetensors checkpoint shards:  33% Completed | 3/9 [00:01<00:02,  2.11it/s]
+(EngineCore pid=661779) Loading safetensors checkpoint shards:  44% Completed | 4/9 [00:01<00:02,  2.33it/s]
+(EngineCore pid=661779) Loading safetensors checkpoint shards:  56% Completed | 5/9 [00:02<00:01,  2.49it/s]
+(EngineCore pid=661779) Loading safetensors checkpoint shards:  67% Completed | 6/9 [00:02<00:01,  2.59it/s]
+(EngineCore pid=661779) Loading safetensors checkpoint shards:  78% Completed | 7/9 [00:02<00:00,  2.66it/s]
+(EngineCore pid=661779) Loading safetensors checkpoint shards:  89% Completed | 8/9 [00:03<00:00,  2.94it/s]
+(EngineCore pid=661779) Loading safetensors checkpoint shards: 100% Completed | 9/9 [00:03<00:00,  3.54it/s]
+(EngineCore pid=661779) Loading safetensors checkpoint shards: 100% Completed | 9/9 [00:03<00:00,  2.68it/s]
+(EngineCore pid=661779) 
+(EngineCore pid=661779) Process EngineCore:
+(EngineCore pid=661779) Traceback (most recent call last):
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+(EngineCore pid=661779)     self.run()
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/multiprocessing/process.py", line 108, in run
+(EngineCore pid=661779)     self._target(*self._args, **self._kwargs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 1112, in run_engine_core
+(EngineCore pid=661779)     raise e
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 1082, in run_engine_core
+(EngineCore pid=661779)     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=661779)     return func(*args, **kwargs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 848, in __init__
+(EngineCore pid=661779)     super().__init__(
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 124, in __init__
+(EngineCore pid=661779)     kv_cache_config = self._initialize_kv_caches(vllm_config)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=661779)     return func(*args, **kwargs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 247, in _initialize_kv_caches
+(EngineCore pid=661779)     available_gpu_memory = self.model_executor.determine_available_memory()
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/v1/executor/abstract.py", line 136, in determine_available_memory
+(EngineCore pid=661779)     return self.collective_rpc("determine_available_memory")
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/v1/executor/uniproc_executor.py", line 80, in collective_rpc
+(EngineCore pid=661779)     result = run_method(self.driver_worker, method, args, kwargs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/v1/serial_utils.py", line 510, in run_method
+(EngineCore pid=661779)     return func(*args, **kwargs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(EngineCore pid=661779)     return func(*args, **kwargs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/v1/worker/gpu_worker.py", line 370, in determine_available_memory
+(EngineCore pid=661779)     self.model_runner.profile_run()
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/v1/worker/gpu_model_runner.py", line 5782, in profile_run
+(EngineCore pid=661779)     hidden_states, last_hidden_states = self._dummy_run(
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(EngineCore pid=661779)     return func(*args, **kwargs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/v1/worker/gpu_model_runner.py", line 5474, in _dummy_run
+(EngineCore pid=661779)     outputs = self.model(
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/compilation/cuda_graph.py", line 254, in __call__
+(EngineCore pid=661779)     return self.runnable(*args, **kwargs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(EngineCore pid=661779)     return self._call_impl(*args, **kwargs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(EngineCore pid=661779)     return forward_call(*args, **kwargs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/model_executor/models/llama.py", line 577, in forward
+(EngineCore pid=661779)     model_output = self.model(
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/compilation/decorators.py", line 523, in __call__
+(EngineCore pid=661779)     output = self.aot_compiled_fn(self, *args, **kwargs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/_dynamo/aot_compile.py", line 124, in __call__
+(EngineCore pid=661779)     return self.fn(*args, **kwargs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/model_executor/models/llama.py", line 400, in forward
+(EngineCore pid=661779)     def forward(
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/compilation/caching.py", line 211, in __call__
+(EngineCore pid=661779)     return self.optimized_call(*args, **kwargs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/fx/graph_module.py", line 936, in call_wrapped
+(EngineCore pid=661779)     return self._wrapped_call(self, *args, **kwargs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/fx/graph_module.py", line 455, in __call__
+(EngineCore pid=661779)     raise e
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/fx/graph_module.py", line 442, in __call__
+(EngineCore pid=661779)     return super(self.cls, obj).__call__(*args, **kwargs)  # type: ignore[misc]
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(EngineCore pid=661779)     return self._call_impl(*args, **kwargs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(EngineCore pid=661779)     return forward_call(*args, **kwargs)
+(EngineCore pid=661779)   File "<eval_with_key>.162", line 1130, in forward
+(EngineCore pid=661779)     submod_0 = self.submod_0(l_input_ids_, s72, l_self_modules_embed_tokens_parameters_weight_, l_self_modules_layers_modules_0_modules_input_layernorm_parameters_weight_, l_self_modules_layers_modules_0_modules_self_attn_modules_qkv_proj_parameters_qweight_, l_self_modules_layers_modules_0_modules_self_attn_modules_qkv_proj_parameters_scales_, l_self_modules_layers_modules_0_modules_self_attn_modules_qkv_proj_parameters_qzeros_, l_positions_, l_self_modules_layers_modules_0_modules_self_attn_modules_rotary_emb_buffers_cos_sin_cache_);  l_input_ids_ = l_self_modules_embed_tokens_parameters_weight_ = l_self_modules_layers_modules_0_modules_input_layernorm_parameters_weight_ = l_self_modules_layers_modules_0_modules_self_attn_modules_qkv_proj_parameters_qweight_ = l_self_modules_layers_modules_0_modules_self_attn_modules_qkv_proj_parameters_scales_ = l_self_modules_layers_modules_0_modules_self_attn_modules_qkv_proj_parameters_qzeros_ = None
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/compilation/cuda_graph.py", line 254, in __call__
+(EngineCore pid=661779)     return self.runnable(*args, **kwargs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/compilation/piecewise_backend.py", line 367, in __call__
+(EngineCore pid=661779)     return range_entry.runnable(*args)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/compilation/compiler_interface.py", line 452, in compiled_graph_wrapper
+(EngineCore pid=661779)     graph_output = inductor_compiled_graph(*args)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/_inductor/standalone_compile.py", line 122, in __call__
+(EngineCore pid=661779)     return self._compiled_fn(*args)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/_inductor/standalone_compile.py", line 215, in <lambda>
+(EngineCore pid=661779)     return CacheCompiledArtifact(lambda *args: compiled_fn(list(args)), None)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 357, in runtime_wrapper
+(EngineCore pid=661779)     all_outs = call_func_at_runtime_with_args(
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/utils.py", line 134, in call_func_at_runtime_with_args
+(EngineCore pid=661779)     out = normalize_as_list(f(args))
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 531, in wrapper
+(EngineCore pid=661779)     return compiled_fn(runtime_args)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/_inductor/output_code.py", line 638, in __call__
+(EngineCore pid=661779)     return self.current_callable(inputs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/_inductor/utils.py", line 3220, in run
+(EngineCore pid=661779)     out = model(new_inputs)
+(EngineCore pid=661779)   File "/tmp/torchinductor_amine/fv/cfvtgnfvf2mk42yoksgnunmmlzgo5uxqqbstnkycta4k2ualnnjc.py", line 774, in call
+(EngineCore pid=661779)     triton_poi_fused_1.run(buf5, arg7_1, arg8_1, buf7, triton_poi_fused_1_xnumel_0, stream=stream0)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 1379, in run
+(EngineCore pid=661779)     self.autotune_to_one_config(*args, **kwargs)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 1129, in autotune_to_one_config
+(EngineCore pid=661779)     self.save_cache_hook(
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/_inductor/runtime/autotune_cache.py", line 301, in save
+(EngineCore pid=661779)     cache.put(key, data)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/_inductor/remote_cache.py", line 195, in put
+(EngineCore pid=661779)     self._put(key, value, sample)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/_inductor/runtime/autotune_cache.py", line 642, in _put
+(EngineCore pid=661779)     super()._put(key, value, sample)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/_inductor/remote_cache.py", line 230, in _put
+(EngineCore pid=661779)     self._backend_put(key, data)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/_inductor/remote_cache.py", line 236, in _backend_put
+(EngineCore pid=661779)     self.backend.put(key, data)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/_inductor/remote_cache.py", line 94, in put
+(EngineCore pid=661779)     self._put(key, data)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/torch/_inductor/runtime/autotune_cache.py", line 609, in _put
+(EngineCore pid=661779)     os.makedirs(os.path.dirname(key), exist_ok=True)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/os.py", line 215, in makedirs
+(EngineCore pid=661779)     makedirs(head, exist_ok=exist_ok)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/os.py", line 215, in makedirs
+(EngineCore pid=661779)     makedirs(head, exist_ok=exist_ok)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/os.py", line 215, in makedirs
+(EngineCore pid=661779)     makedirs(head, exist_ok=exist_ok)
+(EngineCore pid=661779)   File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/os.py", line 225, in makedirs
+(EngineCore pid=661779)     mkdir(name, mode)
+(EngineCore pid=661779) PermissionError: [Errno 13] Permission denied: '/scratch/amine'
+Traceback (most recent call last):
+  File "/storage/home/amine/thesis/baseline2000/src/run_classification.py", line 114, in <module>
+    main()
+  File "/storage/home/amine/thesis/baseline2000/src/run_classification.py", line 87, in main
+    llm = load_model()
+  File "/storage/home/amine/thesis/baseline2000/src/model_loader.py", line 24, in load_model
+    llm = LLM(
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/entrypoints/llm.py", line 382, in __init__
+    self.llm_engine = LLMEngine.from_engine_args(
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/v1/engine/llm_engine.py", line 177, in from_engine_args
+    return cls(
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/v1/engine/llm_engine.py", line 111, in __init__
+    self.engine_core = EngineCoreClient.make_client(
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/v1/engine/core_client.py", line 101, in make_client
+    return SyncMPClient(vllm_config, executor_class, log_stats)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+    return func(*args, **kwargs)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/v1/engine/core_client.py", line 710, in __init__
+    super().__init__(
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/v1/engine/core_client.py", line 535, in __init__
+    with launch_core_engines(
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/contextlib.py", line 142, in __exit__
+    next(self.gen)
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/v1/engine/utils.py", line 998, in launch_core_engines
+    wait_for_engine_startup(
+  File "/storage/home/amine/miniforge3/envs/llm-research/lib/python3.10/site-packages/vllm/v1/engine/utils.py", line 1057, in wait_for_engine_startup
+    raise RuntimeError(
+RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}

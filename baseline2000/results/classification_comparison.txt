@@ -1,0 +1,36 @@
+============================================================================================
+  HATE-SPEECH CLASSIFICATION — baseline2000 (test_2000.csv)
+  Generated : 2026-05-18T16:26:46.347095
+============================================================================================
+
+TASK
+  Dataset        : test_2000.csv
+  Binary target  : label column (0=not hate, 1=hate)
+  Decision rule  : P(yes) >= 0.5  →  predicted hate
+  Total comments : 0
+
+
+RESULTS
+  ------------------------------------------------------------------------------------------
+  strategy                         accuracy       F1  precision   recall    AUROC #pos_pred
+  ------------------------------------------------------------------------------------------
+  zero_shot                         (no data)
+  few_shot                          (no data)
+  definition                        (no data)
+  attribute_aware_no_values         (no data)
+  attribute_aware_with_values       (no data)
+  ------------------------------------------------------------------------------------------
+
+INTERPRETATION
+  - zero_shot                   : bare yes/no, no extra context
+  - few_shot                    : zero-shot + 4 labelled examples
+                                   (from Kennedy et al., hate_speech_score > 0.5)
+  - definition                  : formal hate-speech definition added
+  - attribute_aware_no_values   : lists 10 dimensions, model assesses each
+  - attribute_aware_with_values : uses Llama-3.1-70B attribute annotations
+                                   from testRdige/results/ (low/moderate/high)
+  Compare to:
+    Ridge pre-trained (thresh=0.5)   F1=0.573  AUROC=0.843
+    Ridge pre-trained (thresh=-1.5)  F1=0.802  AUROC=0.843
+    Ridge trained on test_2000 (OOF) F1=0.816  AUROC=0.892
+============================================================================================
