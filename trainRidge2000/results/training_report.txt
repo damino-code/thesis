@@ -1,0 +1,30 @@
+================================================================
+  RIDGE TRAINING — test_2000 (Llama-3.1-70B vanilla)
+  Generated : 2026-05-18T15:43:38.319173
+================================================================
+
+  Samples     : 2000
+  Hate (pos)  : 1079 (53.9%)
+  Best alpha  : 10.0
+
+  CV R²   = 0.4661 ± 0.0399
+  CV MAE  = 0.2699 ± 0.0105
+  CV RMSE = 0.3638 ± 0.0136
+
+  OOF  Pearson r = 0.6829  Spearman ρ = 0.6763
+
+  LEARNED RIDGE WEIGHTS
+  Attribute              Coefficient
+  ----------------------------------
+  sentiment                 0.045504
+  respect                   0.004132
+  insult                   -0.085913
+  humiliate                 0.069977
+  status                   -0.071516
+  dehumanize                0.125178
+  violence                 -0.134629
+  genocide                  0.098270
+  attack_defend             0.019038
+  hatespeech                0.229778
+  intercept                 0.119957
+================================================================

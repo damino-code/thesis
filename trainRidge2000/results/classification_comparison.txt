@@ -1,0 +1,37 @@
+========================================================================
+  RIDGE CLASSIFICATION METRICS — trainRidge2000
+  Generated : 2026-05-18T15:43:43.994646
+========================================================================
+
+TASK
+  Annotation model   : Llama-3.1-70B AWQ-INT4 (vanilla)
+  Ridge target       : binary label (0=not hate, 1=hate)
+  OOF predictions    : 5-fold cross-validation
+  Decision threshold : >= 0.5
+  Total samples      : 2000
+  Positive (hate)    : 1079 / 2000  (54.0%)
+
+RESULTS  (OOF — out-of-fold, unbiased estimate)
+  metric                    value
+  --------------------------------
+  accuracy                 0.8045
+  F1                       0.8155
+  precision                0.8308
+  recall                   0.8007
+  AUROC                    0.8917
+  #pos_predicted             1040
+  --------------------------------
+
+CONFUSION MATRIX  (rows = true, cols = predicted; labels = {0, 1})
+            pred=0   pred=1
+  true=0      745      176
+  true=1      215      864
+
+COMPARISON
+  Pre-trained Llama-3.1-70B vanilla (threshold=0.5, Kennedy et al.)
+    F1=0.6863  AUROC=0.8988  acc=0.8402
+  Pre-trained Llama-3.1-70B vanilla (threshold=-1.5, test_2000)
+    F1=0.8023  AUROC=0.8433  acc=0.7595
+  This model trained directly on test_2000 (OOF, threshold=0.5)
+    F1=0.8155  AUROC=0.8917  acc=0.8045
+========================================================================
