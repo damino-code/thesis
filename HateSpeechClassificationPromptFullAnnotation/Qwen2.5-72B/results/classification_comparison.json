@@ -1,6 +1,6 @@
 {
   "zero_shot": {
-    "pred_file": "/storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Qwen2.5-72B/results/zero_shot/results_zero_shot_20260506_231536.csv",
+    "pred_file": "/storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Qwen2.5-72B/results/zero_shot/results_zero_shot_20260517_233534.csv",
     "per_row": {
       "n": 135556,
       "n_pos_gt": 49273,
@@ -35,19 +35,19 @@
     }
   },
   "definition": {
-    "pred_file": "/storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Qwen2.5-72B/results/definition/results_definition_20260506_234832.csv",
+    "pred_file": "/storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Qwen2.5-72B/results/definition/results_definition_20260518_000901.csv",
     "per_row": {
       "n": 135556,
       "n_pos_gt": 49273,
-      "n_pos_pred": 88668,
-      "accuracy": 0.6911018324530084,
-      "f1": 0.6964426820162243,
-      "precision": 0.5417286958090856,
+      "n_pos_pred": 88644,
+      "accuracy": 0.691278881052849,
+      "f1": 0.6965638753743193,
+      "precision": 0.5418753666350796,
       "recall": 0.9748543827248188,
-      "auroc": 0.9175600350546125,
+      "auroc": 0.9175607642223618,
       "confusion_matrix": {
-        "tn": 45649,
-        "fp": 40634,
+        "tn": 45673,
+        "fp": 40610,
         "fn": 1239,
         "tp": 48034
       }
@@ -55,22 +55,22 @@
     "per_comment": {
       "n": 39565,
       "n_pos_gt": 10437,
-      "n_pos_pred": 23488,
-      "accuracy": 0.6317705042335398,
-      "f1": 0.5705526897568165,
-      "precision": 0.4120401907356948,
+      "n_pos_pred": 23487,
+      "accuracy": 0.6317957790976874,
+      "f1": 0.5705695083126989,
+      "precision": 0.4120577340656533,
       "recall": 0.927277953434895,
-      "auroc": 0.8396057936928539,
+      "auroc": 0.8396057196818714,
       "confusion_matrix": {
-        "tn": 15318,
-        "fp": 13810,
+        "tn": 15319,
+        "fp": 13809,
         "fn": 759,
         "tp": 9678
       }
     }
   },
   "attribute_aware_no_values": {
-    "pred_file": "/storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Qwen2.5-72B/results/attribute_aware_no_values/results_attribute_aware_no_values_20260507_002247.csv",
+    "pred_file": "/storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Qwen2.5-72B/results/attribute_aware_no_values/results_attribute_aware_no_values_20260518_004321.csv",
     "per_row": {
       "n": 135556,
       "n_pos_gt": 49273,
@@ -79,7 +79,7 @@
       "f1": 0.6945345840049421,
       "precision": 0.5341532143559274,
       "recall": 0.9925517017433483,
-      "auroc": 0.9407409032432222,
+      "auroc": 0.9407406481521176,
       "confusion_matrix": {
         "tn": 43631,
         "fp": 42652,
@@ -95,7 +95,7 @@
       "f1": 0.5699020979020979,
       "precision": 0.4024414332556394,
       "recall": 0.9760467567308614,
-      "auroc": 0.88286433133005,
+      "auroc": 0.8828643214619192,
       "confusion_matrix": {
         "tn": 14002,
         "fp": 15126,
@@ -105,19 +105,19 @@
     }
   },
   "attribute_aware_with_values": {
-    "pred_file": "/storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Qwen2.5-72B/results/attribute_aware_with_values/results_attribute_aware_with_values_20260507_010244.csv",
+    "pred_file": "/storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Qwen2.5-72B/results/attribute_aware_with_values/results_attribute_aware_with_values_20260518_012246.csv",
     "per_row": {
       "n": 135556,
       "n_pos_gt": 49273,
-      "n_pos_pred": 105888,
-      "accuracy": 0.5813169465018148,
-      "f1": 0.6342186503051669,
-      "precision": 0.4646702175883953,
+      "n_pos_pred": 105883,
+      "accuracy": 0.5813538316267816,
+      "f1": 0.6342390884013509,
+      "precision": 0.4646921602145765,
       "recall": 0.9985793436567695,
-      "auroc": 0.9316304117087704,
+      "auroc": 0.9316071402024431,
       "confusion_matrix": {
-        "tn": 29598,
-        "fp": 56685,
+        "tn": 29603,
+        "fp": 56680,
         "fn": 70,
         "tp": 49203
       }
@@ -125,15 +125,15 @@
     "per_comment": {
       "n": 39565,
       "n_pos_gt": 10437,
-      "n_pos_pred": 30517,
-      "accuracy": 0.4897510425881461,
-      "f1": 0.5070566977584607,
-      "precision": 0.3402365894419504,
+      "n_pos_pred": 30515,
+      "accuracy": 0.4898015923164413,
+      "f1": 0.5070814612228951,
+      "precision": 0.3402588890709487,
       "recall": 0.994826099453866,
-      "auroc": 0.8689410350095762,
+      "auroc": 0.8688773740519259,
       "confusion_matrix": {
-        "tn": 8994,
-        "fp": 20134,
+        "tn": 8996,
+        "fp": 20132,
         "fn": 54,
         "tp": 10383
       }

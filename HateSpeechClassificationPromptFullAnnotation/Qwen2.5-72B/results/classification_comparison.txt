@@ -1,6 +1,6 @@
 ============================================================================================
   HATE-SPEECH CLASSIFICATION PROMPT — COMPARISON
-  Generated : 2026-05-07T01:02:50.600108
+  Generated : 2026-05-18T01:22:52.841776
 ============================================================================================
 
 TASK
@@ -14,9 +14,9 @@ PER-COMMENT RESULTS  (predictions averaged across annotators)
   strategy                         accuracy       F1  precision   recall    AUROC #pos_pred
   ------------------------------------------------------------------------------------------
   zero_shot                          0.6262   0.5781     0.4116   0.9709   0.8880     24620
-  definition                         0.6318   0.5706     0.4120   0.9273   0.8396     23488
+  definition                         0.6318   0.5706     0.4121   0.9273   0.8396     23487
   attribute_aware_no_values          0.6114   0.5699     0.4024   0.9760   0.8829     25313
-  attribute_aware_with_values        0.4898   0.5071     0.3402   0.9948   0.8689     30517
+  attribute_aware_with_values        0.4898   0.5071     0.3403   0.9948   0.8689     30515
   ------------------------------------------------------------------------------------------
 
 PER-ROW RESULTS  (joined on comment_id × annotator_id)
@@ -24,9 +24,9 @@ PER-ROW RESULTS  (joined on comment_id × annotator_id)
   strategy                         accuracy       F1  precision   recall    AUROC #pos_pred
   ------------------------------------------------------------------------------------------
   zero_shot                          0.7003   0.7060     0.5486   0.9902   0.9402     88935
-  definition                         0.6911   0.6964     0.5417   0.9749   0.9176     88668
+  definition                         0.6913   0.6966     0.5419   0.9749   0.9176     88644
   attribute_aware_no_values          0.6826   0.6945     0.5342   0.9926   0.9407     91558
-  attribute_aware_with_values        0.5813   0.6342     0.4647   0.9986   0.9316    105888
+  attribute_aware_with_values        0.5814   0.6342     0.4647   0.9986   0.9316    105883
   ------------------------------------------------------------------------------------------
 
 INTERPRETATION
