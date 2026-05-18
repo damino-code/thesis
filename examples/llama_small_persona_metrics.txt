@@ -1,0 +1,63 @@
+Model  : Llama-3.1-8B (AWQ-INT4)
+Mode   : Feature-based (persona)
+Source : evaluation_metrics_persona_20260516_190922.json
+========================================================
+
+PEARSON CORRELATIONS
+--------------------
+sentiment      : -0.4532
+respect        : -0.6181
+insult         :  0.5970
+humiliate      :  0.5407
+status         :  0.0238
+dehumanize     :  0.4914
+violence       :  0.4630
+genocide       :  0.4160
+attack_defend  :  0.5273
+hatespeech     : -0.4426
+
+SPEARMAN CORRELATIONS
+---------------------
+sentiment      : -0.4331
+respect        : -0.6705
+insult         :  0.5659
+humiliate      :  0.5180
+status         :  0.0415
+dehumanize     :  0.5121
+violence       :  0.4853
+genocide       :  0.4108
+attack_defend  :  0.5493
+hatespeech     : -0.5011
+
+MAE
+---
+sentiment      :  1.4060
+respect        :  2.0892
+insult         :  0.8390
+humiliate      :  0.8761
+status         :  0.7705
+dehumanize     :  1.0393
+violence       :  1.1613
+genocide       :  1.1114
+attack_defend  :  0.6849
+hatespeech     :  1.0211
+
+RMSE
+----
+sentiment      :  1.6385
+respect        :  2.4870
+insult         :  1.1382
+humiliate      :  1.1867
+status         :  1.1064
+dehumanize     :  1.3999
+violence       :  1.5737
+genocide       :  1.5898
+attack_defend  :  0.9927
+hatespeech     :  1.2253
+
+HATE SPEECH (hatespeech attribute)
+-----------------------------------
+Accuracy       :  0.7345
+F1             :  0.8459
+MAE            :  1.0211
+RMSE           :  1.2253

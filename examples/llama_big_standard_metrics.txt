@@ -1,0 +1,63 @@
+Model  : Llama-3.1-70B
+Mode   : Standard (vanilla)
+Source : evaluation_metrics_standard_20260515_075241.json
+========================================================
+
+PEARSON CORRELATIONS
+--------------------
+sentiment      : -0.7698
+respect        : -0.7677
+insult         :  0.7164
+humiliate      :  0.6688
+status         : -0.5406
+dehumanize     :  0.5914
+violence       :  0.6931
+genocide       :  0.6981
+attack_defend  :  0.6213
+hatespeech     : -0.4367
+
+SPEARMAN CORRELATIONS
+---------------------
+sentiment      : -0.7047
+respect        : -0.7303
+insult         :  0.6975
+humiliate      :  0.6642
+status         : -0.5735
+dehumanize     :  0.5978
+violence       :  0.6176
+genocide       :  0.5487
+attack_defend  :  0.6445
+hatespeech     : -0.4879
+
+MAE
+---
+sentiment      :  3.0148
+respect        :  2.9071
+insult         :  0.7481
+humiliate      :  0.9384
+status         :  2.0240
+dehumanize     :  1.0641
+violence       :  0.7732
+genocide       :  0.5080
+attack_defend  :  0.8781
+hatespeech     :  1.0235
+
+RMSE
+----
+sentiment      :  3.2432
+respect        :  3.1757
+insult         :  1.1837
+humiliate      :  1.3471
+status         :  2.4853
+dehumanize     :  1.5047
+violence       :  1.1958
+genocide       :  0.9443
+attack_defend  :  1.2298
+hatespeech     :  1.2661
+
+HATE SPEECH (hatespeech attribute)
+-----------------------------------
+Accuracy       :  0.6970
+F1             :  0.8200
+MAE            :  1.0235
+RMSE           :  1.2661

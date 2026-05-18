@@ -71,6 +71,20 @@ def calculate_confidence_correlation(predictions_df, human_df):
     return pd.DataFrame(metrics)
 
 
+ABBREV = {
+    'sentiment':     'Sent',
+    'respect':       'Resp',
+    'insult':        'Ins',
+    'humiliate':     'Hum',
+    'status':        'Stat',
+    'dehumanize':    'Dhum',
+    'violence':      'Viol',
+    'genocide':      'Gen',
+    'attack_defend': 'Att',
+    'hatespeech':    'HS',
+}
+
+
 def plot_comparison(vanilla_df, persona_df):
     if vanilla_df.empty and persona_df.empty:
         print("No metrics to plot for either mode.")
@@ -78,47 +92,66 @@ def plot_comparison(vanilla_df, persona_df):
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-    plt.figure(figsize=(11, 8))
+    _, ax = plt.subplots(figsize=(11, 8))
     sns.set_style("whitegrid")
 
     if not vanilla_df.empty:
         sns.scatterplot(
             data=vanilla_df, x='avg_confidence', y='correlation',
             s=140, color='steelblue', alpha=0.85, label='Standard (vanilla)',
-            edgecolor='black', linewidth=0.5,
+            edgecolor='black', linewidth=0.5, ax=ax,
         )
         for _, row in vanilla_df.iterrows():
-            plt.text(row['avg_confidence'] + 0.002, row['correlation'] + 0.002,
-                     row['attribute'], fontsize=10, color='steelblue')
+            lbl = ABBREV.get(row['attribute'], row['attribute'])
+            ax.text(row['avg_confidence'] + 0.002, row['correlation'] + 0.002,
+                    lbl, fontsize=12, color='steelblue', fontweight='bold')
 
     if not persona_df.empty:
         sns.scatterplot(
             data=persona_df, x='avg_confidence', y='correlation',
             s=140, color='darkorange', alpha=0.85, label='Feature-based (persona)',
-            edgecolor='black', linewidth=0.5, marker='^',
+            edgecolor='black', linewidth=0.5, marker='^', ax=ax,
         )
         for _, row in persona_df.iterrows():
-            plt.text(row['avg_confidence'] + 0.002, row['correlation'] - 0.012,
-                     row['attribute'], fontsize=10, color='darkorange')
+            lbl = ABBREV.get(row['attribute'], row['attribute'])
+            ax.text(row['avg_confidence'] + 0.002, row['correlation'] - 0.012,
+                    lbl, fontsize=12, color='darkorange', fontweight='bold')
 
     common = set(vanilla_df['attribute']) & set(persona_df['attribute']) \
         if not vanilla_df.empty and not persona_df.empty else set()
     for attr in common:
         v = vanilla_df.loc[vanilla_df['attribute'] == attr].iloc[0]
         p = persona_df.loc[persona_df['attribute'] == attr].iloc[0]
-        plt.plot(
+        ax.plot(
             [v['avg_confidence'], p['avg_confidence']],
             [v['correlation'], p['correlation']],
             color='gray', linestyle='--', alpha=0.4, linewidth=1,
         )
 
-    plt.title(
+    # Abbreviation key box
+    all_attrs = set()
+    if not vanilla_df.empty:
+        all_attrs.update(vanilla_df['attribute'].tolist())
+    if not persona_df.empty:
+        all_attrs.update(persona_df['attribute'].tolist())
+    key_lines = [f"{ABBREV.get(a, a)} = {a}" for a in sorted(all_attrs)]
+    key_text = "\n".join(key_lines)
+    ax.text(
+        0.01, 0.01, key_text,
+        transform=ax.transAxes,
+        fontsize=10,
+        verticalalignment='bottom',
+        bbox=dict(boxstyle='round,pad=0.4', facecolor='white', alpha=0.8, edgecolor='gray'),
+        family='monospace',
+    )
+
+    ax.set_title(
         f'{MODEL_NAME} — Model Confidence vs. Correlation with Human Annotations\n'
         'Standard vs. Feature-based (Persona)', fontsize=13,
     )
-    plt.xlabel('Average Model Confidence', fontsize=12)
-    plt.ylabel('Correlation with Human Annotations', fontsize=12)
-    plt.legend(loc='best', fontsize=11)
+    ax.set_xlabel('Average Model Confidence', fontsize=12)
+    ax.set_ylabel('Correlation with Human Annotations', fontsize=12)
+    ax.legend(loc='upper right', fontsize=11)
     plt.tight_layout()
 
     mode_dir = "comparison"

@@ -1,41 +1,41 @@
 ================================================================
   HATE SPEECH SCORE — FULL ANNOTATION (Qwen2.5-72B)
   Mode      : PERSONA
-  Generated : 2026-05-05T17:07:17.861014
+  Generated : 2026-05-17T21:13:12.305605
 ================================================================
 
 DATA
-  Predictions file : merged_persona_results_20260430_125227.csv
+  Predictions file : merged_persona_results_20260517_101648.csv
   Unique comments  : 39565
   CV scheme        : 5-fold (4 folds fit / 1 fold test)
 
 CROSS-VALIDATION (mean ± std across 5 folds)
   Ridge best α     : 100.0
   Ridge R²         : 0.6865 ± 0.0060
-  Ridge MAE        : 0.8890 ± 0.0077
-  Ridge RMSE       : 1.1606 ± 0.0097
+  Ridge MAE        : 0.8891 ± 0.0078
+  Ridge RMSE       : 1.1606 ± 0.0098
 
 CORRELATION WITH HUMAN HATE SPEECH SCORE  (predicted vs hate_speech_score)
   OOF   Pearson r  : 0.8286   (p=0.00e+00)
-  OOF   Spearman ρ : 0.8143   (p=0.00e+00)
+  OOF   Spearman ρ : 0.8145   (p=0.00e+00)
   Final Pearson r  : 0.8287   (p=0.00e+00)   [in-sample]
-  Final Spearman ρ : 0.8144   (p=0.00e+00)   [in-sample]
+  Final Spearman ρ : 0.8146   (p=0.00e+00)   [in-sample]
 
 FINAL WEIGHTS (re-fit on all unique comments)
   Attribute                  Ridge
   --------------------------------
-  sentiment              -0.370723
-  respect                -0.394746
-  insult                  0.193719
-  humiliate               0.149551
-  status                 -0.132994
-  dehumanize              0.209509
-  violence                0.126572
-  genocide                0.172728
-  attack_defend           0.370873
-  hatespeech              0.004645
+  sentiment              -0.368931
+  respect                -0.380331
+  insult                  0.192514
+  humiliate               0.143785
+  status                 -0.126660
+  dehumanize              0.203382
+  violence                0.124558
+  genocide                0.172896
+  attack_defend           0.371693
+  hatespeech              0.045673
 
-  Ridge intercept : -2.325556
+  Ridge intercept : -2.376749
 
 INTERPRETATION
   R² = 1.0  → predictions perfectly match hate_speech_score

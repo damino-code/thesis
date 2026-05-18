@@ -12,7 +12,7 @@
 #SBATCH --error=/storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.3-70B/logs/llama70b_hsclassif_%j.err
 
 echo "=========================================================="
-echo "Llama-3.3-70B AWQ — Hate-Speech Classification (4 prompts)"
+echo "Llama-3.3-70B AWQ — Hate-Speech Classification (few_shot only)"
 echo "Job ID: $SLURM_JOB_ID"
 echo "Node: $SLURMD_NODENAME"
 echo "Date: $(date)"
@@ -32,8 +32,8 @@ export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
 mkdir -p /storage/nobackup/amine/models
 
 echo ""
-echo "1. RUNNING ALL 4 PROMPT STRATEGIES (model loaded once)..."
-echo -e "1,2\nall\n" | python src/run_classification.py
+echo "1. RUNNING FEW-SHOT STRATEGY (model loaded once)..."
+echo -e "2\nall\n" | python src/run_classification.py
 
 echo ""
 echo "2. EVALUATING (all strategies side-by-side)..."

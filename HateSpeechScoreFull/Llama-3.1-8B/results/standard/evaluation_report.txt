@@ -1,0 +1,46 @@
+================================================================
+  HATE SPEECH SCORE — FULL ANNOTATION (Llama-3.1-8B)
+  Mode      : STANDARD
+  Generated : 2026-05-17T21:23:51.417222
+================================================================
+
+DATA
+  Predictions file : merged_standard_results_20260516_184023.csv
+  Unique comments  : 39565
+  CV scheme        : 5-fold (4 folds fit / 1 fold test)
+
+CROSS-VALIDATION (mean ± std across 5 folds)
+  Ridge best α     : 100.0
+  Ridge R²         : 0.6255 ± 0.0053
+  Ridge MAE        : 0.9774 ± 0.0072
+  Ridge RMSE       : 1.2685 ± 0.0114
+
+CORRELATION WITH HUMAN HATE SPEECH SCORE  (predicted vs hate_speech_score)
+  OOF   Pearson r  : 0.7909   (p=0.00e+00)
+  OOF   Spearman ρ : 0.7705   (p=0.00e+00)
+  Final Pearson r  : 0.7911   (p=0.00e+00)   [in-sample]
+  Final Spearman ρ : 0.7706   (p=0.00e+00)   [in-sample]
+
+FINAL WEIGHTS (re-fit on all unique comments)
+  Attribute                  Ridge
+  --------------------------------
+  sentiment              -0.194976
+  respect                -0.736831
+  insult                  0.135063
+  humiliate               0.106369
+  status                  0.020893
+  dehumanize              0.125468
+  violence                0.162880
+  genocide                0.208422
+  attack_defend           0.441200
+  hatespeech              0.318852
+
+  Ridge intercept : -2.232208
+
+INTERPRETATION
+  R² = 1.0  → predictions perfectly match hate_speech_score
+  R² = 0.0  → no better than predicting the mean
+  Positive weights expected on hate-related attributes
+  (insult, dehumanize, violence, genocide, hatespeech) and
+  negative weights on protective attributes (respect, sentiment).
+================================================================

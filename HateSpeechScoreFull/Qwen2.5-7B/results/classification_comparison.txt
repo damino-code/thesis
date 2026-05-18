@@ -1,0 +1,38 @@
+====================================================================================
+  RIDGE CLASSIFICATION METRICS — Qwen2.5-7B
+  Generated : 2026-05-17T21:24:13.136099
+====================================================================================
+
+TASK
+  Binary target  : hate_speech_score >= 0.5  (per Kennedy et al.)
+  Aggregation    : one row per comment_id (mean across annotators)
+  Total comments : 39565
+  Positive rate  : 10437 / 39565  (26.4%)
+
+PIPELINES
+  Ridge-Vanilla  : Ridge(OOF, vanilla feats) >= 0.5
+  Ridge-Persona  : Ridge(OOF, persona feats) >= 0.5
+
+  --------------------------------------------------------------------------------
+  pipeline               accuracy       F1  precision   recall    AUROC #pos_pred
+  --------------------------------------------------------------------------------
+  Ridge-Vanilla            0.8037   0.5611     0.6839   0.4756   0.8608      7258
+  Ridge-Persona            0.7986   0.5457     0.6739   0.4585   0.8580      7100
+  --------------------------------------------------------------------------------
+
+CONFUSION MATRICES  (rows = true, cols = predicted; labels = {0, 1})
+  Ridge-Vanilla
+            pred=0   pred=1
+    true=0   26834     2294
+    true=1    5473     4964
+
+  Ridge-Persona
+            pred=0   pred=1
+    true=0   26813     2315
+    true=1    5652     4785
+
+INTERPRETATION
+  - F1/accuracy depend on the threshold (0.5); AUROC is threshold-free.
+  - Comparing Ridge-Vanilla vs Ridge-Persona shows whether persona prompting
+    yields better-calibrated predictions for the IRT hate-speech score.
+====================================================================================

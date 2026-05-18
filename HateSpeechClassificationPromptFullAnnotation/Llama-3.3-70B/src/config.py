@@ -54,9 +54,10 @@ ATTRIBUTE_HUMAN_LABELS = {
     "attack_defend": "Attack/Defend",
 }
 
-# Four prompt strategies. Each maps to a JSON file in src/prompts/<name>.json.
+# Five prompt strategies. Each maps to a JSON file in src/prompts/<name>.json.
 PROMPT_STRATEGIES = [
     "zero_shot",
+    "few_shot",
     "definition",
     "attribute_aware_no_values",
     "attribute_aware_with_values",

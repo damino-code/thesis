@@ -1,0 +1,63 @@
+Model  : Qwen2.5-72B
+Mode   : Standard (vanilla)
+Source : evaluation_metrics_standard_20260515_072751.json
+========================================================
+
+PEARSON CORRELATIONS
+--------------------
+sentiment      : -0.7803
+respect        : -0.7782
+insult         :  0.7306
+humiliate      :  0.6776
+status         : -0.5401
+dehumanize     :  0.5772
+violence       :  0.7083
+genocide       :  0.7004
+attack_defend  :  0.6109
+hatespeech     : -0.4518
+
+SPEARMAN CORRELATIONS
+---------------------
+sentiment      : -0.7278
+respect        : -0.7444
+insult         :  0.7117
+humiliate      :  0.6670
+status         : -0.5611
+dehumanize     :  0.5787
+violence       :  0.6117
+genocide       :  0.5260
+attack_defend  :  0.6481
+hatespeech     : -0.5134
+
+MAE
+---
+sentiment      :  2.8505
+respect        :  2.7238
+insult         :  0.6704
+humiliate      :  0.8277
+status         :  1.9806
+dehumanize     :  0.9214
+violence       :  0.6873
+genocide       :  0.4931
+attack_defend  :  0.8014
+hatespeech     :  0.9784
+
+RMSE
+----
+sentiment      :  3.1144
+respect        :  3.0233
+insult         :  1.0714
+humiliate      :  1.2047
+status         :  2.4485
+dehumanize     :  1.3056
+violence       :  1.0743
+genocide       :  0.8951
+attack_defend  :  1.1579
+hatespeech     :  1.1894
+
+HATE SPEECH (hatespeech attribute)
+-----------------------------------
+Accuracy       :  0.7662
+F1             :  0.8671
+MAE            :  0.9784
+RMSE           :  1.1894

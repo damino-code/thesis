@@ -1,6 +1,6 @@
 ====================================================================================
   RIDGE CLASSIFICATION METRICS — Qwen2.5-72B
-  Generated : 2026-05-04T12:16:54.987945
+  Generated : 2026-05-17T21:13:29.108974
 ====================================================================================
 
 TASK
@@ -16,20 +16,20 @@ PIPELINES
   --------------------------------------------------------------------------------
   pipeline               accuracy       F1  precision   recall    AUROC #pos_pred
   --------------------------------------------------------------------------------
-  Ridge-Vanilla            0.8405   0.6969     0.6989   0.6948   0.8941     10376
-  Ridge-Persona            0.8384   0.6755     0.7181   0.6376   0.8948      9267
+  Ridge-Vanilla            0.8395   0.6920     0.7008   0.6834   0.8933     10178
+  Ridge-Persona            0.8383   0.6763     0.7167   0.6403   0.8950      9325
   --------------------------------------------------------------------------------
 
 CONFUSION MATRICES  (rows = true, cols = predicted; labels = {0, 1})
   Ridge-Vanilla
             pred=0   pred=1
-    true=0   26004     3124
-    true=1    3185     7252
+    true=0   26083     3045
+    true=1    3304     7133
 
   Ridge-Persona
             pred=0   pred=1
-    true=0   26516     2612
-    true=1    3782     6655
+    true=0   26486     2642
+    true=1    3754     6683
 
 INTERPRETATION
   - F1/accuracy depend on the threshold (0.5); AUROC is threshold-free.

@@ -1,0 +1,70 @@
+====================================================================================
+  RIDGE RESULTS — Qwen2.5-7B
+====================================================================================
+
+════════════════════════════════════════════════════════════════════════════════════
+  PART 1: CLASSIFICATION METRICS  (HateSpeechScoreFull)
+════════════════════════════════════════════════════════════════════════════════════
+
+TASK
+  Binary target  : hate_speech_score >= 0.5  (per Kennedy et al.)
+  Aggregation    : one row per comment_id (mean across annotators)
+  Total comments : 39565
+  Positive rate  : 10437 / 39565  (26.4%)
+
+PIPELINES
+  Ridge-Vanilla  : Ridge(OOF, vanilla feats) >= 0.5
+  Ridge-Persona  : Ridge(OOF, persona feats) >= 0.5
+
+  --------------------------------------------------------------------------------
+  pipeline               accuracy       F1  precision   recall    AUROC #pos_pred
+  --------------------------------------------------------------------------------
+  Ridge-Vanilla            0.8037   0.5611     0.6839   0.4756   0.8608      7258
+  Ridge-Persona            0.7986   0.5457     0.6739   0.4585   0.8580      7100
+  --------------------------------------------------------------------------------
+
+CONFUSION MATRICES  (rows = true, cols = predicted; labels = {0, 1})
+  Ridge-Vanilla
+            pred=0   pred=1
+    true=0   26834     2294
+    true=1    5473     4964
+
+  Ridge-Persona
+            pred=0   pred=1
+    true=0   26813     2315
+    true=1    5652     4785
+
+INTERPRETATION
+  - F1/accuracy depend on the threshold (0.5); AUROC is threshold-free.
+  - Comparing Ridge-Vanilla vs Ridge-Persona shows whether persona prompting
+    yields better-calibrated predictions for the IRT hate-speech score.
+
+════════════════════════════════════════════════════════════════════════════════════
+  PART 2: FORMULA COMPARISON  (HateSpeechScoreFullWithCorrelation)
+════════════════════════════════════════════════════════════════════════════════════
+
+  A: Σ Sᵢ·Cᵢ·ρᵢ       (no Ridge, conf+Spearman)
+  B: Σ Sᵢ·Cᵢ·wᵢ        (Ridge, conf only)
+  C: Σ Sᵢ·Cᵢ·ρᵢ·wᵢ     (Ridge, conf+Spearman)
+  D: Σ Sᵢ·ρᵢ            (no Ridge, Spearman only)
+  E: Σ Sᵢ·wᵢ             (Ridge, no conf no Spearman)
+
+  Formula  Mode              R²       MAE      RMSE    Pearson    Spearman
+  --------------------------------------------------------------
+  A     standard     -6.9742    5.3598    5.8541     0.7558      0.7383
+  B     standard      0.6053    1.0057    1.3024     0.7780      0.7559
+  C     standard      0.6053    1.0057    1.3024     0.7780      0.7559
+  D     standard      -9.1424    6.1233    6.6021     0.7620      0.7446
+  E     standard      0.6088    1.0011    1.2965     0.7803      0.7590
+  --------------------------------------------------------------
+  A     persona      -6.2712    5.2101    5.5901     0.7321      0.7294
+  B     persona       0.5792    1.0364    1.3448     0.7611      0.7450
+  C     persona       0.5792    1.0364    1.3448     0.7611      0.7450
+  D     persona      -8.3051    5.9428    6.3237     0.7503      0.7401
+  E     persona       0.5885    1.0246    1.3298     0.7672      0.7498
+  --------------------------------------------------------------
+
+  NOTE: B and C are always identical because Ridge absorbs the Spearman
+  pre-scaling into its weights (ρᵢ is redundant once Ridge is applied).
+
+====================================================================================
