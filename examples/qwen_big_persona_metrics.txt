@@ -61,3 +61,36 @@ Accuracy       :  0.7663
 F1             :  0.8672
 MAE            :  0.9916
 RMSE           :  1.1920
+
+========================================================
+OBSERVATIONS & ANALYSIS
+========================================================
+
+PERSONA EFFECT — NEGLIGIBLE FOR QWEN
+  Persona mode produces virtually no change for Qwen2.5-72B:
+    hatespeech F1 : 0.8671 → 0.8672  (+0.0001, negligible)
+    sentiment     : -0.728 → -0.717   (-0.011, slight regression)
+    respect       : -0.744 → -0.742   (-0.002, essentially flat)
+    violence      :  0.612 →  0.608   (-0.003, essentially flat)
+    genocide      :  0.526 →  0.533   (+0.007, marginal)
+  Changes are negligible across the board. Qwen2.5-72B does not
+  meaningfully benefit from annotator persona context — it extracts
+  the same signal from text alone.
+
+WHY PERSONA HELPS LLAMA BUT NOT QWEN
+  A possible explanation: Qwen's instruction-following may parse
+  the persona context differently or weight it less in its attention
+  compared to Llama. At 72B both models are near-saturated on text
+  signal, but Llama's architecture may integrate demographic context
+  more effectively into attribute scoring.
+
+STATUS ATTRIBUTE
+  status moves from -0.54 (standard) to -0.55 (persona) — minimal
+  change. Across all experiments status is the most inconsistent
+  attribute, and persona context does not resolve this.
+
+RIDGE CONSEQUENCE
+  Because persona offers no attribute improvements over standard,
+  the Ridge results reflect this: persona F1=0.676 < vanilla F1=0.692.
+  For Qwen, vanilla is the better mode for the full pipeline, even
+  though AUROC is marginally higher in persona (0.895 vs 0.893).

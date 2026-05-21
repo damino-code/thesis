@@ -61,3 +61,48 @@ Accuracy       :  0.7572
 F1             :  0.8610
 MAE            :  0.9584
 RMSE           :  1.1879
+
+========================================================
+OBSERVATIONS & ANALYSIS
+========================================================
+
+CRITICAL FAILURE: SENTIMENT
+  sentiment Spearman=-0.016 — near zero.
+  The 8B model in vanilla mode essentially produces random scores
+  for the sentiment attribute. The large model (70B) achieves -0.770
+  on the same attribute. This is the most dramatic gap between
+  model sizes in this study.
+
+  A likely cause: the sentiment prompt uses a 0-4 scale where the
+  small model outputs tokens inconsistently — possibly defaulting to
+  a single value or producing scale-reversed responses. The Spearman
+  of -0.016 suggests no monotonic relationship at all.
+
+STATUS SIGN REVERSAL
+  status Spearman=+0.39 — positive instead of negative.
+  Big models correctly treat high status scores as protective (negative
+  correlation with hate_speech_score). The small model inverts this,
+  suggesting it misunderstands the status prompt direction. This
+  contaminates Ridge features with a wrong-sign signal.
+
+STRONG ATTRIBUTES DESPITE SIZE
+  Despite the sentiment and status failures, insult (0.68), respect
+  (-0.69), humiliate (0.65) and attack_defend (0.56) remain reasonably
+  strong. The model retains genuine signal on more concrete/explicit
+  attributes even at 8B.
+
+  hatespeech F1=0.861 — surprisingly close to big model (0.820-0.867).
+  The direct yes/no hate judgment is more robust than continuous scoring.
+
+MAE PARADOX
+  sentiment MAE=1.16 and status MAE=0.63 are much lower than the big
+  model's equivalent (~3.0 and ~2.0). This reflects scale collapse:
+  the small model outputs a narrow range of values, leading to low
+  absolute error but also near-zero correlation. Low MAE here does
+  NOT mean better annotation — it means the model is not varying
+  its responses appropriately across the dataset.
+
+RIDGE CONSEQUENCE
+  The near-zero sentiment and wrong-sign status degrade Ridge quality.
+  OOF Pearson drops to 0.791 vs 0.840 for the big Llama model.
+  Ridge F1=0.563 (vanilla) is markedly lower than the big model.

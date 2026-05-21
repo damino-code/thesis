@@ -61,3 +61,48 @@ Accuracy       :  0.6970
 F1             :  0.8200
 MAE            :  1.0235
 RMSE           :  1.2661
+
+========================================================
+OBSERVATIONS & ANALYSIS
+========================================================
+
+STRONGEST ATTRIBUTES
+  sentiment (-0.70) and respect (-0.73) are the two best predictors of
+  hate_speech_score. Their negative sign is expected: high sentiment
+  (positive tone) and high respect both correlate with low hate. Together
+  they act as the model's strongest protective-attribute signal.
+
+  insult (0.70) and humiliate (0.66) are the strongest hate-positive
+  attributes, closely followed by attack_defend (0.64) and violence (0.62).
+  These capture the most direct markers of hateful content.
+
+WEAKEST / PROBLEMATIC ATTRIBUTE
+  hatespeech (-0.44) — the model's own hate-speech judgment has the
+  weakest and also negative correlation. The prompt scale is 0=no hate,
+  1=unclear, 2=hate — so higher values should correlate positively with
+  hate_speech_score. The observed negative sign indicates systematic
+  under-scoring: the model tends to output low values (0 or 1) even for
+  text with high IRT hate scores, suggesting poor sensitivity at the upper
+  end of the hate continuum. Despite this, direct F1=0.82 on the binary
+  hatespeech attribute shows the model classifies hate reasonably well when
+  evaluated at the correct threshold — the continuous score range is just
+  poorly calibrated.
+
+  status (Spearman=-0.57) is the weakest among the
+  hate-positive attributes. The 0/1 binary scale makes it harder to
+  calibrate, and the concept of "derogatory status" overlaps with
+  other dimensions.
+
+MAE / RMSE OBSERVATIONS
+  sentiment and respect have very high MAE (~3.0) and RMSE (~3.2)
+  because they use a 0-4 scale while human annotations span a wide
+  range — the model tends to use extreme values. In contrast, insult,
+  violence, and genocide have MAE < 0.8, indicating better calibration
+  on their narrower scales.
+
+STANDARD vs PERSONA (preview)
+  In vanilla mode this model already achieves strong correlations.
+  Persona mode (see llama_big_persona_metrics.txt) brings marginal
+  improvement: +0.02 on sentiment Spearman, +0.02 on insult, +0.04
+  on attack_defend. The gains suggest annotator context helps but
+  the baseline is already well-calibrated for a 70B model.

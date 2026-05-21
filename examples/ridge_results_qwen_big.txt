@@ -68,3 +68,48 @@ INTERPRETATION
   pre-scaling into its weights (ρᵢ is redundant once Ridge is applied).
 
 ====================================================================================
+
+========================================================
+OBSERVATIONS & ANALYSIS
+========================================================
+
+VANILLA BEST FOR F1, PERSONA BEST FOR AUROC
+  Qwen2.5-72B shows a clean split: vanilla wins on F1 (0.6920 vs 0.6763)
+  while persona wins on AUROC (0.8950 vs 0.8933). This means persona
+  produces better-ranked scores overall but is mis-calibrated at threshold
+  0.5 — it predicts fewer positives (9325 vs 10178), hurting recall
+  (0.640 vs 0.683) more than it gains in precision (0.717 vs 0.701).
+
+  For classification tasks: use vanilla. For ranking tasks (AUROC): use
+  persona. The gap is small enough (0.002 AUROC) that vanilla is the
+  practical recommendation for simplicity.
+
+QWEN vs LLAMA (BIG MODELS)
+  Qwen Ridge-Vanilla F1=0.692 vs Llama Ridge-Vanilla F1=0.686.
+  Qwen has marginally higher F1 in vanilla mode, but lower AUROC
+  (0.893 vs 0.899). Llama pulls ahead on AUROC in both modes.
+  Llama-3.1-70B Persona is still the best overall (AUROC=0.9025).
+
+FORMULA COMPARISON
+  Best Pearson for Qwen: 0.8298 (standard formula B/C) vs Llama 0.8401.
+  A 1-point gap in Pearson reflects Qwen's slightly weaker attribute
+  correlations on sentiment/respect and stronger on insult/genocide —
+  the net Ridge combination favors Llama's attribute profile.
+
+  Standard formula outperforms persona for Qwen (Pearson 0.8298 vs 0.8286).
+  This is consistent with qwen_big_persona_metrics.txt: persona offers
+  no attribute improvement and Ridge inherits the same flat result.
+
+RIDGE NECESSITY
+  Formula A (no Ridge, standard): R²=-7.38, Pearson=0.826.
+  Formula B/C (Ridge):            R²=+0.689, Pearson=0.830.
+  Same pattern as Llama: without Ridge the weighted sum has negative R²;
+  Ridge is essential. The gain from Ridge is slightly smaller for Qwen
+  (+0.004 Pearson) than Llama (+0.006), likely because Qwen's attributes
+  are more consistently calibrated — less need for re-weighting.
+
+POSITIVE PREDICTIONS COUNT
+  Vanilla predicts 10178 positives vs actual 10437 (only 2.5% over-predict).
+  Persona predicts 9325 — under-predicts by 10.7%. The threshold is better
+  aligned in vanilla mode for Qwen, further supporting vanilla as the
+  default pipeline choice.

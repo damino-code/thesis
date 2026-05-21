@@ -68,3 +68,50 @@ INTERPRETATION
   pre-scaling into its weights (ρᵢ is redundant once Ridge is applied).
 
 ====================================================================================
+
+========================================================
+OBSERVATIONS & ANALYSIS
+========================================================
+
+BEST OVERALL PIPELINE IN THE STUDY
+  Llama-3.1-70B persona Ridge achieves AUROC=0.9025 — the highest across
+  all models, modes, and formula variants. This is the recommended pipeline
+  when ranking performance matters (AUROC) and compute allows the 70B model.
+
+RIDGE VALUE: CRITICAL
+  Formula A (no Ridge, Spearman-weighted): Pearson=0.834, R²=-8.44
+  Formula B/C (Ridge):                    Pearson=0.840, R²=+0.706
+  The negative R² on formula A means the Spearman-weighted sum without Ridge
+  has higher variance than simply predicting the mean — Ridge is not just
+  marginally helpful, it is essential for calibrated predictions. The raw
+  attribute combination amplifies noise; Ridge learns to suppress the
+  less reliable dimensions.
+
+FORMULA D: WORST BY FAR
+  Formula D (Spearman-only, no confidence, no Ridge): R²=-13.24.
+  Without confidence weighting, noisy high-score predictions (where the model
+  is uncertain) are given full weight, catastrophically inflating variance.
+  Confidence scores carry meaningful calibration signal beyond just the
+  point estimate.
+
+FORMULA E vs B/C
+  Formula E (Ridge but no confidence): Pearson=0.829/0.835 vs B=0.840/0.841.
+  Dropping confidence from features loses ~1 Pearson point. Confidence
+  captures annotation certainty that the raw attribute score misses.
+
+B = C IDENTITY
+  Formulas B and C are numerically identical in every run. Pre-scaling by
+  Spearman ρᵢ before Ridge fitting is equivalent to letting Ridge learn the
+  same re-weighting as part of its fit — the linear model is invariant to
+  this monotone rescaling of input features.
+
+PERSONA EFFECT ON RIDGE
+  Standard → Persona: Pearson 0.8401 → 0.8409 (+0.0008), AUROC 0.8988 →
+  0.9025 (+0.004). The per-attribute gains from persona (see
+  llama_big_persona_metrics.txt) are small individually but compound
+  across 10 features in the linear model, yielding a meaningful AUROC lift.
+
+  The precision/recall tradeoff shifts: persona is more conservative
+  (precision 0.731 vs 0.712, recall 0.653 vs 0.663). For applications
+  where false positives are costly (moderation review queues), persona
+  is preferred; for recall-sensitive use cases, vanilla may be better.

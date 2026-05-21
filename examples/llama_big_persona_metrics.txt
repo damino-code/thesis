@@ -61,3 +61,43 @@ Accuracy       :  0.6904
 F1             :  0.8153
 MAE            :  1.0405
 RMSE           :  1.2775
+
+========================================================
+OBSERVATIONS & ANALYSIS
+========================================================
+
+PERSONA EFFECT
+  Persona mode injects annotator demographics (age, gender, race,
+  ideology) into the prompt. For Llama-3.1-70B this produces
+  consistent but modest improvements across most attributes:
+    sentiment  : -0.70 → -0.72 (+0.02)
+    respect    : -0.73 → -0.76 (+0.03)
+    insult     :  0.70 →  0.72 (+0.02)
+    humiliate  :  0.66 →  0.67 (+0.01)
+    attack_defend: 0.64 → 0.69 (+0.04)  ← largest gain
+  The gains are real but small, suggesting the 70B model is already
+  capturing most of the signal from text alone.
+
+NOTABLE IMPROVEMENTS
+  attack_defend gains the most (+0.04 Spearman).
+  This attribute — whether the comment defends or attacks a group —
+  may be more context-dependent and benefit most from knowing the
+  annotator's own in-group vs out-group perspective.
+
+  MAE also improves across most attributes: sentiment 3.01→2.87,
+  respect 2.91→2.83, status 2.02→1.86. The persona context appears
+  to reduce systematic over-scoring.
+
+REGRESSIONS
+  violence MAE increases slightly (0.77→0.88) and Pearson drops
+  (0.69→0.66). The persona prompt may introduce noise for this
+  attribute — annotator identity matters less for judging explicit
+  violent language than for subjective social-status attributes.
+
+  hatespeech F1 drops very slightly (0.820→0.815), within noise.
+
+RIDGE CONSEQUENCE
+  Despite modest per-attribute gains, persona mode yields the best
+  Ridge AUROC (0.9025 vs 0.8988 vanilla) because even small
+  improvements across 10 features compound in the linear model.
+  This is the best-performing model overall on the Kennedy dataset.

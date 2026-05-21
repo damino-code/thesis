@@ -61,3 +61,54 @@ Accuracy       :  0.7345
 F1             :  0.8459
 MAE            :  1.0211
 RMSE           :  1.2253
+
+========================================================
+OBSERVATIONS & ANALYSIS
+========================================================
+
+PERSONA PARTIALLY RECOVERS SENTIMENT
+  sentiment Spearman improves from -0.016 (standard) to -0.433 (persona) —
+  a large absolute gain (+0.417), but still far from the big model (-0.724).
+  Persona context (annotator demographics) provides the small model with
+  enough framing to avoid pure random scoring, but the 8B capacity remains
+  a hard ceiling on how well it handles the 0-4 sentiment scale.
+
+  hatespeech F1 drops from 0.861 → 0.846. Despite sentiment improvement,
+  the direct hate judgment is slightly degraded — persona context may
+  introduce noise that disrupts the binary calibration.
+
+STATUS: WRONG SIGN TO NEAR-ZERO
+  status moves from +0.37 (standard, wrong sign) to +0.024 (persona, near-
+  zero). The persona prompt partially suppresses the directional error but
+  does not correct it. The model remains unable to reliably interpret
+  "derogatory status" direction at 8B — it neither inverts correctly nor
+  produces a meaningful signal.
+
+PERSONA HURTS MOST OTHER ATTRIBUTES
+  Contrary to the big Llama model where persona brings uniform small gains,
+  the 8B model regresses on most attributes in persona mode:
+    insult      : 0.675 → 0.566  (-0.109)
+    humiliate   : 0.648 → 0.518  (-0.130)
+    dehumanize  : 0.554 → 0.512  (-0.042)
+    violence    : 0.550 → 0.485  (-0.065)
+    genocide    : 0.430 → 0.411  (-0.019)
+  The small model cannot simultaneously process annotator demographics and
+  attribute-specific text signals — the persona context crowds out the
+  attribute reasoning capacity.
+
+  respect Spearman worsens (-0.703 → -0.671 — regression).
+  No attribute shows meaningful improvement in persona except sentiment.
+
+RIDGE CONSEQUENCE: F1 IMPROVES, AUROC DROPS
+  Despite per-attribute regressions, Ridge F1 improves: 0.563 → 0.604 in
+  persona mode. AUROC drops slightly: 0.867 → 0.864.
+
+  The F1 gain comes from better sentiment — the Ridge's most-weighted
+  negative predictor. Even an imperfect -0.453 correlation on sentiment
+  is far better than near-zero, allowing the Ridge to correctly suppress
+  some true-negative predictions. AUROC drop reflects that the overall
+  rank ordering of scores is slightly worse due to the other attribute
+  regressions.
+
+  Key takeaway: for small Llama, persona mode is net positive for F1-based
+  classification but net neutral/slightly negative for ranking quality.
