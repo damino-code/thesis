@@ -1,0 +1,102 @@
+==========================================================
+baseline2000 — Hate-Speech Classification on test_2000.csv
+Job ID: 376439
+Node: gpu-nvidia-h200-1
+Date: Thu May 21 01:40:46 CEST 2026
+==========================================================
+Thu May 21 01:40:46 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H200 NVL                On  |   00000000:8C:00.0 Off |                    0 |
+| N/A   30C    P0             69W /  600W |       0MiB / 143771MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+1. RUNNING ALL STRATEGIES (model loaded once)...
+
+Available prompt strategies:
+  1. zero_shot
+  2. few_shot
+  3. definition
+  4. attribute_aware_no_values
+  5. attribute_aware_with_values
+  6. all
+
+Choose (e.g. '1,3' or 'all') [Default: all]: 
+Enter sample size (or 'all'): 
+Strategies: ['zero_shot', 'few_shot', 'definition', 'attribute_aware_no_values', 'attribute_aware_with_values']
+
+Loading model (once for all strategies)…
+Loading model: hugging-quants/Meta-Llama-3.1-70B-Instruct-AWQ-INT4
+  GPU memory utilization: 0.9
+  Max model length: 1024
+  Max concurrent sequences: 256
+  Tensor parallel size: 1
+  Seed: 42
+INFO 05-21 01:40:53 [utils.py:233] non-default args: {'trust_remote_code': True, 'download_dir': '/storage/nobackup/amine/models', 'seed': 42, 'max_model_len': 1024, 'max_num_seqs': 256, 'disable_log_stats': True, 'quantization': 'awq', 'model': 'hugging-quants/Meta-Llama-3.1-70B-Instruct-AWQ-INT4'}
+ERROR 05-21 01:40:54 [repo_utils.py:47] Error retrieving file list: 401 Client Error. (Request ID: Root=1-6a0e4686-10c749240a4479d02c2525c5;4fdf0c38-1327-40a8-917b-83488a7ca16c)
+ERROR 05-21 01:40:54 [repo_utils.py:47] 
+ERROR 05-21 01:40:54 [repo_utils.py:47] Repository Not Found for url: https://huggingface.co/api/models/hugging-quants/Meta-Llama-3.1-70B-Instruct-AWQ-INT4/tree/main?recursive=true&expand=false.
+ERROR 05-21 01:40:54 [repo_utils.py:47] Please make sure you specified the correct `repo_id` and `repo_type`.
+ERROR 05-21 01:40:54 [repo_utils.py:47] If you are trying to access a private or gated repo, make sure you are authenticated and your token has the required permissions.
+ERROR 05-21 01:40:54 [repo_utils.py:47] For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+ERROR 05-21 01:40:54 [repo_utils.py:47] User Access Token "thesis_fullann" is expired, retrying 1 of 2
+ERROR 05-21 01:40:56 [repo_utils.py:45] Error retrieving file list: 401 Client Error. (Request ID: Root=1-6a0e4688-5ccd487f7c41f6c43d87d696;d2499a05-5e4d-4a7a-9207-032d28e64315)
+ERROR 05-21 01:40:56 [repo_utils.py:45] 
+ERROR 05-21 01:40:56 [repo_utils.py:45] Repository Not Found for url: https://huggingface.co/api/models/hugging-quants/Meta-Llama-3.1-70B-Instruct-AWQ-INT4/tree/main?recursive=true&expand=false.
+ERROR 05-21 01:40:56 [repo_utils.py:45] Please make sure you specified the correct `repo_id` and `repo_type`.
+ERROR 05-21 01:40:56 [repo_utils.py:45] If you are trying to access a private or gated repo, make sure you are authenticated and your token has the required permissions.
+ERROR 05-21 01:40:56 [repo_utils.py:45] For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+ERROR 05-21 01:40:56 [repo_utils.py:45] User Access Token "thesis_fullann" is expired
+ERROR 05-21 01:40:56 [repo_utils.py:110] Error retrieving file list. Please ensure your `model_name_or_path``repo_type`, `token` and `revision` arguments are correctly set. Returning an empty list.
+ERROR 05-21 01:40:56 [repo_utils.py:47] Error retrieving file list: 401 Client Error. (Request ID: Root=1-6a0e4688-3253786e5545018f347d8410;5ef8bd95-cdcc-4218-a3e7-9ee3c27da1ad)
+ERROR 05-21 01:40:56 [repo_utils.py:47] 
+ERROR 05-21 01:40:56 [repo_utils.py:47] Repository Not Found for url: https://huggingface.co/api/models/hugging-quants/Meta-Llama-3.1-70B-Instruct-AWQ-INT4/tree/main?recursive=true&expand=false.
+ERROR 05-21 01:40:56 [repo_utils.py:47] Please make sure you specified the correct `repo_id` and `repo_type`.
+ERROR 05-21 01:40:56 [repo_utils.py:47] If you are trying to access a private or gated repo, make sure you are authenticated and your token has the required permissions.
+ERROR 05-21 01:40:56 [repo_utils.py:47] For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+ERROR 05-21 01:40:56 [repo_utils.py:47] User Access Token "thesis_fullann" is expired, retrying 1 of 2
+ERROR 05-21 01:40:58 [repo_utils.py:45] Error retrieving file list: 401 Client Error. (Request ID: Root=1-6a0e468a-7d5d231e126731d662da6a41;8641a5ad-e11a-4a13-b7d4-1b0499536dfd)
+ERROR 05-21 01:40:58 [repo_utils.py:45] 
+ERROR 05-21 01:40:58 [repo_utils.py:45] Repository Not Found for url: https://huggingface.co/api/models/hugging-quants/Meta-Llama-3.1-70B-Instruct-AWQ-INT4/tree/main?recursive=true&expand=false.
+ERROR 05-21 01:40:58 [repo_utils.py:45] Please make sure you specified the correct `repo_id` and `repo_type`.
+ERROR 05-21 01:40:58 [repo_utils.py:45] If you are trying to access a private or gated repo, make sure you are authenticated and your token has the required permissions.
+ERROR 05-21 01:40:58 [repo_utils.py:45] For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+ERROR 05-21 01:40:58 [repo_utils.py:45] User Access Token "thesis_fullann" is expired
+
+2. EVALUATING (all strategies side-by-side)...
+[skip:zero_shot] No results CSV.
+[skip:few_shot] No results CSV.
+[skip:definition] No results CSV.
+[skip:attribute_aware_no_values] No results CSV.
+[skip:attribute_aware_with_values] No results CSV.
+
+Saved: /storage/home/amine/thesis/baseline2000/results/classification_comparison.txt
+Saved: /storage/home/amine/thesis/baseline2000/results/classification_comparison.json
+
+======================================================================
+  SUMMARY
+  strategy                               F1    AUROC      acc
+  ------------------------------------------------------------
+  zero_shot                         (no data)
+  few_shot                          (no data)
+  definition                        (no data)
+  attribute_aware_no_values         (no data)
+  attribute_aware_with_values       (no data)
+======================================================================
+
+==========================================================
+Done at Thu May 21 01:41:00 CEST 2026

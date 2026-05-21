@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=baseline2000
 #SBATCH --partition=compute
-#SBATCH --nodelist=gpu-nvidia-h100
+#SBATCH --nodelist=gpu-nvidia-h200-1
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:nvidia:1
