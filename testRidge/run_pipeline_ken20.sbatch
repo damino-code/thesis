@@ -8,7 +8,7 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=64G
 #SBATCH --time=08:00:00
-#SBATCH --output=/storage/home/amine/thesis/testRdige/logs/ridge_ken20_%j.out
+#SBATCH --output=/storage/home/amine/thesis/testRidge/logs/ridge_ken20_%j.out
 #SBATCH --error=/storage/home/amine/thesis/testRdige/logs/ridge_ken20_%j.err
 
 echo "=========================================================="

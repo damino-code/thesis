@@ -1,0 +1,36 @@
+============================================================================================
+  HATE-SPEECH CLASSIFICATION — baseline2000 (test_2000_ken20.csv)
+  Generated : 2026-05-22T11:12:52.044964
+============================================================================================
+
+TASK
+  Dataset        : test_2000_ken20.csv
+  Binary target  : label column (0=not hate, 1=hate)
+  Decision rule  : P(yes) >= 0.5  →  predicted hate
+  Total comments : 2000
+  Positive count : 989  (49.5%)
+
+RESULTS
+  ------------------------------------------------------------------------------------------
+  strategy                         accuracy       F1  precision   recall    AUROC #pos_pred
+  ------------------------------------------------------------------------------------------
+  zero_shot                          0.7335   0.7717     0.6694   0.9110   0.8511      1346
+  few_shot                           0.7335   0.7674     0.6751   0.8888   0.8392      1302
+  definition                         0.7560   0.7796     0.7045   0.8726   0.8429      1225
+  attribute_aware_no_values          0.7420   0.7768     0.6788   0.9080   0.8408      1323
+  attribute_aware_with_values       (no data)
+  ------------------------------------------------------------------------------------------
+
+INTERPRETATION
+  - zero_shot                   : bare yes/no, no extra context
+  - few_shot                    : zero-shot + 4 labelled examples
+                                   (from Kennedy et al., hate_speech_score > 0.5)
+  - definition                  : formal hate-speech definition added
+  - attribute_aware_no_values   : lists 10 dimensions, model assesses each
+  - attribute_aware_with_values : uses Llama-3.1-70B attribute annotations
+                                   from testRdige/results/ (low/moderate/high)
+  Compare to:
+    Ridge pre-trained (thresh=0.5)   F1=0.573  AUROC=0.843
+    Ridge pre-trained (thresh=-1.5)  F1=0.802  AUROC=0.843
+    Ridge trained on test_2000 (OOF) F1=0.816  AUROC=0.892
+============================================================================================

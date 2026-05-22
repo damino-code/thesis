@@ -1,6 +1,6 @@
 ============================================================================================
   HATE-SPEECH CLASSIFICATION PROMPT — COMPARISON
-  Generated : 2026-05-17T22:56:11.821931
+  Generated : 2026-05-22T03:13:46.107017
 ============================================================================================
 
 TASK
@@ -14,6 +14,7 @@ PER-COMMENT RESULTS  (predictions averaged across annotators)
   strategy                         accuracy       F1  precision   recall    AUROC #pos_pred
   ------------------------------------------------------------------------------------------
   zero_shot                          0.6664   0.6030     0.4395   0.9602   0.8959     22805
+  few_shot                           0.6747   0.6063     0.4453   0.9493   0.8950     22249
   definition                         0.7079   0.6161     0.4715   0.8888   0.8597     19673
   attribute_aware_no_values          0.6697   0.6030     0.4415   0.9512   0.8839     22489
   attribute_aware_with_values        0.5749   0.5491     0.3812   0.9814   0.8865     26869
@@ -24,6 +25,7 @@ PER-ROW RESULTS  (joined on comment_id × annotator_id)
   strategy                         accuracy       F1  precision   recall    AUROC #pos_pred
   ------------------------------------------------------------------------------------------
   zero_shot                          0.7292   0.7259     0.5742   0.9866   0.9440     84666
+  few_shot                           0.7354   0.7296     0.5804   0.9820   0.9479     83363
   definition                         0.7601   0.7443     0.6076   0.9604   0.9241     77889
   attribute_aware_no_values          0.7168   0.7163     0.5632   0.9837   0.9351     86062
   attribute_aware_with_values        0.6501   0.6738     0.5096   0.9942   0.9406     96139
@@ -31,6 +33,9 @@ PER-ROW RESULTS  (joined on comment_id × annotator_id)
 
 INTERPRETATION
   - zero_shot                    : bare yes/no, no extra context
+  - few_shot                     : zero-shot + 4 labelled examples from the dataset
+                                    (2 hate / 2 non-hate, selected by mean
+                                    hate_speech_score > 0.5 per Kennedy et al.)
   - definition                   : same plus a formal hate-speech definition
   - attribute_aware_no_values    : lists 10 dimensions, model still has to assess
   - attribute_aware_with_values  : substitutes the model's own previous attribute
