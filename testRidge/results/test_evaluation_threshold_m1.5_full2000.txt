@@ -1,0 +1,34 @@
+========================================================================
+  RIDGE TEST EVALUATION (THRESHOLD=-1.5, FULL 2000) — Llama-3.1-70B vanilla
+  Generated : 2026-05-18T15:39:53.190523
+========================================================================
+
+TASK
+  Annotation model   : Llama-3.1-70B AWQ-INT4 (vanilla)
+  Ridge weights from : HateSpeechScoreFull/Llama-3.1-70B/standard
+  Decision threshold : -1.5  (best F1 found on dev split)
+  Ground truth       : binary label column (0=not hate, 1=hate)
+  Total samples      : 2000
+  Positive (hate)    : 1079 / 2000  (54.0%)
+
+RESULTS
+  metric                    value
+  --------------------------------
+  accuracy                 0.7595
+  F1                       0.8023
+  precision                0.7208
+  recall                   0.9045
+  AUROC                    0.8433
+  #pos_predicted             1354
+  --------------------------------
+
+CONFUSION MATRIX  (rows = true, cols = predicted; labels = {0, 1})
+            pred=0   pred=1
+  true=0      543      378
+  true=1      103      976
+
+COMPARISON
+  threshold=0.5  (original)   : F1=0.5727  prec=0.9093  rec=0.4180  AUROC=0.8433
+  threshold=-1.5 (calibrated) : F1=0.8023  prec=0.7208  rec=0.9045  AUROC=0.8433
+  training reference          : F1=0.6863  prec=0.7115  rec=0.6629  AUROC=0.8988
+========================================================================
