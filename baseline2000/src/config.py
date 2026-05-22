@@ -3,9 +3,10 @@ import os
 BASE_DIR   = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 THESIS_DIR = os.path.dirname(os.path.dirname(BASE_DIR))
 
+DATASET = os.environ.get("DATASET", "test_2000")
+
 # Test dataset
-DATASET_PATH = os.path.join(BASE_DIR, "..", "testRdige", "test_2000.csv")
-DATASET_PATH = os.path.normpath(DATASET_PATH)
+DATASET_PATH = os.path.normpath(os.path.join(BASE_DIR, "..", "testDataset", f"{DATASET}.csv"))
 
 # Model — Llama-3.1-70B (same as the annotation run in testRdige)
 MODEL_ID               = "hugging-quants/Meta-Llama-3.1-70B-Instruct-AWQ-INT4"
@@ -16,11 +17,11 @@ MAX_NUM_SEQS           = 256
 TENSOR_PARALLEL_SIZE   = 1
 SEED                   = 42
 
-RESULTS_FOLDER       = os.path.join(BASE_DIR, "results")
-VISUALIZATIONS_FOLDER = os.path.join(BASE_DIR, "visualizations")
+RESULTS_FOLDER        = os.path.join(BASE_DIR, "results", DATASET)
+VISUALIZATIONS_FOLDER = os.path.join(BASE_DIR, "visualizations", DATASET)
 
 # Attribute annotations from the testRdige pipeline (used by attribute_aware_with_values)
-TESTRIDGE_RESULTS_DIR    = os.path.normpath(os.path.join(BASE_DIR, "..", "testRdige", "results"))
+TESTRIDGE_RESULTS_DIR    = os.path.normpath(os.path.join(BASE_DIR, "..", "testRdige", "results", DATASET))
 ATTRIBUTE_VALUES_PATTERN = os.path.join(TESTRIDGE_RESULTS_DIR, "merged_annotations_*.csv")
 
 ATTRIBUTE_SCALES = {

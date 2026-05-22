@@ -102,14 +102,15 @@ def write_report(all_results):
     n_total = sample["results"]["n"] if sample else 0
     n_pos   = sample["results"]["n_pos_gt"] if sample else 0
 
+    dataset_file = os.path.basename(config.DATASET_PATH)
     lines = [
         "=" * 92,
-        "  HATE-SPEECH CLASSIFICATION — baseline2000 (test_2000.csv)",
+        f"  HATE-SPEECH CLASSIFICATION — baseline2000 ({dataset_file})",
         f"  Generated : {datetime.now().isoformat()}",
         "=" * 92,
         "",
         "TASK",
-        f"  Dataset        : test_2000.csv",
+        f"  Dataset        : {dataset_file}",
         f"  Binary target  : label column (0=not hate, 1=hate)",
         f"  Decision rule  : P(yes) >= 0.5  →  predicted hate",
         f"  Total comments : {n_total}",
