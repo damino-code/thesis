@@ -95,3 +95,42 @@ Loaded 135556 comments
 #  STRATEGY: few_shot
 ######################################################################
   Running batch on 135556 comments…
+(EngineCore pid=6004) INFO 05-22 11:39:10 [core.py:1210] Shutdown initiated (timeout=0)
+(EngineCore pid=6004) INFO 05-22 11:39:10 [core.py:1233] Shutdown complete
+  Saved 135556 predictions → /storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.3-70B/results/few_shot/results_few_shot_20260522_113909.csv
+
+All strategies done.
+
+2. EVALUATING (all strategies side-by-side)...
+[eval:zero_shot] results_zero_shot_20260517_222005.csv
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+[eval:few_shot] results_few_shot_20260522_113909.csv
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+[eval:definition] results_definition_20260517_225602.csv
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+[eval:attribute_aware_no_values] results_attribute_aware_no_values_20260506_134441.csv
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+[eval:attribute_aware_with_values] results_attribute_aware_with_values_20260506_141938.csv
+Found dataset: /storage/home/amine/thesis/Dataset/processed_dataset.csv
+Loaded 135556 comments
+
+Saved: /storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.3-70B/results/classification_comparison.txt
+Saved: /storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.3-70B/results/classification_comparison.json
+
+======================================================================
+  SUMMARY (per-comment)
+  strategy                               F1    AUROC      acc
+  ------------------------------------------------------------
+  zero_shot                          0.6030   0.8959   0.6664
+  few_shot                           0.6063   0.8950   0.6747
+  definition                         0.6161   0.8597   0.7079
+  attribute_aware_no_values          0.6030   0.8839   0.6697
+  attribute_aware_with_values        0.5491   0.8865   0.5749
+======================================================================
+
+==========================================================
+Analysis completely finished at Fri May 22 11:39:15 CEST 2026

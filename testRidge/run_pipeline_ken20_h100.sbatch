@@ -9,7 +9,7 @@
 #SBATCH --mem=64G
 #SBATCH --time=08:00:00
 #SBATCH --output=/storage/home/amine/thesis/testRidge/logs/ridge_ken20_h100_%j.out
-#SBATCH --error=/storage/home/amine/thesis/testRdige/logs/ridge_ken20_h100_%j.err
+#SBATCH --error=/storage/home/amine/thesis/testRidge/logs/ridge_ken20_h100_%j.err
 
 echo "=========================================================="
 echo "Ridge Test — test_2000_ken20.csv  (Llama-3.1-70B vanilla) [h100]"
@@ -20,7 +20,7 @@ echo "=========================================================="
 
 export DATASET=test_2000_ken20
 
-cd /storage/home/amine/thesis/testRdige
+cd /storage/home/amine/thesis/testRidge
 
 nvidia-smi
 
@@ -32,7 +32,7 @@ set -a; source /storage/home/amine/thesis/.env; set +a
 export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
 
 mkdir -p /storage/nobackup/amine/models
-mkdir -p /storage/home/amine/thesis/testRdige/logs
+mkdir -p /storage/home/amine/thesis/testRidge/logs
 
 echo ""
 echo "1. ANNOTATING test_2000_ken20.csv (10 attributes, vanilla)..."

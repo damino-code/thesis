@@ -1,6 +1,6 @@
 {
   "zero_shot": {
-    "pred_file": "/storage/home/amine/thesis/baseline2000/results/test_2000_fou18/zero_shot/results_zero_shot_20260522_111113.csv",
+    "pred_file": "/storage/home/amine/thesis/baseline2000/results/test_2000_fou18/zero_shot/results_zero_shot_20260522_143733.csv",
     "results": {
       "n": 2000,
       "n_pos_gt": 413,
@@ -9,7 +9,7 @@
       "f1": 0.562268803945746,
       "precision": 0.5728643216080402,
       "recall": 0.5520581113801453,
-      "auroc": 0.8300019376562904,
+      "auroc": 0.8299866805201463,
       "confusion_matrix": {
         "tn": 1417,
         "fp": 170,
@@ -19,7 +19,7 @@
     }
   },
   "few_shot": {
-    "pred_file": "/storage/home/amine/thesis/baseline2000/results/test_2000_fou18/few_shot/results_few_shot_20260522_111140.csv",
+    "pred_file": "/storage/home/amine/thesis/baseline2000/results/test_2000_fou18/few_shot/results_few_shot_20260522_143801.csv",
     "results": {
       "n": 2000,
       "n_pos_gt": 413,
@@ -28,7 +28,7 @@
       "f1": 0.49586776859504134,
       "precision": 0.5750798722044729,
       "recall": 0.4358353510895884,
-      "auroc": 0.8237015032856243,
+      "auroc": 0.8237045547128531,
       "confusion_matrix": {
         "tn": 1454,
         "fp": 133,
@@ -38,7 +38,7 @@
     }
   },
   "definition": {
-    "pred_file": "/storage/home/amine/thesis/baseline2000/results/test_2000_fou18/definition/results_definition_20260522_111208.csv",
+    "pred_file": "/storage/home/amine/thesis/baseline2000/results/test_2000_fou18/definition/results_definition_20260522_143828.csv",
     "results": {
       "n": 2000,
       "n_pos_gt": 413,
@@ -47,7 +47,7 @@
       "f1": 0.5300462249614792,
       "precision": 0.7288135593220338,
       "recall": 0.41646489104116224,
-      "auroc": 0.8419711609612606,
+      "auroc": 0.8420344780762582,
       "confusion_matrix": {
         "tn": 1523,
         "fp": 64,
@@ -57,7 +57,7 @@
     }
   },
   "attribute_aware_no_values": {
-    "pred_file": "/storage/home/amine/thesis/baseline2000/results/test_2000_fou18/attribute_aware_no_values/results_attribute_aware_no_values_20260522_111235.csv",
+    "pred_file": "/storage/home/amine/thesis/baseline2000/results/test_2000_fou18/attribute_aware_no_values/results_attribute_aware_no_values_20260522_143855.csv",
     "results": {
       "n": 2000,
       "n_pos_gt": 413,
@@ -66,7 +66,7 @@
       "f1": 0.5270457697642164,
       "precision": 0.6168831168831169,
       "recall": 0.4600484261501211,
-      "auroc": 0.8442498142443674,
+      "auroc": 0.8442879570847274,
       "confusion_matrix": {
         "tn": 1469,
         "fp": 118,

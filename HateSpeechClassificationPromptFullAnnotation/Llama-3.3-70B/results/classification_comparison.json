@@ -35,7 +35,7 @@
     }
   },
   "few_shot": {
-    "pred_file": "/storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.3-70B/results/few_shot/results_few_shot_20260522_031339.csv",
+    "pred_file": "/storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.3-70B/results/few_shot/results_few_shot_20260522_113909.csv",
     "per_row": {
       "n": 135556,
       "n_pos_gt": 49273,
@@ -44,7 +44,7 @@
       "f1": 0.7295756808106396,
       "precision": 0.5804013771097489,
       "recall": 0.9819576644409718,
-      "auroc": 0.9478716791702247,
+      "auroc": 0.9478713670393849,
       "confusion_matrix": {
         "tn": 51304,
         "fp": 34979,
@@ -60,7 +60,7 @@
       "f1": 0.6062534418405433,
       "precision": 0.44532338532068855,
       "recall": 0.9493149372425026,
-      "auroc": 0.8949545088372007,
+      "auroc": 0.8949540088518977,
       "confusion_matrix": {
         "tn": 16787,
         "fp": 12341,
