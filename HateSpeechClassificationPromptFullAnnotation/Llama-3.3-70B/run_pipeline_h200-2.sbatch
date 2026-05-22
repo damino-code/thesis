@@ -1,17 +1,18 @@
 #!/bin/bash
-#SBATCH --job-name=llama70b_hsclassif
+#SBATCH --job-name=hsclassif_h200-2
 #SBATCH --partition=compute
+#SBATCH --nodelist=gpu-nvidia-h200-2
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:nvidia:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=64G
 #SBATCH --time=20:00:00
-#SBATCH --output=/storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.3-70B/logs/llama70b_hsclassif_%j.out
-#SBATCH --error=/storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.3-70B/logs/llama70b_hsclassif_%j.err
+#SBATCH --output=/storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.3-70B/logs/hsclassif_h200-2_%j.out
+#SBATCH --error=/storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.3-70B/logs/hsclassif_h200-2_%j.err
 
 echo "=========================================================="
-echo "Llama-3.3-70B AWQ — Hate-Speech Classification (few_shot only)"
+echo "Llama-3.3-70B AWQ — Hate-Speech Classification (few_shot only) [h200-2]"
 echo "Job ID: $SLURM_JOB_ID"
 echo "Node: $SLURMD_NODENAME"
 echo "Date: $(date)"

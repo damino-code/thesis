@@ -1,23 +1,26 @@
 #!/bin/bash
-#SBATCH --job-name=llama70b_hsclassif
+#SBATCH --job-name=ridge_fou18_h200-1
 #SBATCH --partition=compute
+#SBATCH --nodelist=gpu-nvidia-h200-1
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:nvidia:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=64G
-#SBATCH --time=20:00:00
-#SBATCH --output=/storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.3-70B/logs/llama70b_hsclassif_%j.out
-#SBATCH --error=/storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.3-70B/logs/llama70b_hsclassif_%j.err
+#SBATCH --time=08:00:00
+#SBATCH --output=/storage/home/amine/thesis/testRdige/logs/ridge_fou18_h200-1_%j.out
+#SBATCH --error=/storage/home/amine/thesis/testRdige/logs/ridge_fou18_h200-1_%j.err
 
 echo "=========================================================="
-echo "Llama-3.3-70B AWQ — Hate-Speech Classification (few_shot only)"
+echo "Ridge Test — test_2000_fou18.csv  (Llama-3.1-70B vanilla) [h200-1]"
 echo "Job ID: $SLURM_JOB_ID"
 echo "Node: $SLURMD_NODENAME"
 echo "Date: $(date)"
 echo "=========================================================="
 
-cd /storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.3-70B
+export DATASET=test_2000_fou18
+
+cd /storage/home/amine/thesis/testRdige
 
 nvidia-smi
 
@@ -29,15 +32,20 @@ set -a; source /storage/home/amine/thesis/.env; set +a
 export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
 
 mkdir -p /storage/nobackup/amine/models
+mkdir -p /storage/home/amine/thesis/testRdige/logs
 
 echo ""
-echo "1. RUNNING FEW-SHOT STRATEGY (model loaded once)..."
-echo -e "2\nall\n" | python src/run_classification.py
+echo "1. ANNOTATING test_2000_fou18.csv (10 attributes, vanilla)..."
+python src/run_annotation.py
 
 echo ""
-echo "2. EVALUATING (all strategies side-by-side)..."
-python src/evaluation.py
+echo "2. MERGING PER-ATTRIBUTE RESULTS..."
+python src/merge_results.py
+
+echo ""
+echo "3. APPLYING RIDGE WEIGHTS + EVALUATING..."
+python src/evaluate_ridge.py
 
 echo ""
 echo "=========================================================="
-echo "Analysis completely finished at $(date)"
+echo "Done at $(date)"
