@@ -21,7 +21,7 @@ RESULTS_FOLDER        = os.path.join(BASE_DIR, "results", DATASET)
 VISUALIZATIONS_FOLDER = os.path.join(BASE_DIR, "visualizations", DATASET)
 
 # Attribute annotations from the testRdige pipeline (used by attribute_aware_with_values)
-TESTRIDGE_RESULTS_DIR    = os.path.normpath(os.path.join(BASE_DIR, "..", "testRdige", "results", DATASET))
+TESTRIDGE_RESULTS_DIR    = os.path.normpath(os.path.join(BASE_DIR, "..", "testRidge", "results", DATASET))
 ATTRIBUTE_VALUES_PATTERN = os.path.join(TESTRIDGE_RESULTS_DIR, "merged_annotations_*.csv")
 
 ATTRIBUTE_SCALES = {

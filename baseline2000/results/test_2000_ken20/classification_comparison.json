@@ -1,6 +1,6 @@
 {
   "zero_shot": {
-    "pred_file": "/storage/home/amine/thesis/baseline2000/results/test_2000_ken20/zero_shot/results_zero_shot_20260522_144006.csv",
+    "pred_file": "/Users/amine/thesis/baseline2000/results/test_2000_ken20/zero_shot/results_zero_shot_20260522_144006.csv",
     "results": {
       "n": 2000,
       "n_pos_gt": 989,
@@ -19,7 +19,7 @@
     }
   },
   "few_shot": {
-    "pred_file": "/storage/home/amine/thesis/baseline2000/results/test_2000_ken20/few_shot/results_few_shot_20260522_144037.csv",
+    "pred_file": "/Users/amine/thesis/baseline2000/results/test_2000_ken20/few_shot/results_few_shot_20260522_144037.csv",
     "results": {
       "n": 2000,
       "n_pos_gt": 989,
@@ -38,7 +38,7 @@
     }
   },
   "definition": {
-    "pred_file": "/storage/home/amine/thesis/baseline2000/results/test_2000_ken20/definition/results_definition_20260522_144108.csv",
+    "pred_file": "/Users/amine/thesis/baseline2000/results/test_2000_ken20/definition/results_definition_20260522_144108.csv",
     "results": {
       "n": 2000,
       "n_pos_gt": 989,
@@ -57,7 +57,7 @@
     }
   },
   "attribute_aware_no_values": {
-    "pred_file": "/storage/home/amine/thesis/baseline2000/results/test_2000_ken20/attribute_aware_no_values/results_attribute_aware_no_values_20260522_144140.csv",
+    "pred_file": "/Users/amine/thesis/baseline2000/results/test_2000_ken20/attribute_aware_no_values/results_attribute_aware_no_values_20260522_144140.csv",
     "results": {
       "n": 2000,
       "n_pos_gt": 989,
