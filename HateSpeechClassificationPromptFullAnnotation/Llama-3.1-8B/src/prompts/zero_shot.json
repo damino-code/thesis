@@ -1,0 +1,12 @@
+{
+    "prompt": [
+        "You are evaluating online comments.",
+        "",
+        "Is the following comment hate speech?",
+        "",
+        "Comment: \"{text}\"",
+        "",
+        "Answer with only one word: \"yes\" or \"no\"."
+    ],
+    "labels": ["yes", "no"]
+}

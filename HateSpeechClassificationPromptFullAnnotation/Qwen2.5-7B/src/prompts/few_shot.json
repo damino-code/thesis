@@ -1,0 +1,26 @@
+{
+    "prompt": [
+        "You are evaluating online comments.",
+        "",
+        "Here are some labelled examples (label based on hate speech score):",
+        "",
+        "Comment: \"more evidence that israelis are the scum of the earth.\"",
+        "Answer: yes",
+        "",
+        "Comment: \"When playboi carti said 'she just wanna have fun so just let her' I felt that\"",
+        "Answer: no",
+        "",
+        "Comment: \"Females that are lustful and sexually degenerate are the ugliest of women.\"",
+        "Answer: yes",
+        "",
+        "Comment: \"A female Trump Supporter and the guy who likes to grab her in the Pussy, name a more iconic duo, go ahead, I'll wait.\"",
+        "Answer: no",
+        "",
+        "Now classify the following comment:",
+        "",
+        "Comment: \"{text}\"",
+        "",
+        "Answer with only one word: \"yes\" or \"no\"."
+    ],
+    "labels": ["yes", "no"]
+}

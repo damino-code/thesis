@@ -40,7 +40,7 @@ mkdir -p /storage/home/amine/thesis/baseline2000/logs
 
 echo ""
 echo "1. RUNNING ALL STRATEGIES (model loaded once)..."
-echo -e "all\nall\n" | python src/run_classification.py
+echo -e "5\nall\n" | python src/run_classification.py
 
 echo ""
 echo "2. EVALUATING (all strategies side-by-side)..."
