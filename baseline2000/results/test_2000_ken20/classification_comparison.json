@@ -1,6 +1,6 @@
 {
   "zero_shot": {
-    "pred_file": "/Users/amine/thesis/baseline2000/results/test_2000_ken20/zero_shot/results_zero_shot_20260522_144006.csv",
+    "pred_file": "/storage/home/amine/thesis/baseline2000/results/test_2000_ken20/zero_shot/results_zero_shot_20260522_144006.csv",
     "results": {
       "n": 2000,
       "n_pos_gt": 989,
@@ -19,7 +19,7 @@
     }
   },
   "few_shot": {
-    "pred_file": "/Users/amine/thesis/baseline2000/results/test_2000_ken20/few_shot/results_few_shot_20260522_144037.csv",
+    "pred_file": "/storage/home/amine/thesis/baseline2000/results/test_2000_ken20/few_shot/results_few_shot_20260522_144037.csv",
     "results": {
       "n": 2000,
       "n_pos_gt": 989,
@@ -38,7 +38,7 @@
     }
   },
   "definition": {
-    "pred_file": "/Users/amine/thesis/baseline2000/results/test_2000_ken20/definition/results_definition_20260522_144108.csv",
+    "pred_file": "/storage/home/amine/thesis/baseline2000/results/test_2000_ken20/definition/results_definition_20260522_144108.csv",
     "results": {
       "n": 2000,
       "n_pos_gt": 989,
@@ -57,7 +57,7 @@
     }
   },
   "attribute_aware_no_values": {
-    "pred_file": "/Users/amine/thesis/baseline2000/results/test_2000_ken20/attribute_aware_no_values/results_attribute_aware_no_values_20260522_144140.csv",
+    "pred_file": "/storage/home/amine/thesis/baseline2000/results/test_2000_ken20/attribute_aware_no_values/results_attribute_aware_no_values_20260522_144140.csv",
     "results": {
       "n": 2000,
       "n_pos_gt": 989,
@@ -75,5 +75,23 @@
       }
     }
   },
-  "attribute_aware_with_values": null
+  "attribute_aware_with_values": {
+    "pred_file": "/storage/home/amine/thesis/baseline2000/results/test_2000_ken20/attribute_aware_with_values/results_attribute_aware_with_values_20260524_034536.csv",
+    "results": {
+      "n": 2000,
+      "n_pos_gt": 989,
+      "n_pos_pred": 1534,
+      "accuracy": 0.6965,
+      "f1": 0.7594133967499009,
+      "precision": 0.6245110821382008,
+      "recall": 0.9686552072800809,
+      "auroc": 0.8527691850713935,
+      "confusion_matrix": {
+        "tn": 435,
+        "fp": 576,
+        "fn": 31,
+        "tp": 958
+      }
+    }
+  }
 }

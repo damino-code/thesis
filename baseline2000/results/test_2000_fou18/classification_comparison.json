@@ -75,5 +75,23 @@
       }
     }
   },
-  "attribute_aware_with_values": null
+  "attribute_aware_with_values": {
+    "pred_file": "/storage/home/amine/thesis/baseline2000/results/test_2000_fou18/attribute_aware_with_values/results_attribute_aware_with_values_20260524_034325.csv",
+    "results": {
+      "n": 2000,
+      "n_pos_gt": 413,
+      "n_pos_pred": 550,
+      "accuracy": 0.7905,
+      "f1": 0.564901349948079,
+      "precision": 0.49454545454545457,
+      "recall": 0.6585956416464891,
+      "auroc": 0.8301751061515247,
+      "confusion_matrix": {
+        "tn": 1309,
+        "fp": 278,
+        "fn": 141,
+        "tp": 272
+      }
+    }
+  }
 }
