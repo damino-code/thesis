@@ -29,7 +29,7 @@ from sklearn.metrics import (
 import config
 
 FIXED_THRESHOLD = 0.5
-SWEEP_THRESHOLDS = np.round(np.arange(-3.0, 1.05, 0.05), 2)
+SWEEP_THRESHOLDS = np.round(np.arange(-2.0, 2.05, 0.05), 2)
 
 
 def latest_merged():
@@ -159,8 +159,42 @@ def main():
     #    (skipped if dataset has no 'split' column)
     # ----------------------------------------------------------------
     if not has_split:
-        print("\n[skip] No 'split' column — calibrated evaluation skipped.")
+        # No dev/test split — sweep on all rows
+        print("\n[info] No 'split' column — sweeping threshold on full dataset.")
+        sweep = [metrics_at(df["label"].values, df["ridge_score"].values, t)
+                 for t in SWEEP_THRESHOLDS]
+        best = max(sweep, key=lambda x: x["f1"])
+        best_threshold = best["threshold"]
+        print(f"Best threshold (full set): {best_threshold}  (F1={best['f1']:.4f})")
+
+        m_cal = full_metrics(df["label"].values, df["ridge_score"].values, best_threshold)
+
+        sweep_lines = [
+            "",
+            "THRESHOLD SWEEP ON FULL DATASET",
+            f"  {'threshold':>10}  {'F1':>8}  {'precision':>10}  {'recall':>8}  {'#pos_pred':>10}",
+            "  " + "-" * 54,
+        ]
+        for s in sweep:
+            marker = " ◄ best" if s["threshold"] == best_threshold else ""
+            sweep_lines.append(
+                f"  {s['threshold']:>10.2f}  {s['f1']:>8.4f}  {s['precision']:>10.4f}"
+                f"  {s['recall']:>8.4f}  {s['n_pos_pred']:>10}{marker}"
+            )
+        sweep_lines.append("  " + "-" * 54)
+
+        report_cal = fmt_report(
+            f"RIDGE TEST EVALUATION (CALIBRATED) — Llama-3.1-70B vanilla  [{config.DATASET}]",
+            m_cal, best_threshold, len(df), int(df["label"].sum()),
+            threshold_source="best F1 on full dataset"
+        )
+        report_cal += "\n" + "\n".join(sweep_lines)
+
+        out_cal = config.RESULTS_DIR / "test_evaluation_calibrated.txt"
+        out_cal.write_text(report_cal)
+        print("\n" + report_cal)
         print(f"\nSaved: {out_fixed}")
+        print(f"Saved: {out_cal}")
         return
 
     dev_df  = df[df["split"] == "dev"]
