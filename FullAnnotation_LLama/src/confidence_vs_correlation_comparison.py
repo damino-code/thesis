@@ -104,7 +104,7 @@ def plot_comparison(vanilla_df, persona_df):
         for _, row in vanilla_df.iterrows():
             lbl = ABBREV.get(row['attribute'], row['attribute'])
             ax.text(row['avg_confidence'] + 0.002, row['correlation'] + 0.002,
-                    lbl, fontsize=12, color='steelblue', fontweight='bold')
+                    lbl, fontsize=18, color='steelblue', fontweight='bold')
 
     if not persona_df.empty:
         sns.scatterplot(
@@ -115,7 +115,7 @@ def plot_comparison(vanilla_df, persona_df):
         for _, row in persona_df.iterrows():
             lbl = ABBREV.get(row['attribute'], row['attribute'])
             ax.text(row['avg_confidence'] + 0.002, row['correlation'] - 0.012,
-                    lbl, fontsize=12, color='darkorange', fontweight='bold')
+                    lbl, fontsize=18, color='darkorange', fontweight='bold')
 
     common = set(vanilla_df['attribute']) & set(persona_df['attribute']) \
         if not vanilla_df.empty and not persona_df.empty else set()
@@ -139,19 +139,16 @@ def plot_comparison(vanilla_df, persona_df):
     ax.text(
         0.01, 0.01, key_text,
         transform=ax.transAxes,
-        fontsize=10,
+        fontsize=13,
         verticalalignment='bottom',
         bbox=dict(boxstyle='round,pad=0.4', facecolor='white', alpha=0.8, edgecolor='gray'),
         family='monospace',
     )
 
-    ax.set_title(
-        f'{MODEL_NAME} — Model Confidence vs. Correlation with Human Annotations\n'
-        'Standard vs. Feature-based (Persona)', fontsize=13,
-    )
-    ax.set_xlabel('Average Model Confidence', fontsize=12)
-    ax.set_ylabel('Correlation with Human Annotations', fontsize=12)
-    ax.legend(loc='upper right', fontsize=11)
+    ax.set_xlabel('Average Model Confidence', fontsize=15)
+    ax.set_ylabel('Correlation with Human Annotations', fontsize=15)
+    ax.tick_params(labelsize=14)
+    ax.legend(loc='upper right', fontsize=13)
     plt.tight_layout()
 
     mode_dir = "comparison"
