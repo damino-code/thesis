@@ -37,8 +37,8 @@ ATTRIBUTE_SCALES = {
     "hatespeech":    2,
 }
 ATTRIBUTE_HUMAN_LABELS = {
-    "sentiment":     "Sentiment",
-    "respect":       "Respect",
+    "sentiment":     "Negative Sentiment",
+    "respect":       "Disrespect",
     "insult":        "Insult",
     "humiliate":     "Humiliate",
     "status":        "Derogatory Status",

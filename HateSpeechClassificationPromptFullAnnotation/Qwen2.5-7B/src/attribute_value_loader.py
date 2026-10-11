@@ -39,7 +39,7 @@ class AttributeValueLoader:
                 f"No attribute-prediction CSV matched: {self.pattern}\n"
                 f"Run the FullAnnotation pipeline first."
             )
-        latest = max(files, key=os.path.getmtime)
+        latest = max(files)  # newest by filename timestamp; *_flipped.csv sorts after its source
         print(f"[attr-values] Loading: {os.path.basename(latest)}")
         self.df = pd.read_csv(latest, low_memory=False)
 

@@ -43,8 +43,8 @@ ATTRIBUTE_SCALES = {
                           # attribute_aware_with_values since it is the question.
 }
 ATTRIBUTE_HUMAN_LABELS = {
-    "sentiment":     "Sentiment",
-    "respect":       "Respect",
+    "sentiment":     "Negative Sentiment",
+    "respect":       "Disrespect",
     "insult":        "Insult",
     "humiliate":     "Humiliate",
     "status":        "Derogatory Status",

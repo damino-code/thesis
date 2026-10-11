@@ -30,15 +30,12 @@ class AttributeValueLoader:
         self._index_map = {}   # row_index → {attr: bin_label, ...}
 
     def load(self):
-        # Prompt reads values as words ("Sentiment: low" = negative), which matches the
-        # LLM's own unflipped scale -- so skip the *_flipped.csv copies.
-        files = [f for f in glob.glob(config.ATTRIBUTE_VALUES_PATTERN)
-                 if not f.endswith("_flipped.csv")]
+        files = glob.glob(config.ATTRIBUTE_VALUES_PATTERN)
         if not files:
             raise FileNotFoundError(
                 f"No merged annotations found at: {config.ATTRIBUTE_VALUES_PATTERN}"
             )
-        path = max(files, key=os.path.getmtime)
+        path = max(files)  # newest by filename timestamp; *_flipped.csv sorts after its source
         print(f"[attr_loader]  Loading attribute values: {os.path.basename(path)}")
         df = pd.read_csv(path, on_bad_lines="skip", engine="python")
 

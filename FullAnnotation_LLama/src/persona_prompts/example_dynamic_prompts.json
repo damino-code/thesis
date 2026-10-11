@@ -17,7 +17,7 @@
       "original_comment": "Afghanistan will rise. Kashmir will rise. Palestine will rise. The Islamic world will rise.",
       "attribute_being_evaluated": "SENTIMENT",
       "system_prompt": "You are a content annotator with the following characteristics:\n- Gender: Women\n- Age: 81.0\n- Race: White\n- Religion: Christian\n- Ideology: Conservative\n\nEvaluate this comment from your perspective as this annotator.",
-      "scoring_rubric": "SENTIMENT (0-4): Question: How would you describe the sentiment? 0=Strongly negative, 1=Somewhat negative, 2=Neutral, 3=Somewhat positive, 4=Strongly positive",
+      "scoring_rubric": "SENTIMENT (0-4): Question: How would you describe the sentiment? 0=Strongly positive, 1=Somewhat positive, 2=Neutral, 3=Somewhat negative, 4=Strongly negative",
       "expected_llm_output": "0",
       "reasoning": "From this annotator's perspective as an old Conservative Christian, repeated references to 'rise' relating to Middle East and Islamic world may be interpreted as strongly negative.",
       "note": "The LLM will respond as if it IS this annotator, evaluating the comment through their demographic lens"
@@ -37,7 +37,7 @@
       "original_comment": "Afghanistan will rise. Kashmir will rise. Palestine will rise. The Islamic world will rise.",
       "attribute_being_evaluated": "SENTIMENT",
       "system_prompt": "You are a content annotator with the following characteristics:\n- Gender: Men\n- Age: 40.0\n- Race: Asian\n- Religion: Christian\n- Ideology: Slightly Liberal\n\nEvaluate this comment from your perspective as this annotator.",
-      "scoring_rubric": "SENTIMENT (0-4): Question: How would you describe the sentiment? 0=Strongly negative, 1=Somewhat negative, 2=Neutral, 3=Somewhat positive, 4=Strongly positive",
+      "scoring_rubric": "SENTIMENT (0-4): Question: How would you describe the sentiment? 0=Strongly positive, 1=Somewhat positive, 2=Neutral, 3=Somewhat negative, 4=Strongly negative",
       "expected_llm_output": "2",
       "reasoning": "From this annotator's perspective as young and slightly liberal, the comment may be interpreted more neutrally - expressing aspirations rather than threats.",
       "comparison_to_example_1": "Same comment, different annotator demographics and age categories (old vs young), likely different prediction. This demonstrates PERSPECTIVE-TAKING ability."
@@ -57,7 +57,7 @@
       "original_comment": "Afghanistan will rise. Kashmir will rise. Palestine will rise. The Islamic world will rise.",
       "attribute_being_evaluated": "SENTIMENT",
       "system_prompt": "You are a content annotator with the following characteristics:\n- Gender: Women\n- Age: 72.0\n- Race: White\n- Religion: Nothing\n- Ideology: Not specified\n\nEvaluate this comment from your perspective as this annotator.",
-      "scoring_rubric": "SENTIMENT (0-4): 0=Strongly negative, 1=Somewhat negative, 2=Neutral, 3=Somewhat positive, 4=Strongly positive",
+      "scoring_rubric": "SENTIMENT (0-4): 0=Strongly positive, 1=Somewhat positive, 2=Neutral, 3=Somewhat negative, 4=Strongly negative",
       "expected_llm_output": "2 or 3",
       "reasoning": "With no religious affiliation, secular perspective may view this as aspirational/positive or neutral without religious bias. Being old may introduce some caution though.",
       "note_about_missing_values": "Missing/NaN values are converted to 'Not specified' - this is handled gracefully without errors. The LLM adapts its perspective accordingly."

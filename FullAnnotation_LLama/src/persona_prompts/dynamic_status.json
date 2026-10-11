@@ -10,7 +10,7 @@
         "Evaluate this comment from your perspective as this annotator.",
         "",
         "SCORING CRITERIA (Answer based on the definitions below):",
-        "- STATUS (0-4): Question: Does this comment frame the group as inferior? 0=Strongly inferior, 1=Inferior, 2=Equal/Neutral, 3=Superior, 4=Strongly superior",
+        "- STATUS (0-4): Question: Does this comment frame the group as inferior? 0=Strongly superior, 1=Superior, 2=Equal/Neutral, 3=Inferior, 4=Strongly inferior",
         "",
         "Analyze this comment for STATUS:",
         "Comment: \"{text}\"",
