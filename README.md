@@ -18,11 +18,11 @@ This project leverages multiple LLMs to analyze and annotate comments for hate s
 
 ### Analysis Pipeline
 1. **Attribute Annotation**: Uses LLMs to annotate comments across multiple dimensions:
-   - **Sentiment**: Emotional tone (0 = strongly positive → 4 = strongly negative, MHS coding)
-   - **Respect**: Respect toward the targeted group (0 = strongly respectful → 4 = strongly disrespectful)
+   - **Sentiment**: Emotional tone (strongly negative → strongly positive, 5 levels)
+   - **Respect**: Whether comment shows respect to targeted group (5 levels)
    - **Insult**: Presence of insulting language (4 levels)
    - **Humiliation**: Whether comment humiliates the group (3 levels)
-   - **Status**: Framing of the group (0 = strongly superior → 4 = strongly inferior)
+   - **Status**: Framing groups as inferior/superior (2 levels)
    - **Dehumanization**: Portrayal of group as less than human (2 levels)
 
 2. **Model Evaluation**: 

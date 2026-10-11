@@ -33,13 +33,15 @@ class AttributeValueLoader:
         self.df = None
 
     def load(self):
-        files = glob.glob(self.pattern)
+        # Prompt reads values as words ("Sentiment: low" = negative), which matches the
+        # LLM's own unflipped scale -- so skip the *_flipped.csv copies.
+        files = [f for f in glob.glob(self.pattern) if not f.endswith("_flipped.csv")]
         if not files:
             raise FileNotFoundError(
                 f"No attribute-prediction CSV matched: {self.pattern}\n"
                 f"Run the FullAnnotation pipeline first."
             )
-        latest = max(files)  # newest by filename timestamp; *_flipped.csv sorts after its source
+        latest = max(files, key=os.path.getmtime)
         print(f"[attr-values] Loading: {os.path.basename(latest)}")
         self.df = pd.read_csv(latest, low_memory=False)
 
