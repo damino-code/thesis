@@ -30,7 +30,10 @@ class AttributeValueLoader:
         self._index_map = {}   # row_index → {attr: bin_label, ...}
 
     def load(self):
-        files = glob.glob(config.ATTRIBUTE_VALUES_PATTERN)
+        # Prompt reads values as words ("Sentiment: low" = negative), which matches the
+        # LLM's own unflipped scale -- so skip the *_flipped.csv copies.
+        files = [f for f in glob.glob(config.ATTRIBUTE_VALUES_PATTERN)
+                 if not f.endswith("_flipped.csv")]
         if not files:
             raise FileNotFoundError(
                 f"No merged annotations found at: {config.ATTRIBUTE_VALUES_PATTERN}"
