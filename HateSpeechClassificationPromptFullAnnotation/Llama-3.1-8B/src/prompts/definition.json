@@ -1,0 +1,17 @@
+{
+    "prompt": [
+        "You are evaluating online comments for hate speech.",
+        "",
+        "Hate speech is any communication that attacks, threatens,",
+        "or insults a person or group based on protected",
+        "characteristics such as race, ethnicity, religion,",
+        "gender, sexual orientation, or disability.",
+        "",
+        "Is the following comment hate speech?",
+        "",
+        "Comment: \"{text}\"",
+        "",
+        "Answer with only one word: \"yes\" or \"no\"."
+    ],
+    "labels": ["yes", "no"]
+}

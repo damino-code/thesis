@@ -109,19 +109,19 @@ def plot_all(metrics_df):
     # Add labels
     for i, row in metrics_df.iterrows():
         plt.text(
-            row['avg_confidence'] + 0.002, 
-            row['correlation'] + 0.002, 
-            row['attribute'], 
-            fontsize=11
+            row['avg_confidence'] + 0.002,
+            row['correlation'] + 0.002,
+            row['attribute'].replace('_', ' '),
+            fontsize=18
         )
-        
-    plt.title('Impact of Model Confidence on Correlation with Human Annotations', fontsize=14)
-    plt.xlabel('Average Model Confidence', fontsize=12)
-    plt.ylabel('Correlation with Human Annotations', fontsize=12)
-    
+
+    plt.xlabel('Average Model Confidence', fontsize=15)
+    plt.ylabel('Correlation with Human Annotations', fontsize=15)
+    plt.tick_params(labelsize=14)
+
     # Add trend line?
     # sns.regplot(data=metrics_df, x='avg_confidence', y='correlation', scatter=False, color='red', line_kws={'linestyle':'--'})
-    
+
     plt.tight_layout()
     
     output_path = os.path.join(config.VISUALIZATIONS_FOLDER, f"confidence_vs_correlation_{timestamp}.png")

@@ -1,0 +1,55 @@
+==========================================================
+Llama-3.1-8B AWQ — Hate-Speech Classification (all strategies) [h200-2]
+Job ID: 378332
+Node: gpu-nvidia-h200-2
+Date: Sun May 24 03:43:59 CEST 2026
+==========================================================
+No devices were found
+
+1. RUNNING ALL STRATEGIES (model loaded once)...
+
+Available prompt strategies:
+  1. zero_shot
+  2. few_shot
+  3. definition
+  4. attribute_aware_no_values
+  5. attribute_aware_with_values
+  6. all
+
+Choose (e.g. '1,3' or 'all') [Default: all]: 
+Enter sample size (or 'all'): 
+Strategies: ['zero_shot', 'few_shot', 'definition', 'attribute_aware_no_values', 'attribute_aware_with_values']
+
+Loading model (once for all strategies)…
+Loading model: hugging-quants/Meta-Llama-3.1-8B-Instruct-AWQ-INT4
+  GPU memory utilization: 0.9
+  Max model length: 1024
+  Max concurrent sequences: 256
+  Tensor parallel size: 1
+  Seed: 42
+INFO 05-24 03:44:05 [utils.py:233] non-default args: {'trust_remote_code': True, 'download_dir': '/storage/nobackup/amine/models', 'seed': 42, 'max_model_len': 1024, 'max_num_seqs': 256, 'disable_log_stats': True, 'quantization': 'awq', 'model': 'hugging-quants/Meta-Llama-3.1-8B-Instruct-AWQ-INT4'}
+INFO 05-24 03:44:06 [model.py:549] Resolved architecture: LlamaForCausalLM
+
+2. EVALUATING (all strategies side-by-side)...
+[skip:zero_shot] No results CSV.
+[skip:few_shot] No results CSV.
+[skip:definition] No results CSV.
+[skip:attribute_aware_no_values] No results CSV.
+[skip:attribute_aware_with_values] No results CSV.
+
+Saved: /storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.1-8B/results/classification_comparison.txt
+Saved: /storage/home/amine/thesis/HateSpeechClassificationPromptFullAnnotation/Llama-3.1-8B/results/classification_comparison.json
+
+======================================================================
+  SUMMARY (per-comment)
+  strategy                               F1    AUROC      acc
+  ------------------------------------------------------------
+  zero_shot                         (no data)
+  few_shot                          (no data)
+  definition                        (no data)
+  attribute_aware_no_values         (no data)
+  attribute_aware_with_values       (no data)
+======================================================================
+
+==========================================================
+Done at Sun May 24 03:44:08 CEST 2026

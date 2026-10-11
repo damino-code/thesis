@@ -1,0 +1,46 @@
+============================================================================================
+  HATE-SPEECH CLASSIFICATION PROMPT — COMPARISON
+  Generated : 2026-05-24T04:18:49.830423
+============================================================================================
+
+TASK
+  Binary target  : hate_speech_score >= 0.5  (per Kennedy et al.)
+  Decision rule  : P(yes) >= 0.5  →  predicted hate
+  Total comments : 39565
+  Positive count : 10437
+
+PER-COMMENT RESULTS  (predictions averaged across annotators)
+  ------------------------------------------------------------------------------------------
+  strategy                         accuracy       F1  precision   recall    AUROC #pos_pred
+  ------------------------------------------------------------------------------------------
+  zero_shot                          0.6361   0.5808     0.4172   0.9555   0.8601     23906
+  few_shot                           0.5669   0.5438     0.3765   0.9784   0.8628     27121
+  definition                         0.6359   0.5781     0.4163   0.9458   0.8525     23710
+  attribute_aware_no_values          0.6440   0.5853     0.4225   0.9522   0.8679     23523
+  attribute_aware_with_values        0.4769   0.5005     0.3345   0.9936   0.8500     30998
+  ------------------------------------------------------------------------------------------
+
+PER-ROW RESULTS  (joined on comment_id × annotator_id)
+  ------------------------------------------------------------------------------------------
+  strategy                         accuracy       F1  precision   recall    AUROC #pos_pred
+  ------------------------------------------------------------------------------------------
+  zero_shot                          0.7044   0.7073     0.5525   0.9825   0.9117     87619
+  few_shot                           0.6377   0.6656     0.5008   0.9920   0.9212     97598
+  definition                         0.7040   0.7062     0.5524   0.9787   0.9103     87297
+  attribute_aware_no_values          0.7057   0.7079     0.5537   0.9809   0.9290     87284
+  attribute_aware_with_values        0.5754   0.6308     0.4611   0.9978   0.9017    106619
+  ------------------------------------------------------------------------------------------
+
+INTERPRETATION
+  - zero_shot                    : bare yes/no, no extra context
+  - few_shot                     : zero-shot + 4 labelled examples from the dataset
+                                    (2 hate / 2 non-hate, selected by mean
+                                    hate_speech_score > 0.5 per Kennedy et al.)
+  - definition                   : same plus a formal hate-speech definition
+  - attribute_aware_no_values    : lists 10 dimensions, model still has to assess
+  - attribute_aware_with_values  : substitutes the model's own previous attribute
+                                    predictions (low/moderate/high)
+  Compare to:
+    Ridge-Vanilla F1 ~0.685-0.697 (HateSpeechScoreFull/<model>/results)
+    Raw `hatespeech` vote F1 ~0.64-0.68
+============================================================================================

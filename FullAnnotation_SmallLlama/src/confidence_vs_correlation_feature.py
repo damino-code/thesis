@@ -91,11 +91,11 @@ def plot_all(metrics_df, mode_dir="persona"):
     )
     for _, row in metrics_df.iterrows():
         plt.text(row['avg_confidence'] + 0.002, row['correlation'] + 0.002,
-                 row['attribute'], fontsize=11)
+                 row['attribute'].replace('_', ' '), fontsize=18)
 
-    plt.title('Feature-based (Persona) — Model Confidence vs. Correlation with Human Annotations', fontsize=13)
-    plt.xlabel('Average Model Confidence', fontsize=12)
-    plt.ylabel('Correlation with Human Annotations', fontsize=12)
+    plt.xlabel('Average Model Confidence', fontsize=15)
+    plt.ylabel('Correlation with Human Annotations', fontsize=15)
+    plt.tick_params(labelsize=14)
     plt.tight_layout()
 
     filename = f"confidence_vs_correlation_feature_{timestamp}.png"
