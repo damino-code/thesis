@@ -197,7 +197,7 @@ def evaluate_predictions(llm_df, human_df, mode_dir="vanilla"):
     }
 
     global_viz_root = "/storage/home/amine/thesis/global_visualisation"
-    model_name = "Llama-3.3-70B"
+    model_name = "Llama-3.2-8B"
 
     mode_filename_part = "persona" if mode_dir == "persona" else "standard"
     metrics_filename = f"evaluation_metrics_{mode_filename_part}_{timestamp}.json"

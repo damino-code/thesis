@@ -5,7 +5,7 @@ import numpy as np
 from datetime import datetime
 import config
 
-MODEL_NAME = "Llama-3.3-70B"
+MODEL_NAME = "Llama-3.2-8B"
 
 
 def save_plot(filename, mode_dir="vanilla"):

@@ -19,7 +19,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 import config
 from data_loader import load_dataset
 
-MODEL_NAME = "Llama-3.3-70B"
+MODEL_NAME = "Llama-3.2-8B"
 GLOBAL_VIZ_ROOT = "/storage/home/amine/thesis/global_visualisation"
 
 

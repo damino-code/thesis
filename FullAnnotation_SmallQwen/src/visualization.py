@@ -5,7 +5,7 @@ import numpy as np
 from datetime import datetime
 import config
 
-MODEL_NAME = "Qwen2.5-72B"
+MODEL_NAME = "Qwen2.5-7B"
 
 
 def save_plot(filename, mode_dir="vanilla"):
