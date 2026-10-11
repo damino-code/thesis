@@ -1,7 +1,7 @@
 ======================================================================
   HATE SPEECH SCORE — FULL ANNOTATION + SPEARMAN (Llama-3.1-70B)
   Mode      : PERSONA
-  Generated : 2026-10-11T21:55:36.197280
+  Generated : 2026-10-11T22:17:58.883379
 ======================================================================
 
 DATA
@@ -24,18 +24,18 @@ CORRELATION WITH HUMAN HATE SPEECH SCORE  (predicted vs hate_speech_score)
 WEIGHTS (re-fit on all unique comments)
   Attribute               Spearman ρ     Ridge w      Combined
   --------------------------------------------------------
-  sentiment                 0.724034    0.292730      0.211947
-  respect                   0.756675    0.400460      0.303018
-  insult                    0.716481    0.055172      0.039530
-  humiliate                 0.674277    0.060473      0.040775
-  status                    0.582075    0.140674      0.081883
-  dehumanize                0.602676    0.172116      0.103730
-  violence                  0.609856    0.400652      0.244340
-  genocide                  0.537928    0.189180      0.101765
-  attack_defend             0.686785    0.606854      0.416778
-  hatespeech               -0.500063   -0.407976      0.204014
+  sentiment                 0.724034    0.292708      0.211930
+  respect                   0.756675    0.400392      0.302966
+  insult                    0.716481    0.055115      0.039489
+  humiliate                 0.674277    0.060459      0.040766
+  status                    0.582075    0.140724      0.081912
+  dehumanize                0.602676    0.172046      0.103688
+  violence                  0.609856    0.400632      0.244328
+  genocide                  0.537928    0.189168      0.101759
+  attack_defend             0.686785    0.606884      0.416799
+  hatespeech                0.533134    0.383099      0.204243
 
-  Ridge intercept : -4.159244
+  Ridge intercept : -4.159261
 
 INTERPRETATION
   score_adj_i = Attribute_i × Confidence_i × ρ_i

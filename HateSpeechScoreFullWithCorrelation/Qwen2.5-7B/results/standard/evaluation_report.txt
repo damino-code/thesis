@@ -1,7 +1,7 @@
 ======================================================================
   HATE SPEECH SCORE — FULL ANNOTATION + SPEARMAN (Qwen2.5-7B)
   Mode      : STANDARD
-  Generated : 2026-10-11T21:55:52.400784
+  Generated : 2026-10-11T22:18:15.576097
 ======================================================================
 
 DATA
@@ -24,18 +24,18 @@ CORRELATION WITH HUMAN HATE SPEECH SCORE  (predicted vs hate_speech_score)
 WEIGHTS (re-fit on all unique comments)
   Attribute               Spearman ρ     Ridge w      Combined
   --------------------------------------------------------
-  sentiment                 0.595567    0.293561      0.174835
-  respect                   0.669521    0.666641      0.446330
-  insult                    0.667196    0.274880      0.183399
-  humiliate                 0.606269    0.019787      0.011996
-  status                    0.315741    0.102429      0.032341
-  dehumanize                0.562237    0.357153      0.200805
-  violence                  0.560454    0.288460      0.161668
-  genocide                  0.367550   -0.061908     -0.022754
-  attack_defend             0.630012    0.587137      0.369903
-  hatespeech               -0.485429   -1.122481      0.544885
+  sentiment                 0.595567    0.293577      0.174845
+  respect                   0.669521    0.666538      0.446261
+  insult                    0.667196    0.274702      0.183280
+  humiliate                 0.606269    0.019712      0.011951
+  status                    0.315741    0.102313      0.032304
+  dehumanize                0.562237    0.357004      0.200721
+  violence                  0.560454    0.288409      0.161640
+  genocide                  0.367550   -0.061923     -0.022760
+  attack_defend             0.630012    0.587097      0.369878
+  hatespeech                0.526076    1.036852      0.545463
 
-  Ridge intercept : -5.274016
+  Ridge intercept : -5.273820
 
 INTERPRETATION
   score_adj_i = Attribute_i × Confidence_i × ρ_i
