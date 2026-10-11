@@ -68,7 +68,7 @@ def calculate_confidence_correlation(predictions_df, human_df):
 
         metrics.append({
             'attribute': attr,
-            'correlation': sub[attr].corr(sub['human']),
+            'correlation': sub[attr].corr(sub['human'], method='spearman'),
             'avg_confidence': sub[conf_col].mean(),
             'n': len(sub),
         })
