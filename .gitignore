@@ -27,3 +27,7 @@ slurm-*.err
 .DS_Store
 Thumbs.db
 notes.txt
+
+# Paper correction materials (local only)
+changes/
+/acl2023.tex
