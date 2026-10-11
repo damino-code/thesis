@@ -1,41 +1,41 @@
 ======================================================================
   HATE SPEECH SCORE — FULL ANNOTATION + SPEARMAN (Qwen2.5-7B)
   Mode      : STANDARD
-  Generated : 2026-05-17T21:24:45.298154
+  Generated : 2026-10-11T21:55:52.400784
 ======================================================================
 
 DATA
-  Predictions file : merged_standard_results_20260516_183405.csv
+  Predictions file : merged_standard_results_20260516_183405_flipped.csv
   Unique comments  : 39565
   CV scheme        : 5-fold (4 folds fit / 1 fold test)
 
 CROSS-VALIDATION (mean ± std across 5 folds)
   Ridge best α     : 10.0
-  Ridge R²         : 0.6052 ± 0.0052
-  Ridge MAE        : 1.0057 ± 0.0077
-  Ridge RMSE       : 1.3024 ± 0.0077
+  Ridge R²         : 0.6014 ± 0.0049
+  Ridge MAE        : 1.0093 ± 0.0077
+  Ridge RMSE       : 1.3087 ± 0.0094
 
 CORRELATION WITH HUMAN HATE SPEECH SCORE  (predicted vs hate_speech_score)
-  OOF   Pearson r  : 0.7780   (p=0.00e+00)
-  OOF   Spearman ρ : 0.7559   (p=0.00e+00)
-  Final Pearson r  : 0.7782   (p=0.00e+00)   [in-sample]
-  Final Spearman ρ : 0.7560   (p=0.00e+00)   [in-sample]
+  OOF   Pearson r  : 0.7755   (p=0.00e+00)
+  OOF   Spearman ρ : 0.7555   (p=0.00e+00)
+  Final Pearson r  : 0.7757   (p=0.00e+00)   [in-sample]
+  Final Spearman ρ : 0.7557   (p=0.00e+00)   [in-sample]
 
 WEIGHTS (re-fit on all unique comments)
   Attribute               Spearman ρ     Ridge w      Combined
   --------------------------------------------------------
-  sentiment                -0.595567    0.483642     -0.288041
-  respect                  -0.669521    0.590857     -0.395591
-  insult                    0.667196    0.286413      0.191094
-  humiliate                 0.606269    0.005249      0.003182
-  status                   -0.315741    0.334625     -0.105655
-  dehumanize                0.562237    0.357618      0.201066
-  violence                  0.560454    0.281311      0.157662
-  genocide                  0.367550   -0.102866     -0.037809
-  attack_defend             0.630012    0.558500      0.351861
-  hatespeech               -0.485429   -0.992183      0.481635
+  sentiment                 0.595567    0.293561      0.174835
+  respect                   0.669521    0.666641      0.446330
+  insult                    0.667196    0.274880      0.183399
+  humiliate                 0.606269    0.019787      0.011996
+  status                    0.315741    0.102429      0.032341
+  dehumanize                0.562237    0.357153      0.200805
+  violence                  0.560454    0.288460      0.161668
+  genocide                  0.367550   -0.061908     -0.022754
+  attack_defend             0.630012    0.587137      0.369903
+  hatespeech               -0.485429   -1.122481      0.544885
 
-  Ridge intercept : -2.663847
+  Ridge intercept : -5.274016
 
 INTERPRETATION
   score_adj_i = Attribute_i × Confidence_i × ρ_i
