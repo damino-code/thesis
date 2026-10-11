@@ -115,7 +115,7 @@ def fmt_report(title, m, threshold, n_total, n_pos_gt, threshold_source=""):
         "  F1 / accuracy depend on the threshold.",
         "  AUROC is threshold-free.",
         "  Training-set reference (same model, Kennedy et al. dataset):",
-        "    Ridge-Vanilla  F1=0.6863  AUROC=0.8988  acc=0.8402",
+        "    Ridge-Vanilla  F1=0.7005  AUROC=0.8989  acc=0.8407",
         "=" * 72,
     ])
 

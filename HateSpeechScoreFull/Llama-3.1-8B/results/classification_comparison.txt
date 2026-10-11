@@ -1,6 +1,6 @@
 ====================================================================================
   RIDGE CLASSIFICATION METRICS — Llama-3.1-8B
-  Generated : 2026-05-17T21:24:08.438641
+  Generated : 2026-10-11T21:29:02.607063
 ====================================================================================
 
 TASK
@@ -16,20 +16,20 @@ PIPELINES
   --------------------------------------------------------------------------------
   pipeline               accuracy       F1  precision   recall    AUROC #pos_pred
   --------------------------------------------------------------------------------
-  Ridge-Vanilla            0.8097   0.5634     0.7136   0.4654   0.8674      6806
-  Ridge-Persona            0.8086   0.6042     0.6649   0.5537   0.8643      8692
+  Ridge-Vanilla            0.8107   0.5553     0.7304   0.4479   0.8651      6401
+  Ridge-Persona            0.8040   0.5886     0.6595   0.5314   0.8550      8409
   --------------------------------------------------------------------------------
 
 CONFUSION MATRICES  (rows = true, cols = predicted; labels = {0, 1})
   Ridge-Vanilla
             pred=0   pred=1
-    true=0   27179     1949
-    true=1    5580     4857
+    true=0   27402     1726
+    true=1    5762     4675
 
   Ridge-Persona
             pred=0   pred=1
-    true=0   26215     2913
-    true=1    4658     5779
+    true=0   26265     2863
+    true=1    4891     5546
 
 INTERPRETATION
   - F1/accuracy depend on the threshold (0.5); AUROC is threshold-free.

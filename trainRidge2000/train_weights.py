@@ -1,7 +1,7 @@
 """
 Ridge training on test_2000.csv annotations.
 
-Loads the merged Llama-3.1-70B vanilla annotations from testRdige/results/,
+Loads the merged Llama-3.1-70B vanilla annotations from testRidge/results/,
 uses label (0/1) as target, trains Ridge with 5-fold CV, saves weights and
 OOF predictions.
 
@@ -33,7 +33,7 @@ from sklearn.model_selection import KFold
 
 BASE_DIR      = Path(__file__).parent
 THESIS_DIR    = BASE_DIR.parent
-ANNOTATIONS_DIR = THESIS_DIR / "testRdige" / "results"
+ANNOTATIONS_DIR = THESIS_DIR / "testRidge" / "results"
 RESULTS_DIR   = BASE_DIR / "results"
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 

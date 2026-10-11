@@ -1,0 +1,35 @@
+========================================================================
+  RIDGE TEST EVALUATION — Llama-3.1-70B vanilla  [test_2000]
+  Generated : 2026-10-11T21:29:58.268672
+========================================================================
+
+TASK
+  Annotation model   : Llama-3.1-70B AWQ-INT4 (vanilla)
+  Ridge weights from : HateSpeechScoreFull/Llama-3.1-70B/standard
+  Decision threshold : 0.5
+  Ground truth       : binary label column (0=not hate, 1=hate)
+  Total samples      : 2000
+  Positive (hate)    : 1079 / 2000  (54.0%)
+
+RESULTS
+  metric                    value
+  --------------------------------
+  accuracy                 0.6775
+  F1                       0.6036
+  precision                0.8960
+  recall                   0.4551
+  AUROC                    0.8304
+  #pos_predicted              548
+  --------------------------------
+
+CONFUSION MATRIX  (rows = true, cols = predicted; labels = {0, 1})
+            pred=0   pred=1
+  true=0      864       57
+  true=1      588      491
+
+INTERPRETATION
+  F1 / accuracy depend on the threshold.
+  AUROC is threshold-free.
+  Training-set reference (same model, Kennedy et al. dataset):
+    Ridge-Vanilla  F1=0.7005  AUROC=0.8989  acc=0.8407
+========================================================================
